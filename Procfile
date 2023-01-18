@@ -1,0 +1,1 @@
+web: gunicorn compareprivateplanes_backend.wsgi
