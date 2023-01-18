@@ -9,8 +9,12 @@ import Card from "./components/Card";
 import Dropdown from "./components/Dropdown";
 import { OPTIONS, ACTIVE_INDEX } from "./utils/constants/app-constants";
 import aircraftService from "./services/aircraft-service";
+import axios from "axios";
 
 import styles from "./styles/Search.module.scss";
+
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 export default function Search() {
   const [search, setSearch] = useState("");
