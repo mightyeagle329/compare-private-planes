@@ -7,10 +7,7 @@ const Card = ({ className, item }) => {
   return (
     <div className={cn(styles.card, className)} aria-hidden="true">
       <div className={styles.preview}>
-        <img
-          src={"https://compareprivateplanes.com/images/1-1-2048x1365.jpeg"}
-          alt="Card"
-        />
+        <img src={`${item?.image_name}`} alt={`${item?.aircraft_name}`} />
         <div className={styles.control}>
           <div className={styles.category}>{item?.title}</div>
           <div className={cn("button-small", styles.button)}>

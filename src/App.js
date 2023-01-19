@@ -368,7 +368,7 @@ export default function Search() {
                   <Card
                     className={styles.card}
                     item={product}
-                    key={product.slug}
+                    key={product.aircraft_id}
                   />
                 ))
               ) : (
