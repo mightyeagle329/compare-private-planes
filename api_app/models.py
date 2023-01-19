@@ -134,8 +134,7 @@ class Aircraft(models.Model):
 
     key_facts = models.TextField(default="")
 
-    aircraft_image = models.ImageField(
-        blank=True, null=True)
+    aircraft_image = models.TextField(default="")
     # aircraft_date = models.DateField()
 
     def __str__(self):

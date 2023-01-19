@@ -73,9 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'compareprivateplanes_backend.wsgi.application'
 
-CORS_ORIGIN_WHITELIST = [
-    'https://localhost:3000'
-]
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 

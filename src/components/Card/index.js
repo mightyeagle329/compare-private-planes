@@ -8,7 +8,7 @@ const Card = ({ className, item }) => {
     <div className={cn(styles.card, className)} aria-hidden="true">
       <div className={styles.preview}>
         <img
-          src={`${item?.metadata?.image?.imgix_url}?w=600&format=auto`}
+          src={"https://compareprivateplanes.com/images/1-1-2048x1365.jpeg"}
           alt="Card"
         />
         <div className={styles.control}>
@@ -22,83 +22,67 @@ const Card = ({ className, item }) => {
       <div className={styles.foot}>
         <div className={styles.status}>
           {/* <p>{item?.title}</p> */}
-          <p>Embraer Praetor 500</p>
+          <p>{`${item?.aircraft_name}`}</p>
+
           <p className={styles.count}>
-            Number of passengers{" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
+            Range {item?.range_km > 0 ? `${item?.range_km} ` : "Not Available"}
+          </p>
+          <p className={styles.count}>
+            High Speed Cruise{" "}
+            {item?.high_speed_cruise_kmh > 0
+              ? `${item?.high_speed_cruise_kmh} `
               : "Not Available"}
           </p>
           <p className={styles.count}>
-            Range{" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
+            Cabin Altitude{" "}
+            {item?.cabin_altitude > 0
+              ? `${item?.cabin_altitude} `
               : "Not Available"}
           </p>
           <p className={styles.count}>
-            Cruise Speed{" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
+            Hourly Fuel Burn{" "}
+            {item?.hourly_fuel_burn_GPH > 0
+              ? `${item?.hourly_fuel_burn_GPH} `
               : "Not Available"}
           </p>
           <p className={styles.count}>
-            Max Altitude{" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
-              : "Not Available"}
-          </p>
-          <p className={styles.count}>
-            Fuel Burn{" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
-              : "Not Available"}
-          </p>
-          <p className={styles.count}>
-            Baggage Capacity{" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
+            Baggage Capacity CF{" "}
+            {item?.baggage_capacity_CF > 0
+              ? `${item?.baggage_capacity_CF} `
               : "Not Available"}
           </p>
           <p className={styles.count}>
             Take-Off Distance{" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
+            {item?.TO_distance_meters > 0
+              ? `${item?.TO_distance_meters} `
               : "Not Available"}
           </p>
           <p className={styles.count}>
             Landing Distance{" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
+            {item?.landing_distance_meters > 0
+              ? `${item?.landing_distance_meters} `
               : "Not Available"}
           </p>
           <p className={styles.count}>
             Annual Fixed Costs{" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
-              : "Not Available"}
+            {item?.annual_cost > 0 ? `${item?.annual_cost} ` : "Not Available"}
           </p>
           <p className={styles.count}>
-            Hourly Price{" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
-              : "Not Available"}
-          </p>
-          <p className={styles.count}>
-            Price (New){" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
+            Hourly Charter{" "}
+            {item?.estimated_hourly_charter > 0
+              ? `${item?.estimated_hourly_charter} `
               : "Not Available"}
           </p>
           <p className={styles.count}>
             Average Pre-Owned{" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
+            {item?.average_pre_owned > 0
+              ? `${item?.average_pre_owned} `
               : "Not Available"}
           </p>
           <p className={styles.count}>
-            Years Produced{" "}
-            {item?.metadata?.count > 0
-              ? `${item?.metadata?.count} `
+            Production Start{" "}
+            {item?.production_start > 0
+              ? `${item?.production_start} `
               : "Not Available"}
           </p>
         </div>

@@ -30,7 +30,7 @@ export default function Search() {
   const [categories, setCategories] = useState([]);
   const [activeIndex, setActiveIndex] = useState(ACTIVE_INDEX);
 
-  const [aircrafts, setAircrafts] = useState(null);
+  const [aircraftsData, setAircraftsData] = useState([]);
 
   const handleChange = ({ target: { name, value } }) => {
     setRangeValues((prevFields) => ({
@@ -47,7 +47,9 @@ export default function Search() {
   };
 
   async function getAircrafts() {
-    const aircrafts = await aircraftService.getAircrafts();
+    const aircrafts = await aircraftService
+      .getAircrafts()
+      .then((data) => setAircraftsData(data));
     if (aircrafts != null) {
       return aircrafts.results;
     } else {
@@ -55,7 +57,7 @@ export default function Search() {
   }
 
   useEffect(() => {
-    getAircrafts().then((data) => setAircrafts(data));
+    getAircrafts();
   }, []);
 
   const handleFilterDataByParams = useCallback(
@@ -284,9 +286,16 @@ export default function Search() {
             </div>
           </div>
           <div className={styles.wrapper}>
+            <div>
+              <ul>
+                {aircraftsData.map((air) => (
+                  <li key={air.aircraft_id}>{air.aircraft_name}</li>
+                ))}
+              </ul>
+            </div>
             <div className={styles.list}>
-              {filterResult?.length ? (
-                filterResult?.map((product) => (
+              {aircraftsData?.length ? (
+                aircraftsData?.map((product) => (
                   <Card
                     className={styles.card}
                     item={product}

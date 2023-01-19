@@ -9,8 +9,8 @@ class AircraftService {
 
     if (response.data != null) {
       console.log("response");
-      console.log(response.data);
-      return response.data;
+      console.log(response.data.aircrafts);
+      return response.data.aircrafts;
     } else {
       console.log("failed");
       return null;
