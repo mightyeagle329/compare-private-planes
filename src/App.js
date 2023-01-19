@@ -139,7 +139,7 @@ export default function Search() {
 
   const getDataByFilterCategoryOptions = useCallback(
     async (color) => {
-      setManufacturerOption(color);
+      setCategoryOption(color);
       handleFilterDataByParams({ color });
     },
     [handleFilterDataByParams]
@@ -147,7 +147,7 @@ export default function Search() {
 
   const getDataByFilterManufacturerOptions = useCallback(
     async (color) => {
-      setCategoryOption(color);
+      setManufacturerOption(color);
       handleFilterDataByParams({ color });
     },
     [handleFilterDataByParams]
