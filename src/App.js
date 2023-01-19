@@ -7,7 +7,13 @@ import { getAllDataByType, filterDataByParams } from "./cosmic";
 
 import Card from "./components/Card";
 import Dropdown from "./components/Dropdown";
-import { OPTIONS, ACTIVE_INDEX } from "./utils/constants/app-constants";
+import {
+  OPTIONS,
+  CATEGORY_OPTIONS,
+  ACTIVE_INDEX,
+  MANUFACTURER_OPTIONS,
+  PRODUCTION_OPTIONS,
+} from "./utils/constants/app-constants";
 import aircraftService from "./services/aircraft-service";
 import axios from "axios";
 
@@ -20,12 +26,40 @@ export default function Search() {
   const [search, setSearch] = useState("");
   const debouncedSearchTerm = useDebounce(search, 500);
 
-  const [{ min, max }, setRangeValues] = useState({ min: "", max: "" });
+  const [{ min, max }, setValues] = useState({ min: "", max: "" });
+  const [{ minPassengers, maxPassengers }, setPassengerValues] = useState({
+    minPassengers: "",
+    maxPassengers: "",
+  });
+
+  const [{ minRange, maxRange }, setRangeValues] = useState({
+    minRange: "",
+    maxRange: "",
+  });
+  const [{ minCruise, maxCruise }, setCruiseValues] = useState({
+    minCruise: "",
+    maxCruise: "",
+  });
+  const [{ minAltitude, maxAltitude }, setAltitudeValues] = useState({
+    minAltitude: "",
+    maxAltitude: "",
+  });
+
   const debouncedMinTerm = useDebounce(min, 500);
   const debouncedMaxTerm = useDebounce(max, 500);
 
+  const debouncedMinPassengers = useDebounce(min, 500);
+  const debouncedMaxPassengers = useDebounce(max, 500);
+
   const [filterResult, setFilterResult] = useState([]);
   const [option, setOption] = useState(OPTIONS[0]);
+  const [categoryOption, setCategoryOption] = useState(CATEGORY_OPTIONS[0]);
+  const [productionOption, setProductionOption] = useState(
+    PRODUCTION_OPTIONS[0]
+  );
+  const [manufacturerOption, setManufacturerOption] = useState(
+    MANUFACTURER_OPTIONS[0]
+  );
 
   const [categories, setCategories] = useState([]);
   const [activeIndex, setActiveIndex] = useState(ACTIVE_INDEX);
@@ -33,7 +67,35 @@ export default function Search() {
   const [aircraftsData, setAircraftsData] = useState([]);
 
   const handleChange = ({ target: { name, value } }) => {
+    setValues((prevFields) => ({
+      ...prevFields,
+      [name]: value,
+    }));
+  };
+
+  const handlePassengerChange = ({ target: { name, value } }) => {
+    setPassengerValues((prevFields) => ({
+      ...prevFields,
+      [name]: value,
+    }));
+  };
+
+  const handleRangeChange = ({ target: { name, value } }) => {
     setRangeValues((prevFields) => ({
+      ...prevFields,
+      [name]: value,
+    }));
+  };
+
+  const handleCruiseChange = ({ target: { name, value } }) => {
+    setCruiseValues((prevFields) => ({
+      ...prevFields,
+      [name]: value,
+    }));
+  };
+
+  const handleAltitudeChange = ({ target: { name, value } }) => {
+    setAltitudeValues((prevFields) => ({
       ...prevFields,
       [name]: value,
     }));
@@ -46,18 +108,8 @@ export default function Search() {
     }
   };
 
-  async function getAircrafts() {
-    const aircrafts = await aircraftService
-      .getAircrafts()
-      .then((data) => setAircraftsData(data));
-    if (aircrafts != null) {
-      return aircrafts.results;
-    } else {
-    }
-  }
-
   useEffect(() => {
-    getAircrafts();
+    aircraftService.getAircrafts().then((data) => setAircraftsData(data));
   }, []);
 
   const handleFilterDataByParams = useCallback(
@@ -83,6 +135,30 @@ export default function Search() {
       }
     },
     [debouncedSearchTerm, debouncedMinTerm, debouncedMaxTerm, option]
+  );
+
+  const getDataByFilterCategoryOptions = useCallback(
+    async (color) => {
+      setManufacturerOption(color);
+      handleFilterDataByParams({ color });
+    },
+    [handleFilterDataByParams]
+  );
+
+  const getDataByFilterManufacturerOptions = useCallback(
+    async (color) => {
+      setCategoryOption(color);
+      handleFilterDataByParams({ color });
+    },
+    [handleFilterDataByParams]
+  );
+
+  const getDataByFilterProductionOptions = useCallback(
+    async (color) => {
+      setProductionOption(color);
+      handleFilterDataByParams({ color });
+    },
+    [handleFilterDataByParams]
   );
 
   const getDataByFilterOptions = useCallback(
@@ -160,9 +236,9 @@ export default function Search() {
                 <div className={styles.label}>Category</div>
                 <Dropdown
                   className={styles.dropdown}
-                  value={option}
-                  setValue={getDataByFilterOptions}
-                  options={OPTIONS}
+                  value={categoryOption}
+                  setValue={getDataByFilterCategoryOptions}
+                  options={CATEGORY_OPTIONS}
                 />
               </div>
             </div>
@@ -171,9 +247,9 @@ export default function Search() {
                 <div className={styles.label}>Manufacturer</div>
                 <Dropdown
                   className={styles.dropdown}
-                  value={option}
-                  setValue={getDataByFilterOptions}
-                  options={OPTIONS}
+                  value={manufacturerOption}
+                  setValue={getDataByFilterManufacturerOptions}
+                  options={MANUFACTURER_OPTIONS}
                 />
               </div>
             </div>
@@ -182,9 +258,9 @@ export default function Search() {
                 <div className={styles.label}>In Production</div>
                 <Dropdown
                   className={styles.dropdown}
-                  value={option}
-                  setValue={getDataByFilterOptions}
-                  options={OPTIONS}
+                  value={productionOption}
+                  setValue={getDataByFilterProductionOptions}
+                  options={PRODUCTION_OPTIONS}
                 />
               </div>
             </div>
@@ -194,9 +270,9 @@ export default function Search() {
                 <input
                   className={styles.input}
                   type="text"
-                  value={min}
-                  onChange={handleChange}
-                  name="min"
+                  value={minPassengers}
+                  onChange={handlePassengerChange}
+                  name="minPassengers"
                   placeholder="MIN"
                   required
                 />
@@ -204,9 +280,9 @@ export default function Search() {
                 <input
                   className={styles.input}
                   type="text"
-                  value={max}
-                  onChange={handleChange}
-                  name="max"
+                  value={maxPassengers}
+                  onChange={handlePassengerChange}
+                  name="maxPassengers"
                   placeholder="MAX"
                   required
                 />
@@ -218,9 +294,9 @@ export default function Search() {
                 <input
                   className={styles.input}
                   type="text"
-                  value={min}
-                  onChange={handleChange}
-                  name="min"
+                  value={minRange}
+                  onChange={handleRangeChange}
+                  name="minRange"
                   placeholder="MIN"
                   required
                 />
@@ -228,9 +304,9 @@ export default function Search() {
                 <input
                   className={styles.input}
                   type="text"
-                  value={max}
-                  onChange={handleChange}
-                  name="max"
+                  value={maxRange}
+                  onChange={handleRangeChange}
+                  name="maxRange"
                   placeholder="MAX"
                   required
                 />
@@ -242,9 +318,9 @@ export default function Search() {
                 <input
                   className={styles.input}
                   type="text"
-                  value={min}
-                  onChange={handleChange}
-                  name="min"
+                  value={minCruise}
+                  onChange={handleCruiseChange}
+                  name="minCruise"
                   placeholder="MIN"
                   required
                 />
@@ -252,9 +328,9 @@ export default function Search() {
                 <input
                   className={styles.input}
                   type="text"
-                  value={max}
-                  onChange={handleChange}
-                  name="max"
+                  value={maxCruise}
+                  onChange={handleCruiseChange}
+                  name="maxCruise"
                   placeholder="MAX"
                   required
                 />
@@ -266,9 +342,9 @@ export default function Search() {
                 <input
                   className={styles.input}
                   type="text"
-                  value={min}
-                  onChange={handleChange}
-                  name="min"
+                  value={minAltitude}
+                  onChange={handleAltitudeChange}
+                  name="minAltitude"
                   placeholder="MIN"
                   required
                 />
@@ -276,9 +352,9 @@ export default function Search() {
                 <input
                   className={styles.input}
                   type="text"
-                  value={max}
-                  onChange={handleChange}
-                  name="max"
+                  value={maxAltitude}
+                  onChange={handleAltitudeChange}
+                  name="maxAltitude"
                   placeholder="MAX"
                   required
                 />
