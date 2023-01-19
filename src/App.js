@@ -286,13 +286,6 @@ export default function Search() {
             </div>
           </div>
           <div className={styles.wrapper}>
-            <div>
-              <ul>
-                {aircraftsData.map((air) => (
-                  <li key={air.aircraft_id}>{air.aircraft_name}</li>
-                ))}
-              </ul>
-            </div>
             <div className={styles.list}>
               {aircraftsData?.length ? (
                 aircraftsData?.map((product) => (
