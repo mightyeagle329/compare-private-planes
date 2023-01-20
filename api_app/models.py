@@ -3,7 +3,6 @@ from django.db import models
 
 class Aircraft(models.Model):
     aircraft_name = models.CharField(max_length=200, default="")
-    make = models.CharField(max_length=200, default="")
     model = models.CharField(max_length=200, default="")
 
     class Category(models.TextChoices):
