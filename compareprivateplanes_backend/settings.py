@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-svgnh=r3))^-lfw!b$18n=c!qxy_z6jewbo6&u&3yrj4amovrf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
     'api_app',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'https://localhost:3000'
 ]
 
 MIDDLEWARE = [
@@ -72,6 +77,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'compareprivateplanes_backend.wsgi.application'
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
