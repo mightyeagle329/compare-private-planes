@@ -132,7 +132,7 @@ class AircraftList(View):
                 'total_thrust_kgs': item.total_thrust_kgs,
                 'hourly_fuel_burn_LPH': item.hourly_fuel_burn_LPH,
                 'average_mission_length': item.average_mission_length,
-                'image_name': item.aircraft_image.name
+                'image_name': item.aircraft_image
             })
 
         data = {
@@ -149,10 +149,13 @@ class AircraftSearch(View):
         # request_data = request.GET if request.GET.get("airplane_name") else request.data
         print(request)
         airplane_name = request.GET.get("airplane_name")
+        category = request.GET.get("category")
+        model = request.GET.get("model")
+        in_production = request.GET.get("in_production")
 
         try:
             results = Aircraft.objects.filter(
-                aircraft_name__contains=airplane_name)
+                aircraft_name__contains=airplane_name, category__contains=category, model__contains=model, in_production__contains=in_production)
         except Exception:
             print("ERROR: Failed to get object from database")
             return HttpResponse("Object not found !")
@@ -283,4 +286,8 @@ class AircraftSearch(View):
                     }
                 )
 
-        return HttpResponse(data)
+        searchdata = {
+            'aircrafts': data,
+        }
+
+        return JsonResponse(searchdata)
