@@ -3,8 +3,6 @@ from django.http import JsonResponse
 from .models import Aircraft
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.filters import SearchFilter
-from django_filters.rest_framework import DjangoFilterBackend
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -142,9 +140,3 @@ class AircraftList(View):
         }
 
         return JsonResponse(data)
-
-
-class AircraftFilter(View):
-    queryset = Aircraft.objects.all()
-    filter_backends = (DjangoFilterBackend, SearchFilter)
-    filter_fields = ('aircraft_name')
