@@ -2,22 +2,22 @@ import React, { useState, useEffect, useCallback } from "react";
 import cn from "classnames";
 import { HiOutlineSearch } from "react-icons/hi";
 
-import useDebounce from "./utils/hooks/useDebounce";
-import { getAllDataByType, filterDataByParams } from "./cosmic";
+import useDebounce from "../utils/hooks/useDebounce";
+import { getAllDataByType, filterDataByParams } from "../cosmic";
 
-import Card from "./components/Card";
-import Dropdown from "./components/Dropdown";
+import Card from "../components/common/Card";
+import Dropdown from "../components/common/Dropdown";
 import {
   OPTIONS,
   CATEGORY_OPTIONS,
   ACTIVE_INDEX,
   MANUFACTURER_OPTIONS,
   PRODUCTION_OPTIONS,
-} from "./utils/constants/app-constants";
-import aircraftService from "./services/aircraft-service";
+} from "../utils/constants/app-constants";
+import aircraftService from "../services/aircraft-service";
 import axios from "axios";
 
-import styles from "./styles/Search.module.scss";
+import styles from "../styles/Search.module.scss";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -107,6 +107,7 @@ export default function Search() {
       setCategories(categoryTypes);
     }
   };
+  
 
   useEffect(() => {
     aircraftService.getAircrafts().then((data) => setAircraftsData(data));
@@ -139,7 +140,7 @@ export default function Search() {
 
   const getDataByFilterCategoryOptions = useCallback(
     async (color) => {
-      setCategoryOption(color);
+      setManufacturerOption(color);
       handleFilterDataByParams({ color });
     },
     [handleFilterDataByParams]
@@ -147,7 +148,7 @@ export default function Search() {
 
   const getDataByFilterManufacturerOptions = useCallback(
     async (color) => {
-      setManufacturerOption(color);
+      setCategoryOption(color);
       handleFilterDataByParams({ color });
     },
     [handleFilterDataByParams]
@@ -365,6 +366,7 @@ export default function Search() {
             <div className={styles.list}>
               {aircraftsData?.length ? (
                 aircraftsData?.map((product) => (
+                  
                   <Card
                     className={styles.card}
                     item={product}
