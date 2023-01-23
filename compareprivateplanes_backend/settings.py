@@ -42,10 +42,6 @@ INSTALLED_APPS = [
     'api_app',
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    'https://localhost:3000'
-]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -77,7 +73,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'compareprivateplanes_backend.wsgi.application'
 
-
+CORS_ORIGIN_WHITELIST = [
+    'https://localhost:3000'
+]
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 

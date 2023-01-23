@@ -3,6 +3,7 @@ from django.db import models
 
 class Aircraft(models.Model):
     aircraft_name = models.CharField(max_length=200, default="")
+    make = models.CharField(max_length=200, default="")
     model = models.CharField(max_length=200, default="")
 
     class Category(models.TextChoices):
@@ -133,7 +134,8 @@ class Aircraft(models.Model):
 
     key_facts = models.TextField(default="")
 
-    aircraft_image = models.TextField(default="")
+    aircraft_image = models.ImageField(
+        blank=True, null=True)
     # aircraft_date = models.DateField()
 
     def __str__(self):

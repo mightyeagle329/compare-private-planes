@@ -131,7 +131,7 @@ class AircraftList(View):
                 'total_thrust_kgs': item.total_thrust_kgs,
                 'hourly_fuel_burn_LPH': item.hourly_fuel_burn_LPH,
                 'average_mission_length': item.average_mission_length,
-                'image_name': item.aircraft_image
+                'image_name': item.aircraft_image.name
             })
 
         data = {
