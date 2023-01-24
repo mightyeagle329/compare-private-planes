@@ -82,11 +82,12 @@ CORS_ORIGIN_WHITELIST = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dc9q06dhrge6n',
-        'USER': 'gspclcmarnpalf',
-        'PASSWORD': '895cb7507918507d44e46faae0c48a9aa8ee77764bca77711acabe79fb26cd41',
-        'HOST': 'ec2-63-32-248-14.eu-west-1.compute.amazonaws.com',
+        'NAME': 'd51ftffrdhc3v6',
+        'USER': 'syhiishydvrisd',
+        'PASSWORD': '8cdd6cfcf5dc56b19d097e319fcc60294138717e2317d97057d826033368b46b',
+        'HOST': 'ec2-34-241-90-235.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
+
     }
 }
 
