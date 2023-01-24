@@ -146,16 +146,16 @@ class AircraftList(View):
 @method_decorator(csrf_exempt, name="dispatch")
 class AircraftSearch(View):
     def get(self, request):
-        # request_data = request.GET if request.GET.get("airplane_name") else request.data
+        # request_data = request.GET if request.GET.get("aircraft_name") else request.data
         print(request)
-        airplane_name = request.GET.get("airplane_name")
+        aircraft_name = request.GET.get("aircraft_name")
         category = request.GET.get("category")
         model = request.GET.get("model")
         in_production = request.GET.get("in_production")
 
         try:
             results = Aircraft.objects.filter(
-                aircraft_name__contains=airplane_name, category__contains=category, model__contains=model, in_production__contains=in_production)
+                aircraft_name__contains=aircraft_name, category__contains=category, model__contains=model, in_production__contains=in_production)
         except Exception:
             print("ERROR: Failed to get object from database")
             return HttpResponse("Object not found !")
