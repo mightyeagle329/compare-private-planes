@@ -3,7 +3,7 @@ import cn from "classnames";
 import { HiOutlineSearch } from "react-icons/hi";
 
 import useDebounce from "../utils/hooks/useDebounce";
-import { getAllDataByType, filterDataByParams } from "../cosmic";
+import { searchService } from "../utils/hooks/utils";
 
 import Card from "../components/common/Card";
 import Dropdown from "../components/common/Dropdown";
@@ -23,7 +23,12 @@ axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 export default function Search() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState({
+    aircraft_name: "",
+    category: "",
+    in_production: "",
+    manufacturer: "",
+  });
   const debouncedSearchTerm = useDebounce(search, 500);
 
   const [{ min, max }, setValues] = useState({ min: "", max: "" });
@@ -45,33 +50,9 @@ export default function Search() {
     maxAltitude: "",
   });
 
-  const debouncedMinTerm = useDebounce(min, 500);
-  const debouncedMaxTerm = useDebounce(max, 500);
-
-  const debouncedMinPassengers = useDebounce(min, 500);
-  const debouncedMaxPassengers = useDebounce(max, 500);
-
-  const [filterResult, setFilterResult] = useState([]);
-  const [option, setOption] = useState(OPTIONS[0]);
-  const [categoryOption, setCategoryOption] = useState(CATEGORY_OPTIONS[0]);
-  const [productionOption, setProductionOption] = useState(
-    PRODUCTION_OPTIONS[0]
-  );
-  const [manufacturerOption, setManufacturerOption] = useState(
-    MANUFACTURER_OPTIONS[0]
-  );
-
-  const [categories, setCategories] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(ACTIVE_INDEX);
-
   const [aircraftsData, setAircraftsData] = useState([]);
+  const [filterResult, setFilterResult] = useState([]);
 
-  const handleChange = ({ target: { name, value } }) => {
-    setValues((prevFields) => ({
-      ...prevFields,
-      [name]: value,
-    }));
-  };
   const handlePassengerChange = ({ target: { name, value } }) => {
     setPassengerValues((prevFields) => ({
       ...prevFields,
@@ -100,102 +81,25 @@ export default function Search() {
     }));
   };
 
-  const getCategories = async () => {
-    const categoryTypes = await getAllDataByType("categories");
-    if (categoryTypes.length) {
-      setCategories(categoryTypes);
-    }
-  };
-
   useEffect(() => {
     aircraftService.getAircrafts().then((data) => setAircraftsData(data));
   }, []);
 
-  const handleFilterDataByParams = useCallback(
-    async ({
-      category = activeIndex,
-      color = option,
-      min = debouncedMinTerm,
-      max = debouncedMaxTerm,
-      search = debouncedSearchTerm,
-    }) => {
-      const filterResult = await filterDataByParams({
-        category,
-        color,
-        min,
-        max,
-        search: search.toLowerCase().trim(),
-      });
-
-      if (filterResult.hasOwnProperty("error")) {
-        setFilterResult([]);
-      } else {
-        setFilterResult(filterResult);
-      }
-    },
-    [debouncedSearchTerm, debouncedMinTerm, debouncedMaxTerm, option]
-  );
-
-  const getDataByFilterCategoryOptions = useCallback(
-    async (color) => {
-      setCategoryOption(color);
-      handleFilterDataByParams({ color });
-    },
-    [handleFilterDataByParams]
-  );
-
-  const getDataByFilterManufacturerOptions = useCallback(
-    async (color) => {
-      setManufacturerOption(color);
-      handleFilterDataByParams({ color });
-    },
-    [handleFilterDataByParams]
-  );
-
-  const getDataByFilterProductionOptions = useCallback(
-    async (color) => {
-      setProductionOption(color);
-      handleFilterDataByParams({ color });
-    },
-    [handleFilterDataByParams]
-  );
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleFilterDataByParams({ search: debouncedSearchTerm });
-  };
-
-  const handleChangeCategory = (id) => {
-    setActiveIndex(id);
-    handleFilterDataByParams({ category: id });
-  };
-
   useEffect(() => {
-    let isMount = true;
+    searchAircraft();
+  }, [search]);
 
-    if (
-      isMount &&
-      (debouncedSearchTerm?.length ||
-        debouncedMinTerm?.length ||
-        debouncedMaxTerm?.length)
-    ) {
-      handleFilterDataByParams({
-        min: debouncedMinTerm,
-        max: debouncedMaxTerm,
-        search: debouncedSearchTerm,
-      });
-    } else {
-      !search?.length && handleFilterDataByParams({ category: activeIndex });
-    }
+  const handleSearchChanged = (key, value) => {
+    setSearch((currentSearch) => ({ ...currentSearch, [key]: value }));
+  };
 
-    !categories?.length && getCategories();
-
-    return () => {
-      isMount = false;
-    };
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearchTerm, debouncedMinTerm, debouncedMaxTerm]);
+  const searchAircraft = async () => {
+    const searchParams = new URLSearchParams(search);
+    console.log(searchParams.toString());
+    const res = await searchService(`/api/search?${searchParams}`);
+    console.log(res);
+    setFilterResult(res);
+  };
 
   return (
     <div className={cn("section-pt80", styles.section)}>
@@ -206,20 +110,20 @@ export default function Search() {
               <div className={styles.title}>Search Aircraft</div>
             </div>
             <div className={styles.form}>
-              <form className={styles.search} action="" onSubmit={handleSubmit}>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  name="search"
-                  placeholder="Search Aircraft"
-                  required
-                />
-                <button className={styles.result}>
-                  <HiOutlineSearch name="search" size="16" />
-                </button>
-              </form>
+              <input
+                className={styles.input}
+                type="text"
+                value={search.aircraft_name}
+                onChange={(e) =>
+                  handleSearchChanged("aircraft_name", e.target.value)
+                }
+                name="search"
+                placeholder="Search Aircraft"
+                required
+              />
+              <button className={styles.result}>
+                <HiOutlineSearch name="search" size="16" />
+              </button>
             </div>
 
             <div className={styles.sorting}>
@@ -227,8 +131,8 @@ export default function Search() {
                 <div className={styles.label}>Category</div>
                 <Dropdown
                   className={styles.dropdown}
-                  value={categoryOption}
-                  setValue={getDataByFilterCategoryOptions}
+                  value={search.category}
+                  setValue={(value) => handleSearchChanged("category", value)}
                   options={CATEGORY_OPTIONS}
                 />
               </div>
@@ -238,8 +142,10 @@ export default function Search() {
                 <div className={styles.label}>Manufacturer</div>
                 <Dropdown
                   className={styles.dropdown}
-                  value={manufacturerOption}
-                  setValue={getDataByFilterManufacturerOptions}
+                  value={search.manufacturer}
+                  setValue={(value) =>
+                    handleSearchChanged("manufacturer", value)
+                  }
                   options={MANUFACTURER_OPTIONS}
                 />
               </div>
@@ -249,8 +155,10 @@ export default function Search() {
                 <div className={styles.label}>In Production</div>
                 <Dropdown
                   className={styles.dropdown}
-                  value={productionOption}
-                  setValue={getDataByFilterProductionOptions}
+                  value={search.in_production}
+                  setValue={(value) =>
+                    handleSearchChanged("in_production", value)
+                  }
                   options={PRODUCTION_OPTIONS}
                 />
               </div>
@@ -363,7 +271,7 @@ export default function Search() {
                   />
                 ))
               ) : (
-                <p className={styles.inform}>Try another category!</p>
+                <p className={styles.inform}>Loading</p>
               )}
             </div>
           </div>
