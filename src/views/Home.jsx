@@ -12,7 +12,11 @@ import {
   CATEGORY_OPTIONS,
   ACTIVE_INDEX,
   MANUFACTURER_OPTIONS,
+  CATEGORY_OPTIONS2,
   PRODUCTION_OPTIONS,
+  CATEGORY_OPTIONS_DIC,
+  MANUFACTURER_OPTIONS_DIC,
+  PRODUCTION_OPTIONS_DIC,
 } from "../utils/constants/app-constants";
 import aircraftService from "../services/aircraft-service";
 import axios from "axios";
@@ -27,7 +31,7 @@ export default function Search() {
     aircraft_name: "",
     category: "",
     in_production: "",
-    manufacturer: "",
+    model: "",
   });
   const debouncedSearchTerm = useDebounce(search, 500);
 
@@ -96,7 +100,7 @@ export default function Search() {
   const searchAircraft = async () => {
     const searchParams = new URLSearchParams(search);
     console.log(searchParams.toString());
-    const res = await searchService(`/api/search?${searchParams}`);
+    const res = await searchService(`/api/search?${searchParams.toString()}`);
     console.log(res);
     setFilterResult(res);
   };
@@ -110,20 +114,22 @@ export default function Search() {
               <div className={styles.title}>Search Aircraft</div>
             </div>
             <div className={styles.form}>
-              <input
-                className={styles.input}
-                type="text"
-                value={search.aircraft_name}
-                onChange={(e) =>
-                  handleSearchChanged("aircraft_name", e.target.value)
-                }
-                name="search"
-                placeholder="Search Aircraft"
-                required
-              />
-              <button className={styles.result}>
-                <HiOutlineSearch name="search" size="16" />
-              </button>
+              <form className={styles.search} action="">
+                <input
+                  className={styles.input}
+                  type="text"
+                  value={search.aircraft_name}
+                  onChange={(e) =>
+                    handleSearchChanged("aircraft_name", e.target.value)
+                  }
+                  name="search"
+                  placeholder="Search Aircraft"
+                  required
+                />
+                <button className={styles.result}>
+                  <HiOutlineSearch name="search" size="16" />
+                </button>
+              </form>
             </div>
 
             <div className={styles.sorting}>
@@ -131,7 +137,7 @@ export default function Search() {
                 <div className={styles.label}>Category</div>
                 <Dropdown
                   className={styles.dropdown}
-                  value={search.category}
+                  value={CATEGORY_OPTIONS_DIC[search.category]}
                   setValue={(value) => handleSearchChanged("category", value)}
                   options={CATEGORY_OPTIONS}
                 />
@@ -142,10 +148,8 @@ export default function Search() {
                 <div className={styles.label}>Manufacturer</div>
                 <Dropdown
                   className={styles.dropdown}
-                  value={search.manufacturer}
-                  setValue={(value) =>
-                    handleSearchChanged("manufacturer", value)
-                  }
+                  value={MANUFACTURER_OPTIONS_DIC[search.model]}
+                  setValue={(value) => handleSearchChanged("model", value)}
                   options={MANUFACTURER_OPTIONS}
                 />
               </div>
@@ -155,7 +159,7 @@ export default function Search() {
                 <div className={styles.label}>In Production</div>
                 <Dropdown
                   className={styles.dropdown}
-                  value={search.in_production}
+                  value={PRODUCTION_OPTIONS_DIC[search.in_production]}
                   setValue={(value) =>
                     handleSearchChanged("in_production", value)
                   }
@@ -262,7 +266,15 @@ export default function Search() {
           </div>
           <div className={styles.wrapper}>
             <div className={styles.list}>
-              {aircraftsData?.length ? (
+              {filterResult?.length ? (
+                filterResult?.map((product) => (
+                  <Card
+                    className={styles.card}
+                    item={product}
+                    key={product.aircraft_id}
+                  />
+                ))
+              ) : aircraftsData?.length ? (
                 aircraftsData?.map((product) => (
                   <Card
                     className={styles.card}

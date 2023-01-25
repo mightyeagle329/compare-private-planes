@@ -1,5 +1,4 @@
 import React from "react";
-import { HiAdjustments } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import cn from "classnames";
 import styles from "./Card.module.scss";
@@ -10,17 +9,9 @@ const Card = ({ className, item }) => {
       <Link to={`/singleAircraft/${item?.aircraft_id}`}>
         <div className={styles.preview}>
           <img src={`${item?.image_name}`} alt={`${item?.aircraft_name}`} />
-          <div className={styles.control}>
-            <div className={styles.category}>{item?.title}</div>
-            <div className={cn("button-small", styles.button)}>
-              <span>{`${item?.metadata?.categories[0]?.title}`}</span>
-              <HiAdjustments name="scatter-up" size="16" />
-            </div>
-          </div>
         </div>
         <div className={styles.foot}>
           <div className={styles.status}>
-            {/* <p>{item?.title}</p> */}
             <p>{`${item?.aircraft_name}`} </p>
 
             <p className={styles.count}>
