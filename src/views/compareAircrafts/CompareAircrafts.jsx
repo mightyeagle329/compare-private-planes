@@ -17,36 +17,34 @@ import Range from "../../components/CompareAircrafts/Range";
 import Weights from "../../components/CompareAircrafts/Weight";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
-import { useEffect } from "react";
 
 const CompareAircrafts = () => {
-
-    // location.state.selectedAircrfts is an array of selected aircraft IDs,
-    // which you can use to fetch the data for the selected aircrafts
-    // and pass them as props
+  // location.state.selectedAircrfts is an array of selected aircraft IDs,
+  // which you can use to fetch the data for the selected aircrafts
+  // and pass them as props
   const location = useLocation();
-  const aircrafts = location.state.selectedAircafts
-  const [aircraftsData, setAircraftsData] = useState(aircrafts)
-  const onRemoveAircraft = (data) =>{
-    setAircraftsData(data)
-  }
+  const aircrafts = location.state.selectedAircafts;
+  const [aircraftsData, setAircraftsData] = useState(aircrafts);
+  const onRemoveAircraft = (data) => {
+    setAircraftsData(data);
+  };
   return (
     <>
       <Header />
       <main className={cn(global.wrapper)}>
-        <KeyFacts data={aircraftsData}  onRemoveAircraft={onRemoveAircraft}/>
-        <BascInfo data={aircraftsData}/>
-        <Performance data={aircraftsData}/>
-        <OwnershipCost data={aircraftsData}/>
-        <AquisitionCost data={aircraftsData}/>
-        <HistoricalMarket data={aircraftsData}/>
-        <Range data={aircraftsData}/>
-        <Maintenance data={aircraftsData}/>
-        <Interior data={aircraftsData}/>
-        <Features data={aircraftsData}/>
-        <Powerplant data={aircraftsData}/>
-        <Weights data={aircraftsData}/>
-        <Dimensions data={aircraftsData}/>
+        <KeyFacts data={aircraftsData} onRemoveAircraft={onRemoveAircraft} />
+        <BascInfo data={aircraftsData} />
+        <Performance data={aircraftsData} />
+        <OwnershipCost data={aircraftsData} />
+        <AquisitionCost data={aircraftsData} />
+        <HistoricalMarket data={aircraftsData} />
+        <Range data={aircraftsData} />
+        <Maintenance data={aircraftsData} />
+        <Interior data={aircraftsData} />
+        <Features data={aircraftsData} />
+        <Powerplant data={aircraftsData} />
+        <Weights data={aircraftsData} />
+        <Dimensions data={aircraftsData} />
         <div className={cn(global.footer)}>
           <div>
             <div className={cn(global.btns_container)}>

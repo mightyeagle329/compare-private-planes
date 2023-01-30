@@ -2,18 +2,18 @@
 .main_key_facts {
   display: flex;
   align-items: center;
-
+  justify-content: center;
+  gap: 50px;
   .facts {
     flex: 1;
   }
 
   .img_container {
     flex: 1;
-    margin-top: 10px;
-
     img {
       max-width: 70%;
       height: auto;
+      float: center;
       border-radius: 15px;
     }
   }
@@ -23,12 +23,13 @@
   .main_key_facts {
     flex-direction: column;
     align-items: flex-start;
-
-    .image_container {
+    .img_container {
+      display: grid;
+      place-items: center;
       margin-top: 20px;
 
       img {
-        max-width: 60%;
+        margin: 0 auto;
         height: auto;
       }
     }
@@ -120,7 +121,6 @@
 }
 
 .os_header {
-
   h1,
   h2,
   h3 {
@@ -144,287 +144,278 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
-
   .suggestion {
     display: flex;
-    flex-direction: column;
     align-items: center;
     gap: 10px;
 
-
     .image_container {
       position: relative;
-
       img {
         object-fit: cover;
         width: 170px;
         height: auto;
         border-radius: 15px;
-
       }
-
       img {
         flex: 1;
         max-width: 100%;
         height: 100px;
         object-fit: cover;
-
       }
     }
   }
+}
+@media screen and (max-width: 768px) {
+  .similar {
+    flex-direction: column;
+  }
+}
 
-  @media screen and (max-width: 768px) {
-    .similar {
-      flex-direction: column;
+// Accident data
+
+.main_accidentData {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  overflow: auto;
+  .total_aircraft {
+    font-size: 0.8rem;
+    background-color: gray;
+    color: beige;
+    padding: 5px;
+  }
+}
+
+// historical Fact
+.plot_btn_container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    outline: none;
+    border: none;
+    background-color: #d9d9d9;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 1rem;
+
+    &:hover {
+      background-color: #c4c4c4;
     }
   }
+}
 
-  // Accident data
+// fleet flight hours
 
-  .main_accidentData {
+.aircraft_table {
+  > * {
+    border-bottom: 1px solid #c4c4c4;
+  }
+
+  .aircraft_table_body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    overflow: auto;
+    gap: 10px;
+  }
 
-    .total_aircraft {
-      font-size: 0.8rem;
-      background-color: gray;
-      color: beige;
-      padding: 5px;
+  .aircraft_table_head {
+    font-size: smaller;
+    white-space: nowrap;
+    min-width: 90%;
+    max-width: 90%;
+    margin: 0 auto;
+
+    > * {
+      flex: 1;
     }
   }
 
-  // historical Fact
-  .plot_btn_container {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+  .aircraft_table_row {
+    border-bottom: 1px solid #c4c4c4;
+    min-width: 90%;
+    max-width: 90%;
 
-    button {
-      outline: none;
-      border: none;
-      background-color: #d9d9d9;
-      border-radius: 5px;
-      padding: 10px 15px;
-      cursor: pointer;
-      font-weight: 600;
-      margin-bottom: 1rem;
+    .aircraft_table_row_elm {
+      justify-content: center;
+      align-items: center;
 
-      &:hover {
-        background-color: #c4c4c4;
-      }
-    }
-  }
-
-  // fleet flight hours
-
-  .aircraft_table {
-    >* {
-      border-bottom: 1px solid #c4c4c4;
-    }
-
-    .aircraft_table_body {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .aircraft_table_head {
-      font-size: smaller;
-      white-space: nowrap;
-      min-width: 90%;
-      max-width: 90%;
-      margin: 0 auto;
-
-      >* {
+      > * {
         flex: 1;
       }
+
+      .toggle_btn {
+        outline: none;
+        border: none;
+        background-color: #d9d9d9;
+        border-radius: 100px;
+        padding: 5px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+    }
+
+    .hours_graph {
+      position: relative;
+      display: none;
+      justify-content: center;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .aircraft_table {
+    .aircraft_table_head {
+      display: none;
     }
 
     .aircraft_table_row {
-      border-bottom: 1px solid #c4c4c4;
-      min-width: 90%;
-      max-width: 90%;
-
       .aircraft_table_row_elm {
-        justify-content: center;
-        align-items: center;
-
-        >* {
-          flex: 1;
-        }
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: flex-start;
 
         .toggle_btn {
-          outline: none;
-          border: none;
-          background-color: #d9d9d9;
-          border-radius: 100px;
-          padding: 5px;
-          cursor: pointer;
-          font-weight: 600;
-        }
-      }
-
-      .hours_graph {
-        position: relative;
-        display: none;
-        justify-content: center;
-      }
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-    .aircraft_table {
-      .aircraft_table_head {
-        display: none;
-      }
-
-      .aircraft_table_row {
-        .aircraft_table_row_elm {
-          flex-wrap: wrap;
-          flex-direction: column;
-          align-items: flex-start;
-
-          .toggle_btn {
-            margin-bottom: 10px;
-          }
+          margin-bottom: 10px;
         }
       }
     }
   }
+}
 
-  // Maintenance
+// Maintenance
 
-  /* The actual timeline (the vertical ruler) */
-  .timeline {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+/* The actual timeline (the vertical ruler) */
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  /* The actual timeline (the vertical ruler) */
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  background-color: rgb(168, 168, 168);
+  border-radius: 100px;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+.container {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+/* The circles on the timeline */
+.container::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -17px;
+  background-color: rgb(168, 168, 168);
+  border: 4px solid rgb(168, 168, 168);
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Place the container to the left */
+.left {
+  left: 0;
+}
+
+/* Place the container to the right */
+.right {
+  left: 50%;
+}
+
+/* Add arrows to the left container (pointing right) */
+.left::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  right: 30px;
+  border: medium solid rgb(178, 79, 79);
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent rgb(232, 232, 232);
+}
+
+/* Add arrows to the right container (pointing left) */
+.right::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border: medium solid rgb(178, 79, 79);
+  border-width: 10px 10px 10px 0;
+  border-color: transparent transparent transparent rgb(188, 65, 65);
+}
+
+/* Fix the circle for containers on the right side */
+.right::after {
+  left: -16px;
+}
+
+/* The actual content */
+.content {
+  padding: 20px 30px;
+  background-color: white;
+  position: relative;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+/* Media queries - Responsive timeline on screens less than 600px wide */
+@media screen and (max-width: 600px) {
+  /* Place the timelime to the left */
   .timeline::after {
-    content: "";
-    position: absolute;
-    width: 6px;
-    background-color: rgb(168, 168, 168);
-    border-radius: 100px;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -3px;
+    left: 31px;
   }
 
-  /* Container around content */
+  /* Full-width containers */
   .container {
-    padding: 10px 40px;
-    position: relative;
-    background-color: inherit;
-    width: 50%;
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
   }
 
-  /* The circles on the timeline */
-  .container::after {
-    content: "";
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    right: -17px;
-    background-color: rgb(168, 168, 168);
-    border: 4px solid rgb(168, 168, 168);
-    top: 15px;
-    border-radius: 50%;
-    z-index: 1;
-  }
-
-  /* Place the container to the left */
-  .left {
-    left: 0;
-  }
-
-  /* Place the container to the right */
-  .right {
-    left: 50%;
-  }
-
-  /* Add arrows to the left container (pointing right) */
-  .left::before {
-    content: " ";
-    height: 0;
-    position: absolute;
-    top: 22px;
-    width: 0;
-    z-index: 1;
-    right: 30px;
-    border: medium solid rgb(178, 79, 79);
-    border-width: 10px 0 10px 10px;
-    border-color: transparent transparent transparent rgb(232, 232, 232);
-  }
-
-  /* Add arrows to the right container (pointing left) */
-  .right::before {
-    content: " ";
-    height: 0;
-    position: absolute;
-    top: 22px;
-    width: 0;
-    z-index: 1;
-    left: 30px;
-    border: medium solid rgb(178, 79, 79);
+  /* Make sure that all arrows are pointing leftwards */
+  .container::before {
+    left: 60px;
+    border: medium solid white;
     border-width: 10px 10px 10px 0;
-    border-color: transparent transparent transparent rgb(188, 65, 65);
+    border-color: transparent white transparent transparent;
   }
 
-  /* Fix the circle for containers on the right side */
+  /* Make sure all circles are at the same spot */
+  .left::after,
   .right::after {
-    left: -16px;
+    left: 15px;
   }
 
-  /* The actual content */
-  .content {
-    padding: 20px 30px;
-    background-color: white;
-    position: relative;
-    border-radius: 6px;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-  }
-
-  /* Media queries - Responsive timeline on screens less than 600px wide */
-  @media screen and (max-width: 600px) {
-
-    /* Place the timelime to the left */
-    .timeline::after {
-      left: 31px;
-    }
-
-    /* Full-width containers */
-    .container {
-      width: 100%;
-      padding-left: 70px;
-      padding-right: 25px;
-    }
-
-    /* Make sure that all arrows are pointing leftwards */
-    .container::before {
-      left: 60px;
-      border: medium solid white;
-      border-width: 10px 10px 10px 0;
-      border-color: transparent white transparent transparent;
-    }
-
-    /* Make sure all circles are at the same spot */
-    .left::after,
-    .right::after {
-      left: 15px;
-    }
-
-    /* Make all right containers behave like the left ones */
-    .right {
-      left: 0%;
-    }
+  /* Make all right containers behave like the left ones */
+  .right {
+    left: 0%;
   }
 }

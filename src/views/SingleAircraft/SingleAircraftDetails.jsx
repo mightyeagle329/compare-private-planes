@@ -41,15 +41,18 @@ export default function SingleAircraftDetails() {
     aircraftService.getAircrafts().then((data) => setAircraftsData(data));
   }, []);
   const [openModal, setOpenModal] = useState(false);
+  const filteredAircrafts = aircraftsData.filter(
+    (aircraft) => aircraft.aircraft_id !== aircraftData.aircraft_id
+  );
   let selectedAircafts = [];
-
-  // const filteredAircrafts = aircraftsData.filter((aircraft) => aircraft.aircraft_id !== aircraftData.aircraft_id)
+  selectedAircafts.push(aircraftData);
   const onSelect = (e, aircraft) => {
     if (selectedAircafts.includes(aircraft)) {
+      e.target.checked = false;
       selectedAircafts.pop(aircraft);
       return;
     }
-    if (selectedAircafts.length === 2) {
+    if (selectedAircafts.length >= 3) {
       alert("max 3");
       e.target.checked = false;
       return;
@@ -80,7 +83,6 @@ export default function SingleAircraftDetails() {
         <AccidentData params={aircraftData} />
 
         <Similar params={aircraftsData} />
-
         <div className={cn(global.footer)}>
           <div>
             <div className={cn(global.btns_container)}>
@@ -103,9 +105,12 @@ export default function SingleAircraftDetails() {
         >
           <div>
             <div className={cn(scopedStyles.options)}>
-              {aircraftsData.map((aircraft) => {
+              {filteredAircrafts.map((aircraft) => {
                 return (
-                  <label className={cn(scopedStyles.option)} key={aircraft.aircraft_id}>
+                  <label
+                    className={cn(scopedStyles.option)}
+                    key={aircraft.aircraft_id}
+                  >
                     <span>{aircraft.aircraft_name}</span>
                     <input
                       type="checkbox"

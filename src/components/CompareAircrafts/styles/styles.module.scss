@@ -92,6 +92,15 @@
             &:nth-child(3){
                 border-right: #a4a4a4 1px solid;
             }
+            .image_container {
+                position: relative;
+                img {
+                  object-fit: cover;
+                  width: 170px;
+                  height: auto;
+                  border-radius: 15px;
+                }
+            }
             .btn{
                 border-radius: 15px;
                 outline: none;
