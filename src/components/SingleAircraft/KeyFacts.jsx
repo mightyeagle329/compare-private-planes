@@ -1,19 +1,19 @@
 import cn from "classnames";
-import global from "./styles/global.module.scss";
+import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
-import SectionHeader from "./shared/SectionHeader";
+import SectionHeader from "../shared/SectionHeader";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const KeyFacts = () => {
-  const data = {
+const KeyFacts = ({ params }) => {
+  const data_passengers = {
     datasets: [
       {
-        label: "# of Votes",
-        data: [12, 20],
+        label: "Pax",
+        data: [params.max_pax, 19],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -34,7 +34,109 @@ const KeyFacts = () => {
       },
     ],
   };
-  const facts = ["fact1", "fact2", "fact3", "fact4", "fact5"];
+  const data_range = {
+    datasets: [
+      {
+        label: "Range",
+        data: [params.range_NM, 8000],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  const data_cruise = {
+    datasets: [
+      {
+        label: "Cruise Speed",
+        data: [params.high_cruise_knots, 516],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  const data_cost = {
+    datasets: [
+      {
+        label: "Cost Per Hour",
+        data: [params.hourly_ownership_rate_NAmerica, 10000],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  const data_fuel = {
+    datasets: [
+      {
+        label: "Hourly Fuel Burn",
+        data: [params.hourly_fuel_burn_GPH, 626],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 2,
+      },
+    ],
+  };
 
   return (
     <>
@@ -42,12 +144,10 @@ const KeyFacts = () => {
         <SectionHeader title="Key Facts" />
         <main className={cn(styles.main_key_facts)}>
           <ul className={cn(styles.facts)}>
-            {facts.map((fact) => {
-              return <li key={fact}>fact</li>;
-            })}
+            <li>{params.key_facts}</li>
           </ul>
           <div className={cn(styles.img_container)}>
-            <img src="https://via.placeholder.com/350" alt="" />
+            <img src={`${params?.image_name}`} alt="" />
           </div>
         </main>
       </section>
@@ -62,7 +162,7 @@ const KeyFacts = () => {
           >
             <span>Passengers</span>
             <Doughnut
-              data={data}
+              data={data_passengers}
               options={{
                 responsive: true,
               }}
@@ -76,7 +176,7 @@ const KeyFacts = () => {
           >
             <span>Range</span>
             <Doughnut
-              data={data}
+              data={data_range}
               options={{
                 responsive: true,
               }}
@@ -90,7 +190,7 @@ const KeyFacts = () => {
           >
             <span>Cruise Speed</span>
             <Doughnut
-              data={data}
+              data={data_cruise}
               options={{
                 responsive: true,
               }}
@@ -104,7 +204,7 @@ const KeyFacts = () => {
           >
             <span>Cost per Hour</span>
             <Doughnut
-              data={data}
+              data={data_cost}
               options={{
                 responsive: true,
               }}
@@ -118,7 +218,7 @@ const KeyFacts = () => {
           >
             <span>Fuel Burn</span>
             <Doughnut
-              data={data}
+              data={data_fuel}
               options={{
                 responsive: true,
               }}

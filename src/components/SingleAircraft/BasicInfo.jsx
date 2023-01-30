@@ -1,7 +1,7 @@
 import cn from "classnames";
-import global from "./styles/global.module.scss";
-import SectionHeader from "./shared/SectionHeader";
-const BasicInfo = () => {
+import global from "../styles/global.module.scss";
+import SectionHeader from "../shared/SectionHeader";
+const BasicInfo = ({ params }) => {
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Basic Info" />
@@ -10,16 +10,16 @@ const BasicInfo = () => {
           <div className={cn(global.column)}>
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>Production Start</span>
-                <span>2015</span>
+                <span className={cn(global.key, global.key_realign, global.key, global.key_realign_realign)}>Production Start</span>
+                <span>{params.production_start}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>Production End</span>
-                <span>Present</span>
+                <span className={cn(global.key, global.key_realign, global.key, global.key_realign_realign)}>Production End</span>
+                <span>{params.production_end}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>In Production?</span>
-                <span>Yes</span>
+                <span className={cn(global.key, global.key_realign, global.key, global.key_realign_realign)}>In Production?</span>
+                <span>{params.in_production}</span>
               </div>
             </div>
           </div>
@@ -27,16 +27,16 @@ const BasicInfo = () => {
           <div className={cn(global.column)}>
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>Number Made</span>
-                <span>150</span>
+                <span className={cn(global.key, global.key_realign, global.key, global.key_realign_realign)}>Number Made</span>
+                <span>{params.number_made}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>Number in Service</span>
-                <span>135</span>
+                <span className={cn(global.key, global.key_realign, global.key, global.key_realign_realign)}>Number in Service</span>
+                <span>{params.number_in_service}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>Serial Number Range</span>
-                <span>0333 to 0555</span>
+                <span className={cn(global.key, global.key_realign)}>Serial Number Range</span>
+                <span>{params.serial_numbers}</span>
               </div>
             </div>
           </div>

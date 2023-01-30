@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import { HiOutlineSearch } from "react-icons/hi";
 
@@ -8,11 +8,8 @@ import { searchService } from "../utils/hooks/utils";
 import Card from "../components/common/Card";
 import Dropdown from "../components/common/Dropdown";
 import {
-  OPTIONS,
   CATEGORY_OPTIONS,
-  ACTIVE_INDEX,
   MANUFACTURER_OPTIONS,
-  CATEGORY_OPTIONS2,
   PRODUCTION_OPTIONS,
   CATEGORY_OPTIONS_DIC,
   MANUFACTURER_OPTIONS_DIC,

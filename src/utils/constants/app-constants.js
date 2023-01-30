@@ -1,5 +1,3 @@
-const ACTIVE_INDEX = "627e23f18bb13a000911ea55";
-
 const CATEGORY_OPTIONS = ["", "Large", "Medium", "Light", "VLJ", "Prop"];
 const CATEGORY_OPTIONS_DIC = {
   "": "Show all",
@@ -54,7 +52,6 @@ const PRODUCTION_OPTIONS_DIC = {
 };
 
 export {
-  ACTIVE_INDEX,
   CATEGORY_OPTIONS,
   MANUFACTURER_OPTIONS,
   PRODUCTION_OPTIONS,

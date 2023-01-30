@@ -2,12 +2,12 @@ import cn from "classnames";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 
-import global from "./styles/global.module.scss";
+import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
-import SectionHeader from "./shared/SectionHeader";
+import SectionHeader from "../shared/SectionHeader";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-const OwnershipCosts = () => {
+const OwnershipCosts = ({ params }) => {
   const data = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
     datasets: [
@@ -42,7 +42,7 @@ const OwnershipCosts = () => {
         <header className={cn(styles.os_header)}>
           <h2>Estimated annual flight hours: 200</h2>
           <h2>Aircraft Annual Budget</h2>
-          <h3 className={cn(styles.cost)}>$860,720</h3>
+          <h3 className={cn(styles.cost)}>${params.annual_cost}</h3>
         </header>
         <div className={styles.pie_charts}>
           <div className={styles.pie_chart}>

@@ -1,7 +1,7 @@
 import cn from "classnames";
-import global from "./styles/global.module.scss";
+import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
-import SectionHeader from "./shared/SectionHeader";
+import SectionHeader from "../shared/SectionHeader";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,7 +15,6 @@ import {
 import { faker } from "@faker-js/faker";
 import { Line } from "react-chartjs-2";
 
-
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -26,7 +25,7 @@ ChartJS.register(
   Legend
 );
 
-const FleetFlightHours = () => {
+const FleetFlightHours = ({ params }) => {
   const colsHeads = [
     "Registration Number",
     "Serial Number",
@@ -78,7 +77,7 @@ const FleetFlightHours = () => {
           <div className={cn(global.column)}>
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>
+                <span className={cn(global.key, global.key_realign)}>
                   Average Hours per Aircraft per Year:
                 </span>
                 <span>200</span>
@@ -89,7 +88,7 @@ const FleetFlightHours = () => {
           <div className={cn(global.column)}>
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>
+                <span className={cn(global.key, global.key_realign)}>
                   Total Fleet Hours This Year:
                 </span>
                 <span>200</span>
@@ -129,7 +128,12 @@ const FleetFlightHours = () => {
                     <span className={cn(global._padding)}>{elm}</span>
                     <span className={cn(global._padding)}>{elm}</span>
                     <span className={cn(global._padding)}>{elm}</span>
-                    <button onClick={(e) => onToggle(e, index)} className={cn(styles.toggle_btn)}>View</button>
+                    <button
+                      onClick={(e) => onToggle(e, index)}
+                      className={cn(styles.toggle_btn)}
+                    >
+                      View
+                    </button>
                   </div>
                   <div className={cn(styles.hours_graph) + " chart" + index}>
                     <Line data={data} options={options} />

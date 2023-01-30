@@ -1,7 +1,7 @@
 import cn from "classnames";
-import global from "./styles/global.module.scss";
+import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
-import SectionHeader from "./shared/SectionHeader";
+import SectionHeader from "../shared/SectionHeader";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,9 +11,9 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
+} from "chart.js";
 import { faker } from "@faker-js/faker";
-import { Line } from 'react-chartjs-2';
+import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -25,39 +25,38 @@ ChartJS.register(
   Legend
 );
 
-const HistoricalMarket = () => {
-
+const HistoricalMarket = ({ params }) => {
   const options = {
     responsive: true,
     plugins: {
       legend: {
-        position: 'bottom',
-      }
+        position: "bottom",
+      },
     },
   };
 
-  const labels = ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'];
+  const labels = ["May", "Jun", "Jul", "Aug", "Sep", "Oct"];
 
   const data = {
     labels,
     datasets: [
       {
-        label: 'Current Values',
+        label: "Current Values",
         data: labels.map(() => faker.datatype.number({ min: 11.0, max: 20.0 })),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      }
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
     ],
   };
 
   return (
     <section className={cn(global.section)}>
-      <SectionHeader title="Historical Market" />
+      <SectionHeader title="Historical Market Activity" />
       <main>
         <div className={cn(styles.plot_btn_container)}>
           <button className={cn(styles.button)}>Time Period to View</button>
         </div>
-      <div className={cn(styles.line_chart)}>
+        <div className={cn(styles.line_chart)}>
           <Line data={data} options={options} />
         </div>
       </main>

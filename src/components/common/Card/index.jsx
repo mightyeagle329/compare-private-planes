@@ -6,7 +6,7 @@ import styles from "./Card.module.scss";
 const Card = ({ className, item }) => {
   return (
     <div className={cn(styles.card, className)} aria-hidden="true">
-      <Link to={`/singleAircraft/${item?.aircraft_id}`}>
+      <Link to={`/aircrafts/${item?.aircraft_id}`}>
         <div className={styles.preview}>
           <img src={`${item?.image_name}`} alt={`${item?.aircraft_name}`} />
         </div>

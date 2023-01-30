@@ -1,7 +1,7 @@
-.main {
+.wrapper {
   width: 100%;
   height: auto;
-
+  
   .section {
     max-width: 60%;
     margin: 0 auto;
@@ -50,6 +50,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
+        flex-wrap: wrap;
         gap: 40px;
         .column_header {
           font-weight: bolder;
@@ -60,15 +61,25 @@
         .rows {
           display: flex;
           flex-direction: column;
+          flex: 1;
           gap: 40px;
+          text-align: center;
           .row {
             white-space: nowrap;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 10px;
+            color: red;
             .key {
+              flex: 1;
               font-weight: bolder;
+            }
+            .key_realign {
+              flex: 0;
+            }
+            .value {
+              flex: 1;
             }
           }
         }
@@ -144,8 +155,17 @@
     }
   }
 }
-@media screen and (max-width: 768px) {
-  .main {
+
+@media screen and (max-width: 1130px) {
+  .wrapper {
+    .seperator {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 868px) {
+  .wrapper {
     padding: 0 10px;
     .section {
       max-width: 100%;
@@ -219,4 +239,10 @@
 
 ._padding {
   padding: 0.6rem;
+}
+
+.image_container{
+  img{
+    max-width: 100%;
+  }
 }

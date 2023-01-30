@@ -1,8 +1,8 @@
 import cn from "classnames";
-import global from "./styles/global.module.scss";
-import SectionHeader from "./shared/SectionHeader";
+import global from "../styles/global.module.scss";
+import SectionHeader from "../shared/SectionHeader";
 
-const Dimensions = () => {
+const Dimensions = ({ params }) => {
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Dimensions" />
@@ -11,18 +11,18 @@ const Dimensions = () => {
           <div className={cn(global.details_table)}>
             <div className={cn(global.column)}>
               <span className={cn(global.column_header)}>
-                High Speed Cruise
+                Exterior Dimensions (Feet)
               </span>
               <div className={cn(global.rows)}>
                 <div className={cn(global.row)}>
-                  <span className={cn(global.key)}>Knots</span>
-                  <span className={cn(global.key)}>MPH</span>
-                  <span className={cn(global.key)}>Mach</span>
+                  <span className={cn(global.key)}>Length</span>
+                  <span className={cn(global.key)}>Height</span>
+                  <span className={cn(global.key)}>Wings</span>
                 </div>
                 <div className={cn(global.row)}>
-                  <span>597</span>
-                  <span>650</span>
-                  <span>09</span>
+                  <span className={cn(global.value)}>{params.ext_length_feet}</span>
+                  <span className={cn(global.value)}>{params.exterior_height_feet}</span>
+                  <span className={cn(global.value)}>{params.wingspan_feet}</span>
                 </div>
               </div>
             </div>
@@ -33,18 +33,18 @@ const Dimensions = () => {
           <div className={cn(global.details_table)}>
             <div className={cn(global.column)}>
               <span className={cn(global.column_header)}>
-                High Speed Cruise
+                Interior Dimensions (Feet)
               </span>
               <div className={cn(global.rows)}>
                 <div className={cn(global.row)}>
-                  <span className={cn(global.key)}>Knots</span>
-                  <span className={cn(global.key)}>MPH</span>
-                  <span className={cn(global.key)}>Mach</span>
+                  <span className={cn(global.key)}>Length</span>
+                  <span className={cn(global.key)}>Height</span>
+                  <span className={cn(global.key)}>Width</span>
                 </div>
                 <div className={cn(global.row)}>
-                  <span>597</span>
-                  <span>650</span>
-                  <span>09</span>
+                  <span className={cn(global.value)}>{params.int_length_feet}</span>
+                  <span className={cn(global.value)}>{params.int_height_feet}</span>
+                  <span className={cn(global.value)}>{params.int_width_feet}</span>
                 </div>
               </div>
             </div>
@@ -55,18 +55,16 @@ const Dimensions = () => {
           <div className={cn(global.details_table)}>
             <div className={cn(global.column)}>
               <span className={cn(global.column_header)}>
-                High Speed Cruise
+                Door Dimensions (Feet)
               </span>
               <div className={cn(global.rows)}>
                 <div className={cn(global.row)}>
-                  <span className={cn(global.key)}>Knots</span>
-                  <span className={cn(global.key)}>MPH</span>
-                  <span className={cn(global.key)}>Mach</span>
+                  <span className={cn(global.key)}>Height</span>
+                  <span className={cn(global.key)}>Width</span>
                 </div>
                 <div className={cn(global.row)}>
-                  <span>597</span>
-                  <span>650</span>
-                  <span>09</span>
+                  <span className={cn(global.value)}>{params.door_height_feet}</span>
+                  <span className={cn(global.value)}>{params.door_width_feet}</span>
                 </div>
               </div>
             </div>

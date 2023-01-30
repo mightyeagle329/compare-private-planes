@@ -8,16 +8,13 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
+} from "chart.js";
 import { faker } from "@faker-js/faker";
-import { Line } from 'react-chartjs-2';
+import { Line } from "react-chartjs-2";
 
-
-
-import global from "./styles/global.module.scss";
+import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
-import SectionHeader from "./shared/SectionHeader";
-
+import SectionHeader from "../shared/SectionHeader";
 
 ChartJS.register(
   CategoryScale,
@@ -28,39 +25,38 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const Acquisition = () => {
-
+const Acquisition = ({ params }) => {
   const options = {
     responsive: true,
     plugins: {
       legend: {
-        position: 'bottom',
-      }
+        position: "bottom",
+      },
     },
   };
 
-  const labels = ['1998', '1999', '2000', '2002', '2001', '2003'];
+  const labels = ["1998", "1999", "2000", "2002", "2001", "2003"];
 
   const data = {
     labels,
     datasets: [
       {
-        label: 'Current Values',
+        label: "Current Values",
         data: labels.map(() => faker.datatype.number({ min: 11.0, max: 20.0 })),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
-        label: 'Hour Adjusted',
+        label: "Hour Adjusted",
         data: labels.map(() => faker.datatype.number({ min: 11.0, max: 20.0 })),
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        borderColor: "rgb(53, 162, 235)",
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
       {
-        label: 'Future Values',
+        label: "Future Values",
         data: labels.map(() => faker.datatype.number({ min: 11.0, max: 20.0 })),
-        borderColor: 'rgb(153, 82, 155)',
-        backgroundColor: 'rgba(153, 82, 155, 0.5)',
+        borderColor: "rgb(153, 82, 155)",
+        backgroundColor: "rgba(153, 82, 155, 0.5)",
       },
     ],
   };
@@ -73,20 +69,56 @@ const Acquisition = () => {
           <div className={cn(global.column)}>
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>Production Start</span>
-                <span>2015</span>
+                <span
+                  className={cn(
+                    global.key,
+                    global.key_realign,
+                    global.key,
+                    global.key_realign_realign
+                  )}
+                >
+                  New Purchase Price
+                </span>
+                <span>{params.new_purchase}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>Production End</span>
-                <span>Present</span>
+                <span
+                  className={cn(
+                    global.key,
+                    global.key_realign,
+                    global.key,
+                    global.key_realign_realign
+                  )}
+                >
+                  Select Year of Manufacture
+                </span>
+                <span>{params.manifacturer_year}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>In Production?</span>
-                <span>Yes</span>
+                <span
+                  className={cn(
+                    global.key,
+                    global.key_realign,
+                    global.key,
+                    global.key_realign_realign
+                  )}
+                >
+                  Input Airframe Hours
+                </span>
+                <span>{params.airframe_hours}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>In Production?</span>
-                <span>Yes</span>
+                <span
+                  className={cn(
+                    global.key,
+                    global.key_realign,
+                    global.key,
+                    global.key_realign_realign
+                  )}
+                >
+                  Estimated Future Value
+                </span>
+                <span>{params.est_future_value}</span>
               </div>
             </div>
           </div>
@@ -94,20 +126,56 @@ const Acquisition = () => {
           <div className={cn(global.column)}>
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>Number Made</span>
-                <span>150</span>
+                <span
+                  className={cn(
+                    global.key,
+                    global.key_realign,
+                    global.key,
+                    global.key_realign_realign
+                  )}
+                >
+                  Depreciation Rate
+                </span>
+                <span>{params.depreication_rate}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>Number in Service</span>
-                <span>135</span>
+                <span
+                  className={cn(
+                    global.key,
+                    global.key_realign,
+                    global.key,
+                    global.key_realign_realign
+                  )}
+                >
+                  Current Market Value
+                </span>
+                <span>{params.market_value}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>Serial Number Range</span>
-                <span>0333 to 0555</span>
+                <span
+                  className={cn(
+                    global.key,
+                    global.key_realign,
+                    global.key,
+                    global.key_realign_realign
+                  )}
+                >
+                  Adjusted Value
+                </span>
+                <span>{params.adjusted_value}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key)}>Serial Number Range</span>
-                <span>0333 to 0555</span>
+                <span
+                  className={cn(
+                    global.key,
+                    global.key_realign,
+                    global.key,
+                    global.key_realign_realign
+                  )}
+                >
+                  Future Value
+                </span>
+                <span>{params.future_value}</span>
               </div>
             </div>
           </div>
@@ -131,13 +199,18 @@ const Acquisition = () => {
             {labels.map((label, index) => (
               <tr key={index}>
                 <td className={cn(global.td)}>{label}</td>
-                <td className={cn(global.td)}>{data.datasets[0].data[index]}</td>
-                <td className={cn(global.td)}>{data.datasets[1].data[index]}</td>
-                <td className={cn(global.td)}>{data.datasets[2].data[index]}</td>
+                <td className={cn(global.td)}>
+                  {data.datasets[0].data[index]}
+                </td>
+                <td className={cn(global.td)}>
+                  {data.datasets[1].data[index]}
+                </td>
+                <td className={cn(global.td)}>
+                  {data.datasets[2].data[index]}
+                </td>
               </tr>
             ))}
           </tbody>
-          
         </table>
       </main>
     </section>

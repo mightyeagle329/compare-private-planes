@@ -1,7 +1,7 @@
 import cn from "classnames";
-import global from "./styles/global.module.scss";
+import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
-import SectionHeader from "./shared/SectionHeader";
+import SectionHeader from "../shared/SectionHeader";
 
 const AccidentData = () => {
   return (
