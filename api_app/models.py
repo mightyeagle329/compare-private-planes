@@ -63,7 +63,6 @@ class Aircraft(models.Model):
     engine_manufacturer = models.CharField(max_length=200, default="")
     engine_model = models.CharField(max_length=200, default="")
     thrust_output_lbs = models.IntegerField(default=0)
-    thrust_engine_lbs = models.IntegerField(default=0)
     total_thrust_lbs = models.IntegerField(default=0)
     hourly_fuel_burn_GPH = models.IntegerField(default=0)
     lateral_db = models.IntegerField(default=0)
