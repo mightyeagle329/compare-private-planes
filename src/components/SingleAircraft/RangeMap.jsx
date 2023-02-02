@@ -13,8 +13,9 @@ const RangeMap = ({ params }) => {
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Range Map" />
-
-      <Map />
+      <main>
+        <Map />
+      </main>
     </section>
   );
 };
@@ -46,6 +47,9 @@ function Map() {
       zoom={10}
       center={{ lat: 44, lng: -80 }}
       mapContainerClassName="map-container"
-    ></GoogleMap>
+    >
+      <Circle center={center} options={options} />
+      <p>chadi</p>
+    </GoogleMap>
   );
 }
