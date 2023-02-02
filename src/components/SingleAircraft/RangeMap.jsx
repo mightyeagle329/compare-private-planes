@@ -43,13 +43,15 @@ function Map() {
   };
 
   return (
-    <GoogleMap
-      zoom={10}
-      center={{ lat: 44, lng: -80 }}
-      mapContainerClassName="map-container"
-    >
-      <Circle center={center} options={options} />
-      <p>chadi</p>
-    </GoogleMap>
+    <div className="map-div">
+      <GoogleMap
+        zoom={10}
+        center={{ lat: 44, lng: -80 }}
+        mapContainerClassName="map-container"
+      >
+        <Circle center={center} options={options} />
+        <p>chadi</p>
+      </GoogleMap>
+    </div>
   );
 }
