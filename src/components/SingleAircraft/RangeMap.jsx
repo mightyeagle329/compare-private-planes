@@ -46,8 +46,6 @@ function Map() {
       zoom={10}
       center={{ lat: 44, lng: -80 }}
       mapContainerClassName="map-container"
-    >
-      <Circle center={center} options={options} />
-    </GoogleMap>
+    ></GoogleMap>
   );
 }
