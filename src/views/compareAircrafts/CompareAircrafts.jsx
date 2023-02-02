@@ -17,13 +17,17 @@ import Range from "../../components/CompareAircrafts/Range";
 import Weights from "../../components/CompareAircrafts/Weight";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const CompareAircrafts = () => {
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   // location.state.selectedAircrfts is an array of selected aircraft IDs,
   // which you can use to fetch the data for the selected aircrafts
   // and pass them as props
   const location = useLocation();
-  const aircrafts = location.state.selectedAircafts;
+  const aircrafts = location.state;
   const [aircraftsData, setAircraftsData] = useState(aircrafts);
   const onRemoveAircraft = (data) => {
     setAircraftsData(data);

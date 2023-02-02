@@ -39,22 +39,7 @@ const KeyFacts = ({ data, onRemoveAircraft }) => {
                     <img src={aircraft.image_name} alt="" />
                   </div>
                   <ul>
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Quisquam ab reprehenderit, labore nemo aperiam corporis!{" "}
-                    </li>
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Quisquam ab reprehenderit, labore nemo aperiam corporis!{" "}
-                    </li>
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Quisquam ab reprehenderit, labore nemo aperiam corporis!{" "}
-                    </li>
-                    <li>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Quisquam ab reprehenderit, labore nemo aperiam corporis!{" "}
-                    </li>
+                    <li>{aircraft.key_facts} </li>
                   </ul>
                 </div>
               );

@@ -11,12 +11,16 @@ const Powerplant = ({ params }) => {
           <div className={cn(global.column)}>
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>Engine Make</span>
+                <span className={cn(global.key, global.key_realign)}>
+                  Engine Make
+                </span>
                 <span>{params.engine_manufacturer}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>Thrust per Engine (lbs)</span>
-                <span>{params.thrust_output_lbs}</span>
+                <span className={cn(global.key, global.key_realign)}>
+                  Thrust per Engine (lbs)
+                </span>
+                <span>{params.thrust_engine_lbs}</span>
               </div>
             </div>
           </div>
@@ -24,7 +28,9 @@ const Powerplant = ({ params }) => {
           <div className={cn(global.column)}>
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>Engine Model</span>
+                <span className={cn(global.key, global.key_realign)}>
+                  Engine Model
+                </span>
                 <span>{params.engine_model}</span>
               </div>
               <div className={cn(global.row)}>
@@ -53,9 +59,15 @@ const Powerplant = ({ params }) => {
                 </div>
                 <div className={cn(global.rows)}>
                   <div className={cn(global.row)}>
-                    <span className={cn(global.value)}>{params.lateral_db}</span>
-                    <span className={cn(global.value)}>{params.flyover_db}</span>
-                    <span className={cn(global.value)}>{params.approach_db}</span>
+                    <span className={cn(global.value)}>
+                      {params.lateral_db}
+                    </span>
+                    <span className={cn(global.value)}>
+                      {params.flyover_db}
+                    </span>
+                    <span className={cn(global.value)}>
+                      {params.approach_db}
+                    </span>
                   </div>
                 </div>
               </div>

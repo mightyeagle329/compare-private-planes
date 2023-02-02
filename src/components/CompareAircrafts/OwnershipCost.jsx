@@ -5,7 +5,7 @@ import styles from "./styles/styles.module.scss";
 
 import SectionHeader from "../shared/SectionHeader";
 
-const OwnershipCost = ({data}) => {
+const OwnershipCost = ({ data }) => {
   return (
     <>
       <section className={cn(global.section)}>
@@ -28,7 +28,7 @@ const OwnershipCost = ({data}) => {
                   styles.table_key
                 )}
               >
-                Production Start
+                Annual Budget{" "}
               </span>
               <span
                 className={cn(
@@ -36,7 +36,7 @@ const OwnershipCost = ({data}) => {
                   styles.table_key
                 )}
               >
-                Production End
+                Annual Fixed Costs{" "}
               </span>
               <span
                 className={cn(
@@ -44,36 +44,15 @@ const OwnershipCost = ({data}) => {
                   styles.table_key
                 )}
               >
-                In Production?
-              </span>
-              <span
-                className={cn(
-                  styles.compare_table_column_cell,
-                  styles.table_key
-                )}
-              >
-                Number Made
-              </span>
-              <span
-                className={cn(
-                  styles.compare_table_column_cell,
-                  styles.table_key
-                )}
-              >
-                Number in Service
-              </span>
-              <span
-                className={cn(
-                  styles.compare_table_column_cell,
-                  styles.table_key
-                )}
-              >
-                Serial Numbers
+                Variable Costs per Hour{" "}
               </span>
             </div>
             {data.map((aircraft) => {
               return (
-                <div className={cn(styles.compare_table_column)} key={aircraft.aircraft_id}>
+                <div
+                  className={cn(styles.compare_table_column)}
+                  key={aircraft.aircraft_id}
+                >
                   <span
                     className={cn(
                       styles.compare_table_column_cell,
@@ -82,28 +61,19 @@ const OwnershipCost = ({data}) => {
                   >
                     {aircraft.aircraft_name}
                   </span>
+
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Production Start
+                    {aircraft.annual_budget}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Production End
+                    {aircraft.annual_fixed_cost}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    In Production?
-                  </span>
-                  <span className={cn(styles.compare_table_column_cell)}>
-                    Number Made
-                  </span>
-                  <span className={cn(styles.compare_table_column_cell)}>
-                    Number in Service
-                  </span>
-                  <span className={cn(styles.compare_table_column_cell)}>
-                    Serial Numbers
+                    {aircraft.variable_costs_hourly}
                   </span>
                 </div>
               );
             })}
-            
           </div>
           <div className={cn(styles.additional_info)}>
             <h3>Annual Fixed Costs Breakdown</h3>
@@ -112,16 +82,26 @@ const OwnershipCost = ({data}) => {
               <div className={cn(styles.crew_salary)}>
                 <div className={cn(styles.aircraft_names)}>
                   {data.map((aircraft) => {
-                    return(
-                      <div className={cn(styles.aircraft_name)} key={aircraft.aircraft_id}>{aircraft.aircraft_name}</div>
-                    )
+                    return (
+                      <div
+                        className={cn(styles.aircraft_name)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.aircraft_name}
+                      </div>
+                    );
                   })}
                 </div>
                 <div className={cn(styles.bars)}>
                   {data.map((aircraft) => {
-                    return(
-                      <div className={cn(styles.bar)} key={aircraft.aircraft_id}>$25200</div>
-                    )
+                    return (
+                      <div
+                        className={cn(styles.bar)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.crew_salary}
+                      </div>
+                    );
                   })}
                 </div>
               </div>

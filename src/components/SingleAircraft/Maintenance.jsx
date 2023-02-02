@@ -12,25 +12,19 @@ const Maintenance = ({ params }) => {
           <div className={cn(styles.container, styles.left)}>
             <div className={cn(styles.content)}>
               <h2>A Check</h2>
-              <p>
-                Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
-              </p>
+              <p>{params.a_check}</p>
             </div>
           </div>
           <div className={cn(styles.container, styles.right)}>
             <div className={cn(styles.content)}>
               <h2>B Check</h2>
-              <p>
-                Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
-              </p>
+              <p>{params.a_check}</p>
             </div>
           </div>
           <div className={cn(styles.container, styles.left)}>
             <div className={cn(styles.content)}>
               <h2>C Check</h2>
-              <p>
-                Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec
-              </p>
+              <p>{params.a_check}</p>
             </div>
           </div>
         </div>

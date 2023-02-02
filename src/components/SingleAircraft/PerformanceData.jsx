@@ -14,11 +14,15 @@ const PerformanceData = ({ params }) => {
           <div className={cn(global.column)}>
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>Range (Nautical Miles)</span>
+                <span className={cn(global.key, global.key_realign)}>
+                  Range (Nautical Miles)
+                </span>
                 <span>{params.range_NM}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>Range (Miles / KM)</span>
+                <span className={cn(global.key, global.key_realign)}>
+                  Range (Miles / KM)
+                </span>
                 <span>{params.range_Miles}</span>
               </div>
               <div className={cn(global.row)}>
@@ -33,8 +37,10 @@ const PerformanceData = ({ params }) => {
           <div className={cn(global.column)}>
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>Max Altitude (Feet)</span>
-                <span>{params.cabin_altitude}</span>
+                <span className={cn(global.key, global.key_realign)}>
+                  Max Altitude (Feet)
+                </span>
+                <span>{params.max_altitude_feet}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
@@ -62,9 +68,15 @@ const PerformanceData = ({ params }) => {
                 <span className={cn(global.key)}>Mach</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.value)}>{params.high_cruise_knots}</span>
-                <span className={cn(global.value)}>{params.high_cruise_MPH}</span>
-                <span className={cn(global.value)}>{params.high_cruise_Mach}</span>
+                <span className={cn(global.value)}>
+                  {params.high_cruise_knots}
+                </span>
+                <span className={cn(global.value)}>
+                  {params.high_cruise_MPH}
+                </span>
+                <span className={cn(global.value)}>
+                  {params.high_cruise_Mach}
+                </span>
               </div>
             </div>
           </div>
@@ -78,9 +90,15 @@ const PerformanceData = ({ params }) => {
                 <span className={cn(global.key)}>Mach</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.value)}>{params.long_range_cruise_knots}</span>
-                <span className={cn(global.value)}>{params.long_range_cruise_MPH}</span>
-                <span className={cn(global.value)}>{params.long_range_cruise_Mach}</span>
+                <span className={cn(global.value)}>
+                  {params.long_range_cruise_knots}
+                </span>
+                <span className={cn(global.value)}>
+                  {params.long_range_cruise_MPH}
+                </span>
+                <span className={cn(global.value)}>
+                  {params.long_range_cruise_Mach}
+                </span>
               </div>
             </div>
           </div>

@@ -71,7 +71,10 @@ const BasicInfo = ({ data }) => {
             </div>
             {data.map((aircraft) => {
               return (
-                <div className={cn(styles.compare_table_column)} key={aircraft.aircraft_id}>
+                <div
+                  className={cn(styles.compare_table_column)}
+                  key={aircraft.aircraft_id}
+                >
                   <span
                     className={cn(
                       styles.compare_table_column_cell,
@@ -81,22 +84,22 @@ const BasicInfo = ({ data }) => {
                     {aircraft.aircraft_name}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Production Start
+                    {aircraft.production_start}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Production End
+                    {aircraft.production_end}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    In Production?
+                    {aircraft.in_production ? "Yes" : "No"}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Number Made
+                    {aircraft.number_made}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Number in Service
+                    {aircraft.number_made}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Serial Numbers
+                    {aircraft.serial_numbers}
                   </span>
                 </div>
               );

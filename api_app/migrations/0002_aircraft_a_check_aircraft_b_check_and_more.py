@@ -45,9 +45,4 @@ class Migration(migrations.Migration):
             name='pressure_differential_psi',
             field=models.IntegerField(default=0),
         ),
-        migrations.AddField(
-            model_name='aircraft',
-            name='thrust_engine_lbs',
-            field=models.IntegerField(default=0),
-        ),
     ]

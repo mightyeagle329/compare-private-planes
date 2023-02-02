@@ -62,6 +62,13 @@ export default function SingleAircraftDetails() {
   };
   const navigate = useNavigate();
 
+  const onCompare = () => {
+    if (selectedAircafts.length < 2) {
+      alert("Select at least 1 aircrafts");
+      return;
+    }
+    navigate("/compare", { state: selectedAircafts });
+  };
   return (
     <>
       <Header />
@@ -130,9 +137,7 @@ export default function SingleAircraftDetails() {
               })}
             </div>
             <button
-              onClick={() =>
-                navigate("/compare", { state: { selectedAircafts } })
-              }
+              onClick={() => onCompare()}
               className={scopedStyles.compare_btn}
             >
               Compare

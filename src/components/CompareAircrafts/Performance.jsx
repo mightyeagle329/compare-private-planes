@@ -5,7 +5,7 @@ import styles from "./styles/styles.module.scss";
 
 import SectionHeader from "../shared/SectionHeader";
 
-const Performance = ({data}) => {
+const Performance = ({ data }) => {
   return (
     <>
       <section className={cn(global.section)}>
@@ -27,7 +27,7 @@ const Performance = ({data}) => {
                   styles.table_key
                 )}
               >
-                Production Start
+                Range (NM)
               </span>
               <span
                 className={cn(
@@ -35,7 +35,7 @@ const Performance = ({data}) => {
                   styles.table_key
                 )}
               >
-                Production End
+                Range (Miles)
               </span>
               <span
                 className={cn(
@@ -43,7 +43,7 @@ const Performance = ({data}) => {
                   styles.table_key
                 )}
               >
-                In Production?
+                Fuel Burn (GPH)
               </span>
               <span
                 className={cn(
@@ -51,7 +51,7 @@ const Performance = ({data}) => {
                   styles.table_key
                 )}
               >
-                Number Made
+                Max Altitude (Feet)
               </span>
               <span
                 className={cn(
@@ -59,7 +59,7 @@ const Performance = ({data}) => {
                   styles.table_key
                 )}
               >
-                Number in Service
+                Rate of Climb (Feet/Min)
               </span>
               <span
                 className={cn(
@@ -67,12 +67,31 @@ const Performance = ({data}) => {
                   styles.table_key
                 )}
               >
-                Serial Numbers
+                Initial Cruise Altitude (Feet)
+              </span>
+              <span
+                className={cn(
+                  styles.compare_table_column_cell,
+                  styles.table_key
+                )}
+              >
+                Take-Off Distance (Feet)
+              </span>
+              <span
+                className={cn(
+                  styles.compare_table_column_cell,
+                  styles.table_key
+                )}
+              >
+                Landing Distance (Feet)
               </span>
             </div>
             {data.map((aircraft) => {
               return (
-                <div className={cn(styles.compare_table_column)} key={aircraft.aircraft_id}>
+                <div
+                  className={cn(styles.compare_table_column)}
+                  key={aircraft.aircraft_id}
+                >
                   <span
                     className={cn(
                       styles.compare_table_column_cell,
@@ -82,27 +101,32 @@ const Performance = ({data}) => {
                     {aircraft.aircraft_name}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Production Start
+                    {aircraft.range_NM}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Production End
+                    {aircraft.range_Miles}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    In Production?
+                    {aircraft.hourly_fuel_burn_GPH}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Number Made
+                    {aircraft.max_altitude_feet}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Number in Service
+                    {aircraft.rate_climb}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Serial Numbers
+                    {aircraft.initial_cruise_altitude}
+                  </span>
+                  <span className={cn(styles.compare_table_column_cell)}>
+                    {aircraft.TO_distance_feet}
+                  </span>
+                  <span className={cn(styles.compare_table_column_cell)}>
+                    {aircraft.landing_distance_feet}
                   </span>
                 </div>
               );
             })}
-            
           </div>
         </main>
       </section>

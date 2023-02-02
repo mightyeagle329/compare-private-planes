@@ -1,18 +1,17 @@
-import React from 'react'
-import cn from 'classnames'
-import global from '../styles/global.module.scss'
+import React from "react";
+import cn from "classnames";
+import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
 
-import SectionHeader from '../shared/SectionHeader'
+import SectionHeader from "../shared/SectionHeader";
 
-
-const MainTenance = ({data}) =>{
-    return (
-       <>
-        <section className={cn(global.section)}>
-        <SectionHeader title="Maintenance" />
+const MainTenance = ({ data }) => {
+  return (
+    <>
+      <section className={cn(global.section)}>
+        <SectionHeader title="Maintenance Schedule" />
         <main>
-        <div className={cn(styles.compare_table)}>
+          <div className={cn(styles.compare_table)}>
             <div className={cn(styles.compare_table_column)}>
               <span
                 className={cn(
@@ -28,7 +27,7 @@ const MainTenance = ({data}) =>{
                   styles.table_key
                 )}
               >
-                Production Start
+                A Check
               </span>
               <span
                 className={cn(
@@ -36,7 +35,7 @@ const MainTenance = ({data}) =>{
                   styles.table_key
                 )}
               >
-                Production End
+                B Check
               </span>
               <span
                 className={cn(
@@ -44,7 +43,7 @@ const MainTenance = ({data}) =>{
                   styles.table_key
                 )}
               >
-                In Production?
+                C Check
               </span>
               <span
                 className={cn(
@@ -52,28 +51,15 @@ const MainTenance = ({data}) =>{
                   styles.table_key
                 )}
               >
-                Number Made
-              </span>
-              <span
-                className={cn(
-                  styles.compare_table_column_cell,
-                  styles.table_key
-                )}
-              >
-                Number in Service
-              </span>
-              <span
-                className={cn(
-                  styles.compare_table_column_cell,
-                  styles.table_key
-                )}
-              >
-                Serial Numbers
+                D Check
               </span>
             </div>
             {data.map((aircraft) => {
               return (
-                <div className={cn(styles.compare_table_column)} key={aircraft.aircraft_id}>
+                <div
+                  className={cn(styles.compare_table_column)}
+                  key={aircraft.aircraft_id}
+                >
                   <span
                     className={cn(
                       styles.compare_table_column_cell,
@@ -83,30 +69,24 @@ const MainTenance = ({data}) =>{
                     {aircraft.aircraft_name}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Production Start
+                    {aircraft.a_check} hours
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Production End
+                    {aircraft.b_check} hours
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    In Production?
+                    {aircraft.c_check} hours
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Number Made
-                  </span>
-                  <span className={cn(styles.compare_table_column_cell)}>
-                    Number in Service
-                  </span>
-                  <span className={cn(styles.compare_table_column_cell)}>
-                    Serial Numbers
+                    {aircraft.d_check} hours
                   </span>
                 </div>
               );
             })}
-          </div> 
+          </div>
         </main>
-        </section>
-       </>
-    )
-}
-export default MainTenance
+      </section>
+    </>
+  );
+};
+export default MainTenance;

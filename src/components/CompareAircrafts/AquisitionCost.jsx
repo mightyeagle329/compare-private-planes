@@ -26,7 +26,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const AquisitionCost = ({data}) => {
+const AquisitionCost = ({ data }) => {
   const options = {
     responsive: true,
     plugins: {
@@ -42,19 +42,19 @@ const AquisitionCost = ({data}) => {
     labels,
     datasets: [
       {
-        label: "Current Values",
+        label: "Aircraft 1",
         data: labels.map(() => faker.datatype.number({ min: 11.0, max: 20.0 })),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
       {
-        label: "Hour Adjusted",
+        label: "Aircraft 2",
         data: labels.map(() => faker.datatype.number({ min: 11.0, max: 20.0 })),
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
       {
-        label: "Future Values",
+        label: "Aircraft 3",
         data: labels.map(() => faker.datatype.number({ min: 11.0, max: 20.0 })),
         borderColor: "rgb(153, 82, 155)",
         backgroundColor: "rgba(153, 82, 155, 0.5)",
@@ -88,7 +88,7 @@ const AquisitionCost = ({data}) => {
                   styles.table_key
                 )}
               >
-                Production Start
+                Select YOM
               </span>
               <span
                 className={cn(
@@ -96,7 +96,7 @@ const AquisitionCost = ({data}) => {
                   styles.table_key
                 )}
               >
-                Production End
+                New Purchase Price
               </span>
               <span
                 className={cn(
@@ -104,7 +104,7 @@ const AquisitionCost = ({data}) => {
                   styles.table_key
                 )}
               >
-                In Production?
+                Current Value
               </span>
               <span
                 className={cn(
@@ -112,7 +112,7 @@ const AquisitionCost = ({data}) => {
                   styles.table_key
                 )}
               >
-                Number Made
+                Depreciation Rate
               </span>
               <span
                 className={cn(
@@ -120,20 +120,15 @@ const AquisitionCost = ({data}) => {
                   styles.table_key
                 )}
               >
-                Number in Service
-              </span>
-              <span
-                className={cn(
-                  styles.compare_table_column_cell,
-                  styles.table_key
-                )}
-              >
-                Serial Numbers
+                Future Values
               </span>
             </div>
             {data.map((aircraft) => {
               return (
-                <div className={cn(styles.compare_table_column)} key={aircraft.aircraft_id}>
+                <div
+                  className={cn(styles.compare_table_column)}
+                  key={aircraft.aircraft_id}
+                >
                   <span
                     className={cn(
                       styles.compare_table_column_cell,
@@ -142,23 +137,21 @@ const AquisitionCost = ({data}) => {
                   >
                     {aircraft.aircraft_name}
                   </span>
+
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Production Start
+                    2019
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Production End
+                    {aircraft.new_purchase}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    In Production?
+                    {aircraft.current_value}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Number Made
+                    {aircraft.deprecation_rate}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    Number in Service
-                  </span>
-                  <span className={cn(styles.compare_table_column_cell)}>
-                    Serial Numbers
+                    {aircraft.future_value}
                   </span>
                 </div>
               );
