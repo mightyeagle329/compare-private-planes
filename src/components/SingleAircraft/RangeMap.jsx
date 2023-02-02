@@ -1,7 +1,7 @@
 import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
-import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, Circle, useLoadScript } from "@react-google-maps/api";
 
 const RangeMap = ({ params }) => {
   const { isLoaded } = useLoadScript({
@@ -13,9 +13,8 @@ const RangeMap = ({ params }) => {
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Range Map" />
-      <main>
-        <Map />
-      </main>
+
+      <Map />
     </section>
   );
 };
@@ -23,13 +22,32 @@ const RangeMap = ({ params }) => {
 export default RangeMap;
 
 function Map() {
+  const options = {
+    strokeColor: "#FF0000",
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: "#FF0000",
+    fillOpacity: 0.35,
+    clickable: false,
+    draggable: false,
+    editable: false,
+    visible: true,
+    radius: 30000,
+    zIndex: 1,
+  };
+
+  const center = {
+    lat: 44,
+    lng: -80,
+  };
+
   return (
     <GoogleMap
       zoom={10}
       center={{ lat: 44, lng: -80 }}
       mapContainerClassName="map-container"
     >
-      <p>chadi</p>
+      <Circle center={center} options={options} />
     </GoogleMap>
   );
 }
