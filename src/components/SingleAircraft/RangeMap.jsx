@@ -41,7 +41,12 @@ function Map() {
   const center = useMemo(() => ({ lat: 44, lng: -80 }), []);
 
   return (
-    <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
+    <GoogleMap
+      zoom={10}
+      center={center}
+      mapContainerClassName="map-container"
+      mapContainerStyle={{ height: 400 + "px" }}
+    >
       <Circle center={center} options={options} />
       <p>chadi</p>
     </GoogleMap>
