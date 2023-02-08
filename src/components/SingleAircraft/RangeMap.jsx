@@ -5,8 +5,9 @@ import {
   GoogleMap,
   Circle,
   useLoadScript,
+  LoadScript,
   Marker,
-  Autocomplete,
+  StandaloneSearchBox,
 } from "@react-google-maps/api";
 import { useMemo, useState } from "react";
 
@@ -64,36 +65,42 @@ function Map() {
   const center = useMemo(() => ({ lat: 44, lng: -80 }), []);
 
   return (
-    <GoogleMap
-      zoom={10}
-      center={center}
-      mapContainerClassName="map-container"
-      mapContainerStyle={{ height: 400 + "px" }}
+    <LoadScript
+      id="script-loader"
+      googleMapsApiKey="AIzaSyB7zRbK_udn4vYNr4neiaPd71SuyldNIg4"
+      libraries={["places"]}
     >
-      <Marker position={position} />
-      <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
-        <input
-          type="text"
-          placeholder="Customized your placeholder"
-          style={{
-            boxSizing: `border-box`,
-            border: `1px solid transparent`,
-            width: `240px`,
-            height: `32px`,
-            padding: `0 12px`,
-            borderRadius: `3px`,
-            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-            fontSize: `14px`,
-            outline: `none`,
-            textOverflow: `ellipses`,
-            position: "absolute",
-            left: "50%",
-            marginLeft: "-120px",
-          }}
-        />
-      </Autocomplete>
-      <Circle center={center} options={options} />
-      <p>chadi</p>
-    </GoogleMap>
+      <GoogleMap
+        zoom={10}
+        center={center}
+        mapContainerClassName="map-container"
+        mapContainerStyle={{ height: 400 + "px" }}
+      >
+        <Marker position={position} />
+        <StandaloneSearchBox onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+          <input
+            type="text"
+            placeholder="Customized your placeholder"
+            style={{
+              boxSizing: `border-box`,
+              border: `1px solid transparent`,
+              width: `240px`,
+              height: `32px`,
+              padding: `0 12px`,
+              borderRadius: `3px`,
+              boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+              fontSize: `14px`,
+              outline: `none`,
+              textOverflow: `ellipses`,
+              position: "absolute",
+              left: "50%",
+              marginLeft: "-120px",
+            }}
+          />
+        </StandaloneSearchBox>
+        <Circle center={center} options={options} />
+        <p>chadi</p>
+      </GoogleMap>
+    </LoadScript>
   );
 }
