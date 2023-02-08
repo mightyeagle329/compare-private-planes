@@ -139,16 +139,14 @@ export default function SingleAircraftDetails() {
           <h3>Compare Private Planes</h3>
           <h1>{aircraftData.aircraft_name}</h1>
           <div className={cn(pdf.sample_aircrafts)}>
-            
-                <div className={cn(pdf.sample_aircraft)} >
-                  <div className={cn(pdf.image_container)}>
-                    <img src={aircraftData.image_name} alt="aircraft" />
-                  </div>
-                  <div className={cn(pdf.sample_aircraft_info)}>
-                    <p>{aircraftData.manufacturer}</p>
-                  </div>
-                </div>
-            
+            <div className={cn(pdf.sample_aircraft)}>
+              <div className={cn(pdf.image_container)}>
+                <img src={aircraftData.image_name} alt="aircraft" />
+              </div>
+              <div className={cn(pdf.sample_aircraft_info)}>
+                <p>{aircraftData.manufacturer}</p>
+              </div>
+            </div>
           </div>
         </div>
         <div className={cn(pdf.second_page)}>
@@ -208,11 +206,12 @@ export default function SingleAircraftDetails() {
         {/* <AccidentData params={aircraftData} /> */}
 
         <Similar params={similarAircrafts} />
-        <div className={cn(global.footer,global.pdf_hidden)}>
+        <div className={cn(global.footer, global.pdf_hidden)}>
           <div>
             <div className={cn(global.btns_container)}>
-              <button className={cn(global.action_btn)}
-              onClick={() => window.print()}
+              <button
+                className={cn(global.action_btn)}
+                onClick={() => window.print()}
               >
                 Export Report as PDF
               </button>

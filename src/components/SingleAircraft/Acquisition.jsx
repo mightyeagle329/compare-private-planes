@@ -19,7 +19,7 @@ import {
   AIRFRAME_OPTIONS,
   FUTURE_OPTIONS,
 } from "../../utils/constants/app-constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -41,18 +41,24 @@ const Acquisition = ({ params, acquisition }) => {
   };
 
   const keys = Object.keys(acquisition);
+
   const values = Object.values(acquisition);
   const labels = keys;
   const [yearManufacture, setYearManufacture] = useState(keys[0]);
-  const [airframe, setAirframe] = useState(AIRFRAME_OPTIONS[0]);
+  const [airframe, setAirframe] = useState(500);
   const [estimatedFutureValue, setestimatedFutureValue] = useState(
     FUTURE_OPTIONS[0]
   );
   const [futureValue, setfutureValue] = useState([]);
   const [hourAdjusted, setHourAdjusted] = useState([]);
+  const [hourAdjustedSingleValue, setHourAdjustedSingleValue] = useState(0);
   const [year, setYear] = useState(keys[0]);
   const [i, seti] = useState(0);
   const [futureCounter, setFutureCounter] = useState(0);
+
+  for (let counter = 0; counter < keys.length; counter++) {
+    keys[counter] = keys[counter].replace("-", "");
+  }
 
   for (var k = 0; k < values.length; k++) {
     futureValue[k] =
@@ -64,15 +70,16 @@ const Acquisition = ({ params, acquisition }) => {
     futureValue[k].toFixed(2);
   }
 
-  for (var k = 0; k < keys.length; k++) {
-    let real = (2022 - keys[k]) * 400;
+  for (let kounter = 0; kounter < keys.length; kounter++) {
+    let real = (2022 - keys[kounter]) * 400;
+    hourAdjusted[kounter] = 1;
     if (parseFloat(airframe) - real > 0) {
       for (let i = 0; i < parseFloat(airframe) - real; i++) {
-        hourAdjusted[i] *= 0.99999;
+        hourAdjusted[kounter] *= 0.99999;
       }
     } else {
       for (let i = 0; i < Math.abs(parseFloat(airframe) - real); i++) {
-        hourAdjusted[i] *= 1.00001;
+        hourAdjusted[kounter] *= 1.00001;
       }
     }
   }
@@ -82,6 +89,7 @@ const Acquisition = ({ params, acquisition }) => {
     for (var c = 0; c < values.length; c++) {
       if (keys[c] === val) {
         seti(c);
+        setHourAdjustedSingleValue(hourAdjusted[c]);
       }
     }
   };
@@ -99,6 +107,10 @@ const Acquisition = ({ params, acquisition }) => {
     }
   };
 
+  useEffect(() => {
+    setHourAdjustedSingleValue(hourAdjusted[i]);
+  }, [airframe, yearManufacture, i]);
+
   const data = {
     labels,
     datasets: [
@@ -110,7 +122,7 @@ const Acquisition = ({ params, acquisition }) => {
       },
       {
         label: "Hour Adjusted",
-        data: values,
+        data: hourAdjusted,
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
@@ -261,7 +273,7 @@ const Acquisition = ({ params, acquisition }) => {
                 >
                   Adjusted Value
                 </span>
-                <span>{params.adjusted_value}</span>
+                <span>{hourAdjustedSingleValue}</span>
               </div>
               <div className={cn(global.row)}>
                 <span
