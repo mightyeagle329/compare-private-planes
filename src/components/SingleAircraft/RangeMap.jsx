@@ -1,7 +1,12 @@
 import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
-import { GoogleMap, Circle, useLoadScript } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  Circle,
+  useLoadScript,
+  Marker,
+} from "@react-google-maps/api";
 import { useMemo } from "react";
 
 const RangeMap = ({ params }) => {
@@ -38,6 +43,11 @@ function Map() {
     zIndex: 1,
   };
 
+  const position = {
+    lat: 37.772,
+    lng: -80,
+  };
+
   const center = useMemo(() => ({ lat: 44, lng: -80 }), []);
 
   return (
@@ -47,6 +57,7 @@ function Map() {
       mapContainerClassName="map-container"
       mapContainerStyle={{ height: 400 + "px" }}
     >
+      <Marker position={position} />
       <Circle center={center} options={options} />
       <p>chadi</p>
     </GoogleMap>
