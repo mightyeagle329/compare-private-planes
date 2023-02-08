@@ -115,7 +115,7 @@ const PerformanceData = ({ params }) => {
             <span
               className={styles.distance_bar}
               style={{
-                width: takeOff,
+                width: params.TO_distance_feet * 0.1 ,
               }}
             >
               {params.TO_distance_feet}
@@ -123,7 +123,9 @@ const PerformanceData = ({ params }) => {
             <span
               className={styles.distance_bar}
               style={{
-                width: landing,
+                width: params.landing_distance_feet * 0.1 + 20,
+                backgroundColor: "#4D516D"
+
               }}
             >
               {params.landing_distance_feet}

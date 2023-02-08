@@ -99,7 +99,8 @@ const OwnershipCost = ({ data }) => {
                         className={cn(styles.bar)}
                         key={aircraft.aircraft_id}
                       >
-                        {aircraft.crew_salary}
+                        {aircraft.NA_annual_captain +
+                          aircraft.NA_annual_first_office}
                       </div>
                     );
                   })}

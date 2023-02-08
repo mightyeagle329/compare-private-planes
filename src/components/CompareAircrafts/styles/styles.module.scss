@@ -149,3 +149,15 @@
         text-align: center;
     }
 }
+
+
+@media print{
+    .compare_table{
+        .compare_table_column{
+            font-size: 1.2rem;
+        }
+    }
+    .button{
+        display: none;
+    }
+}

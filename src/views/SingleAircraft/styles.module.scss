@@ -102,3 +102,14 @@
 
     
 }
+
+
+.sorting{
+  position: relative;
+  .dropdown{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+}

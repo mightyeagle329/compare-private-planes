@@ -25,7 +25,7 @@ ChartJS.register(
   Legend
 );
 
-const HistoricalMarket = ({ params }) => {
+const HistoricalMarket = ({ params, historicalData }) => {
   const options = {
     responsive: true,
     plugins: {
@@ -35,14 +35,17 @@ const HistoricalMarket = ({ params }) => {
     },
   };
 
-  const labels = ["May", "Jun", "Jul", "Aug", "Sep", "Oct"];
+  const keys = Object.keys(historicalData);
+  const values = Object.values(historicalData);
+
+  const labels = keys;
 
   const data = {
     labels,
     datasets: [
       {
-        label: "Current Values",
-        data: labels.map(() => faker.datatype.number({ min: 11.0, max: 20.0 })),
+        label: "Historical data",
+        data: values,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
@@ -53,9 +56,9 @@ const HistoricalMarket = ({ params }) => {
     <section className={cn(global.section)}>
       <SectionHeader title="Historical Market Activity" />
       <main>
-        <div className={cn(styles.plot_btn_container)}>
+        {/* <div className={cn(styles.plot_btn_container)}>
           <button className={cn(styles.button)}>Time Period to View</button>
-        </div>
+        </div> */}
         <div className={cn(styles.line_chart)}>
           <Line data={data} options={options} />
         </div>

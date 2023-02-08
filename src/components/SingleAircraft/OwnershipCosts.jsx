@@ -5,15 +5,59 @@ import { Pie } from "react-chartjs-2";
 import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
 import SectionHeader from "../shared/SectionHeader";
+import { useState, useEffect } from "react";
+import Axios from "axios";
+import Dropdown from "../common/Dropdown";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-const OwnershipCosts = ({ params }) => {
-  const data = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+const OwnershipCosts = ({ params, currency, country }) => {
+  const [info, setInfo] = useState([]);
+  const [from, setFrom] = useState("usd");
+  const [to, setTo] = useState("usd");
+  const [nbHours, setNbHours] = useState(0);
+  const [annualBudget, setAnnualBudget] = useState(0);
+  const [conversionRate, setConversionRate] = useState(0);
+
+  useEffect(() => {
+    Axios.get(
+      `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`
+    ).then((res) => {
+      setInfo(res.data[from]);
+    });
+  }, [from]);
+
+  useEffect(() => {
+    currency === "USD"
+      ? setTo("usd")
+      : currency === "GBP"
+      ? setTo("gbp")
+      : setTo("eur");
+    setFrom("usd");
+    setConversionRate(info[to]);
+  }, [info, currency, to]);
+
+  const annualData = {
+    labels: [
+      "Crew Salary",
+      "Crew Training",
+      "Hangar",
+      "Insurance",
+      "Management",
+      "Miscellaneous Fixed",
+    ],
     datasets: [
       {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
+        data: [
+          parseInt(params.NA_annual_captain) +
+            parseInt(params.NA_annual_first_office) +
+            parseInt(params.NA_annual_employee_benefits),
+          params.NA_annual_crew_training,
+          params.NA_annual_hangar,
+          parseInt(params.NA_annual_insurance_hull) +
+            parseInt(params.NA_annual_insurance_liability),
+          params.NA_annual_management,
+          params.NA_annual_misc,
+        ],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -35,22 +79,172 @@ const OwnershipCosts = ({ params }) => {
     ],
   };
 
+  const variableData = {
+    labels: [
+      "Fuel Cost",
+      "Maintenance",
+      "Engine Overhaul",
+      "Ground Fees",
+      "Miscellaneous Variabme",
+    ],
+    datasets: [
+      {
+        data: [
+          params.NA_hourly_fuel,
+          params.NA_hourly_maintenance,
+          params.NA_hourly_engine_overhaul,
+          params.NA_hourly_ground_fees,
+          params.NA_hourly_misc,
+        ],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const onHoursChanged = (e) => {
+    setNbHours(e.target.value);
+    setAnnualBudget(
+      currency != "USD"
+        ? (country === "North America"
+            ? parseFloat(params.NA_annual_total)
+            : country === "Europe"
+            ? parseFloat(params.EU_annual_total)
+            : country === "South America"
+            ? parseFloat(params.SA_annual_total)
+            : parseFloat(params.AS_annual_total) + parseFloat(e.target.value)) *
+            conversionRate
+        : (country === "North America"
+            ? parseFloat(params.NA_annual_total)
+            : country === "Europe"
+            ? parseFloat(params.EU_annual_total)
+            : country === "South America"
+            ? parseFloat(params.SA_annual_total)
+            : parseFloat(params.AS_annual_total) + parseFloat(e.target.value)) +
+            parseFloat(e.target.value)
+    );
+    if (e.target.value === "") {
+      setAnnualBudget(params.NA_annual_total);
+    }
+  };
+
   return (
-    <section className={cn(global.section)}>
+    <section className={cn(global.section) + " " + global.page_break}>
       <SectionHeader title="Ownership Costs" />
-      <main>
+      <main className={styles.ownership_main}>
         <header className={cn(styles.os_header)}>
-          <h2>Estimated annual flight hours: 200</h2>
+          <h2 className={global.pdf_hidden}>
+            Estimated annual flight hours:{" "}
+            <div className={styles.form + " " + global.pdf_hidden}>
+              <form className={styles.search} action="">
+                <input
+                  className={styles.input}
+                  type="text"
+                  value={nbHours}
+                  onChange={(e) => onHoursChanged(e)}
+                  name="nbHours"
+                  placeholder="Number of hours"
+                  required
+                />
+              </form>
+            </div>
+          </h2>
           <h2>Aircraft Annual Budget</h2>
-          <h3 className={cn(styles.cost)}>${params.annual_cost}</h3>
+          {currency != "USD" ? (
+            country === "North America" ? (
+              <h3 className={cn(styles.cost)}>
+                {(parseInt(params.NA_annual_total) +
+                  parseInt(nbHours) * params.NA_hourly_total) *
+                  conversionRate}
+              </h3>
+            ) : country === "Europe" ? (
+              <h3 className={cn(styles.cost)}>
+                {(parseInt(params.EU_annual_total) +
+                  parseInt(nbHours) * params.EU_hourly_total) *
+                  conversionRate}
+              </h3>
+            ) : country === "South America" ? (
+              <h3 className={cn(styles.cost)}>
+                {(parseInt(params.SA_annual_total) +
+                  parseInt(nbHours) * params.SA_hourly_total) *
+                  conversionRate}
+              </h3>
+            ) : (
+              <h3 className={cn(styles.cost)}>
+                {(parseInt(params.AS_annual_total) +
+                  parseInt(nbHours) * params.AS_hourly_total) *
+                  conversionRate}
+              </h3>
+            )
+          ) : country === "North America" ? (
+            <h3 className={cn(styles.cost)}>
+              {(parseInt(params.NA_annual_total) +
+                parseInt(nbHours) * params.NA_hourly_total) *
+                conversionRate}
+            </h3>
+          ) : country === "Europe" ? (
+            <h3 className={cn(styles.cost)}>
+              {parseInt(params.EU_annual_total) +
+                parseInt(nbHours) * params.EU_hourly_total}
+            </h3>
+          ) : country === "South America" ? (
+            <h3 className={cn(styles.cost)}>
+              {parseInt(params.SA_annual_total) +
+                parseInt(nbHours) * params.SA_hourly_total}
+            </h3>
+          ) : (
+            <h3 className={cn(styles.cost)}>
+              {parseInt(params.AS_annual_total) +
+                parseInt(nbHours) * params.AS_hourly_total}
+            </h3>
+          )}
         </header>
         <div className={styles.pie_charts}>
           <div className={styles.pie_chart}>
             <div className={styles.pie_chart__header}>
               <h3>Annual Fixed Costs</h3>
-              <h4 className={cn(styles.cost)}>$860,720</h4>
+              <h4 className={cn(styles.cost)}>
+                {country === "North America" ? (
+                  <h3 className={cn(styles.cost)}>
+                    {currency != "USD"
+                      ? params.NA_annual_total * conversionRate
+                      : params.NA_annual_total}
+                  </h3>
+                ) : country === "Europe" ? (
+                  <h3 className={cn(styles.cost)}>
+                    {currency != "USD"
+                      ? params.EU_annual_total * conversionRate
+                      : params.EU_annual_total}
+                  </h3>
+                ) : country === "South America" ? (
+                  <h3 className={cn(styles.cost)}>
+                    {currency != "USD"
+                      ? params.SA_annual_total * conversionRate
+                      : params.SA_annual_total}
+                  </h3>
+                ) : (
+                  <h3 className={cn(styles.cost)}>
+                    {currency != "USD"
+                      ? params.AS_annual_total * conversionRate
+                      : params.AS_annual_total}
+                  </h3>
+                )}
+              </h4>
               <Pie
-                data={data}
+                data={annualData}
                 options={{
                   responsive: true,
                 }}
@@ -60,9 +254,37 @@ const OwnershipCosts = ({ params }) => {
           <div className={styles.pie_chart}>
             <div className={styles.pie_chart__header}>
               <h3>Variable Costs per Hour</h3>
-              <h4 className={cn(styles.cost)}>$860,720</h4>
+
+              <h4 className={cn(styles.cost)}>
+                {country === "North America" ? (
+                  <h3 className={cn(styles.cost)}>
+                    {currency != "USD"
+                      ? params.NA_hourly_total * conversionRate
+                      : params.NA_hourly_total}
+                  </h3>
+                ) : country === "Europe" ? (
+                  <h3 className={cn(styles.cost)}>
+                    {currency != "USD"
+                      ? params.EU_hourly_total * conversionRate
+                      : params.EU_hourly_total}
+                  </h3>
+                ) : country === "South America" ? (
+                  <h3 className={cn(styles.cost)}>
+                    {currency != "USD"
+                      ? params.SA_hourly_total * conversionRate
+                      : params.SA_hourly_total}
+                  </h3>
+                ) : (
+                  <h3 className={cn(styles.cost)}>
+                    {currency != "USD"
+                      ? params.AS_hourly_total * conversionRate
+                      : params.AS_hourly_total}
+                  </h3>
+                )}
+              </h4>
+
               <Pie
-                data={data}
+                data={variableData}
                 options={{
                   responsive: true,
                 }}

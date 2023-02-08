@@ -7,7 +7,7 @@ import styles from "./styles/styles.module.scss";
 const Dimensions = ({ data }) => {
   return (
     <>
-      <section className={cn(global.section)}>
+      <section className={cn(global.section, global.page_break)}>
         <SectionHeader title="Dimensions" />
         <main>
           <div className={cn(styles.compare_table)}>

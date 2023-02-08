@@ -1,7 +1,7 @@
 .wrapper {
   width: 100%;
   height: auto;
-  
+
   .section {
     max-width: 60%;
     margin: 0 auto;
@@ -70,6 +70,8 @@
             align-items: center;
             justify-content: space-between;
             gap: 10px;
+
+            position: relative;
             color: red;
             .key {
               flex: 1;
@@ -149,7 +151,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      color: rgb(61, 61, 61); 
+      color: rgb(61, 61, 61);
       border: #1c1d42ba solid 1px;
     }
   }
@@ -165,9 +167,10 @@
 
 @media screen and (max-width: 868px) {
   .wrapper {
-    padding: 0 10px;
+    
     .section {
       max-width: 100%;
+
       .section_header {
         flex-direction: column;
         gap: 0;
@@ -240,9 +243,91 @@
   padding: 0.6rem;
 }
 
-.image_container{
-  flex: 1;  
-  img{
+.image_container {
+  flex: 1;
+  img {
     max-width: 100%;
+  }
+}
+
+.pdf_only{
+  display: none;
+}
+
+@media print {
+  .page_break {
+    page-break-before: always;
+  }
+
+  .pdf_hidden{
+    display: none;
+  }
+  .pdf_only{
+    display: block;
+  }
+  .pdf_accidentData_text{
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  .wrapper {
+    .section {
+      max-width: 100%;
+      margin: 0 auto;
+      .line_chart{
+        width: 100%;
+        height: 100%;
+      }
+      box-shadow: none;
+      .pdf_hidden{
+        display: none;
+      }
+      .section_header {
+        flex-direction: column;
+        gap: 0;
+        font-size: 24px;
+        .line {
+          display: none;
+        }
+      }
+      .table_container {
+        flex-direction: column;
+        .details_table {
+          min-width: 100%;
+          justify-content: center;
+        }
+      }
+      .details_table {
+        gap: 20px;
+        .column {
+          max-width: 100%;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          font-size: larger;
+          .column_header {
+            font-weight: bolder;
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: center;
+          }
+          .rows {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .row {
+              white-space: nowrap;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 10px;
+              .key {
+                font-weight: bolder;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

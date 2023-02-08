@@ -98,11 +98,11 @@ const FleetFlightHours = ({ params }) => {
         </div>
         {/* -------------------- */}
 
-        <div className={cn(styles.line_chart)}>
+        <div className={cn(global.line_chart)}>
           <Line data={data} options={options} />
         </div>
         {/* ------------------- */}
-        <div className={cn(styles.aircraft_table)}>
+        <div className={cn(styles.aircraft_table, global.pdf_hidden)}>
           <div className={cn(global.flexify, styles.aircraft_table_head)}>
             {colsHeads.map((label, index) => {
               return (

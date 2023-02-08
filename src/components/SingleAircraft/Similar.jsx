@@ -5,10 +5,9 @@ import SectionHeader from "../shared/SectionHeader";
 
 const Similar = ({ params }) => {
   return (
-    <section className={cn(global.section)}>
+    <section className={cn(global.section, global.pdf_hidden)}>
       <SectionHeader title="Similar Aircraft" />
       <main className={cn(styles.similar)}>
-
         {params?.length ? (
           params?.map((product) => (
             <div key={product.aircraft_id} className={cn(styles.suggestion)}>
@@ -21,7 +20,6 @@ const Similar = ({ params }) => {
         ) : (
           <p>Loading</p>
         )}
-
       </main>
     </section>
   );

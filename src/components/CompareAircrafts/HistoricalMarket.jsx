@@ -65,13 +65,13 @@ const HistoricalMarket = () => {
   };
   return (
     <>
-      <section className={cn(global.section)}>
+      <section className={cn(global.section,global.page_break)}>
         <SectionHeader title="Historical Market Activity" />
         <main>
           <div className={cn(outerStyles.plot_btn_container)}>
             <button className={cn(styles.button)}>Time Period to View</button>
           </div>
-          <div className={cn(styles.line_chart)}>
+          <div className={cn(global.line_chart)}>
             <Line data={data} options={options} />
           </div>
         </main>

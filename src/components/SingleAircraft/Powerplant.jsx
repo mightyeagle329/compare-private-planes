@@ -20,7 +20,7 @@ const Powerplant = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Thrust per Engine (lbs)
                 </span>
-                <span>{params.thrust_engine_lbs}</span>
+                <span>{params.thrust_output_lbs}</span>
               </div>
             </div>
           </div>

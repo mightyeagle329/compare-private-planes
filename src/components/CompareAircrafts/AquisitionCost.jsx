@@ -157,7 +157,7 @@ const AquisitionCost = ({ data }) => {
               );
             })}
           </div>
-          <div className={cn(styles.line_chart)}>
+          <div className={cn(global.line_chart)}>
             <Line data={lineData} options={options} />
           </div>
         </main>

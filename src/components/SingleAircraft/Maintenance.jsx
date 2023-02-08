@@ -5,7 +5,7 @@ import SectionHeader from "../shared/SectionHeader";
 
 const Maintenance = ({ params }) => {
   return (
-    <section className={cn(global.section)}>
+    <section className={cn(global.section) + " " + global.page_break}>
       <SectionHeader title="Maintenance" />
       <main>
         <div className={cn(styles.timeline)}>

@@ -675,7 +675,7 @@ class AircraftById(View):
             'AS_hourly_ground_fees': item.AS_hourly_ground_fees,
             'AS_hourly_misc': item.AS_hourly_misc,
             'AS_hourly_total': item.AS_hourly_total,
-            'acquisition_values': item.acquisition_values,
+            'acquisition_values':  item.acquisition_values,
             'historical_data': item.historical_data,
 
         })

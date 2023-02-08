@@ -8,7 +8,7 @@ import SectionHeader from "../shared/SectionHeader";
 const Performance = ({ data }) => {
   return (
     <>
-      <section className={cn(global.section)}>
+      <section className={cn(global.section, global.page_break)}>
         <SectionHeader title="Performance" />
         <main>
           <div className={cn(styles.compare_table)}>

@@ -34,16 +34,17 @@ const AccidentData = () => {
             </tr>
           </tbody>
         </table>
-        <div className={cn(global.pagination_container)}>
+        <div className={cn(global.pagination_container, global.pdf_hidden)}>
           <span> Prev </span>
           <span>1</span>
           <span>2</span>
           <span>...</span>
           <span>Next</span>
         </div>
-        <p className={cn(styles.total_aircraft)}>
+        <p className={cn(styles.total_aircraft, global.pdf_hidden)}>
           Total Aircraft 9367
         </p>
+        <p className={cn(global.pdf_only, global.pdf_accidentData_text)}>For a full list of assumptions and how data is collected, please visit compareprivateplanes.com</p>
       </main>
     </section>
   );

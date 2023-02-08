@@ -1,4 +1,15 @@
 const CATEGORY_OPTIONS = ["", "Large", "Medium", "Light", "VLJ", "Prop"];
+const AIRFRAME_OPTIONS = [
+  "500 hours",
+  "1000 hours",
+  "1500 hours",
+  "2000 hours",
+  "2500 hours",
+  "3000 hours",
+];
+
+const FUTURE_OPTIONS = ["1 year", "2 years", "3 years", "5 years", "10 years"];
+
 const CATEGORY_OPTIONS_DIC = {
   "": "Show all",
   Large: "Large",
@@ -25,6 +36,9 @@ const MANUFACTURER_OPTIONS = [
   "Nextant",
   "Pilatus",
 ];
+
+const COUNTRY_OPTIONS = ["North America", "Europe", "South America", "Asia"];
+const CURRENCY_OPTIONS = ["USD", "Euro", "GBP"];
 
 const MANUFACTURER_OPTIONS_DIC = {
   "": "Show all",
@@ -58,4 +72,8 @@ export {
   CATEGORY_OPTIONS_DIC,
   MANUFACTURER_OPTIONS_DIC,
   PRODUCTION_OPTIONS_DIC,
+  COUNTRY_OPTIONS,
+  CURRENCY_OPTIONS,
+  AIRFRAME_OPTIONS,
+  FUTURE_OPTIONS,
 };
