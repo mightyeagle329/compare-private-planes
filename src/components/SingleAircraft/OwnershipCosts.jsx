@@ -254,7 +254,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
           <div className={styles.pie_chart}>
             <div className={styles.pie_chart__header}>
               <h3>Variable Costs per Hour</h3>
-
               <h4 className={cn(styles.cost)}>
                 {country === "North America" ? (
                   <h3 className={cn(styles.cost)}>

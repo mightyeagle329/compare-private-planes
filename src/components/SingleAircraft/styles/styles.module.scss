@@ -19,8 +19,6 @@
   }
 }
 
-
-
 @media screen and (max-width: 768px) {
   .main_key_facts {
     flex-direction: column;
@@ -69,7 +67,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    .chart_label{
+    .chart_label {
       position: absolute;
       top: 62%;
       left: 50%;
@@ -126,7 +124,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-
+    
     .distance_bar {
       background-color: rgb(118, 145, 103);
       height: 25px;
@@ -156,9 +154,21 @@
     .info {
       flex-direction: column;
       align-items: flex-start;
-
+    }
+    .bars {
+      overflow: auto;
       .distance_bar {
-        width: 100%;
+        background-color: transparent;
+        color: black;
+        max-width: fit-content;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translate(0, -50%);
+          border: none;
+        }
       }
     }
   }
@@ -177,20 +187,19 @@
   }
 }
 
-.ownership_main{
-  .form{
-    .search{
-      input{
-        width:30%;
+.ownership_main {
+  .form {
+    .search {
+      input {
+        width: 30%;
         height: 30px;
         border: 1px solid #ccc;
         border-radius: 4px;
-        box-shadow: 0px 0px 2px 0px rgba(99,99,99,0.75);
+        box-shadow: 0px 0px 2px 0px rgba(99, 99, 99, 0.75);
         padding: 0 5px;
         outline: none;
-        &:focus{
+        &:focus {
           border: 1px solid rgb(139, 139, 139);
-          
         }
       }
     }
@@ -204,16 +213,16 @@
 
 // aquisition Costs
 
-.sorting{
+.sorting {
   position: absolute;
   right: 0;
- .dropdown{
-  .dropdown{
-    .head{
-      display: none;
+  .dropdown {
+    .dropdown {
+      .head {
+        display: none;
+      }
     }
   }
- } 
 }
 
 .os_header {

@@ -102,11 +102,28 @@ export default function Search() {
     setFilterResult(res);
   };
 
+  const [rerender, setRerenderer] = useState(false)
+  const openFilter = () => {
+    const filter = document.querySelector(".filters_target");
+    if(filter.style.display === "none"){
+      filter.style.display = "flex";
+    }else{
+      filter.style.display = "none";
+    }
+    
+  };
+  
+
   return (
     <div className={cn("section-pt80", styles.section)}>
-      <div className={cn("container", styles.container)}>
+      <div className={cn(styles.container)}>
         <div className={styles.row}>
-          <div className={styles.filters}>
+          <span className={styles.open_filter} 
+            onClick={() => openFilter()}
+          >
+            <i class="fa-solid fa-sliders"></i>
+          </span>
+          <div className={"filters_target " + styles.filters}>
             <div className={styles.top}>
               <div className={styles.title}>Search Aircraft</div>
             </div>

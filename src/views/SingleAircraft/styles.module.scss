@@ -113,3 +113,15 @@
     gap: 10px;
   }
 }
+
+@media screen and (max-width: 1130px) {
+  .sorting{
+    max-width: 70%;
+    margin: 0 auto;
+    .dropdown{
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+  
+}
