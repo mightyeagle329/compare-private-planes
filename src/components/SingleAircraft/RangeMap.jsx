@@ -6,8 +6,9 @@ import {
   Circle,
   useLoadScript,
   Marker,
+  Autocomplete,
 } from "@react-google-maps/api";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 const RangeMap = ({ params }) => {
   const { isLoaded } = useLoadScript({
@@ -29,6 +30,8 @@ const RangeMap = ({ params }) => {
 export default RangeMap;
 
 function Map() {
+  const [autocomplete, setAutocomplete] = useState(null);
+
   const options = {
     strokeColor: "#FF0000",
     strokeOpacity: 0.8,
@@ -41,6 +44,16 @@ function Map() {
     visible: true,
     radius: 30000,
     zIndex: 1,
+  };
+
+  const onLoad = (autocomplete) => {
+    setAutocomplete(autocomplete);
+  };
+
+  const onPlaceChanged = () => {
+    if (autocomplete !== null) {
+      autocomplete.getPlace();
+    }
   };
 
   const position = {
@@ -58,7 +71,7 @@ function Map() {
       mapContainerStyle={{ height: 400 + "px" }}
     >
       <Marker position={position} />
-      <Autocomplete onLoad={this.onLoad} onPlaceChanged={this.onPlaceChanged}>
+      <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
         <input
           type="text"
           placeholder="Customized your placeholder"
