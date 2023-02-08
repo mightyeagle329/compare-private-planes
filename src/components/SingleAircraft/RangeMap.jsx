@@ -47,11 +47,6 @@ function Map() {
 
   const onLoad = (autocomplete) => {
     setAutocomplete(autocomplete);
-    setLat2(autocomplete.location.lat());
-    setLng2(autocomplete.location.lng());
-    console.log("here 2");
-    console.log(lat2);
-    console.log(lng2);
   };
 
   const onPlaceChanged = () => {
