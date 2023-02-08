@@ -204,11 +204,69 @@
       }
     }
   }
+  .f_v_costs{
+    .costs_container{
+      .costs{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .keys_values_container{
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          .key_value_bar{
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            .key_value{
+              flex: 1;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: 10px;
+              white-space: nowrap;
+            }
+            .bar{
+              flex: 2;
+              background-color: rgb(213, 213, 213);
+              height: 15px;
+              transition: width 1s ease-in-out;
+              text-align: end;
+              color: beige;
+              padding-right: 10px;
+              position: relative;
+              border-radius: 15px;
+              .bar__fill{
+                background-color: rgb(118, 145, 103);
+                height: 15px;
+                transition: width 1s ease-in-out;
+                text-align: end;
+                color: beige;
+                // width: 30%;
+                padding-right: 10px;
+                position: relative;
+                border-radius: 15px;
+              }
+            }
+          }
+        }
+        .bars{
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+         
+        }
+      }
+    }
+  }
 }
 
 .cost {
   color: rgb(129, 129, 129);
   font-weight: bolder;
+  text-align: center;
 }
 
 // aquisition Costs

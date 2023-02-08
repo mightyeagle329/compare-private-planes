@@ -1,13 +1,14 @@
 import cn from "classnames";
+
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+
 import { Pie } from "react-chartjs-2";
 
-import global from "../styles/global.module.scss";
-import styles from "./styles/styles.module.scss";
-import SectionHeader from "../shared/SectionHeader";
+import global from "../../styles/global.module.scss";
+import styles from "../styles/styles.module.scss";
+import SectionHeader from "../../shared/SectionHeader";
 import { useState, useEffect } from "react";
 import Axios from "axios";
-import Dropdown from "../common/Dropdown";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 const OwnershipCosts = ({ params, currency, country }) => {
@@ -118,7 +119,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
   const onHoursChanged = (e) => {
     setNbHours(e.target.value);
     setAnnualBudget(
-      currency != "USD"
+      currency !== "USD"
         ? (country === "North America"
             ? parseFloat(params.NA_annual_total)
             : country === "Europe"
@@ -163,7 +164,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
             </div>
           </h2>
           <h2>Aircraft Annual Budget</h2>
-          {currency != "USD" ? (
+          {currency !== "USD" ? (
             country === "North America" ? (
               <h3 className={cn(styles.cost)}>
                 {(parseInt(params.NA_annual_total) +
@@ -216,33 +217,33 @@ const OwnershipCosts = ({ params, currency, country }) => {
           <div className={styles.pie_chart}>
             <div className={styles.pie_chart__header}>
               <h3>Annual Fixed Costs</h3>
-              <h4 className={cn(styles.cost)}>
+              <p className={cn(styles.cost)}>
                 {country === "North America" ? (
-                  <h3 className={cn(styles.cost)}>
-                    {currency != "USD"
+                  <span className={cn(styles.cost)}>
+                    {currency !== "USD"
                       ? params.NA_annual_total * conversionRate
                       : params.NA_annual_total}
-                  </h3>
+                  </span>
                 ) : country === "Europe" ? (
-                  <h3 className={cn(styles.cost)}>
-                    {currency != "USD"
+                  <span className={cn(styles.cost)}>
+                    {currency !== "USD"
                       ? params.EU_annual_total * conversionRate
                       : params.EU_annual_total}
-                  </h3>
+                  </span>
                 ) : country === "South America" ? (
-                  <h3 className={cn(styles.cost)}>
-                    {currency != "USD"
+                  <span className={cn(styles.cost)}>
+                    {currency !== "USD"
                       ? params.SA_annual_total * conversionRate
                       : params.SA_annual_total}
-                  </h3>
+                  </span>
                 ) : (
-                  <h3 className={cn(styles.cost)}>
-                    {currency != "USD"
+                  <span className={cn(styles.cost)}>
+                    {currency !== "USD"
                       ? params.AS_annual_total * conversionRate
                       : params.AS_annual_total}
-                  </h3>
+                  </span>
                 )}
-              </h4>
+              </p>
               <Pie
                 data={annualData}
                 options={{
@@ -254,33 +255,33 @@ const OwnershipCosts = ({ params, currency, country }) => {
           <div className={styles.pie_chart}>
             <div className={styles.pie_chart__header}>
               <h3>Variable Costs per Hour</h3>
-              <h4 className={cn(styles.cost)}>
+              <p className={cn(styles.cost)}>
                 {country === "North America" ? (
-                  <h3 className={cn(styles.cost)}>
-                    {currency != "USD"
+                  <span className={cn(styles.cost)}>
+                    {currency !== "USD"
                       ? params.NA_hourly_total * conversionRate
                       : params.NA_hourly_total}
-                  </h3>
+                  </span>
                 ) : country === "Europe" ? (
-                  <h3 className={cn(styles.cost)}>
-                    {currency != "USD"
+                  <span className={cn(styles.cost)}>
+                    {currency !== "USD"
                       ? params.EU_hourly_total * conversionRate
                       : params.EU_hourly_total}
-                  </h3>
+                  </span>
                 ) : country === "South America" ? (
-                  <h3 className={cn(styles.cost)}>
-                    {currency != "USD"
+                  <span className={cn(styles.cost)}>
+                    {currency !== "USD"
                       ? params.SA_hourly_total * conversionRate
                       : params.SA_hourly_total}
-                  </h3>
+                  </span>
                 ) : (
-                  <h3 className={cn(styles.cost)}>
-                    {currency != "USD"
+                  <span className={cn(styles.cost)}>
+                    {currency !== "USD"
                       ? params.AS_hourly_total * conversionRate
                       : params.AS_hourly_total}
-                  </h3>
+                  </span>
                 )}
-              </h4>
+              </p>
 
               <Pie
                 data={variableData}
@@ -288,6 +289,194 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   responsive: true,
                 }}
               />
+            </div>
+          </div>
+        </div>
+        <div className={cn(styles.f_v_costs)}>
+          <div className={cn(styles.costs_container)}>
+            <h3>Annual Fixed Costs Breakdown</h3>
+            <div className={cn(styles.costs)}>
+              <div className={cn(styles.keys_values_container)}>
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Crew Salary</span>
+                    <span>
+                      {parseInt(params.NA_annual_captain) +
+                        parseInt(params.NA_annual_first_office) +
+                        parseInt(params.NA_annual_employee_benefits)}
+                    </span>
+                  </div>{" "}
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill)}
+                      style={{
+                        width: "40%",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Crew Training</span>
+                    <span>{params.NA_annual_crew_training}</span>
+                  </div>
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill)}
+                      style={{
+                        width: "20%",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Hangar</span>
+                    <span>{params.NA_annual_hangar}</span>
+                  </div>
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill)}
+                      style={{
+                        width: "20%",
+                      }}
+                    ></div>
+                  </div>
+                </div>{" "}
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Insurrance Hull</span>
+                    <span>{params.NA_annual_insurance_hull}</span>
+                  </div>
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill)}
+                      style={{
+                        width: "20%",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Insurrance Liability</span>
+                    <span>{params.NA_annual_insurance_liability}</span>
+                  </div>
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill)}
+                      style={{
+                        width: "20%",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Managment</span>
+                    <span>{params.NA_annual_management}</span>
+                  </div>
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill)}
+                      style={{
+                        width: "20%",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Misc Fixed</span>
+                    <span>{params.NA_annual_misc}</span>
+                  </div>
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill)}
+                      style={{
+                        width: "20%",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={cn(styles.costs_container)}>
+            <h3>Variable Cost Breakdown (per flight hour)</h3>
+            <div className={cn(styles.costs)}>
+              <div className={cn(styles.keys_values_container)}>
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Fuel Cost</span>
+                    <span>{params.NA_hourly_fuel}</span>
+                  </div>
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill)}
+                      style={{
+                        width: "20%",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Maintenance</span>
+                    <span>{params.NA_hourly_maintenance}</span>
+                  </div>
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill)}
+                      style={{
+                        width: "20%",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Engine Overhaul</span>
+                    <span>{params.NA_hourly_engine_overhaul}</span>
+                  </div>
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill)}
+                      style={{
+                        width: "20%",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Ground Fees</span>
+                    <span>{params.NA_hourly_ground_fees}</span>
+                  </div>
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill)}
+                      style={{
+                        width: "20%",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Misc Variable</span>
+                    <span>{params.NA_hourly_misc}</span>
+                  </div>
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill)}
+                      style={{
+                        width: "20%",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

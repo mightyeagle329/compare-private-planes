@@ -9,7 +9,7 @@ import Header from "../../components/common/header";
 import KeyFacts from "../../components/SingleAircraft/KeyFacts";
 import BasicInfo from "../../components/SingleAircraft/BasicInfo";
 import PerformanceData from "../../components/SingleAircraft/PerformanceData";
-import OwnershipCosts from "../../components/SingleAircraft/OwnershipCosts";
+import OwnershipCosts from "../../components/SingleAircraft/OwnershipCosts/OwnershipCosts";
 import Acquisition from "../../components/SingleAircraft/Acquisition";
 import HistoricalMarket from "../../components/SingleAircraft/HistoricalMarket";
 import FleetFlightHours from "../../components/SingleAircraft/FleetFlightHours";
