@@ -26,6 +26,10 @@ export default RangeMap;
 
 function Map() {
   const [autocomplete, setAutocomplete] = useState(null);
+  const [lat1, setLat1] = useState(0);
+  const [lat2, setLat2] = useState(0);
+  const [lng1, setLng1] = useState(0);
+  const [lng2, setLng2] = useState(0);
 
   const options = {
     strokeColor: "#FF0000",
@@ -43,11 +47,21 @@ function Map() {
 
   const onLoad = (autocomplete) => {
     setAutocomplete(autocomplete);
+    setLat2(autocomplete.location.lat());
+    setLng2(autocomplete.location.lng());
+    console.log("here 2");
+    console.log(lat2);
+    console.log(lng2);
   };
 
   const onPlaceChanged = () => {
     if (autocomplete !== null) {
       autocomplete.getPlace();
+      setLat1(autocomplete.location.lat());
+      setLng1(autocomplete.location.lng());
+      console.log("here");
+      console.log(lat1);
+      console.log(lng1);
       console.log(autocomplete);
     } else {
       console.log("autocomplete is null");
@@ -63,7 +77,6 @@ function Map() {
 
   return (
     <div>
-      <p>{autocomplete}</p>
       <LoadScript
         id="script-loader"
         googleMapsApiKey="AIzaSyB7zRbK_udn4vYNr4neiaPd71SuyldNIg4"
