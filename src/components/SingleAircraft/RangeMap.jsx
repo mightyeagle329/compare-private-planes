@@ -48,6 +48,9 @@ function Map() {
   const onPlaceChanged = () => {
     if (autocomplete !== null) {
       autocomplete.getPlace();
+      console.log(autocomplete);
+    } else {
+      console.log("autocomplete is null");
     }
   };
 
@@ -59,42 +62,45 @@ function Map() {
   const center = useMemo(() => ({ lat: 44, lng: -80 }), []);
 
   return (
-    <LoadScript
-      id="script-loader"
-      googleMapsApiKey="AIzaSyB7zRbK_udn4vYNr4neiaPd71SuyldNIg4"
-      libraries={["places"]}
-    >
-      <GoogleMap
-        zoom={10}
-        center={center}
-        mapContainerClassName="map-container"
-        mapContainerStyle={{ height: 400 + "px" }}
+    <div>
+      <p>{autocomplete}</p>
+      <LoadScript
+        id="script-loader"
+        googleMapsApiKey="AIzaSyB7zRbK_udn4vYNr4neiaPd71SuyldNIg4"
+        libraries={["places"]}
       >
-        <Marker position={position} />
-        <StandaloneSearchBox onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
-          <input
-            type="text"
-            placeholder="Customized your placeholder"
-            style={{
-              boxSizing: `border-box`,
-              border: `1px solid transparent`,
-              width: `240px`,
-              height: `32px`,
-              padding: `0 12px`,
-              borderRadius: `3px`,
-              boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-              fontSize: `14px`,
-              outline: `none`,
-              textOverflow: `ellipses`,
-              position: "absolute",
-              left: "50%",
-              marginLeft: "-120px",
-            }}
-          />
-        </StandaloneSearchBox>
-        <Circle center={center} options={options} />
-        <p>chadi</p>
-      </GoogleMap>
-    </LoadScript>
+        <GoogleMap
+          zoom={10}
+          center={center}
+          mapContainerClassName="map-container"
+          mapContainerStyle={{ height: 400 + "px" }}
+        >
+          <Marker position={position} />
+          <StandaloneSearchBox onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+            <input
+              type="text"
+              placeholder="Search location"
+              style={{
+                boxSizing: `border-box`,
+                border: `1px solid transparent`,
+                width: `240px`,
+                height: `32px`,
+                padding: `0 12px`,
+                borderRadius: `3px`,
+                boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+                fontSize: `14px`,
+                outline: `none`,
+                textOverflow: `ellipses`,
+                position: "absolute",
+                left: "50%",
+                marginLeft: "-120px",
+              }}
+            />
+          </StandaloneSearchBox>
+          <Circle center={center} options={options} />
+          <p>chadi</p>
+        </GoogleMap>
+      </LoadScript>
+    </div>
   );
 }
