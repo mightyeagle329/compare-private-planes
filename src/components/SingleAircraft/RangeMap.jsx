@@ -12,12 +12,6 @@ import {
 import { useMemo, useState } from "react";
 
 const RangeMap = ({ params }) => {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyB7zRbK_udn4vYNr4neiaPd71SuyldNIg4",
-  });
-
-  if (!isLoaded) return <div>Loading ..</div>;
-
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Range Map" />
