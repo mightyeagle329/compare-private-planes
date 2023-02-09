@@ -236,6 +236,7 @@ class Accident(models.Model):
     aircraft_incident = models.ForeignKey(
         Aircraft, on_delete=models.CASCADE, db_column='Aircraft Incident', default="")
     reg = models.CharField(max_length=200, default="", db_column='Reg')
+    year = models.CharField(max_length=200, default="", db_column='Year')
     date = models.CharField(max_length=200, default="", db_column='Date')
     occurrence = models.CharField(
         max_length=200, default="", db_column='occurrence')
