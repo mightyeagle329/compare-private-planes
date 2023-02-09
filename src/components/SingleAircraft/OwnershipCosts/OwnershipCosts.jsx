@@ -37,6 +37,26 @@ const OwnershipCosts = ({ params, currency, country }) => {
     setConversionRate(info[to]);
   }, [info, currency, to]);
 
+  const maximumAnnualValue = Math.max(
+    parseInt(params.NA_annual_captain) +
+      parseInt(params.NA_annual_first_office) +
+      parseInt(params.NA_annual_employee_benefits),
+    params.NA_annual_crew_training,
+    params.NA_annual_hangar,
+    params.NA_annual_insurance_hull,
+    params.NA_annual_insurance_liability,
+    params.NA_annual_management,
+    params.NA_annual_misc
+  );
+
+  const maximumVariableValue = Math.max(
+    params.NA_hourly_fuel,
+    params.NA_hourly_maintenance,
+    params.NA_hourly_engine_overhaul,
+    params.NA_hourly_ground_fees,
+    params.NA_hourly_misc
+  );
+
   const annualData = {
     labels: [
       "Crew Salary",
@@ -305,12 +325,17 @@ const OwnershipCosts = ({ params, currency, country }) => {
                         parseInt(params.NA_annual_first_office) +
                         parseInt(params.NA_annual_employee_benefits)}
                     </span>
-                  </div>{" "}
+                  </div>
                   <div className={cn(styles.bar)}>
                     <div
                       className={cn(styles.bar__fill)}
                       style={{
-                        width: "40%",
+                        width:
+                          parseInt(params.NA_annual_captain) +
+                          parseInt(params.NA_annual_first_office) +
+                          (parseInt(params.NA_annual_employee_benefits) /
+                            maximumAnnualValue) *
+                            100,
                       }}
                     ></div>
                   </div>
@@ -324,7 +349,11 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     <div
                       className={cn(styles.bar__fill)}
                       style={{
-                        width: "20%",
+                        width:
+                          (params.NA_annual_crew_training /
+                            maximumAnnualValue) *
+                            100 +
+                          "%",
                       }}
                     ></div>
                   </div>
@@ -338,7 +367,9 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     <div
                       className={cn(styles.bar__fill)}
                       style={{
-                        width: "20%",
+                        width:
+                          (params.NA_annual_hangar / maximumAnnualValue) * 100 +
+                          "%",
                       }}
                     ></div>
                   </div>
@@ -352,7 +383,11 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     <div
                       className={cn(styles.bar__fill)}
                       style={{
-                        width: "20%",
+                        width:
+                          (params.NA_annual_insurance_hull /
+                            maximumAnnualValue) *
+                            100 +
+                          "%",
                       }}
                     ></div>
                   </div>
@@ -366,7 +401,11 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     <div
                       className={cn(styles.bar__fill)}
                       style={{
-                        width: "20%",
+                        width:
+                          (params.NA_annual_insurance_liability /
+                            maximumAnnualValue) *
+                            100 +
+                          "%",
                       }}
                     ></div>
                   </div>
@@ -380,7 +419,10 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     <div
                       className={cn(styles.bar__fill)}
                       style={{
-                        width: "20%",
+                        width:
+                          (params.NA_annual_management / maximumAnnualValue) *
+                            100 +
+                          "%",
                       }}
                     ></div>
                   </div>
@@ -394,7 +436,9 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     <div
                       className={cn(styles.bar__fill)}
                       style={{
-                        width: "20%",
+                        width:
+                          (params.NA_annual_misc / maximumAnnualValue) * 100 +
+                          "%",
                       }}
                     ></div>
                   </div>
@@ -415,7 +459,9 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     <div
                       className={cn(styles.bar__fill)}
                       style={{
-                        width: "20%",
+                        width:
+                          (params.NA_hourly_fuel / maximumVariableValue) * 100 +
+                          "%",
                       }}
                     ></div>
                   </div>
@@ -429,7 +475,11 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     <div
                       className={cn(styles.bar__fill)}
                       style={{
-                        width: "20%",
+                        width:
+                          (params.NA_hourly_maintenance /
+                            maximumVariableValue) *
+                            100 +
+                          "%",
                       }}
                     ></div>
                   </div>
@@ -443,7 +493,11 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     <div
                       className={cn(styles.bar__fill)}
                       style={{
-                        width: "20%",
+                        width:
+                          (params.NA_hourly_engine_overhaul /
+                            maximumVariableValue) *
+                            100 +
+                          "%",
                       }}
                     ></div>
                   </div>
@@ -457,7 +511,11 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     <div
                       className={cn(styles.bar__fill)}
                       style={{
-                        width: "20%",
+                        width:
+                          (params.NA_hourly_ground_fees /
+                            maximumVariableValue) *
+                            100 +
+                          "%",
                       }}
                     ></div>
                   </div>
@@ -471,7 +529,9 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     <div
                       className={cn(styles.bar__fill)}
                       style={{
-                        width: "20%",
+                        width:
+                          (params.NA_hourly_misc / maximumVariableValue) * 100 +
+                          "%",
                       }}
                     ></div>
                   </div>
