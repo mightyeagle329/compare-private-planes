@@ -231,3 +231,16 @@ class Aircraft(models.Model):
 
     def __str__(self):
         return self.aircraft_name
+
+
+class Accidents(models.Model):
+    country = models.CharField(max_length=200, default="")
+    aircraft = models.ForeignKey(
+        Aircraft, on_delete=models.CASCADE)
+    reg = models.CharField(max_length=200, default="")
+    date = models.CharField(max_length=200, default="")
+    occurrence = models.CharField(max_length=200, default="")
+    details = models.CharField(max_length=200, default="")
+
+    def __str__(self):
+        return self.aircraft
