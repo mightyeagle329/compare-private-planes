@@ -692,6 +692,7 @@ class AccidentsList(View):
         for item in all_accidents:
             accidents_data.append({
                 'country': item.country,
+                'aircraft_incident': item.aircraft_incident,
                 'reg': item.reg,
                 'date': item.date,
                 'occurrence': item.occurrence,
