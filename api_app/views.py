@@ -1,6 +1,6 @@
 from django.views import View
 from django.http import JsonResponse
-from .models import Aircraft, Accidents
+from .models import Aircraft, Accident
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
@@ -686,8 +686,8 @@ class AircraftById(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class AccidentsList(View):
     def get(self, request):
-        accidents_number = Accidents.objects.count()
-        all_accidents = Accidents.objects.all()
+        accidents_number = Accident.objects.count()
+        all_accidents = Accident.objects.all()
         accidents_data = []
         for item in all_accidents:
             accidents_data.append({

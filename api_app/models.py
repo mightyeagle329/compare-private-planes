@@ -233,7 +233,7 @@ class Aircraft(models.Model):
         return self.aircraft_name
 
 
-class Accidents(models.Model):
+class Accident(models.Model):
     country = models.CharField(max_length=200, default="")
     aircraft = models.ForeignKey(
         Aircraft, on_delete=models.CASCADE)
