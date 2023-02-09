@@ -235,8 +235,6 @@ class Aircraft(models.Model):
 
 class Accident(models.Model):
     country = models.CharField(max_length=200, default="")
-    aircraft = models.ForeignKey(
-        Aircraft, on_delete=models.CASCADE)
     reg = models.CharField(max_length=200, default="")
     date = models.CharField(max_length=200, default="")
     occurrence = models.CharField(max_length=200, default="")
