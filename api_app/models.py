@@ -232,15 +232,15 @@ class Aircraft(models.Model):
 
 
 class Accident(models.Model):
-    country = models.CharField(max_length=200, default="", db_column='Country')
+    country = models.CharField(
+        max_length=200, default="", null=True, blank=True)
     aircraft_incident = models.ForeignKey(
-        Aircraft, on_delete=models.CASCADE, db_column='Aircraft Incident', default="")
-    reg = models.CharField(max_length=200, default="", db_column='Reg')
-    year = models.CharField(max_length=200, default="", db_column='Year')
-    date = models.CharField(max_length=200, default="", db_column='Date')
+        Aircraft, on_delete=models.CASCADE, null=True, blank=True)
+    reg = models.CharField(max_length=200, null=True, blank=True)
+    date = models.CharField(max_length=200, null=True, blank=True)
     occurrence = models.CharField(
-        max_length=200, default="", db_column='occurrence')
-    details = models.CharField(max_length=200, default="", db_column='details')
+        max_length=200, null=True, blank=True)
+    details = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.aircraft
