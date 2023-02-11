@@ -22,7 +22,10 @@ const RangeMap = ({ params }) => {
     <section className={cn(global.section)}>
       <SectionHeader title="Range Map" />
       <main>
-        <Map rangeDecrease={params.range_decrease_per_passenger} />
+        <Map
+          rangeDecrease={params.range_decrease_per_passenger}
+          aicraftRange={params.range_km * 1000}
+        />
       </main>
     </section>
   );
@@ -30,13 +33,12 @@ const RangeMap = ({ params }) => {
 
 export default RangeMap;
 
-function Map({ rangeDecrease }) {
-  const [autocomplete, setAutocomplete] = useState(null);
-  const [lat1, setLat1] = useState(0);
-  const [lng1, setLng1] = useState(0);
+function Map({ rangeDecrease, aicraftRange }) {
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
   const [address, setAddress] = useState("");
   const [nbPax, setNbPax] = useState(0);
-  const [range, setRange] = useState(0);
+  const [range, setRange] = useState(aicraftRange);
 
   function handleChange(address) {
     setAddress(address);
@@ -63,15 +65,12 @@ function Map({ rangeDecrease }) {
     zIndex: 1,
   };
 
-  const calculateRange = () => {
-    var decrease = parseFloat(nbPax) + parseFloat(rangeDecrease);
-    setRange(decrease);
-  };
-
   const handlePaxChanged = (e) => {
     setNbPax(e.target.value);
     if (e.target.value != "") {
-      setRange(parseFloat(e.target.value) + parseFloat(rangeDecrease));
+      setRange(
+        aicraftRange - parseFloat(e.target.value) * parseFloat(rangeDecrease)
+      );
     }
   };
 
@@ -84,7 +83,9 @@ function Map({ rangeDecrease }) {
 
   return (
     <div>
-      {range}
+      aicraftRange {aicraftRange}
+      <br></br>
+      range {range}
       <br></br>
       {rangeDecrease}
       <LoadScript
