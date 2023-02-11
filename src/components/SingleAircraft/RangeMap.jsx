@@ -27,7 +27,7 @@ const RangeMap = ({ params }) => {
 export default RangeMap;
 
 function Map({ rangeDecrease, aicraftRange }) {
-  const [latLng, setLatLong] = useState({ lat: 0, lng: 0 });
+  const [latLng, setLatLong] = useState({ lat: 37.772, lng: -80 });
   const [address, setAddress] = useState("");
   const [nbPax, setNbPax] = useState(0);
   const [range, setRange] = useState(aicraftRange);
@@ -130,7 +130,7 @@ function Map({ rangeDecrease, aicraftRange }) {
           )}
         </PlacesAutocomplete>
         <GoogleMap
-          zoom={2}
+          zoom={4}
           center={latLng}
           mapContainerClassName="map-container"
           mapContainerStyle={{ height: 400 + "px" }}
