@@ -2,7 +2,7 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import { GoogleMap, Circle, LoadScript, Marker } from "@react-google-maps/api";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -59,19 +59,12 @@ function Map({ rangeDecrease, aicraftRange }) {
 
   const handlePaxChanged = (e) => {
     setNbPax(e.target.value);
-    if (e.target.value != "") {
+    if (e.target.value !== "") {
       setRange(
         aicraftRange - parseFloat(e.target.value) * parseFloat(rangeDecrease)
       );
     }
   };
-
-  const position = {
-    lat: 37.772,
-    lng: -80,
-  };
-
-  const center = useMemo(() => ({ lat: 44, lng: -80 }), []);
 
   return (
     <div>
