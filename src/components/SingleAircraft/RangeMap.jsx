@@ -34,8 +34,7 @@ const RangeMap = ({ params }) => {
 export default RangeMap;
 
 function Map({ rangeDecrease, aicraftRange }) {
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
+  const [latLng, setLatLong] = useState(0);
   const [address, setAddress] = useState("");
   const [nbPax, setNbPax] = useState(0);
   const [range, setRange] = useState(aicraftRange);
@@ -47,7 +46,7 @@ function Map({ rangeDecrease, aicraftRange }) {
   function handleSelect(address) {
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
-      .then((latLng) => console.log("Success", latLng))
+      .then((latLng) => setLatLong(latLng))
       .catch((error) => console.error("Error", error));
   }
 
@@ -149,11 +148,17 @@ function Map({ rangeDecrease, aicraftRange }) {
 
         <GoogleMap
           zoom={10}
-          center={center}
+          center={latLng}
           mapContainerClassName="map-container"
           mapContainerStyle={{ height: 400 + "px" }}
         >
-          <Circle center={center} options={options} />
+          <Circle center={latLng} options={options} />
+          <Marker
+            icon={
+              "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+            }
+            position={latLng}
+          />
           <p>chadi</p>
         </GoogleMap>
       </LoadScript>
