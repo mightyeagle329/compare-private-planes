@@ -9,19 +9,20 @@ import {
   Marker,
   StandaloneSearchBox,
 } from "@react-google-maps/api";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+import styles from "../../styles/Search.module.scss";
 
 const RangeMap = ({ params }) => {
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Range Map" />
       <main>
-        <Map />
+        <Map rangeDecrease={params.range_decrease_per_passenger} />
       </main>
     </section>
   );
@@ -29,11 +30,13 @@ const RangeMap = ({ params }) => {
 
 export default RangeMap;
 
-function Map() {
+function Map({ rangeDecrease }) {
   const [autocomplete, setAutocomplete] = useState(null);
   const [lat1, setLat1] = useState(0);
   const [lng1, setLng1] = useState(0);
   const [address, setAddress] = useState("");
+  const [nbPax, setNbPax] = useState(0);
+  const [range, setRange] = useState(0);
 
   function handleChange(address) {
     setAddress(address);
@@ -46,7 +49,7 @@ function Map() {
       .catch((error) => console.error("Error", error));
   }
 
-  const options = {
+  var options = {
     strokeColor: "#FF0000",
     strokeOpacity: 0.8,
     strokeWeight: 2,
@@ -56,25 +59,19 @@ function Map() {
     draggable: false,
     editable: false,
     visible: true,
-    radius: 30000,
+    radius: range * 1000,
     zIndex: 1,
   };
 
-  const onLoad = (autocomplete) => {
-    setAutocomplete(autocomplete);
+  const calculateRange = () => {
+    var decrease = parseFloat(nbPax) + parseFloat(rangeDecrease);
+    setRange(decrease);
   };
 
-  const onPlaceChanged = () => {
-    if (autocomplete !== null) {
-      autocomplete.getPlace();
-      setLat1(autocomplete.location.lat());
-      setLng1(autocomplete.location.lng());
-      console.log("here");
-      console.log(lat1);
-      console.log(lng1);
-      console.log(autocomplete);
-    } else {
-      console.log("autocomplete is null");
+  const handlePaxChanged = (e) => {
+    setNbPax(e.target.value);
+    if (e.target.value != "") {
+      setRange(parseFloat(e.target.value) + parseFloat(rangeDecrease));
     }
   };
 
@@ -87,6 +84,9 @@ function Map() {
 
   return (
     <div>
+      {range}
+      <br></br>
+      {rangeDecrease}
       <LoadScript
         id="script-loader"
         googleMapsApiKey="AIzaSyB7zRbK_udn4vYNr4neiaPd71SuyldNIg4"
@@ -104,12 +104,25 @@ function Map() {
             loading,
           }) => (
             <div>
-              <input
-                {...getInputProps({
-                  placeholder: "Search Places ...",
-                  className: "location-search-input",
-                })}
-              />
+              <center>
+                <input
+                  {...getInputProps({
+                    placeholder: "Please type a start location",
+                    className: "location-search-input",
+                  })}
+                />
+              </center>
+              <center>
+                <input
+                  className={styles.input}
+                  type="text"
+                  value={nbPax}
+                  onChange={(e) => handlePaxChanged(e)}
+                  name="search"
+                  placeholder="Please type the pax number"
+                  required
+                />
+              </center>
               <div className="autocomplete-dropdown-container">
                 {loading && <div>Loading...</div>}
                 {suggestions.map((suggestion) => {
