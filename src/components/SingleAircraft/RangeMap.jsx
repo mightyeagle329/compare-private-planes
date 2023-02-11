@@ -1,15 +1,8 @@
 import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
-import {
-  GoogleMap,
-  Circle,
-  useLoadScript,
-  LoadScript,
-  Marker,
-  StandaloneSearchBox,
-} from "@react-google-maps/api";
-import { useEffect, useMemo, useState } from "react";
+import { GoogleMap, Circle, LoadScript, Marker } from "@react-google-maps/api";
+import { useMemo, useState } from "react";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -34,7 +27,7 @@ const RangeMap = ({ params }) => {
 export default RangeMap;
 
 function Map({ rangeDecrease, aicraftRange }) {
-  const [latLng, setLatLong] = useState(0);
+  const [latLng, setLatLong] = useState([0, 0]);
   const [address, setAddress] = useState("");
   const [nbPax, setNbPax] = useState(0);
   const [range, setRange] = useState(aicraftRange);
@@ -143,22 +136,14 @@ function Map({ rangeDecrease, aicraftRange }) {
             </div>
           )}
         </PlacesAutocomplete>
-
-        {/* <Marker position={position} /> */}
-
         <GoogleMap
-          zoom={10}
+          zoom={2}
           center={latLng}
           mapContainerClassName="map-container"
           mapContainerStyle={{ height: 400 + "px" }}
         >
           <Circle center={latLng} options={options} />
-          <Marker
-            icon={
-              "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-            }
-            position={latLng}
-          />
+          <Marker position={latLng} />
           <p>chadi</p>
         </GoogleMap>
       </LoadScript>
