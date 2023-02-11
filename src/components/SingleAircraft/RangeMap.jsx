@@ -83,11 +83,6 @@ function Map({ rangeDecrease, aicraftRange }) {
 
   return (
     <div>
-      aicraftRange {aicraftRange}
-      <br></br>
-      range {range}
-      <br></br>
-      {rangeDecrease}
       <LoadScript
         id="script-loader"
         googleMapsApiKey="AIzaSyB7zRbK_udn4vYNr4neiaPd71SuyldNIg4"
