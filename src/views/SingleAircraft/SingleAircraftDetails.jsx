@@ -39,6 +39,8 @@ import Dropdown from "../../components/common/Dropdown";
 export default function SingleAircraftDetails() {
   const [aircraftData, setAircraftData] = useState([]);
   const [aircraftsData, setAircraftsData] = useState([]);
+  const [accidentsData, setAccidentsData] = useState([]);
+  const [nbAccidents, setNbAccidents] = useState(0);
   const [similarAircrafts, setSimilarAircrafts] = useState([]);
   const [filterResult, setFilterResult] = useState([]);
 
@@ -98,6 +100,17 @@ export default function SingleAircraftDetails() {
 
   useEffect(() => {
     aircraftService.getAircrafts().then((data) => setAircraftsData(data));
+  }, []);
+
+  useEffect(() => {
+    aircraftService
+      .getAccidents()
+      .then((data) => setAccidentsData(data.accidents))
+      .then((data) => setNbAccidents(data.count));
+  }, []);
+
+  useEffect(() => {
+    aircraftService.getAccidents().then((data) => setNbAccidents(data.count));
   }, []);
 
   const filteredAircrafts = aircraftsData.filter(
@@ -203,8 +216,7 @@ export default function SingleAircraftDetails() {
         <Powerplant params={aircraftData} />
         <Weights params={aircraftData} />
         <Dimensions params={aircraftData} />
-        {/* <AccidentData params={aircraftData} /> */}
-
+        <AccidentData params={accidentsData} nbAccidents={nbAccidents} />
         <Similar params={similarAircrafts} />
         <div className={cn(global.footer, global.pdf_hidden)}>
           <div>

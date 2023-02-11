@@ -9,6 +9,12 @@ class AircraftService {
     return response.data.aircrafts;
   }
 
+  async getAccidents() {
+    const response = await axios.get(API_URL + "accident-items/");
+    if (response.data == null) return;
+    return response.data;
+  }
+
   async getAircraftById(aircraft_id) {
     console.log(aircraft_id);
     const response = await axios.get(
