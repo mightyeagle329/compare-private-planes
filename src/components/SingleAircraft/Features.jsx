@@ -40,7 +40,7 @@ const Features = ({ params }) => {
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
-                  Avionics
+                  Dispatch Reliability
                 </span>
                 <span>{params.typical_avionic_suite ? "Yes" : "No"}</span>
               </div>

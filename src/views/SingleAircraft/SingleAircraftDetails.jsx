@@ -210,7 +210,14 @@ export default function SingleAircraftDetails() {
         <HistoricalMarket params={aircraftData} historicalData={history} />
         <FleetFlightHours params={aircraftData} />
         <RangeMap params={aircraftData} />
-        <Maintenance params={aircraftData} />
+        {aircraftData.a_check === 0 &&
+        aircraftData.b_check === 0 &&
+        aircraftData.c_check === 0 &&
+        aircraftData.d_check === 0 ? (
+          <div></div>
+        ) : (
+          <Maintenance params={aircraftData} />
+        )}
         <Interior params={aircraftData} />
         <Features params={aircraftData} />
         <Powerplant params={aircraftData} />

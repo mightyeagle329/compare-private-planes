@@ -17,12 +17,18 @@ const Dimensions = ({ params }) => {
                 <div className={cn(global.row)}>
                   <span className={cn(global.key)}>Length</span>
                   <span className={cn(global.key)}>Height</span>
-                  <span className={cn(global.key)}>Wings</span>
+                  <span className={cn(global.key)}>Wingspan</span>
                 </div>
                 <div className={cn(global.row)}>
-                  <span className={cn(global.value)}>{params.ext_length_feet}</span>
-                  <span className={cn(global.value)}>{params.exterior_height_feet}</span>
-                  <span className={cn(global.value)}>{params.wingspan_feet}</span>
+                  <span className={cn(global.value)}>
+                    {params.ext_length_feet}
+                  </span>
+                  <span className={cn(global.value)}>
+                    {params.exterior_height_feet}
+                  </span>
+                  <span className={cn(global.value)}>
+                    {params.wingspan_feet}
+                  </span>
                 </div>
               </div>
             </div>
@@ -42,9 +48,15 @@ const Dimensions = ({ params }) => {
                   <span className={cn(global.key)}>Width</span>
                 </div>
                 <div className={cn(global.row)}>
-                  <span className={cn(global.value)}>{params.int_length_feet}</span>
-                  <span className={cn(global.value)}>{params.int_height_feet}</span>
-                  <span className={cn(global.value)}>{params.int_width_feet}</span>
+                  <span className={cn(global.value)}>
+                    {params.int_length_feet}
+                  </span>
+                  <span className={cn(global.value)}>
+                    {params.int_height_feet}
+                  </span>
+                  <span className={cn(global.value)}>
+                    {params.int_width_feet}
+                  </span>
                 </div>
               </div>
             </div>
@@ -63,8 +75,12 @@ const Dimensions = ({ params }) => {
                   <span className={cn(global.key)}>Width</span>
                 </div>
                 <div className={cn(global.row)}>
-                  <span className={cn(global.value)}>{params.door_height_feet}</span>
-                  <span className={cn(global.value)}>{params.door_width_feet}</span>
+                  <span className={cn(global.value)}>
+                    {params.door_height_feet}
+                  </span>
+                  <span className={cn(global.value)}>
+                    {params.door_width_feet}
+                  </span>
                 </div>
               </div>
             </div>

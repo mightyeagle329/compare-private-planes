@@ -17,11 +17,15 @@ const Weights = ({ params }) => {
                 <span>{params.max_TO_weight_lbs}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>Max Landing Weight (lbs)</span>
+                <span className={cn(global.key, global.key_realign)}>
+                  Max Landing Weight (lbs)
+                </span>
                 <span>{params.max_landing_weight_lbs}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>Max Payload (lbs)</span>
+                <span className={cn(global.key, global.key_realign)}>
+                  Max Payload (lbs)
+                </span>
                 <span>{params.max_payload_lbs}</span>
               </div>
               <div className={cn(global.row)}>
@@ -36,19 +40,27 @@ const Weights = ({ params }) => {
           <div className={cn(global.column)}>
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>Max Ramp Weight (lbs)</span>
+                <span className={cn(global.key, global.key_realign)}>
+                  Max Ramp Weight (lbs)
+                </span>
                 <span>{params.max_ramp_weight_lbs}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>Available Fuel (lbs)</span>
+                <span className={cn(global.key, global.key_realign)}>
+                  Available Fuel (lbs)
+                </span>
                 <span>{params.available_fuel_lbs}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>Useful Payload (lbs)</span>
+                <span className={cn(global.key, global.key_realign)}>
+                  Useful Payload (lbs)
+                </span>
                 <span>{params.useful_payload_lbs}</span>
               </div>
               <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>Baggage Weight (lbs)</span>
+                <span className={cn(global.key, global.key_realign)}>
+                  Baggage Weight (lbs)
+                </span>
                 <span>{params.baggage_weight_lbs}</span>
               </div>
             </div>
@@ -60,18 +72,24 @@ const Weights = ({ params }) => {
           <div className={cn(global.details_table)}>
             <div className={cn(global.column)}>
               <span className={cn(global.column_header)}>
-                High Speed Cruise
+                Baggage Capacity (cubic feet)
               </span>
               <div className={cn(global.rows)}>
                 <div className={cn(global.row)}>
-                  <span className={cn(global.key)}>Knots</span>
-                  <span className={cn(global.key)}>MPH</span>
-                  <span className={cn(global.key)}>Mach</span>
+                  <span className={cn(global.key)}>Total</span>
+                  <span className={cn(global.key)}>Internal</span>
+                  <span className={cn(global.key)}>External</span>
                 </div>
                 <div className={cn(global.row)}>
-                  <span className={cn(global.value)}>597</span>
-                  <span className={cn(global.value)}>650</span>
-                  <span className={cn(global.value)}>09</span>
+                  <span className={cn(global.value)}>
+                    {params.baggage_capacity_cubicmeters}
+                  </span>
+                  <span className={cn(global.value)}>
+                    {params.internal_baggage_cubicfeet}
+                  </span>
+                  <span className={cn(global.value)}>
+                    {params.external_baggage_cubicfeet}
+                  </span>
                 </div>
               </div>
             </div>

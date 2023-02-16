@@ -35,7 +35,7 @@ const Features = ({ data }) => {
                   styles.table_key
                 )}
               >
-                Avionics
+                Dispatch Reliability
               </span>
               <span
                 className={cn(

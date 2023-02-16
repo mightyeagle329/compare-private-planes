@@ -38,7 +38,7 @@ const MANUFACTURER_OPTIONS = [
 ];
 
 const COUNTRY_OPTIONS = ["North America", "Europe", "South America", "Asia"];
-const CURRENCY_OPTIONS = ["USD", "Euro", "GBP"];
+const CURRENCY_OPTIONS = ["USD", "EUR", "GBP"];
 
 const MANUFACTURER_OPTIONS_DIC = {
   "": "Show all",
