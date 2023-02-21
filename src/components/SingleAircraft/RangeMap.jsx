@@ -3,6 +3,7 @@ import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import { GoogleMap, Circle, LoadScript, Marker } from "@react-google-maps/api";
 import { useState } from "react";
+
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -83,7 +84,7 @@ function Map({ rangeDecrease, aicraftRange }) {
             getSuggestionItemProps,
             loading,
           }) => (
-            <div className={styles.input_buttons}>
+            <div>
               <center>
                 <input
                   {...getInputProps({
@@ -129,10 +130,13 @@ function Map({ rangeDecrease, aicraftRange }) {
           )}
         </PlacesAutocomplete>
         <GoogleMap
-          zoom={4}
+          zoom={2}
           center={latLng}
-          clickableIcons={false}
-          defaultClickableIcons={false}
+          options={{
+            streetViewControl: false,
+            fullscreenControl: false,
+            mapTypeControl: false,
+          }}
           mapContainerClassName="map-container"
           mapContainerStyle={{ height: 400 + "px" }}
         >
