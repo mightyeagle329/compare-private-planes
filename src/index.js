@@ -12,8 +12,4 @@ const router = createBrowserRouter([
   { path: "/aircrafts/:id", element: <SingleAircraftDetails /> },
   { path: "/compare/", element: <CompareAircrafts /> },
 ]);
-root.render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
-);
+root.render(<RouterProvider router={router} />);
