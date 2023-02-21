@@ -1,16 +1,25 @@
 // key facts
 .main_key_facts {
   display: flex;
+  text-align: center;
+
   align-items: center;
   justify-content: center;
   gap: 50px;
 
   .facts {
     flex: 1;
+    text-align: left !important;
+  }
+
+  .single_image {
+    margin-bottom: 1rem;
   }
 
   .img_container {
     flex: 1;
+    margin-left: 2rem;
+    padding-bottom: .5rem;
 
     img {
       max-width: 70%;
@@ -107,6 +116,10 @@
 
 //  Performance Data
 
+.runaway_img {
+  padding-bottom: 30px;
+}
+
 .additional_infos {
   display: flex;
   flex-direction: row;
@@ -132,8 +145,33 @@
     gap: 10px;
 
     .distance_bar {
-      background-color: rgb(118, 145, 103);
+      background-color: #7AA4DA;
       height: 25px;
+      transition: width 1s ease-in-out;
+      text-align: end;
+      color: beige;
+      padding-right: 10px;
+      padding-top: 3px;
+      position: relative;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+        border-top: 14px solid transparent;
+        border-bottom: 14px solid transparent;
+        border-left: 14px solid rgb(255, 255, 255);
+      }
+    }
+
+    .landing_distance_bar {
+      background-color: #92C176;
+      height: 25px;
+      padding-top: 3px;
       transition: width 1s ease-in-out;
       text-align: end;
       color: beige;
@@ -167,6 +205,21 @@
       overflow: auto;
 
       .distance_bar {
+        background-color: transparent;
+        color: black;
+        max-width: fit-content;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          transform: translate(0, -50%);
+          border: none;
+        }
+      }
+
+      .landing_distance_bar {
         background-color: transparent;
         color: black;
         max-width: fit-content;

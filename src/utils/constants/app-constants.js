@@ -39,6 +39,7 @@ const MANUFACTURER_OPTIONS = [
 
 const COUNTRY_OPTIONS = ["North America", "Europe", "South America", "Asia"];
 const CURRENCY_OPTIONS = ["USD", "EUR", "GBP"];
+const UNIT_OPTIONS = ["Imperial Units", "Metrics"];
 
 const MANUFACTURER_OPTIONS_DIC = {
   "": "Show all",
@@ -76,4 +77,5 @@ export {
   CURRENCY_OPTIONS,
   AIRFRAME_OPTIONS,
   FUTURE_OPTIONS,
+  UNIT_OPTIONS,
 };

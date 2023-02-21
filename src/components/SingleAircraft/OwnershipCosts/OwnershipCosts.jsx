@@ -274,7 +274,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
           </div>
           <div className={styles.pie_chart}>
             <div className={styles.pie_chart__header}>
-              <h3>Variable Costs per Hour</h3>
+              <h3>Variable Cost per Hour</h3>
               <p className={cn(styles.cost)}>
                 {country === "North America" ? (
                   <span className={cn(styles.cost)}>
@@ -331,11 +331,11 @@ const OwnershipCosts = ({ params, currency, country }) => {
                       className={cn(styles.bar__fill)}
                       style={{
                         width:
-                          parseInt(params.NA_annual_captain) +
-                          parseInt(params.NA_annual_first_office) +
-                          (parseInt(params.NA_annual_employee_benefits) /
+                          ((parseInt(params.NA_annual_captain) +
+                            parseInt(params.NA_annual_first_office) +
+                            parseInt(params.NA_annual_employee_benefits)) /
                             maximumAnnualValue) *
-                            100,
+                          100,
                       }}
                     ></div>
                   </div>

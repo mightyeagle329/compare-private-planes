@@ -2,8 +2,23 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
 import SectionHeader from "../shared/SectionHeader";
+import { useEffect, useState } from "react";
 
-const AccidentData = ({ params, nbAccidents }) => {
+const AccidentData = ({ params, nbAccidents, aircraftName }) => {
+  const [accidents, setAccidents] = useState([]);
+  const [nbSingleAccidents, setnbSingleAccidents] = useState(0);
+
+  useEffect(() => {
+    if (params !== undefined) {
+      for (var i = 0; i < params.length; i++) {
+        if (params[i].aircraft_incident === aircraftName) {
+          accidents.push(params[i]);
+          setnbSingleAccidents(nbSingleAccidents + 1);
+        }
+      }
+    }
+  }, [params]);
+
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Accident DataBase" />
@@ -20,7 +35,7 @@ const AccidentData = ({ params, nbAccidents }) => {
             </tr>
           </thead>
           <tbody>
-            {params.map((accident) => {
+            {accidents.map((accident) => {
               return (
                 <tr className={cn(global.tr)} key={accident.reg}>
                   <td className={cn(global._padding)}>{accident.country}</td>
@@ -42,7 +57,7 @@ const AccidentData = ({ params, nbAccidents }) => {
           <span>Next</span>
         </div> */}
         <p className={cn(styles.total_aircraft, global.pdf_hidden)}>
-          Total Accidents: {nbAccidents}
+          Total Accidents: {nbSingleAccidents}
         </p>
         <p className={cn(global.pdf_only, global.pdf_accidentData_text)}>
           For a full list of assumptions and how data is collected, please visit

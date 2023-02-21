@@ -13,7 +13,7 @@ const Dimensions = ({ params }) => {
               <span className={cn(global.column_header)}>
                 Exterior Dimensions (Feet)
               </span>
-              <div className={cn(global.rows)}>
+              <div className={cn(global.rows_dimensions)}>
                 <div className={cn(global.row)}>
                   <span className={cn(global.key)}>Length</span>
                   <span className={cn(global.key)}>Height</span>
@@ -41,7 +41,7 @@ const Dimensions = ({ params }) => {
               <span className={cn(global.column_header)}>
                 Interior Dimensions (Feet)
               </span>
-              <div className={cn(global.rows)}>
+              <div className={cn(global.rows_dimensions)}>
                 <div className={cn(global.row)}>
                   <span className={cn(global.key)}>Length</span>
                   <span className={cn(global.key)}>Height</span>
@@ -69,7 +69,7 @@ const Dimensions = ({ params }) => {
               <span className={cn(global.column_header)}>
                 Door Dimensions (Feet)
               </span>
-              <div className={cn(global.rows)}>
+              <div className={cn(global.rows_dimensions)}>
                 <div className={cn(global.row)}>
                   <span className={cn(global.key)}>Height</span>
                   <span className={cn(global.key)}>Width</span>

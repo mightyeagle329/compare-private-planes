@@ -1,43 +1,52 @@
 // global styles for compare aircraft page*
 
-.compare_table{
+.compare_table {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     overflow: auto;
     scrollbar-width: none;
-    .compare_table_column{
-        &:nth-child(1){
+
+    .compare_table_column {
+        &:nth-child(1) {
             border-right: #a4a4a4 1px solid;
         }
-        &:nth-child(2){
+
+        &:nth-child(2) {
             border-right: #a4a4a4 1px solid;
         }
-        &:nth-child(3){
+
+        &:nth-child(3) {
             border-right: #a4a4a4 1px solid;
         }
+
         display: flex;
         flex-direction: column;
         flex: 1;
         padding: 10px;
         font-size: 1.1rem;
-        .compare_table_column_cell{
+
+        .compare_table_column_cell {
             margin-bottom: 20px;
             text-align: center;
         }
-        .invisible{
+
+        .invisible {
             visibility: hidden;
         }
-        .table_key{
+
+        .table_key {
             font-weight: bolder;
             text-align: start;
         }
-        .table_column_head{
+
+        .table_column_head {
             font-weight: bolder;
             text-align: center;
         }
-        .remove_btn{
+
+        .remove_btn {
             border-radius: 15px;
             outline: none;
             border: none;
@@ -45,14 +54,15 @@
             padding: 5px 15px;
             font-weight: bolder;
             cursor: pointer;
-            &:hover{
+
+            &:hover {
                 background-color: #a4a4a4;
-            }   
+            }
         }
     }
 }
 
-.btn{
+.btn {
     border-radius: 15px;
     outline: none;
     border: none;
@@ -60,23 +70,25 @@
     padding: 5px 15px;
     font-weight: bolder;
     cursor: pointer;
-    &:hover{
+
+    &:hover {
         background-color: #a4a4a4;
-    }   
+    }
 }
 
 
 // key fact
 
-.key_facts_container{
-    .facts{
+.key_facts_container {
+    .facts {
         display: flex;
         flex-direction: row;
         align-items: flex-start;
         overflow: auto;
+        text-align: left !important;
         scrollbar-width: none;
-        
-        .fact{
+
+        .fact {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -84,25 +96,31 @@
             flex: 1;
             padding: 10px;
             gap: 20px;
-            &:nth-child(1){
+
+            &:nth-child(1) {
                 border-right: #a4a4a4 1px solid;
             }
-            &:nth-child(2){
+
+            &:nth-child(2) {
                 border-right: #a4a4a4 1px solid;
             }
-            &:nth-child(3){
+
+            &:nth-child(3) {
                 border-right: #a4a4a4 1px solid;
             }
+
             .image_container {
                 position: relative;
+
                 img {
-                  object-fit: cover;
-                  width: 170px;
-                  height: auto;
-                  border-radius: 15px;
+                    object-fit: cover;
+                    width: 170px;
+                    height: auto;
+                    border-radius: 15px;
                 }
             }
-            .btn{
+
+            .btn {
                 border-radius: 15px;
                 outline: none;
                 border: none;
@@ -110,31 +128,34 @@
                 padding: 5px 15px;
                 font-weight: bolder;
                 cursor: pointer;
-                &:hover{
+
+                &:hover {
                     background-color: #a4a4a4;
-                }   
+                }
             }
         }
     }
 }
 
 // Ownership Costs 
-.ownership_container{
-    .additional_info{
-        .crew_salary{
+.ownership_container {
+    .additional_info {
+        .crew_salary {
             display: flex;
             padding: 0 30px;
             gap: 20px;
-            .aircraft_names > *, .bars > *{
+
+            .aircraft_names>*,
+            .bars>* {
                 flex: 1;
                 margin-bottom: 10px;
                 padding: 5px;
             }
-            
-            .bar{
-               background-color: rebeccapurple;
-               border-radius: 100px;
-               color: beige;
+
+            .bar {
+                background-color: rebeccapurple;
+                border-radius: 100px;
+                color: beige;
             }
         }
     }
@@ -144,20 +165,21 @@
 
 
 
-.aquisition_container{
-    .future_value{
+.aquisition_container {
+    .future_value {
         text-align: center;
     }
 }
 
 
-@media print{
-    .compare_table{
-        .compare_table_column{
+@media print {
+    .compare_table {
+        .compare_table_column {
             font-size: 1.2rem;
         }
     }
-    .button{
+
+    .button {
         display: none;
     }
 }

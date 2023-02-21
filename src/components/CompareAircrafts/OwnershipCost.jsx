@@ -44,7 +44,7 @@ const OwnershipCost = ({ data }) => {
                   styles.table_key
                 )}
               >
-                Variable Costs per Hour{" "}
+                Variable Cost per Hour{" "}
               </span>
             </div>
             {data.map((aircraft) => {

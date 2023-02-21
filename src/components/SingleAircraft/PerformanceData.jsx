@@ -104,6 +104,13 @@ const PerformanceData = ({ params }) => {
           </div>
         </div>
         {/* --------------------- */}
+        <center>
+          <img
+            className={cn(styles.runaway_img)}
+            src="https://compareprivateplanes.com/tools/runway.jpg"
+          ></img>
+        </center>
+
         <div className={cn(styles.additional_infos)}>
           <div className={cn(styles.info)}>
             <span className={cn(styles.subtitle)}>
@@ -115,16 +122,23 @@ const PerformanceData = ({ params }) => {
             <span
               className={styles.distance_bar}
               style={{
-                width: params.TO_distance_feet < 600 ? params.TO_distance_feet * 0.4 + 40 : params.TO_distance_fee * 0.7,
+                width:
+                  (parseInt(params.TO_distance_feet) /
+                    (parseInt(params.TO_distance_feet) +
+                      parseInt(params.landing_distance_feet))) *
+                  1000,
               }}
             >
               {params.TO_distance_feet}
             </span>
             <span
-              className={styles.distance_bar}
+              className={styles.landing_distance_bar}
               style={{
-                width: params.landing_distance_feet < 600 ? params.landing_distance_feet * 0.4 + 40 : 60,
-
+                width:
+                  (parseInt(params.landing_distance_feet) /
+                    (parseInt(params.TO_distance_feet) +
+                      parseInt(params.landing_distance_feet))) *
+                  1000,
               }}
             >
               {params.landing_distance_feet}

@@ -124,7 +124,7 @@ const Weights = ({ data }) => {
                     {aircraft.aircraft_name}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.max_TO_weight_lbs}
+                    {aircraft.MTOW_kgs}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
                     {aircraft.max_landing_weight_lbs}
@@ -139,7 +139,7 @@ const Weights = ({ data }) => {
                     {aircraft.max_payload_lbs}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.useful_payload_lbs}
+                    {aircraft.useful_load_lbs}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
                     {aircraft.basic_operating_weight_lbs}

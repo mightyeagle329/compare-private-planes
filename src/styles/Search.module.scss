@@ -1,5 +1,9 @@
 @import "./global.module.scss";
 
+.input_buttons {
+  z-index: 2;
+}
+
 .section {
   margin-top: 48px;
   max-width: 80%;

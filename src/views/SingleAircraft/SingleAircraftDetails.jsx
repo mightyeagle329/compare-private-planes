@@ -33,6 +33,7 @@ import styles from "./styles.module.scss";
 import {
   COUNTRY_OPTIONS,
   CURRENCY_OPTIONS,
+  UNIT_OPTIONS,
 } from "../../utils/constants/app-constants";
 import Dropdown from "../../components/common/Dropdown";
 
@@ -46,6 +47,7 @@ export default function SingleAircraftDetails() {
 
   const [currency, setCurrency] = useState(CURRENCY_OPTIONS[0]);
   const [country, setCountry] = useState(COUNTRY_OPTIONS[0]);
+  const [unit, setUnit] = useState(UNIT_OPTIONS[0]);
   const [openModal, setOpenModal] = useState(false);
   const [keys, setKeys] = useState([]);
   const [history, setHistory] = useState([]);
@@ -68,6 +70,10 @@ export default function SingleAircraftDetails() {
 
   const onCurrencyChanged = (val) => {
     setCurrency(val);
+  };
+
+  const onUnitChanged = (val) => {
+    setUnit(val);
   };
 
   const onCountryChanged = (val) => {
@@ -186,6 +192,12 @@ export default function SingleAircraftDetails() {
           <div className={styles.dropdown}>
             <Dropdown
               className={styles.dropdown}
+              value={unit}
+              setValue={(value) => onUnitChanged(value)}
+              options={UNIT_OPTIONS}
+            />
+            <Dropdown
+              className={styles.dropdown}
               value={country}
               setValue={(value) => onCountryChanged(value)}
               options={COUNTRY_OPTIONS}
@@ -223,7 +235,11 @@ export default function SingleAircraftDetails() {
         <Powerplant params={aircraftData} />
         <Weights params={aircraftData} />
         <Dimensions params={aircraftData} />
-        <AccidentData params={accidentsData} nbAccidents={nbAccidents} />
+        <AccidentData
+          params={accidentsData}
+          nbAccidents={nbAccidents}
+          aircraftName={aircraftData.aircraft_name}
+        />
         <Similar params={similarAircrafts} />
         <div className={cn(global.footer, global.pdf_hidden)}>
           <div>

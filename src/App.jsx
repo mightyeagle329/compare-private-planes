@@ -9,11 +9,6 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" exact element={<Home />} />
-        {/* <Route
-          path="/aircrafts/:id"
-          exact
-          element={<SingleAircraftDetails />}
-        /> */}
       </Routes>
     </>
   );

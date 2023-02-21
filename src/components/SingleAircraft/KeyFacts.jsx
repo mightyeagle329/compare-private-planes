@@ -10,9 +10,15 @@ import { useEffect, useState } from "react";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const KeyFacts = ({ params }) => {
-  const [keyFacts, setKeyFacts] = useState("");
+  const [keyFacts, setKeyFacts] = useState([]);
+  const [index, setindex] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+
   useEffect(() => {
-    setKeyFacts(params.key_facts);
+    if (params.key_facts !== undefined) {
+      setKeyFacts(params.key_facts.split("\n"));
+    } else {
+    }
   }, [params.key_facts]);
   const data_passengers = {
     datasets: [
@@ -79,11 +85,23 @@ const KeyFacts = ({ params }) => {
         <SectionHeader title="Key Facts" />
         <main className={cn(styles.main_key_facts)}>
           <ul className={cn(styles.facts)}>
-            <li>{params.key_facts}</li>
-            <li>{keyFacts}</li>
+            <div>
+              {keyFacts.map((fact) => {
+                return <li>{fact}</li>;
+              })}
+            </div>
           </ul>
           <div className={cn(styles.img_container)}>
-            <img src={`${params?.image_name}`} alt="" />
+            <img
+              src={`${params?.image_name}`}
+              className={cn(styles.single_image)}
+              alt=""
+            />
+            <img
+              src={`${params?.floorplan_drawing}`}
+              className={cn(styles.single_image)}
+              alt=""
+            />
           </div>
         </main>
       </section>

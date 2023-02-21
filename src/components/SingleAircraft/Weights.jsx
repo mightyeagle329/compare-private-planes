@@ -14,7 +14,7 @@ const Weights = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Max Take-Off Weight (lbs)
                 </span>
-                <span>{params.max_TO_weight_lbs}</span>
+                <span>{params.MTOW_kgs}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
@@ -55,7 +55,7 @@ const Weights = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Useful Payload (lbs)
                 </span>
-                <span>{params.useful_payload_lbs}</span>
+                <span>{params.useful_load_lbs}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
