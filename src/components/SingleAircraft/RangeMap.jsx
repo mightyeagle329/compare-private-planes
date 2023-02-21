@@ -130,8 +130,10 @@ function Map({ rangeDecrease, aicraftRange }) {
           )}
         </PlacesAutocomplete>
         <GoogleMap
-          zoom={4}
+          zoom={2}
           center={latLng}
+          clickableIcons={false}
+          defaultClickableIcons={false}
           mapContainerClassName="map-container"
           mapContainerStyle={{ height: 400 + "px" }}
         >
