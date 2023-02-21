@@ -144,6 +144,7 @@ class AircraftList(View):
                 'total_thrust_kgs': item.total_thrust_kgs,
                 'hourly_fuel_burn_LPH': item.hourly_fuel_burn_LPH,
                 'average_mission_length': item.average_mission_length,
+                'floorplan_drawing': item.floorplan_drawing,
                 'image_name': item.aircraft_image,
 
                 'NA_annual_captain': item.NA_annual_captain,
@@ -381,6 +382,7 @@ class AircraftSearch(View):
                         "total_thrust_kgs": item.total_thrust_kgs,
                         "hourly_fuel_burn_LPH": item.hourly_fuel_burn_LPH,
                         "average_mission_length": item.average_mission_length,
+                        'floorplan_drawing': item.floorplan_drawing,
                         "image_name": item.aircraft_image,
                         'NA_annual_captain': item.NA_annual_captain,
                         'NA_annual_first_office': item.NA_annual_first_office,
@@ -602,6 +604,7 @@ class AircraftById(View):
             'total_thrust_kgs': item.total_thrust_kgs,
             'hourly_fuel_burn_LPH': item.hourly_fuel_burn_LPH,
             'average_mission_length': item.average_mission_length,
+            'floorplan_drawing': item.floorplan_drawing,
             'image_name': item.aircraft_image,
             'NA_annual_captain': item.NA_annual_captain,
             'NA_annual_first_office': item.NA_annual_first_office,

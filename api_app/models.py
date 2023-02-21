@@ -146,6 +146,7 @@ class Aircraft(models.Model):
     key_facts = models.TextField(default="")
 
     aircraft_image = models.TextField(default="")
+    floorplan_drawing = models.TextField(default="")
 
     NA_annual_captain = models.FloatField(default=0)
     NA_annual_first_office = models.FloatField(default=0)
