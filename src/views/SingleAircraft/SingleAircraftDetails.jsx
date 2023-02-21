@@ -13,7 +13,6 @@ import OwnershipCosts from "../../components/SingleAircraft/OwnershipCosts/Owner
 import Acquisition from "../../components/SingleAircraft/Acquisition";
 import HistoricalMarket from "../../components/SingleAircraft/HistoricalMarket";
 import FleetFlightHours from "../../components/SingleAircraft/FleetFlightHours";
-import RangeMap from "../../components/SingleAircraft/RangeMap";
 import Maintenance from "../../components/SingleAircraft/Maintenance";
 import Interior from "../../components/SingleAircraft/Interior";
 import Features from "../../components/SingleAircraft/Features";
@@ -209,7 +208,6 @@ export default function SingleAircraftDetails() {
         <Acquisition params={aircraftData} acquisition={keys} />
         <HistoricalMarket params={aircraftData} historicalData={history} />
         <FleetFlightHours params={aircraftData} />
-        <RangeMap params={aircraftData} />
         {aircraftData.a_check === 0 &&
         aircraftData.b_check === 0 &&
         aircraftData.c_check === 0 &&

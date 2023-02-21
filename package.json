@@ -3,7 +3,6 @@
   "homepage": ".",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://compareprivateplanes.herokuapp.com",
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
     "@react-google-maps/api": "^2.18.1",
