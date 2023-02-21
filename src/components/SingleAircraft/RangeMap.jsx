@@ -132,8 +132,7 @@ function Map({ rangeDecrease, aicraftRange }) {
         <GoogleMap
           zoom={2}
           center={latLng}
-          clickableIcons={false}
-          defaultClickableIcons={false}
+          options={{ streetViewControl: false, fullscreenControl: false }}
           mapContainerClassName="map-container"
           mapContainerStyle={{ height: 400 + "px" }}
         >
