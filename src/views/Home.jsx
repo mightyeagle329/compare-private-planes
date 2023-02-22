@@ -4,9 +4,11 @@ import { HiOutlineSearch } from "react-icons/hi";
 
 import useDebounce from "../utils/hooks/useDebounce";
 import { searchService } from "../utils/hooks/utils";
-
+import Slider from "@mui/material/Slider";
 import Card from "../components/common/Card";
 import Dropdown from "../components/common/Dropdown";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
 import {
   CATEGORY_OPTIONS,
   MANUFACTURER_OPTIONS,
@@ -17,13 +19,30 @@ import {
 } from "../utils/constants/app-constants";
 import aircraftService from "../services/aircraft-service";
 import axios from "axios";
-
+import { MdOutlineExpandMore } from "react-icons/md";
 import styles from "../styles/Search.module.scss";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 export default function Search() {
+  const [passengerExpanded, setPassengerExpanded] = useState(false);
+  const [rangeExpanded, setRangeExpanded] = useState(false);
+  const [cruiseExpanded, setCruiseExpanded] = useState(false);
+  const [altitudeExpanded, setAltitudeExpanded] = useState(false);
+
+  const handlePassengerAccordion = () => {
+    setPassengerExpanded(!passengerExpanded);
+  };
+  const handleRangeAccordion = () => {
+    setRangeExpanded(!rangeExpanded);
+  };
+  const handleCruiseAccordion = () => {
+    setCruiseExpanded(!cruiseExpanded);
+  };
+  const handleAltitudeAccordion = () => {
+    setAltitudeExpanded(!altitudeExpanded);
+  };
   const [search, setSearch] = useState({
     aircraft_name: "",
     category: "",
@@ -53,6 +72,7 @@ export default function Search() {
 
   const [aircraftsData, setAircraftsData] = useState([]);
   const [filterResult, setFilterResult] = useState([]);
+  const [passengerSlider, setPassengerSlider] = useState(0);
 
   const handlePassengerChange = ({ target: { name, value } }) => {
     setPassengerValues((prevFields) => ({
@@ -92,6 +112,10 @@ export default function Search() {
 
   const handleSearchChanged = (key, value) => {
     setSearch((currentSearch) => ({ ...currentSearch, [key]: value }));
+  };
+
+  const handlePassengerSlider = (event, newValue) => {
+    setPassengerSlider(newValue);
   };
 
   const searchAircraft = async () => {
@@ -177,101 +201,176 @@ export default function Search() {
                 />
               </div>
             </div>
-            <div className={styles.range}>
-              <div className={styles.label}>Passengers</div>
-              <div className={styles.prices}>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={minPassengers}
-                  onChange={handlePassengerChange}
-                  name="minPassengers"
-                  placeholder="MIN"
-                  required
-                />
-                <p className={styles.separator}>to</p>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={maxPassengers}
-                  onChange={handlePassengerChange}
-                  name="maxPassengers"
-                  placeholder="MAX"
-                  required
-                />
-              </div>
+            <div>
+              <Accordion
+                expanded={passengerExpanded}
+                onChange={handlePassengerAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>Passengers</div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    aria-label="Volume"
+                    value={passengerSlider}
+                    onChange={handlePassengerSlider}
+                  />
+                  <div className={styles.prices}>
+                    <input
+                      className={styles.input}
+                      type="text"
+                      value={minPassengers}
+                      onChange={handlePassengerChange}
+                      name="minPassengers"
+                      placeholder="MIN"
+                      required
+                    />
+                    <p className={styles.separator}>to</p>
+                    <input
+                      className={styles.input}
+                      type="text"
+                      value={maxPassengers}
+                      onChange={handlePassengerChange}
+                      name="maxPassengers"
+                      placeholder="MAX"
+                      required
+                    />
+                  </div>
+                </div>
+              </Accordion>
             </div>
-            <div className={styles.range}>
-              <div className={styles.label}>Range (NM)</div>
-              <div className={styles.prices}>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={minRange}
-                  onChange={handleRangeChange}
-                  name="minRange"
-                  placeholder="MIN"
-                  required
-                />
-                <p className={styles.separator}>to</p>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={maxRange}
-                  onChange={handleRangeChange}
-                  name="maxRange"
-                  placeholder="MAX"
-                  required
-                />
-              </div>
+
+            <div>
+              <Accordion
+                expanded={rangeExpanded}
+                onChange={handleRangeAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>Range (NM)</div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    aria-label="Volume"
+                    value={passengerSlider}
+                    onChange={handlePassengerSlider}
+                  />
+                  <div className={styles.prices}>
+                    <input
+                      className={styles.input}
+                      type="text"
+                      value={minRange}
+                      onChange={handleRangeChange}
+                      name="minRange"
+                      placeholder="MIN"
+                      required
+                    />
+                    <p className={styles.separator}>to</p>
+                    <input
+                      className={styles.input}
+                      type="text"
+                      value={maxRange}
+                      onChange={handleRangeChange}
+                      name="maxRange"
+                      placeholder="MAX"
+                      required
+                    />
+                  </div>
+                </div>
+              </Accordion>
             </div>
-            <div className={styles.range}>
-              <div className={styles.label}>Cruise Speed (Knots)</div>
-              <div className={styles.prices}>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={minCruise}
-                  onChange={handleCruiseChange}
-                  name="minCruise"
-                  placeholder="MIN"
-                  required
-                />
-                <p className={styles.separator}>to</p>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={maxCruise}
-                  onChange={handleCruiseChange}
-                  name="maxCruise"
-                  placeholder="MAX"
-                  required
-                />
-              </div>
+
+            <div>
+              <Accordion
+                expanded={cruiseExpanded}
+                onChange={handleCruiseAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>Cruise Speed (Knots)</div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    aria-label="Volume"
+                    value={passengerSlider}
+                    onChange={handlePassengerSlider}
+                  />
+                  <div className={styles.prices}>
+                    <input
+                      className={styles.input}
+                      type="text"
+                      value={minCruise}
+                      onChange={handleCruiseChange}
+                      name="minCruise"
+                      placeholder="MIN"
+                      required
+                    />
+                    <p className={styles.separator}>to</p>
+                    <input
+                      className={styles.input}
+                      type="text"
+                      value={maxCruise}
+                      onChange={handleCruiseChange}
+                      name="maxCruise"
+                      placeholder="MAX"
+                      required
+                    />
+                  </div>
+                </div>
+              </Accordion>
             </div>
-            <div className={styles.range}>
-              <div className={styles.label}>Max Altitude (Feet)</div>
-              <div className={styles.prices}>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={minAltitude}
-                  onChange={handleAltitudeChange}
-                  name="minAltitude"
-                  placeholder="MIN"
-                  required
-                />
-                <p className={styles.separator}>to</p>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={maxAltitude}
-                  onChange={handleAltitudeChange}
-                  name="maxAltitude"
-                  placeholder="MAX"
-                  required
-                />
-              </div>
+
+            <div>
+              <Accordion
+                expanded={altitudeExpanded}
+                onChange={handleAltitudeAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>Max Altitude (Feet)</div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    aria-label="Volume"
+                    value={passengerSlider}
+                    onChange={handlePassengerSlider}
+                  />
+                  <div className={styles.prices}>
+                    <input
+                      className={styles.input}
+                      type="text"
+                      value={minAltitude}
+                      onChange={handleAltitudeChange}
+                      name="minAltitude"
+                      placeholder="MIN"
+                      required
+                    />
+                    <p className={styles.separator}>to</p>
+                    <input
+                      className={styles.input}
+                      type="text"
+                      value={maxAltitude}
+                      onChange={handleAltitudeChange}
+                      name="maxAltitude"
+                      placeholder="MAX"
+                      required
+                    />
+                  </div>
+                </div>
+              </Accordion>
             </div>
           </div>
           <div className={styles.wrapper}>

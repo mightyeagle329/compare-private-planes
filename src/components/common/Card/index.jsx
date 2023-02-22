@@ -10,11 +10,9 @@ import {
   HiOutlineTrendingDown,
   HiOutlineTrendingUp,
   HiOutlineCube,
-  HiBookmarkAlt,
   HiOutlineFire,
   HiOutlineClock,
 } from "react-icons/hi";
-
 import { ImWarning } from "react-icons/im";
 import { SiSpeedtest } from "react-icons/si";
 

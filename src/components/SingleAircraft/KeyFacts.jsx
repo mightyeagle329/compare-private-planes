@@ -25,8 +25,8 @@ const KeyFacts = ({ params }) => {
       {
         label: "Pax",
         data: [params.max_pax, 19],
-        backgroundColor: ["rgba(255, 99, 132, 1)", "rgba(255, 159, 64, 0.0)"],
-        borderColor: ["rgba(255, 99, 132, 0.3)"],
+        backgroundColor: ["#56AD70", "rgba(255, 159, 64, 0.0)"],
+        borderColor: ["#EBEBEB"],
         borderWidth: 2,
       },
     ],
@@ -36,8 +36,8 @@ const KeyFacts = ({ params }) => {
       {
         label: "Range",
         data: [params.range_NM, 8000],
-        backgroundColor: ["rgba(255, 99, 132, 1)", "rgba(255, 159, 64, 0.0)"],
-        borderColor: ["rgba(255, 99, 132, 0.3)"],
+        backgroundColor: ["#DBE050", "rgba(255, 159, 64, 0.0)"],
+        borderColor: ["#EBEBEB"],
         borderWidth: 2,
       },
     ],
@@ -48,8 +48,8 @@ const KeyFacts = ({ params }) => {
       {
         label: "Cruise Speed",
         data: [params.high_cruise_knots, 516],
-        backgroundColor: ["rgba(255, 99, 132, 1)", "rgba(255, 159, 64, 0.0)"],
-        borderColor: ["rgba(255, 99, 132, 0.3)"],
+        backgroundColor: ["#DA3978", "rgba(255, 159, 64, 0.0)"],
+        borderColor: ["#EBEBEB"],
         borderWidth: 2,
       },
     ],
@@ -60,8 +60,8 @@ const KeyFacts = ({ params }) => {
       {
         label: "Cost Per Hour",
         data: [params.hourly_ownership_rate_NAmerica, 10000],
-        backgroundColor: ["rgba(255, 99, 132, 1)", "rgba(255, 159, 64, 0.0)"],
-        borderColor: ["rgba(255, 99, 132, 0.3)"],
+        backgroundColor: ["#90EB4B", "rgba(255, 159, 64, 0.0)"],
+        borderColor: ["#EBEBEB"],
         borderWidth: 2,
       },
     ],
@@ -72,8 +72,8 @@ const KeyFacts = ({ params }) => {
       {
         label: "Hourly Fuel Burn",
         data: [params.hourly_fuel_burn_GPH, 626],
-        backgroundColor: ["rgba(255, 99, 132, 1)", "rgba(255, 159, 64, 0.0)"],
-        borderColor: ["rgba(255, 99, 132, 0.3)"],
+        backgroundColor: ["#D857F4", "rgba(255, 159, 64, 0.0)"],
+        borderColor: ["#EBEBEB"],
         borderWidth: 2,
       },
     ],
@@ -119,6 +119,8 @@ const KeyFacts = ({ params }) => {
               data={data_passengers}
               options={{
                 responsive: true,
+                cutout: 50,
+                cutout: 50,
                 plugins: {
                   tooltip: {
                     enabled: false, // <-- this option disables tooltips
@@ -126,7 +128,11 @@ const KeyFacts = ({ params }) => {
                 },
               }}
             />
-            <span className={styles.chart_label}>{params.max_pax}</span>
+            <span className={styles.chart_label_passengers}>
+              {params.max_pax}
+              <br></br>
+              <span className={styles.chart_label_description}>Pax</span>
+            </span>
           </div>
           <div
             style={{
@@ -139,6 +145,7 @@ const KeyFacts = ({ params }) => {
               data={data_range}
               options={{
                 responsive: true,
+                cutout: 50,
                 plugins: {
                   tooltip: {
                     enabled: false, // <-- this option disables tooltips
@@ -146,7 +153,10 @@ const KeyFacts = ({ params }) => {
                 },
               }}
             />
-            <span className={styles.chart_label}>{params.range_NM}</span>
+            <span className={styles.chart_label_range}>
+              {params.range_NM} <br></br>
+              <span className={styles.chart_label_description}>NM</span>
+            </span>
           </div>
           <div
             style={{
@@ -159,6 +169,7 @@ const KeyFacts = ({ params }) => {
               data={data_cruise}
               options={{
                 responsive: true,
+                cutout: 50,
                 plugins: {
                   tooltip: {
                     enabled: false, // <-- this option disables tooltips
@@ -166,8 +177,9 @@ const KeyFacts = ({ params }) => {
                 },
               }}
             />
-            <span className={styles.chart_label}>
-              {params.high_cruise_knots}
+            <span className={styles.chart_label_cruise}>
+              {params.high_cruise_knots} <br></br>
+              <span className={styles.chart_label_description}>Knots</span>
             </span>
           </div>
           <div
@@ -181,6 +193,7 @@ const KeyFacts = ({ params }) => {
               data={data_cost}
               options={{
                 responsive: true,
+                cutout: 50,
                 plugins: {
                   tooltip: {
                     enabled: false, // <-- this option disables tooltips
@@ -188,8 +201,9 @@ const KeyFacts = ({ params }) => {
                 },
               }}
             />
-            <span className={styles.chart_label}>
-              {params.hourly_ownership_rate_NAmerica}
+            <span className={styles.chart_label_cost}>
+              {params.hourly_ownership_rate_NAmerica} <br></br>
+              <span className={styles.chart_label_description}>per hour</span>
             </span>
           </div>
           <div
@@ -203,6 +217,7 @@ const KeyFacts = ({ params }) => {
               data={data_fuel}
               options={{
                 responsive: true,
+                cutout: 50,
                 plugins: {
                   tooltip: {
                     enabled: false, // <-- this option disables tooltips
@@ -210,8 +225,9 @@ const KeyFacts = ({ params }) => {
                 },
               }}
             />
-            <span className={styles.chart_label}>
-              {params.hourly_fuel_burn_GPH}
+            <span className={styles.chart_label_fuel}>
+              {params.hourly_fuel_burn_GPH} <br></br>
+              <span className={styles.chart_label_description}>GPH</span>
             </span>
           </div>
         </div>

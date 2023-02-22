@@ -66,6 +66,8 @@
   }
 }
 
+
+
 .doughnut_charts_wrapper {
   display: flex;
   justify-content: center;
@@ -82,15 +84,100 @@
     justify-content: center;
     gap: 10px;
 
-    .chart_label {
+    .chart_label_passengers {
       position: absolute;
       top: 62%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 600;
-      color: gray;
+      color: #56AD70;
       z-index: 10;
+      text-align: center;
+
+      .chart_label_description {
+        font-weight: 200;
+        font-size: 15px;
+        color: #8E8E8E;
+        text-align: center;
+      }
+    }
+
+    .chart_label_range {
+      position: absolute;
+      top: 62%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #DBE050;
+      text-align: center;
+      z-index: 10;
+
+      .chart_label_description {
+        font-weight: 200;
+        font-size: 15px;
+        text-align: center;
+        color: #8E8E8E;
+        text-align: center;
+      }
+    }
+
+    .chart_label_cruise {
+      position: absolute;
+      top: 62%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.4rem;
+      text-align: center;
+      font-weight: 600;
+      color: #DA3978;
+      z-index: 10;
+
+      .chart_label_description {
+        font-weight: 200;
+        font-size: 15px;
+        color: #8E8E8E;
+        text-align: center;
+      }
+    }
+
+    .chart_label_cost {
+      position: absolute;
+      top: 62%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #90EB4B;
+      z-index: 10;
+
+      .chart_label_description {
+        font-weight: 200;
+        font-size: 15px;
+        color: #8E8E8E;
+        text-align: center;
+      }
+    }
+
+    .chart_label_fuel {
+      position: absolute;
+      text-align: center;
+      top: 62%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #D857F4;
+      z-index: 10;
+
+      .chart_label_description {
+        font-weight: 200;
+        font-size: 15px;
+        color: #8E8E8E;
+        text-align: center;
+      }
     }
   }
 }
