@@ -4,6 +4,7 @@ from .models import Aircraft, Accident
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from django.contrib.humanize.templatetags.humanize import intcomma
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -21,10 +22,10 @@ class AircraftList(View):
                 'category': item.category,
                 'max_pax': item.max_pax,
                 'typical_pax': item.typical_pax,
-                "a_check": item.a_check,
-                "b_check": item.b_check,
-                "c_check": item.c_check,
-                "d_check": item.d_check,
+                "a_check": intcomma(item.a_check),
+                "b_check": intcomma(item.b_check),
+                "c_check": intcomma(item.c_check),
+                "d_check": intcomma(item.d_check),
                 "living_zones": item.living_zones,
                 "baggage_access": item.baggage_access,
                 "pressure_differential_psi": item.pressure_differential_psi,
@@ -495,7 +496,7 @@ class AircraftById(View):
             'high_cruise_MPH': item.high_cruise_MPH,
             'high_cruise_Mach': item.high_cruise_Mach,
             'long_range_cruise_knots': item.long_range_cruise_knots,
-            'long_range_cruise_MPH': "{:,.2f}".format(item.long_range_cruise_MPH),
+            'long_range_cruise_MPH': item.long_range_cruise_MPH,
             'long_range_cruise_Mach': item.long_range_cruise_Mach,
             'max_altitude_feet': item.max_altitude_feet,
             'ceiling_feet': item.ceiling_feet,
