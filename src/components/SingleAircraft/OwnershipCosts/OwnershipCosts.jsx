@@ -18,7 +18,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
   const [nbHours, setNbHours] = useState(0);
   const [annualBudget, setAnnualBudget] = useState(0);
   const [conversionRate, setConversionRate] = useState(0);
-  const newLegendClickHandler = function () {};
 
   useEffect(() => {
     Axios.get(
@@ -188,65 +187,49 @@ const OwnershipCosts = ({ params, currency, country }) => {
           {currency !== "USD" ? (
             country === "North America" ? (
               <h3 className={cn(styles.cost)}>
-                {(
-                  (parseInt(params.NA_annual_total) +
-                    parseInt(nbHours) * params.NA_hourly_total) *
-                  conversionRate
-                ).toFixed(2)}
+                {(parseInt(params.NA_annual_total) +
+                  parseInt(nbHours) * params.NA_hourly_total) *
+                  conversionRate}
               </h3>
             ) : country === "Europe" ? (
               <h3 className={cn(styles.cost)}>
-                {(
-                  (parseInt(params.EU_annual_total) +
-                    parseInt(nbHours) * params.EU_hourly_total) *
-                  conversionRate
-                ).toFixed(2)}
+                {(parseInt(params.EU_annual_total) +
+                  parseInt(nbHours) * params.EU_hourly_total) *
+                  conversionRate}
               </h3>
             ) : country === "South America" ? (
               <h3 className={cn(styles.cost)}>
-                {(
-                  (parseInt(params.SA_annual_total) +
-                    parseInt(nbHours) * params.SA_hourly_total) *
-                  conversionRate
-                ).toFixed(2)}
+                {(parseInt(params.SA_annual_total) +
+                  parseInt(nbHours) * params.SA_hourly_total) *
+                  conversionRate}
               </h3>
             ) : (
               <h3 className={cn(styles.cost)}>
-                {(
-                  (parseInt(params.AS_annual_total) +
-                    parseInt(nbHours) * params.AS_hourly_total) *
-                  conversionRate
-                ).toFixed(2)}
+                {(parseInt(params.AS_annual_total) +
+                  parseInt(nbHours) * params.AS_hourly_total) *
+                  conversionRate}
               </h3>
             )
           ) : country === "North America" ? (
             <h3 className={cn(styles.cost)}>
-              {(
-                (parseInt(params.NA_annual_total) +
-                  parseInt(nbHours) * params.NA_hourly_total) *
-                conversionRate
-              ).toFixed(2)}
+              {(parseInt(params.NA_annual_total) +
+                parseInt(nbHours) * params.NA_hourly_total) *
+                conversionRate}
             </h3>
           ) : country === "Europe" ? (
             <h3 className={cn(styles.cost)}>
-              {(
-                parseInt(params.EU_annual_total) +
-                parseInt(nbHours) * params.EU_hourly_total
-              ).toFixed(2)}
+              {parseInt(params.EU_annual_total) +
+                parseInt(nbHours) * params.EU_hourly_total}
             </h3>
           ) : country === "South America" ? (
             <h3 className={cn(styles.cost)}>
-              {(
-                parseInt(params.SA_annual_total) +
-                parseInt(nbHours) * params.SA_hourly_total
-              ).toFixed(2)}
+              {parseInt(params.SA_annual_total) +
+                parseInt(nbHours) * params.SA_hourly_total}
             </h3>
           ) : (
             <h3 className={cn(styles.cost)}>
-              {(
-                parseInt(params.AS_annual_total) +
-                parseInt(nbHours) * params.AS_hourly_total
-              ).toFixed(2)}
+              {parseInt(params.AS_annual_total) +
+                parseInt(nbHours) * params.AS_hourly_total}
             </h3>
           )}
         </header>
@@ -258,26 +241,26 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 {country === "North America" ? (
                   <span className={cn(styles.cost)}>
                     {currency !== "USD"
-                      ? (params.NA_annual_total * conversionRate).toFixed(2)
-                      : params.NA_annual_total.toFixed(2)}
+                      ? params.NA_annual_total * conversionRate
+                      : params.NA_annual_total}
                   </span>
                 ) : country === "Europe" ? (
                   <span className={cn(styles.cost)}>
                     {currency !== "USD"
-                      ? (params.EU_annual_total * conversionRate).toFixed(2)
-                      : params.EU_annual_total.toFixed(2)}
+                      ? params.EU_annual_total * conversionRate
+                      : params.EU_annual_total}
                   </span>
                 ) : country === "South America" ? (
                   <span className={cn(styles.cost)}>
                     {currency !== "USD"
-                      ? (params.SA_annual_total * conversionRate).toFixed(2)
-                      : params.SA_annual_total.toFixed(2)}
+                      ? params.SA_annual_total * conversionRate
+                      : params.SA_annual_total}
                   </span>
                 ) : (
                   <span className={cn(styles.cost)}>
                     {currency !== "USD"
-                      ? (params.AS_annual_total * conversionRate).toFixed(2)
-                      : params.AS_annual_total.toFixed(2)}
+                      ? params.AS_annual_total * conversionRate
+                      : params.AS_annual_total}
                   </span>
                 )}
               </p>
@@ -285,12 +268,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 data={annualData}
                 options={{
                   responsive: true,
-                  plugins: {
-                    legend: {
-                      position: "bottom",
-                      onClick: newLegendClickHandler,
-                    },
-                  },
                 }}
               />
             </div>
@@ -302,26 +279,26 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 {country === "North America" ? (
                   <span className={cn(styles.cost)}>
                     {currency !== "USD"
-                      ? (params.NA_hourly_total * conversionRate).toFixed(2)
-                      : params.NA_hourly_total.toFixed(2)}
+                      ? params.NA_hourly_total * conversionRate
+                      : params.NA_hourly_total}
                   </span>
                 ) : country === "Europe" ? (
                   <span className={cn(styles.cost)}>
                     {currency !== "USD"
-                      ? (params.EU_hourly_total * conversionRate).toFixed(2)
-                      : params.EU_hourly_total.toFixed(2)}
+                      ? params.EU_hourly_total * conversionRate
+                      : params.EU_hourly_total}
                   </span>
                 ) : country === "South America" ? (
                   <span className={cn(styles.cost)}>
                     {currency !== "USD"
-                      ? (params.SA_hourly_total * conversionRate).toFixed(2)
-                      : params.SA_hourly_total.toFixed(2)}
+                      ? params.SA_hourly_total * conversionRate
+                      : params.SA_hourly_total}
                   </span>
                 ) : (
                   <span className={cn(styles.cost)}>
                     {currency !== "USD"
-                      ? (params.AS_hourly_total * conversionRate).toFixed(2)
-                      : params.AS_hourly_total.toFixed(2)}
+                      ? params.AS_hourly_total * conversionRate
+                      : params.AS_hourly_total}
                   </span>
                 )}
               </p>
@@ -330,12 +307,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 data={variableData}
                 options={{
                   responsive: true,
-                  plugins: {
-                    legend: {
-                      position: "bottom",
-                      onClick: newLegendClickHandler,
-                    },
-                  },
                 }}
               />
             </div>
@@ -357,7 +328,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   </div>
                   <div className={cn(styles.bar)}>
                     <div
-                      className={cn(styles.bar__fill1)}
+                      className={cn(styles.bar__fill)}
                       style={{
                         width:
                           ((parseInt(params.NA_annual_captain) +
@@ -376,7 +347,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   </div>
                   <div className={cn(styles.bar)}>
                     <div
-                      className={cn(styles.bar__fill2)}
+                      className={cn(styles.bar__fill)}
                       style={{
                         width:
                           (params.NA_annual_crew_training /
@@ -394,7 +365,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   </div>
                   <div className={cn(styles.bar)}>
                     <div
-                      className={cn(styles.bar__fill3)}
+                      className={cn(styles.bar__fill)}
                       style={{
                         width:
                           (params.NA_annual_hangar / maximumAnnualValue) * 100 +
@@ -410,7 +381,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   </div>
                   <div className={cn(styles.bar)}>
                     <div
-                      className={cn(styles.bar__fill4)}
+                      className={cn(styles.bar__fill)}
                       style={{
                         width:
                           (params.NA_annual_insurance_hull /
@@ -428,7 +399,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   </div>
                   <div className={cn(styles.bar)}>
                     <div
-                      className={cn(styles.bar__fill5)}
+                      className={cn(styles.bar__fill)}
                       style={{
                         width:
                           (params.NA_annual_insurance_liability /
@@ -446,7 +417,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   </div>
                   <div className={cn(styles.bar)}>
                     <div
-                      className={cn(styles.bar__fill6)}
+                      className={cn(styles.bar__fill)}
                       style={{
                         width:
                           (params.NA_annual_management / maximumAnnualValue) *
@@ -463,7 +434,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   </div>
                   <div className={cn(styles.bar)}>
                     <div
-                      className={cn(styles.bar__fill7)}
+                      className={cn(styles.bar__fill)}
                       style={{
                         width:
                           (params.NA_annual_misc / maximumAnnualValue) * 100 +
@@ -486,7 +457,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   </div>
                   <div className={cn(styles.bar)}>
                     <div
-                      className={cn(styles.bar__fill1)}
+                      className={cn(styles.bar__fill)}
                       style={{
                         width:
                           (params.NA_hourly_fuel / maximumVariableValue) * 100 +
@@ -502,7 +473,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   </div>
                   <div className={cn(styles.bar)}>
                     <div
-                      className={cn(styles.bar__fill2)}
+                      className={cn(styles.bar__fill)}
                       style={{
                         width:
                           (params.NA_hourly_maintenance /
@@ -520,7 +491,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   </div>
                   <div className={cn(styles.bar)}>
                     <div
-                      className={cn(styles.bar__fill3)}
+                      className={cn(styles.bar__fill)}
                       style={{
                         width:
                           (params.NA_hourly_engine_overhaul /
@@ -538,7 +509,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   </div>
                   <div className={cn(styles.bar)}>
                     <div
-                      className={cn(styles.bar__fill4)}
+                      className={cn(styles.bar__fill)}
                       style={{
                         width:
                           (params.NA_hourly_ground_fees /
@@ -556,7 +527,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   </div>
                   <div className={cn(styles.bar)}>
                     <div
-                      className={cn(styles.bar__fill6)}
+                      className={cn(styles.bar__fill)}
                       style={{
                         width:
                           (params.NA_hourly_misc / maximumVariableValue) * 100 +
