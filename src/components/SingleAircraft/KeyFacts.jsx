@@ -3,16 +3,41 @@ import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import axios from "axios";
 
 import SectionHeader from "../shared/SectionHeader";
 import { useEffect, useState } from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const KeyFacts = ({ params }) => {
+const KeyFacts = ({ params, currency, country, unit }) => {
   const [keyFacts, setKeyFacts] = useState([]);
   const [index, setindex] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [info, setInfo] = useState([]);
+  const [from, setFrom] = useState("usd");
+  const [to, setTo] = useState("usd");
+  const [conversionRate, setConversionRate] = useState(0);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`
+      )
+      .then((res) => {
+        setInfo(res.data[from]);
+      });
+  }, [from]);
+
+  useEffect(() => {
+    currency === "USD"
+      ? setTo("usd")
+      : currency === "GBP"
+      ? setTo("gbp")
+      : setTo("eur");
+    setFrom("usd");
+    setConversionRate(info[to]);
+  }, [info, currency, to]);
 
   useEffect(() => {
     if (params.key_facts !== undefined) {
@@ -59,7 +84,7 @@ const KeyFacts = ({ params }) => {
     datasets: [
       {
         label: "Cost Per Hour",
-        data: [params.hourly_ownership_rate_NAmerica, 10000],
+        data: [params.NA_hourly_total, 10000],
         backgroundColor: ["#90EB4B", "rgba(255, 159, 64, 0.0)"],
         borderColor: ["#EBEBEB"],
         borderWidth: 2,
@@ -178,8 +203,14 @@ const KeyFacts = ({ params }) => {
               }}
             />
             <span className={styles.chart_label_cruise}>
-              {params.high_cruise_knots} <br></br>
-              <span className={styles.chart_label_description}>Knots</span>
+              {unit == "Imperial Units"
+                ? params.high_cruise_knots
+                : params.high_speed_cruise_kmh}{" "}
+              <br></br>
+              <span className={styles.chart_label_description}>
+                {" "}
+                {unit == "Imperial Units" ? "Knots" : "Kmh"}
+              </span>
             </span>
           </div>
           <div
@@ -202,7 +233,39 @@ const KeyFacts = ({ params }) => {
               }}
             />
             <span className={styles.chart_label_cost}>
-              {params.hourly_ownership_rate_NAmerica} <br></br>
+              {currency === "USD" ? "$" : currency === "EUR" ? "€" : "£"}
+              {currency === "USD"
+                ? country === "North America"
+                  ? params.NA_hourly_total !== 0
+                    ? params.NA_hourly_total
+                    : "-"
+                  : country === "Europe"
+                  ? params.EU_hourly_total !== 0
+                    ? params.EU_hourly_total
+                    : "-"
+                  : country === "South America"
+                  ? params.SA_hourly_total !== 0
+                    ? params.SA_hourly_total
+                    : "-"
+                  : params.AS_hourly_total !== 0
+                  ? params.AS_hourly_total
+                  : "-"
+                : country === "North America"
+                ? params.NA_hourly_total !== 0
+                  ? (params.NA_hourly_total * conversionRate).toFixed(2)
+                  : "-"
+                : country === "Europe"
+                ? params.EU_hourly_total !== 0
+                  ? (params.EU_hourly_total * conversionRate).toFixed(2)
+                  : "-"
+                : country === "South America"
+                ? params.SA_hourly_total !== 0
+                  ? (params.SA_hourly_total * conversionRate).toFixed(2)
+                  : "-"
+                : params.AS_hourly_total !== 0
+                ? (params.AS_hourly_total * conversionRate).toFixed(2)
+                : "-"}{" "}
+              <br></br>
               <span className={styles.chart_label_description}>per hour</span>
             </span>
           </div>

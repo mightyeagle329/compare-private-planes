@@ -210,7 +210,12 @@ export default function SingleAircraftDetails() {
             />
           </div>
         </div>
-        <KeyFacts params={aircraftData} />
+        <KeyFacts
+          params={aircraftData}
+          currency={currency}
+          country={country}
+          unit={unit}
+        />
         <BasicInfo params={aircraftData} />
         <PerformanceData params={aircraftData} />
         <OwnershipCosts

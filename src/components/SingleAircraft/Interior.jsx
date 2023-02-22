@@ -32,7 +32,9 @@ const Interior = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Cabin Noise (dB)
                 </span>
-                <span>{params.cabin_noise}</span>
+                <span>
+                  {params.cabin_noise === 0 ? "-" : params.cabin_noise}
+                </span>
               </div>
             </div>
           </div>

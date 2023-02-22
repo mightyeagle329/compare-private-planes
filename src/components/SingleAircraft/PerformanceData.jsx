@@ -52,7 +52,11 @@ const PerformanceData = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Initial Cruise Altitude (Feet)
                 </span>
-                <span>{params.initial_cruise_altitude}</span>
+                <span>
+                  {params.initial_cruise_altitude === 0
+                    ? "-"
+                    : params.initial_cruise_altitude}
+                </span>
               </div>
             </div>
           </div>

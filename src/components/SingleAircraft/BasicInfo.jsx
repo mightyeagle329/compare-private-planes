@@ -83,7 +83,9 @@ const BasicInfo = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Serial Number Range
                 </span>
-                <span>{params.serial_numbers}</span>
+                <span>
+                  {params.serial_numbers === 0 ? "-" : params.serial_numbers}
+                </span>
               </div>
             </div>
           </div>
