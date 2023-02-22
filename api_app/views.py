@@ -495,7 +495,7 @@ class AircraftById(View):
             'high_cruise_MPH': item.high_cruise_MPH,
             'high_cruise_Mach': item.high_cruise_Mach,
             'long_range_cruise_knots': item.long_range_cruise_knots,
-            'long_range_cruise_MPH': item.long_range_cruise_MPH,
+            'long_range_cruise_MPH': "{:,.2f}".format(item.long_range_cruise_MPH),
             'long_range_cruise_Mach': item.long_range_cruise_Mach,
             'max_altitude_feet': item.max_altitude_feet,
             'ceiling_feet': item.ceiling_feet,

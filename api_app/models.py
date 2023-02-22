@@ -28,7 +28,7 @@ class Aircraft(models.Model):
     high_cruise_Mach = models.FloatField(default=0)
     high_cruise_knots = models.FloatField(default=0)
     long_range_cruise_knots = models.IntegerField(default=0)
-    long_range_cruise_MPH = models.FloatField(default=0, localize=True)
+    long_range_cruise_MPH = models.FloatField(default=0)
     long_range_cruise_Mach = models.FloatField(default=0)
     ceiling_feet = models.IntegerField(default=0)
     TO_distance_feet = models.IntegerField(default=0)
