@@ -268,6 +268,11 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 data={annualData}
                 options={{
                   responsive: true,
+                  plugins: {
+                    legend: {
+                      position: "bottom",
+                    },
+                  },
                 }}
               />
             </div>
@@ -307,6 +312,11 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 data={variableData}
                 options={{
                   responsive: true,
+                  plugins: {
+                    legend: {
+                      position: "bottom",
+                    },
+                  },
                 }}
               />
             </div>

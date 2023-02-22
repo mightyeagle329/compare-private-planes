@@ -25,11 +25,24 @@ ChartJS.register(
 );
 
 const HistoricalMarket = ({ params, historicalData }) => {
+  const newLegendClickHandler = function () {};
+
   const options = {
     responsive: true,
+    scales: {
+      xAxes: [
+        {
+          scaleLabel: {
+            display: true,
+            labelString: "X Axis Title",
+          },
+        },
+      ],
+    },
     plugins: {
       legend: {
         position: "bottom",
+        onClick: newLegendClickHandler,
       },
     },
   };

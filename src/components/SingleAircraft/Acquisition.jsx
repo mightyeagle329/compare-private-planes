@@ -30,6 +30,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
 const Acquisition = ({ params, acquisition }) => {
   const options = {
     responsive: true,
