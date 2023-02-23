@@ -2,6 +2,8 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
 import SectionHeader from "../shared/SectionHeader";
+import numeral from "numeral";
+
 const PerformanceData = ({ params }) => {
   const takeOff = "100%";
   const landing = "45%";
@@ -17,19 +19,21 @@ const PerformanceData = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Range (Nautical Miles)
                 </span>
-                <span>{params.range_NM}</span>
+                <span>{numeral(params.range_NM).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Range (Miles / KM)
                 </span>
-                <span>{params.range_Miles}</span>
+                <span>{numeral(params.range_Miles).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Fuel Burn (Gallons per Hour)
                 </span>
-                <span>{params.hourly_fuel_burn_GPH}</span>
+                <span>
+                  {numeral(params.hourly_fuel_burn_GPH).format("0,0")}
+                </span>
               </div>
             </div>
           </div>
@@ -40,22 +44,22 @@ const PerformanceData = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Max Altitude (Feet)
                 </span>
-                <span>{params.max_altitude_feet}</span>
+                <span>{numeral(params.max_altitude_feet).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Rate of Climb (Feet / Min)
                 </span>
-                <span>{params.rate_climb}</span>
+                <span>{numeral(params.rate_climb).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Initial Cruise Altitude (Feet)
                 </span>
                 <span>
-                  {params.initial_cruise_altitude === 0
+                  {numeral(params.initial_cruise_altitude).format("0,0") === 0
                     ? "-"
-                    : params.initial_cruise_altitude}
+                    : numeral(params.initial_cruise_altitude).format("0,0")}
                 </span>
               </div>
             </div>
@@ -73,17 +77,18 @@ const PerformanceData = ({ params }) => {
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.value)}>
-                  {params.high_cruise_knots}
+                  {numeral(params.high_cruise_knots).format("0,0")}
                 </span>
                 <span className={cn(global.value)}>
-                  {params.high_cruise_MPH}
+                  {numeral(params.high_cruise_MPH).format("0,0")}
                 </span>
                 <span className={cn(global.value)}>
-                  {params.high_cruise_Mach}
+                  {numeral(params.high_cruise_Mach).format("0,0")}
                 </span>
               </div>
             </div>
           </div>
+
           <span className={cn(global.seperator)}></span>
           <div className={cn(global.column)}>
             <span className={cn(global.column_header)}>Long Range Cruise</span>
@@ -95,13 +100,13 @@ const PerformanceData = ({ params }) => {
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.value)}>
-                  {params.long_range_cruise_knots}
+                  {numeral(params.long_range_cruise_knots).format("0,0")}
                 </span>
                 <span className={cn(global.value)}>
-                  {params.long_range_cruise_MPH}
+                  {numeral(params.long_range_cruise_MPH).format("0,0")}
                 </span>
                 <span className={cn(global.value)}>
-                  {params.long_range_cruise_Mach}
+                  {numeral(params.long_range_cruise_Mach).format("0,0")}
                 </span>
               </div>
             </div>
@@ -126,14 +131,15 @@ const PerformanceData = ({ params }) => {
             <span
               className={styles.distance_bar}
               style={{
-                width:
+                width: `${
                   (parseInt(params.TO_distance_feet) /
                     (parseInt(params.TO_distance_feet) +
                       parseInt(params.landing_distance_feet))) *
-                  1000,
+                  1000
+                }px`,
               }}
             >
-              {params.TO_distance_feet}
+              {numeral(params.TO_distance_feet).format("0,0")}
             </span>
             <span
               className={styles.landing_distance_bar}
@@ -145,7 +151,7 @@ const PerformanceData = ({ params }) => {
                   1000,
               }}
             >
-              {params.landing_distance_feet}
+              {numeral(params.landing_distance_feet).format("0,0")}
             </span>
           </div>
         </div>

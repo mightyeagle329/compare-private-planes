@@ -1,6 +1,8 @@
 import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
+import numeral from "numeral";
+
 const BasicInfo = ({ params }) => {
   return (
     <section className={cn(global.section, global.page_break)}>
@@ -64,7 +66,7 @@ const BasicInfo = ({ params }) => {
                 >
                   Number Made
                 </span>
-                <span>{params.number_made}</span>
+                <span>{numeral(params.number_made).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span
@@ -77,14 +79,16 @@ const BasicInfo = ({ params }) => {
                 >
                   Number in Service
                 </span>
-                <span>{params.number_in_service}</span>
+                <span>{numeral(params.number_in_service).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Serial Number Range
                 </span>
                 <span>
-                  {params.serial_numbers === 0 ? "-" : params.serial_numbers}
+                  {params.serial_numbers === 0
+                    ? "-"
+                    : numeral(params.serial_numbers).format("0,0")}
                 </span>
               </div>
             </div>

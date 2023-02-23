@@ -20,6 +20,7 @@ import {
   FUTURE_OPTIONS,
 } from "../../utils/constants/app-constants";
 import { useEffect, useState } from "react";
+import numeral from "numeral";
 
 ChartJS.register(
   CategoryScale,
@@ -31,9 +32,27 @@ ChartJS.register(
   Legend
 );
 
-const Acquisition = ({ params, acquisition }) => {
+const Acquisition = ({ params, acquisition, currency }) => {
   const options = {
     responsive: true,
+    scales: {
+      x: {
+        display: true,
+        title: {
+          display: true,
+          text: "Year",
+        },
+      },
+      y: {
+        display: true,
+        title: {
+          display: true,
+          text: `Value (${
+            currency === "USD" ? "$" : currency === "GBP" ? "£" : "€"
+          })`,
+        },
+      },
+    },
     plugins: {
       legend: {
         position: "bottom",
@@ -45,7 +64,12 @@ const Acquisition = ({ params, acquisition }) => {
 
   const values = Object.values(acquisition);
   const labels = keys;
-  const [yearManufacture, setYearManufacture] = useState("-");
+
+  const [yearManufacture, setYearManufacture] = useState(Date.year);
+  useEffect(() => {
+    setYearManufacture(keys[0]);
+  }, [keys]);
+
   const [airframe, setAirframe] = useState(500);
   const [estimatedFutureValue, setestimatedFutureValue] = useState(
     FUTURE_OPTIONS[0]
@@ -114,6 +138,7 @@ const Acquisition = ({ params, acquisition }) => {
 
   const data = {
     labels,
+
     datasets: [
       {
         label: "Current Values",
@@ -139,7 +164,7 @@ const Acquisition = ({ params, acquisition }) => {
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Aquisition Costs" />
-      <main>
+      <main className={cn(styles.main_aquisiton)}>
         <div className={cn(global.details_table)}>
           <div className={cn(global.column)}>
             <div className={cn(global.rows)}>
@@ -155,7 +180,9 @@ const Acquisition = ({ params, acquisition }) => {
                   New Purchase Price
                 </span>
 
-                <span>{params.new_purchase}</span>
+                <span className={cn(global.green_value)}>
+                  {numeral(params.new_purchase).format("0,0.0")}
+                </span>
               </div>
               <div
                 className={
@@ -203,7 +230,7 @@ const Acquisition = ({ params, acquisition }) => {
                         value={airframe}
                         onChange={(e) => onAirframeChanged(e)}
                         name="nbHours"
-                        placeholder="Airframe hours"
+                        placeholder="Enter hours"
                         required
                       />
                     </form>
@@ -248,7 +275,9 @@ const Acquisition = ({ params, acquisition }) => {
                 >
                   Depreciation Rate
                 </span>
-                <span>-{params.depreication_rate}%</span>
+                <span className={cn(global.green_value)}>
+                  -{params.depreication_rate}%
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span
@@ -261,7 +290,9 @@ const Acquisition = ({ params, acquisition }) => {
                 >
                   Current Market Value
                 </span>
-                <span>{values[i]}</span>
+                <span className={cn(global.green_value)}>
+                  {numeral(values[i]).format("0,0.0")}
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span
@@ -274,7 +305,9 @@ const Acquisition = ({ params, acquisition }) => {
                 >
                   Adjusted Value
                 </span>
-                <span>{hourAdjustedSingleValue}</span>
+                <span className={cn(global.green_value)}>
+                  {Math.round(hourAdjustedSingleValue)}
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span
@@ -287,7 +320,9 @@ const Acquisition = ({ params, acquisition }) => {
                 >
                   Future Value
                 </span>
-                <span>{futureValue[futureCounter]}</span>
+                <span className={cn(global.green_value)}>
+                  {numeral(futureValue[futureCounter]).format("0,0.0")}
+                </span>
               </div>
             </div>
           </div>
@@ -297,32 +332,34 @@ const Acquisition = ({ params, acquisition }) => {
         <div className={cn(global.line_chart)}>
           <Line data={data} options={options} />
         </div>
-        <table className={cn(global.table)}>
-          <thead>
-            <tr>
-              <th className={cn(global.th)}>Year</th>
-              <th className={cn(global.th)}>Current Value</th>
-              <th className={cn(global.th)}>Hour Adjusted</th>
-              <th className={cn(global.th)}>Future Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            {labels.map((label, index) => (
-              <tr key={index}>
-                <td className={cn(global.td)}>{label}</td>
-                <td className={cn(global.td)}>
-                  {data.datasets[0].data[index]}
-                </td>
-                <td className={cn(global.td)}>
-                  {data.datasets[1].data[index]}
-                </td>
-                <td className={cn(global.td)}>
-                  {data.datasets[2].data[index]}
-                </td>
+        <div className={cn(styles.table_container)}>
+          <table className={cn(global.table)}>
+            <thead>
+              <tr>
+                <th className={cn(global.th)}>Year</th>
+                <th className={cn(global.th)}>Current Value</th>
+                <th className={cn(global.th)}>Hour Adjusted</th>
+                <th className={cn(global.th)}>Future Value</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {labels.map((label, index) => (
+                <tr key={index}>
+                  <td className={cn(global.td)}>{label}</td>
+                  <td className={cn(global.td)}>
+                    {numeral(data.datasets[0].data[index]).format("0,0")}
+                  </td>
+                  <td className={cn(global.td)}>
+                    {numeral(data.datasets[1].data[index]).format("0,0")}
+                  </td>
+                  <td className={cn(global.td)}>
+                    {numeral(data.datasets[2].data[index]).format("0,0")}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </main>
     </section>
   );

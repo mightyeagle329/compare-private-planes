@@ -26,7 +26,7 @@ import Modal from "../../components/common/modal/Modal";
 
 import aircraftService from "../../services/aircraft-service";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { searchService } from "../../utils/hooks/utils";
 import styles from "./styles.module.scss";
@@ -66,7 +66,7 @@ export default function SingleAircraftDetails() {
     // setSimilarAircrafts(filtered);
   };
 
-  const { id } = useParams();
+  const id = useLocation().state.id;
 
   const onCurrencyChanged = (val) => {
     setCurrency(val);
@@ -223,7 +223,11 @@ export default function SingleAircraftDetails() {
           currency={currency}
           country={country}
         />
-        <Acquisition params={aircraftData} acquisition={keys} />
+        <Acquisition
+          params={aircraftData}
+          acquisition={keys}
+          currency={currency}
+        />
         <HistoricalMarket params={aircraftData} historicalData={history} />
         <FleetFlightHours params={aircraftData} />
         <RangeMap params={aircraftData} />

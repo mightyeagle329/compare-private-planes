@@ -4,7 +4,6 @@ import { HiOutlineSearch } from "react-icons/hi";
 
 import useDebounce from "../utils/hooks/useDebounce";
 import { searchService } from "../utils/hooks/utils";
-import Slider from "@mui/material/Slider";
 import Card from "../components/common/Card";
 import Dropdown from "../components/common/Dropdown";
 import Accordion from "@mui/material/Accordion";
@@ -21,6 +20,7 @@ import aircraftService from "../services/aircraft-service";
 import axios from "axios";
 import { MdOutlineExpandMore } from "react-icons/md";
 import styles from "../styles/Search.module.scss";
+import MultiRangeSlider from "../components/common/multiRangeSlider/MultiRangeSlider";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -30,6 +30,13 @@ export default function Search() {
   const [rangeExpanded, setRangeExpanded] = useState(false);
   const [cruiseExpanded, setCruiseExpanded] = useState(false);
   const [altitudeExpanded, setAltitudeExpanded] = useState(false);
+  const [fuelBurnExpanded, setfuelBurnExpanded] = useState(false);
+  const [baggageExpanded, setbaggageExpanded] = useState(false);
+  const [takeOffExpanded, settakeOffExpanded] = useState(false);
+  const [landingDistanceExpanded, setLandingDistanceExpanded] = useState(false);
+  const [hourlyPrice, setHourlyPrice] = useState(false);
+  const [purchasePrice, setPurchasePrice] = useState(false);
+  const [preOwned, setpreOwned] = useState(false);
 
   const handlePassengerAccordion = () => {
     setPassengerExpanded(!passengerExpanded);
@@ -43,64 +50,50 @@ export default function Search() {
   const handleAltitudeAccordion = () => {
     setAltitudeExpanded(!altitudeExpanded);
   };
+  const handleFuelAccordion = () => {
+    setfuelBurnExpanded(!fuelBurnExpanded);
+  };
+  const handleBaggageAccordion = () => {
+    setbaggageExpanded(!baggageExpanded);
+  };
+  const handleTakeOffAccordion = () => {
+    settakeOffExpanded(!takeOffExpanded);
+  };
+  const handleLandingAccordion = () => {
+    setLandingDistanceExpanded(!landingDistanceExpanded);
+  };
+  const handleHourlyPriceAccordion = () => {
+    setHourlyPrice(!hourlyPrice);
+  };
+
+  const handlePurchaseAccordion = () => {
+    setPurchasePrice(!purchasePrice);
+  };
+
+  const handlePreOwnedAccordion = () => {
+    setpreOwned(!preOwned);
+  };
   const [search, setSearch] = useState({
     aircraft_name: "",
     category: "",
     in_production: "",
-    model: "",
+    aircraft_manufacturer: "",
+    max_pax: 20,
+    range_NM: 8000,
+    high_cruise_knots: 520,
+    max_altitude_feet: 51000,
+    hourly_fuel_burn_GPH: 500,
+    baggage_capacity_CF: 200,
+    TO_distance_feet: 1500,
+    landing_distance_feet: 1500,
+    NA_hourly_total: 10000,
+    new_purchase: 10000000,
+    average_pre_owned: 3000000,
   });
   const debouncedSearchTerm = useDebounce(search, 500);
 
-  const [{ min, max }, setValues] = useState({ min: "", max: "" });
-  const [{ minPassengers, maxPassengers }, setPassengerValues] = useState({
-    minPassengers: "",
-    maxPassengers: "",
-  });
-
-  const [{ minRange, maxRange }, setRangeValues] = useState({
-    minRange: "",
-    maxRange: "",
-  });
-  const [{ minCruise, maxCruise }, setCruiseValues] = useState({
-    minCruise: "",
-    maxCruise: "",
-  });
-  const [{ minAltitude, maxAltitude }, setAltitudeValues] = useState({
-    minAltitude: "",
-    maxAltitude: "",
-  });
-
   const [aircraftsData, setAircraftsData] = useState([]);
   const [filterResult, setFilterResult] = useState([]);
-  const [passengerSlider, setPassengerSlider] = useState(0);
-
-  const handlePassengerChange = ({ target: { name, value } }) => {
-    setPassengerValues((prevFields) => ({
-      ...prevFields,
-      [name]: value,
-    }));
-  };
-
-  const handleRangeChange = ({ target: { name, value } }) => {
-    setRangeValues((prevFields) => ({
-      ...prevFields,
-      [name]: value,
-    }));
-  };
-
-  const handleCruiseChange = ({ target: { name, value } }) => {
-    setCruiseValues((prevFields) => ({
-      ...prevFields,
-      [name]: value,
-    }));
-  };
-
-  const handleAltitudeChange = ({ target: { name, value } }) => {
-    setAltitudeValues((prevFields) => ({
-      ...prevFields,
-      [name]: value,
-    }));
-  };
 
   useEffect(() => {
     aircraftService.getAircrafts().then((data) => setAircraftsData(data));
@@ -112,10 +105,6 @@ export default function Search() {
 
   const handleSearchChanged = (key, value) => {
     setSearch((currentSearch) => ({ ...currentSearch, [key]: value }));
-  };
-
-  const handlePassengerSlider = (event, newValue) => {
-    setPassengerSlider(newValue);
   };
 
   const searchAircraft = async () => {
@@ -141,7 +130,7 @@ export default function Search() {
       <div className={cn(styles.container)}>
         <div className={styles.row}>
           <span className={styles.open_filter} onClick={() => openFilter()}>
-            <i class="fa-solid fa-sliders"></i>
+            <i className="fa-solid fa-sliders"></i>
           </span>
           <div className={"filters_target " + styles.filters}>
             <div className={styles.top}>
@@ -182,15 +171,17 @@ export default function Search() {
                 <div className={styles.label}>Manufacturer</div>
                 <Dropdown
                   className={styles.dropdown}
-                  value={MANUFACTURER_OPTIONS_DIC[search.model]}
-                  setValue={(value) => handleSearchChanged("model", value)}
+                  value={MANUFACTURER_OPTIONS_DIC[search.aircraft_manufacturer]}
+                  setValue={(value) =>
+                    handleSearchChanged("aircraft_manufacturer", value)
+                  }
                   options={MANUFACTURER_OPTIONS}
                 />
               </div>
             </div>
             <div className={styles.sorting}>
               <div className={styles.dropdown}>
-                <div className={styles.label}>In Production</div>
+                <div className={styles.label}>In Production</div>{" "}
                 <Dropdown
                   className={styles.dropdown}
                   value={PRODUCTION_OPTIONS_DIC[search.in_production]}
@@ -202,6 +193,7 @@ export default function Search() {
               </div>
             </div>
             <div>
+              {" "}
               <Accordion
                 expanded={passengerExpanded}
                 onChange={handlePassengerAccordion}
@@ -214,32 +206,13 @@ export default function Search() {
                   <div className={styles.label}>Passengers</div>
                 </AccordionSummary>
                 <div className={styles.range}>
-                  <Slider
-                    aria-label="Volume"
-                    value={passengerSlider}
-                    onChange={handlePassengerSlider}
+                  <MultiRangeSlider
+                    min={0}
+                    max={20}
+                    onChange={({ min, max }) => {
+                      handleSearchChanged("max_pax", max);
+                    }}
                   />
-                  <div className={styles.prices}>
-                    <input
-                      className={styles.input}
-                      type="text"
-                      value={minPassengers}
-                      onChange={handlePassengerChange}
-                      name="minPassengers"
-                      placeholder="MIN"
-                      required
-                    />
-                    <p className={styles.separator}>to</p>
-                    <input
-                      className={styles.input}
-                      type="text"
-                      value={maxPassengers}
-                      onChange={handlePassengerChange}
-                      name="maxPassengers"
-                      placeholder="MAX"
-                      required
-                    />
-                  </div>
                 </div>
               </Accordion>
             </div>
@@ -257,32 +230,13 @@ export default function Search() {
                   <div className={styles.label}>Range (NM)</div>
                 </AccordionSummary>
                 <div className={styles.range}>
-                  <Slider
-                    aria-label="Volume"
-                    value={passengerSlider}
-                    onChange={handlePassengerSlider}
+                  <MultiRangeSlider
+                    min={0}
+                    max={8000}
+                    onChange={({ min, max }) => {
+                      handleSearchChanged("range_NM", max);
+                    }}
                   />
-                  <div className={styles.prices}>
-                    <input
-                      className={styles.input}
-                      type="text"
-                      value={minRange}
-                      onChange={handleRangeChange}
-                      name="minRange"
-                      placeholder="MIN"
-                      required
-                    />
-                    <p className={styles.separator}>to</p>
-                    <input
-                      className={styles.input}
-                      type="text"
-                      value={maxRange}
-                      onChange={handleRangeChange}
-                      name="maxRange"
-                      placeholder="MAX"
-                      required
-                    />
-                  </div>
                 </div>
               </Accordion>
             </div>
@@ -300,32 +254,13 @@ export default function Search() {
                   <div className={styles.label}>Cruise Speed (Knots)</div>
                 </AccordionSummary>
                 <div className={styles.range}>
-                  <Slider
-                    aria-label="Volume"
-                    value={passengerSlider}
-                    onChange={handlePassengerSlider}
+                  <MultiRangeSlider
+                    min={0}
+                    max={520}
+                    onChange={({ min, max }) => {
+                      handleSearchChanged("high_cruise_knots", max);
+                    }}
                   />
-                  <div className={styles.prices}>
-                    <input
-                      className={styles.input}
-                      type="text"
-                      value={minCruise}
-                      onChange={handleCruiseChange}
-                      name="minCruise"
-                      placeholder="MIN"
-                      required
-                    />
-                    <p className={styles.separator}>to</p>
-                    <input
-                      className={styles.input}
-                      type="text"
-                      value={maxCruise}
-                      onChange={handleCruiseChange}
-                      name="maxCruise"
-                      placeholder="MAX"
-                      required
-                    />
-                  </div>
                 </div>
               </Accordion>
             </div>
@@ -343,32 +278,178 @@ export default function Search() {
                   <div className={styles.label}>Max Altitude (Feet)</div>
                 </AccordionSummary>
                 <div className={styles.range}>
-                  <Slider
-                    aria-label="Volume"
-                    value={passengerSlider}
-                    onChange={handlePassengerSlider}
+                  <MultiRangeSlider
+                    min={0}
+                    max={51000}
+                    onChange={({ min, max }) => {
+                      handleSearchChanged("max_altitude_feet", max);
+                    }}
                   />
-                  <div className={styles.prices}>
-                    <input
-                      className={styles.input}
-                      type="text"
-                      value={minAltitude}
-                      onChange={handleAltitudeChange}
-                      name="minAltitude"
-                      placeholder="MIN"
-                      required
-                    />
-                    <p className={styles.separator}>to</p>
-                    <input
-                      className={styles.input}
-                      type="text"
-                      value={maxAltitude}
-                      onChange={handleAltitudeChange}
-                      name="maxAltitude"
-                      placeholder="MAX"
-                      required
-                    />
-                  </div>
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={fuelBurnExpanded}
+                onChange={handleFuelAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>Fuel Burn (Gallons/Hour)</div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <MultiRangeSlider
+                    min={0}
+                    max={500}
+                    onChange={({ min, max }) => {
+                      handleSearchChanged("hourly_fuel_burn_GPH", max);
+                    }}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={baggageExpanded}
+                onChange={handleBaggageAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>Baggage Capacity (cu ft)</div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <MultiRangeSlider
+                    min={0}
+                    max={200}
+                    onChange={({ min, max }) => {
+                      handleSearchChanged("baggage_capacity_CF", max);
+                    }}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={takeOffExpanded}
+                onChange={handleTakeOffAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>Take-Off Distance (Feet)</div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <MultiRangeSlider
+                    min={0}
+                    max={1500}
+                    onChange={({ min, max }) => {
+                      handleSearchChanged("TO_distance_feet", max);
+                    }}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={landingDistanceExpanded}
+                onChange={handleLandingAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>Landing Distance (Feet)</div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <MultiRangeSlider
+                    min={0}
+                    max={1500}
+                    onChange={({ min, max }) => {
+                      handleSearchChanged("landing_distance_feet", max);
+                    }}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={hourlyPrice}
+                onChange={handleHourlyPriceAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>Hourly Price ($)</div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <MultiRangeSlider
+                    min={0}
+                    max={10000}
+                    onChange={({ min, max }) => {
+                      handleSearchChanged("NA_hourly_total", max);
+                    }}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={purchasePrice}
+                onChange={handlePurchaseAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>Purchase Price ($ million)</div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <MultiRangeSlider
+                    min={0}
+                    max={10000000}
+                    onChange={({ min, max }) => {
+                      handleSearchChanged("new_purchase", max);
+                    }}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion expanded={preOwned} onChange={handlePreOwnedAccordion}>
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>Pre-Owned ($ million)</div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <MultiRangeSlider
+                    min={0}
+                    max={3000000}
+                    onChange={({ min, max }) => {
+                      handleSearchChanged("average_pre_owned", max);
+                    }}
+                  />
                 </div>
               </Accordion>
             </div>

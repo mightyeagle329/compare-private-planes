@@ -4,7 +4,7 @@ import styles from "./styles/styles.module.scss";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import axios from "axios";
-
+import numeral from "numeral";
 import SectionHeader from "../shared/SectionHeader";
 import { useEffect, useState } from "react";
 
@@ -179,7 +179,7 @@ const KeyFacts = ({ params, currency, country, unit }) => {
               }}
             />
             <span className={styles.chart_label_range}>
-              {params.range_NM} <br></br>
+              {numeral(params.range_NM).format("0,0")} <br></br>
               <span className={styles.chart_label_description}>NM</span>
             </span>
           </div>
@@ -204,8 +204,8 @@ const KeyFacts = ({ params, currency, country, unit }) => {
             />
             <span className={styles.chart_label_cruise}>
               {unit == "Imperial Units"
-                ? params.high_cruise_knots
-                : params.high_speed_cruise_kmh}{" "}
+                ? numeral(params.high_cruise_knots).format("0,0")
+                : numeral(params.high_speed_cruise_kmh).format("0,0")}{" "}
               <br></br>
               <span className={styles.chart_label_description}>
                 {" "}
@@ -236,34 +236,40 @@ const KeyFacts = ({ params, currency, country, unit }) => {
               {currency === "USD" ? "$" : currency === "EUR" ? "€" : "£"}
               {currency === "USD"
                 ? country === "North America"
-                  ? params.NA_hourly_total !== 0
-                    ? params.NA_hourly_total
+                  ? numeral(params.NA_hourly_total).format("0,0") !== 0
+                    ? numeral(params.NA_hourly_total).format("0,0")
                     : "-"
                   : country === "Europe"
-                  ? params.EU_hourly_total !== 0
-                    ? params.EU_hourly_total
+                  ? numeral(params.EU_hourly_total).format("0,0") !== 0
+                    ? numeral(params.EU_hourly_total).format("0,0")
                     : "-"
                   : country === "South America"
-                  ? params.SA_hourly_total !== 0
-                    ? params.SA_hourly_total
+                  ? numeral(params.SA_hourly_total).format("0,0") !== 0
+                    ? numeral(params.SA_hourly_total).format("0,0")
                     : "-"
-                  : params.AS_hourly_total !== 0
-                  ? params.AS_hourly_total
+                  : numeral(params.AS_hourly_total).format("0,0") !== 0
+                  ? numeral(params.AS_hourly_total).format("0,0")
                   : "-"
                 : country === "North America"
-                ? params.NA_hourly_total !== 0
-                  ? (params.NA_hourly_total * conversionRate).toFixed(2)
+                ? numeral(params.NA_hourly_total).format("0,0") !== 0
+                  ? numeral(params.NA_hourly_total * conversionRate).format(
+                      "0,0"
+                    )
                   : "-"
                 : country === "Europe"
-                ? params.EU_hourly_total !== 0
-                  ? (params.EU_hourly_total * conversionRate).toFixed(2)
+                ? numeral(params.EU_hourly_total).format("0,0") !== 0
+                  ? numeral(params.EU_hourly_total * conversionRate).format(
+                      "0,0"
+                    )
                   : "-"
                 : country === "South America"
                 ? params.SA_hourly_total !== 0
-                  ? (params.SA_hourly_total * conversionRate).toFixed(2)
+                  ? numeral(params.SA_hourly_total * conversionRate).format(
+                      "0,0"
+                    )
                   : "-"
                 : params.AS_hourly_total !== 0
-                ? (params.AS_hourly_total * conversionRate).toFixed(2)
+                ? numeral(params.AS_hourly_total * conversionRate).format("0,0")
                 : "-"}{" "}
               <br></br>
               <span className={styles.chart_label_description}>per hour</span>
@@ -289,7 +295,7 @@ const KeyFacts = ({ params, currency, country, unit }) => {
               }}
             />
             <span className={styles.chart_label_fuel}>
-              {params.hourly_fuel_burn_GPH} <br></br>
+              {numeral(params.hourly_fuel_burn_GPH).format("0,0")} <br></br>
               <span className={styles.chart_label_description}>GPH</span>
             </span>
           </div>

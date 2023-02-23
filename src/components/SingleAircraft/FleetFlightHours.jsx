@@ -39,6 +39,7 @@ const FleetFlightHours = ({ params }) => {
 
   const options = {
     responsive: true,
+    events:[],
     plugins: {
       legend: {
         position: "bottom",
@@ -122,7 +123,7 @@ const FleetFlightHours = ({ params }) => {
                       styles.aircraft_table_row_elm
                     )}
                   >
-                    <span className={cn(global._padding)}>{elm} --------</span>
+                    <span className={cn(global._padding)}>{elm}</span>
                     <span className={cn(global._padding)}>{elm}</span>
                     <span className={cn(global._padding)}>{elm}</span>
                     <span className={cn(global._padding)}>{elm}</span>

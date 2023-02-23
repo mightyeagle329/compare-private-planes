@@ -13,6 +13,9 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { useEffect, useState } from "react";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 ChartJS.register(
   CategoryScale,
@@ -25,33 +28,37 @@ ChartJS.register(
 );
 
 const HistoricalMarket = ({ params, historicalData }) => {
-  const newLegendClickHandler = function () {};
-
   const options = {
     responsive: true,
+    events: [],
     scales: {
-      xAxes: [
-        {
-          scaleLabel: {
-            display: true,
-            labelString: "X Axis Title",
-          },
+      x: {
+        display: true,
+        title: {
+          display: true,
+          text: "Year",
         },
-      ],
+      },
+      y: {
+        display: true,
+        title: {
+          display: true,
+          text: "Number of Transactions",
+        },
+      },
     },
     plugins: {
       legend: {
         position: "bottom",
-        onClick: newLegendClickHandler,
+        // onClick: newLegendClickHandler,
       },
     },
   };
 
   const keys = Object.keys(historicalData);
   const values = Object.values(historicalData);
-
-  const labels = keys;
-
+  const [tmpValues, setTmpValues] = useState(keys);
+  const labels = tmpValues.length === 0 ? keys : tmpValues;
   const data = {
     labels,
     datasets: [
@@ -63,14 +70,87 @@ const HistoricalMarket = ({ params, historicalData }) => {
       },
     ],
   };
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [fromIndex, setFromIndex] = useState(0);
+  const [toIndex, setToIndex] = useState(0);
+
+  const handleFromChange = (event) => {
+    setFrom(event.target.value);
+  };
+
+  const handleToChange = (event) => {
+    setTo(event.target.value);
+  };
+
+  useEffect(() => {
+    if (keys[0] !== undefined) {
+      setFrom(keys[0]);
+      setTo(keys[keys.length - 1]);
+      setFromIndex(0);
+      setToIndex(keys.length - 1);
+      setTmpValues(keys);
+    }
+  }, [keys[0]]);
+
+  useEffect(() => {
+    for (let i = 0; i < keys.length; i++) {
+      if (to === keys[i]) {
+        setToIndex(i);
+        const tmp = keys;
+        setTmpValues(tmp.slice(fromIndex, i + 1));
+      }
+    }
+  }, [to]);
+
+  useEffect(() => {
+    for (let i = 0; i < keys.length; i++) {
+      if (from === keys[i]) {
+        setFromIndex(i);
+        const tmp = keys;
+        setTmpValues(tmp.slice(i, toIndex));
+      }
+    }
+  }, [from]);
 
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Historical Market Activity" />
       <main>
-        {/* <div className={cn(styles.plot_btn_container)}>
-          <button className={cn(styles.button)}>Time Period to View</button>
-        </div> */}
+        <div className={cn(styles.chart_dates)}>
+          <div className={cn(styles.single_select)}>
+            From
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={from}
+              label="Age"
+              onChange={handleFromChange}
+            >
+              {keys?.map((key) => (
+                <MenuItem key={keys} value={key}>
+                  {key}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
+          <div className={cn(styles.single_select)}>
+            To
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={to}
+              label="Age"
+              onChange={handleToChange}
+            >
+              {keys?.map((key) => (
+                <MenuItem key={keys} value={key}>
+                  {key}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
+        </div>
         <div className={cn(styles.line_chart)}>
           <Line data={data} options={options} />
         </div>

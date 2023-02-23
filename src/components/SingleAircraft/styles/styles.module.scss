@@ -386,7 +386,7 @@
 
             .bar {
               flex: 2;
-              background-color: rgb(213, 213, 213);
+              background-color: rgb(230, 228, 229);
               height: 15px;
               transition: width 1s ease-in-out;
               text-align: end;
@@ -503,6 +503,12 @@
 
 // aquisition Costs
 
+.main_aquisiton {
+  .table_container {
+    overflow: auto;
+  }
+}
+
 .sorting {
   position: absolute;
   right: 0;
@@ -530,6 +536,27 @@
   }
 }
 
+
+
+.chart_dates {
+  width: 50%;
+  margin-bottom: 15px;
+  text-align: center;
+  margin-left: 25%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px
+}
+
+.single_select {
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 30%;
+}
+
 .os_header {
 
   h1,
@@ -538,6 +565,50 @@
     text-align: center;
   }
 }
+
+
+// Range Map
+
+.main_range_map {
+  .range_configs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+
+    .map_inputs {
+      display: flex;
+      gap: 10px;
+      flex-direction: column;
+      align-items: center;
+
+      label {
+        display: grid;
+        place-items: center;
+        max-width: 200px;
+        margin: 0 auto;
+      }
+
+      .map_input {
+        margin-top: 10px;
+        max-width: 120px;
+        height: 30px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0px 0px 2px 0px rgba(99, 99, 99, 0.75);
+        padding: 0 5px;
+        outline: none;
+
+        &:focus {
+          border: 1px solid rgb(139, 139, 139);
+        }
+      }
+
+    }
+  }
+}
+
 
 @media screen and (max-width: 940px) {
   .pie_charts {

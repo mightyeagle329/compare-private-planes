@@ -15,11 +15,18 @@ import {
 } from "react-icons/hi";
 import { ImWarning } from "react-icons/im";
 import { SiSpeedtest } from "react-icons/si";
+import numeral from "numeral";
 
 const Card = ({ className, item }) => {
+  const aircraftName = item?.aircraft_name.replace(/\s/g, "-");
   return (
     <div className={cn(styles.card, className)} aria-hidden="true">
-      <Link to={`/aircrafts/${item?.aircraft_id}`}>
+      <Link
+        to={`/aircrafts/${aircraftName}`}
+        state={{
+          id: item.aircraft_id,
+        }}
+      >
         <div className={styles.preview}>
           <img src={`${item?.image_name}`} alt={`${item?.aircraft_name}`} />
         </div>
@@ -33,24 +40,26 @@ const Card = ({ className, item }) => {
             </p>
             <p className={styles.count}>
               <HiOutlineMap name="search" size="16" /> Range:{" "}
-              {item?.range_km > 0 ? `${item?.range_km} ` : "Not Available"}
+              {item?.range_km > 0
+                ? `${numeral(item?.range_km).format("0,0")} `
+                : "Not Available"}
             </p>
             <p className={styles.count}>
               <SiSpeedtest name="search" size="16" /> High Speed Cruise:{" "}
-              {item?.high_speed_cruise_kmh > 0
-                ? `${item?.high_speed_cruise_kmh} `
+              {item?.high_cruise_knots > 0
+                ? `${numeral(item?.high_cruise_knots).format("0,0")} `
                 : "Not Available"}
             </p>
             <p className={styles.count}>
               <ImWarning name="search" size="16" /> Max Altitude:{" "}
               {item?.max_altitude_feet > 0
-                ? `${item?.cabin_altitude} `
+                ? `${numeral(item?.cabin_altitude).format("0,0")} `
                 : "Not Available"}
             </p>
             <p className={styles.count}>
               <HiOutlineFire name="search" size="16" /> Hourly Fuel Burn:{" "}
               {item?.hourly_fuel_burn_GPH > 0
-                ? `${item?.hourly_fuel_burn_GPH} `
+                ? `${numeral(item?.hourly_fuel_burn_GPH).format("0,0")} `
                 : "Not Available"}
             </p>
             <p className={styles.count}>
@@ -62,41 +71,41 @@ const Card = ({ className, item }) => {
             <p className={styles.count}>
               <HiOutlineTrendingUp name="search" size="16" /> Take-Off Distance:{" "}
               {item?.TO_distance_meters > 0
-                ? `${item?.TO_distance_meters} `
+                ? `${numeral(item?.TO_distance_meters).format("0,0")} `
                 : "Not Available"}
             </p>
             <p className={styles.count}>
               <HiOutlineTrendingDown name="search" size="16" /> Landing
               Distance:{" "}
               {item?.landing_distance_meters > 0
-                ? `${item?.landing_distance_meters} `
+                ? `${numeral(item?.landing_distance_meters).format("0,0")} `
                 : "Not Available"}
             </p>
             <p className={styles.count}>
               <HiOutlineCurrencyDollar name="search" size="16" /> Annual Fixed
               Costs:{" "}
               {item?.annual_cost > 0
-                ? `${item?.annual_cost} `
+                ? `${numeral(item?.annual_cost).format("0,0")} `
                 : "Not Available"}
             </p>
             <p className={styles.count}>
               <HiOutlineCurrencyDollar name="search" size="16" /> Hourly
               Charter:{" "}
               {item?.estimated_hourly_charter > 0
-                ? `${item?.estimated_hourly_charter} `
+                ? `${numeral(item?.estimated_hourly_charter).format("0,0")} `
                 : "Not Available"}
             </p>
             <p className={styles.count}>
               <HiOutlineShoppingCart name="search" size="16" /> Price (New):{" "}
               {item?.new_purchase > 0
-                ? `${item?.average_pre_owned} `
+                ? `${numeral(item?.new_purchase).format("0,0")} `
                 : "Not Available"}
             </p>
             <p className={styles.count}>
               <HiOutlineShoppingCart name="search" size="16" /> Average
               Pre-Owned:{" "}
               {item?.average_pre_owned > 0
-                ? `${item?.average_pre_owned} `
+                ? `${numeral(item?.average_pre_owned).format("0,0")} `
                 : "Not Available"}
             </p>
             <p className={styles.count}>

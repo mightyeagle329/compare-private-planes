@@ -1,6 +1,7 @@
 import SectionHeader from "../shared/SectionHeader";
 import cn from "classnames";
 import global from "../styles/global.module.scss";
+import numeral from "numeral";
 
 const Powerplant = ({ params }) => {
   return (
@@ -20,7 +21,7 @@ const Powerplant = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Thrust per Engine (lbs)
                 </span>
-                <span>{params.thrust_output_lbs}</span>
+                <span>{numeral(params.thrust_output_lbs).format("0,0")}</span>
               </div>
             </div>
           </div>
@@ -37,7 +38,7 @@ const Powerplant = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Total Thrust Output (lbs)
                 </span>
-                <span>{params.total_thrust_lbs}</span>
+                <span>{numeral(params.total_thrust_lbs).format("0,0")}</span>
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
+import numeral from "numeral";
 
 const Interior = ({ params }) => {
   return (
@@ -14,26 +15,28 @@ const Interior = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Maximum Passengers
                 </span>
-                <span>{params.max_pax}</span>
+                <span>{numeral(params.max_pax).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Typical Passengers
                 </span>
-                <span>{params.typical_pax}</span>
+                <span>{numeral(params.typical_pax).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Number of Living Zones
                 </span>
-                <span>{params.living_zones}</span>
+                <span>{numeral(params.living_zones).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Cabin Noise (dB)
                 </span>
                 <span>
-                  {params.cabin_noise === 0 ? "-" : params.cabin_noise}
+                  {numeral(params.cabin_noise).format("0,0") === 0
+                    ? "-"
+                    : numeral(params.cabin_noise).format("0,0")}
                 </span>
               </div>
             </div>
@@ -45,25 +48,27 @@ const Interior = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Max Cabin Altitude (Feet)
                 </span>
-                <span>{params.cabin_altitude}</span>
+                <span>{numeral(params.cabin_altitude).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Sea Level Cabin (Feet)
                 </span>
-                <span>{params.sea_level_cabin}</span>
+                <span>{numeral(params.sea_level_cabin).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Pressure Differential (PSI)
                 </span>
-                <span>{params.pressure_differential_psi}</span>
+                <span>
+                  {numeral(params.pressure_differential_psi).format("0,0")}
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Cabin Volume (Cubic Feet)
                 </span>
-                <span>{params.cabin_volume_CF}</span>
+                <span>{numeral(params.cabin_volume_CF).format("0,0")}</span>
               </div>
             </div>
           </div>

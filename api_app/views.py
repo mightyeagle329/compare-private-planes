@@ -239,10 +239,21 @@ class AircraftSearch(View):
         category = request.GET.get("category")
         aircraft_manufacturer = request.GET.get("aircraft_manufacturer")
         in_production = request.GET.get("in_production")
+        max_pax = request.GET.get("max_pax")
+        range_NM = request.GET.get("range_NM")
+        high_cruise_knots = request.GET.get("high_cruise_knots")
+        max_altitude_feet = request.GET.get("max_altitude_feet")
+        hourly_fuel_burn_GPH = request.GET.get("hourly_fuel_burn_GPH")
+        baggage_capacity_CF = request.GET.get("baggage_capacity_CF")
+        TO_distance_feet = request.GET.get("TO_distance_feet")
+        landing_distance_feet = request.GET.get("landing_distance_feet")
+        NA_hourly_total = request.GET.get("NA_hourly_total")
+        new_purchase = request.GET.get("new_purchase")
+        average_pre_owned = request.GET.get("average_pre_owned")
 
         try:
             results = Aircraft.objects.filter(
-                aircraft_name__icontains=aircraft_name, category__icontains=category, aircraft_manufacturer__icontains=aircraft_manufacturer, in_production__icontains=in_production)
+                aircraft_name__icontains=aircraft_name, category__icontains=category, aircraft_manufacturer__icontains=aircraft_manufacturer, in_production__icontains=in_production, max_pax__lte=max_pax, range_NM__lte=range_NM, high_cruise_knots__lte=high_cruise_knots, max_altitude_feet__lte=max_altitude_feet, hourly_fuel_burn_GPH__lte=hourly_fuel_burn_GPH, baggage_capacity_CF__lte=baggage_capacity_CF, TO_distance_feet__lte=TO_distance_feet, landing_distance_feet__lte=landing_distance_feet, NA_hourly_total__lte=NA_hourly_total, new_purchase__lte=new_purchase, average_pre_owned__lte=average_pre_owned,)
         except Exception:
             print("ERROR: Failed to get object from database")
             return HttpResponse("Object not found !")

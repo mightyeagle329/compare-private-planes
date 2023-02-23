@@ -5,10 +5,10 @@
 }
 
 .section {
-  margin-top: 48px;
-  max-width: 80%;
+  width: 95%;
   margin: 0 auto;
-
+  margin-top: 48px;
+  
   .top {
     padding-bottom: 10px;
     border-bottom: 1px solid var(--neutrals6);
@@ -128,7 +128,7 @@
   }
 
   .wrapper {
-    flex-grow: 1;
+    // flex-grow: 1;
     padding-left: 32px;
   }
 
@@ -203,7 +203,8 @@
   }
 
   .list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: flex-start;
     justify-content: center;
     flex-wrap: wrap;
@@ -212,8 +213,8 @@
   }
 
   .card {
-    // flex: 0 0 calc(50% - 32px);
-    flex: 1;
+    flex: 0 0 calc(50% - 32px);
+    // flex: 1;
     max-width: calc(50% - 32px);
     min-width: 350px;
     height: 49rem;

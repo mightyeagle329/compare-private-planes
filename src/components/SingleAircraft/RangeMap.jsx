@@ -8,13 +8,13 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import styles from "../../styles/Search.module.scss";
+import styles from "./styles/styles.module.scss";
 
 const RangeMap = ({ params }) => {
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Range Map" />
-      <main>
+      <main className={styles.main_range_map}>
         <Map
           rangeDecrease={params.range_decrease_per_passenger}
           aicraftRange={params.range_km * 1000}
@@ -84,26 +84,33 @@ function Map({ rangeDecrease, aicraftRange }) {
             getSuggestionItemProps,
             loading,
           }) => (
-            <div>
-              <center>
-                <input
-                  {...getInputProps({
-                    placeholder: "Please type a start location",
-                    className: "location-search-input",
-                  })}
-                />
-              </center>
-              <center>
-                <input
-                  className={styles.input}
-                  type="text"
-                  value={nbPax}
-                  onChange={(e) => handlePaxChanged(e)}
-                  name="search"
-                  placeholder="Please type the pax number"
-                  required
-                />
-              </center>
+            <div className={styles.range_configs}>
+              <div className={styles.map_inputs}>
+                <label htmlFor="startLocation">
+                  Start location
+                  <input
+                    {...getInputProps({
+                      placeholder: "Start location",
+                      className: "location-search-input",
+                    })}
+                    id="startLocation"
+                    className={styles.map_input}
+                  />
+                </label>
+                <label htmlFor="paxNumber">
+                  Pax number
+                  <input
+                    className={styles.map_input}
+                    type="text"
+                    id="paxNumber"
+                    value={nbPax}
+                    onChange={(e) => handlePaxChanged(e)}
+                    name="search"
+                    placeholder="Pax number"
+                    required
+                  />
+                </label>
+              </div>
               <div className="autocomplete-dropdown-container">
                 {loading && <div>Loading...</div>}
                 {suggestions.map((suggestion) => {
