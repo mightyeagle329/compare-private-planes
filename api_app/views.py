@@ -16,6 +16,7 @@ class AircraftList(View):
             aircrafts_data.append({
                 'aircraft_id': item.id,
                 'aircraft_name': item.aircraft_name,
+                'aircraft_manufacturer': item.aircraft_manufacturer,
                 'key_facts': item.key_facts,
                 'model': item.model,
                 'category': item.category,
@@ -255,6 +256,7 @@ class AircraftSearch(View):
                         "key_facts": item.key_facts,
                         "model": item.model,
                         "category": item.category,
+                        'aircraft_manufacturer': item.aircraft_manufacturer,
                         "a_check": item.a_check,
                         "b_check": item.b_check,
                         "c_check": item.c_check,
@@ -481,6 +483,7 @@ class AircraftById(View):
             'key_facts': item.key_facts,
             'model': item.model,
             'category': item.category,
+            'aircraft_manufacturer': item.aircraft_manufacturer,
             'max_pax': item.max_pax,
             'typical_pax': item.typical_pax,
             'cabin_noise': item.cabin_noise,
