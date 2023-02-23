@@ -237,12 +237,12 @@ class AircraftSearch(View):
         print(request)
         aircraft_name = request.GET.get("aircraft_name")
         category = request.GET.get("category")
-        model = request.GET.get("model")
+        aircraft_manufacturer = request.GET.get("aircraft_manufacturer")
         in_production = request.GET.get("in_production")
 
         try:
             results = Aircraft.objects.filter(
-                aircraft_name__icontains=aircraft_name, category__icontains=category, model__icontains=model, in_production__icontains=in_production)
+                aircraft_name__icontains=aircraft_name, category__icontains=category, aircraft_manufacturer__icontains=aircraft_manufacturer, in_production__icontains=in_production)
         except Exception:
             print("ERROR: Failed to get object from database")
             return HttpResponse("Object not found !")
