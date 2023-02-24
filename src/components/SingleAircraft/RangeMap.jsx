@@ -3,6 +3,7 @@ import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import { GoogleMap, Circle, LoadScript, Marker } from "@react-google-maps/api";
 import { useState } from "react";
+import Slider from "@mui/material/Slider";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -16,6 +17,7 @@ const RangeMap = ({ params }) => {
       <SectionHeader title="Range Map" />
       <main className={styles.main_range_map}>
         <Map
+          max_pax={params.max_pax}
           rangeDecrease={params.range_decrease_per_passenger}
           aicraftRange={params.range_km * 1000}
         />
@@ -26,7 +28,7 @@ const RangeMap = ({ params }) => {
 
 export default RangeMap;
 
-function Map({ rangeDecrease, aicraftRange }) {
+function Map({ rangeDecrease, aicraftRange, max_pax }) {
   const [latLng, setLatLong] = useState({ lat: 37.772, lng: -80 });
   const [address, setAddress] = useState("");
   const [nbPax, setNbPax] = useState(0);
@@ -66,6 +68,15 @@ function Map({ rangeDecrease, aicraftRange }) {
     }
   };
 
+  const handlePaxChange = (e, newValue) => {
+    setNbPax(newValue);
+    if (e.target.value !== "") {
+      setRange(
+        aicraftRange - parseFloat(e.target.value) * parseFloat(rangeDecrease)
+      );
+    }
+  };
+
   return (
     <div>
       <LoadScript
@@ -98,16 +109,12 @@ function Map({ rangeDecrease, aicraftRange }) {
                   />
                 </label>
                 <label htmlFor="paxNumber">
-                  Pax number
-                  <input
-                    className={styles.map_input}
-                    type="text"
-                    id="paxNumber"
+                  Pax number: {nbPax}
+                  <Slider
+                    aria-label="Volume"
                     value={nbPax}
-                    onChange={(e) => handlePaxChanged(e)}
-                    name="search"
-                    placeholder="Pax number"
-                    required
+                    max={max_pax}
+                    onChange={handlePaxChange}
                   />
                 </label>
               </div>

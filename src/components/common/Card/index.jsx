@@ -40,8 +40,8 @@ const Card = ({ className, item }) => {
             </p>
             <p className={styles.count}>
               <HiOutlineMap name="search" size="16" /> Range:{" "}
-              {item?.range_km > 0
-                ? `${numeral(item?.range_km).format("0,0")} `
+              {item?.range_NM > 0
+                ? `${numeral(item?.range_NM).format("0,0")} `
                 : "Not Available"}
             </p>
             <p className={styles.count}>

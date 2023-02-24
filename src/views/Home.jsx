@@ -21,6 +21,7 @@ import axios from "axios";
 import { MdOutlineExpandMore } from "react-icons/md";
 import styles from "../styles/Search.module.scss";
 import MultiRangeSlider from "../components/common/multiRangeSlider/MultiRangeSlider";
+import { Slider } from "@mui/material";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -37,6 +38,7 @@ export default function Search() {
   const [hourlyPrice, setHourlyPrice] = useState(false);
   const [purchasePrice, setPurchasePrice] = useState(false);
   const [preOwned, setpreOwned] = useState(false);
+  const [maxPax, setMaxPax] = useState(null);
 
   const handlePassengerAccordion = () => {
     setPassengerExpanded(!passengerExpanded);
@@ -78,17 +80,7 @@ export default function Search() {
     category: "",
     in_production: "",
     aircraft_manufacturer: "",
-    max_pax: 20,
-    range_NM: 8000,
-    high_cruise_knots: 520,
-    max_altitude_feet: 51000,
-    hourly_fuel_burn_GPH: 500,
-    baggage_capacity_CF: 200,
-    TO_distance_feet: 1500,
-    landing_distance_feet: 1500,
-    NA_hourly_total: 10000,
-    new_purchase: 10000000,
-    average_pre_owned: 3000000,
+    max_pax: null,
   });
   const debouncedSearchTerm = useDebounce(search, 500);
 
@@ -102,6 +94,11 @@ export default function Search() {
   useEffect(() => {
     searchAircraft();
   }, [search]);
+
+  const handlePaxChanged = (event, newValue) => {
+    setMaxPax(newValue);
+    handleSearchChanged("max_pax", newValue);
+  };
 
   const handleSearchChanged = (key, value) => {
     setSearch((currentSearch) => ({ ...currentSearch, [key]: value }));
@@ -203,20 +200,20 @@ export default function Search() {
                   aria-controls="panel4bh-content"
                   id="panel4bh-header"
                 >
-                  <div className={styles.label}>Passengers</div>
+                  <div className={styles.label}>Max Passengers: {maxPax}</div>
                 </AccordionSummary>
                 <div className={styles.range}>
-                  <MultiRangeSlider
-                    min={0}
+                  <Slider
+                    className={styles.slider_home}
+                    aria-label="Volume"
+                    value={maxPax}
                     max={20}
-                    onChange={({ min, max }) => {
-                      handleSearchChanged("max_pax", max);
-                    }}
+                    onChange={handlePaxChanged}
                   />
                 </div>
               </Accordion>
             </div>
-
+            {/* 
             <div>
               <Accordion
                 expanded={rangeExpanded}
@@ -452,7 +449,7 @@ export default function Search() {
                   />
                 </div>
               </Accordion>
-            </div>
+            </div> */}
           </div>
           <div className={styles.wrapper}>
             <div className={styles.list}>
