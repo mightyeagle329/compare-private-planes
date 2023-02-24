@@ -100,14 +100,14 @@ export default function Search() {
     range_NM: 3000,
     high_cruise_knots: 12312,
     max_altitude_feet: 12312,
-    hourly_fuel_burn_GPH: 1231,
-    baggage_capacity_CF: 12321,
-    TO_distance_feet: 1231,
-    landing_distance_feet: 123,
-    annual_cost: 12312,
-    estimated_hourly_charter: 1000,
-    new_purchase: 1000,
-    average_pre_owned: 10000,
+    hourly_fuel_burn_GPH: 10000,
+    baggage_capacity_CF: 10000,
+    TO_distance_feet: 10000,
+    landing_distance_feet: 10000,
+    annual_cost: 10000,
+    estimated_hourly_charter: 1000000,
+    new_purchase: 1000000,
+    average_pre_owned: 1000000,
   });
   const debouncedSearchTerm = useDebounce(search, 500);
 
@@ -333,7 +333,7 @@ export default function Search() {
                     className={styles.slider_home}
                     aria-label="Volume"
                     value={cruiseSpeed}
-                    max={300}
+                    max={3000}
                     onChange={handleCruiseChanged}
                   />
                 </div>
@@ -359,7 +359,7 @@ export default function Search() {
                     className={styles.slider_home}
                     aria-label="Volume"
                     value={maxAltitude}
-                    max={300}
+                    max={30000}
                     onChange={handleMaxAltitudeChanged}
                   />
                 </div>
@@ -385,7 +385,7 @@ export default function Search() {
                     className={styles.slider_home}
                     aria-label="Volume"
                     value={fuelBurn}
-                    max={300}
+                    max={3000}
                     onChange={handleFuelBurnChanged}
                   />
                 </div>
@@ -411,7 +411,7 @@ export default function Search() {
                     className={styles.slider_home}
                     aria-label="Volume"
                     value={baggageCapacity}
-                    max={300}
+                    max={3000}
                     onChange={handleBaggageCapacityChanged}
                   />
                 </div>
@@ -437,7 +437,7 @@ export default function Search() {
                     className={styles.slider_home}
                     aria-label="Volume"
                     value={takeOffDistance}
-                    max={300}
+                    max={3000}
                     onChange={handleTakeOffChanged}
                   />
                 </div>
@@ -463,7 +463,7 @@ export default function Search() {
                     className={styles.slider_home}
                     aria-label="Volume"
                     value={landingDistance}
-                    max={300}
+                    max={3000}
                     onChange={handleLandingDistanceChanged}
                   />
                 </div>
@@ -489,7 +489,7 @@ export default function Search() {
                     className={styles.slider_home}
                     aria-label="Volume"
                     value={annualFixedCost}
-                    max={300}
+                    max={30000}
                     onChange={handleAnnualFixedChanged}
                   />
                 </div>
@@ -515,7 +515,7 @@ export default function Search() {
                     className={styles.slider_home}
                     aria-label="Volume"
                     value={hourlyprice}
-                    max={300}
+                    max={10000}
                     onChange={handleHourlyPriceChange}
                   />
                 </div>
@@ -541,7 +541,8 @@ export default function Search() {
                     className={styles.slider_home}
                     aria-label="Volume"
                     value={purchaseprice}
-                    max={300}
+                    min={100000}
+                    max={1000000}
                     onChange={handlePurchasePriceChanged}
                   />
                 </div>
@@ -573,243 +574,6 @@ export default function Search() {
                 </div>
               </Accordion>
             </div>
-            {/* 
-            <div>
-              <Accordion
-                expanded={rangeExpanded}
-                onChange={handleRangeAccordion}
-              >
-                <AccordionSummary
-                  expandIcon={<MdOutlineExpandMore />}
-                  aria-controls="panel4bh-content"
-                  id="panel4bh-header"
-                >
-                  <div className={styles.label}>Range (NM)</div>
-                </AccordionSummary>
-                <div className={styles.range}>
-                  <MultiRangeSlider
-                    min={0}
-                    max={8000}
-                    onChange={({ min, max }) => {
-                      handleSearchChanged("range_NM", max);
-                    }}
-                  />
-                </div>
-              </Accordion>
-            </div>
-
-            <div>
-              <Accordion
-                expanded={cruiseExpanded}
-                onChange={handleCruiseAccordion}
-              >
-                <AccordionSummary
-                  expandIcon={<MdOutlineExpandMore />}
-                  aria-controls="panel4bh-content"
-                  id="panel4bh-header"
-                >
-                  <div className={styles.label}>Cruise Speed (Knots)</div>
-                </AccordionSummary>
-                <div className={styles.range}>
-                  <MultiRangeSlider
-                    min={0}
-                    max={520}
-                    onChange={({ min, max }) => {
-                      handleSearchChanged("high_cruise_knots", max);
-                    }}
-                  />
-                </div>
-              </Accordion>
-            </div>
-
-            <div>
-              <Accordion
-                expanded={altitudeExpanded}
-                onChange={handleAltitudeAccordion}
-              >
-                <AccordionSummary
-                  expandIcon={<MdOutlineExpandMore />}
-                  aria-controls="panel4bh-content"
-                  id="panel4bh-header"
-                >
-                  <div className={styles.label}>Max Altitude (Feet)</div>
-                </AccordionSummary>
-                <div className={styles.range}>
-                  <MultiRangeSlider
-                    min={0}
-                    max={51000}
-                    onChange={({ min, max }) => {
-                      handleSearchChanged("max_altitude_feet", max);
-                    }}
-                  />
-                </div>
-              </Accordion>
-            </div>
-
-            <div>
-              <Accordion
-                expanded={fuelBurnExpanded}
-                onChange={handleFuelAccordion}
-              >
-                <AccordionSummary
-                  expandIcon={<MdOutlineExpandMore />}
-                  aria-controls="panel4bh-content"
-                  id="panel4bh-header"
-                >
-                  <div className={styles.label}>Fuel Burn (Gallons/Hour)</div>
-                </AccordionSummary>
-                <div className={styles.range}>
-                  <MultiRangeSlider
-                    min={0}
-                    max={500}
-                    onChange={({ min, max }) => {
-                      handleSearchChanged("hourly_fuel_burn_GPH", max);
-                    }}
-                  />
-                </div>
-              </Accordion>
-            </div>
-
-            <div>
-              <Accordion
-                expanded={baggageExpanded}
-                onChange={handleBaggageAccordion}
-              >
-                <AccordionSummary
-                  expandIcon={<MdOutlineExpandMore />}
-                  aria-controls="panel4bh-content"
-                  id="panel4bh-header"
-                >
-                  <div className={styles.label}>Baggage Capacity (cu ft)</div>
-                </AccordionSummary>
-                <div className={styles.range}>
-                  <MultiRangeSlider
-                    min={0}
-                    max={200}
-                    onChange={({ min, max }) => {
-                      handleSearchChanged("baggage_capacity_CF", max);
-                    }}
-                  />
-                </div>
-              </Accordion>
-            </div>
-
-            <div>
-              <Accordion
-                expanded={takeOffExpanded}
-                onChange={handleTakeOffAccordion}
-              >
-                <AccordionSummary
-                  expandIcon={<MdOutlineExpandMore />}
-                  aria-controls="panel4bh-content"
-                  id="panel4bh-header"
-                >
-                  <div className={styles.label}>Take-Off Distance (Feet)</div>
-                </AccordionSummary>
-                <div className={styles.range}>
-                  <MultiRangeSlider
-                    min={0}
-                    max={1500}
-                    onChange={({ min, max }) => {
-                      handleSearchChanged("TO_distance_feet", max);
-                    }}
-                  />
-                </div>
-              </Accordion>
-            </div>
-
-            <div>
-              <Accordion
-                expanded={landingDistanceExpanded}
-                onChange={handleLandingAccordion}
-              >
-                <AccordionSummary
-                  expandIcon={<MdOutlineExpandMore />}
-                  aria-controls="panel4bh-content"
-                  id="panel4bh-header"
-                >
-                  <div className={styles.label}>Landing Distance (Feet)</div>
-                </AccordionSummary>
-                <div className={styles.range}>
-                  <MultiRangeSlider
-                    min={0}
-                    max={1500}
-                    onChange={({ min, max }) => {
-                      handleSearchChanged("landing_distance_feet", max);
-                    }}
-                  />
-                </div>
-              </Accordion>
-            </div>
-
-            <div>
-              <Accordion
-                expanded={hourlyPrice}
-                onChange={handleHourlyPriceAccordion}
-              >
-                <AccordionSummary
-                  expandIcon={<MdOutlineExpandMore />}
-                  aria-controls="panel4bh-content"
-                  id="panel4bh-header"
-                >
-                  <div className={styles.label}>Hourly Price ($)</div>
-                </AccordionSummary>
-                <div className={styles.range}>
-                  <MultiRangeSlider
-                    min={0}
-                    max={10000}
-                    onChange={({ min, max }) => {
-                      handleSearchChanged("NA_hourly_total", max);
-                    }}
-                  />
-                </div>
-              </Accordion>
-            </div>
-
-            <div>
-              <Accordion
-                expanded={purchasePrice}
-                onChange={handlePurchaseAccordion}
-              >
-                <AccordionSummary
-                  expandIcon={<MdOutlineExpandMore />}
-                  aria-controls="panel4bh-content"
-                  id="panel4bh-header"
-                >
-                  <div className={styles.label}>Purchase Price ($ million)</div>
-                </AccordionSummary>
-                <div className={styles.range}>
-                  <MultiRangeSlider
-                    min={0}
-                    max={10000000}
-                    onChange={({ min, max }) => {
-                      handleSearchChanged("new_purchase", max);
-                    }}
-                  />
-                </div>
-              </Accordion>
-            </div>
-
-            <div>
-              <Accordion expanded={preOwned} onChange={handlePreOwnedAccordion}>
-                <AccordionSummary
-                  expandIcon={<MdOutlineExpandMore />}
-                  aria-controls="panel4bh-content"
-                  id="panel4bh-header"
-                >
-                  <div className={styles.label}>Pre-Owned ($ million)</div>
-                </AccordionSummary>
-                <div className={styles.range}>
-                  <MultiRangeSlider
-                    min={0}
-                    max={3000000}
-                    onChange={({ min, max }) => {
-                      handleSearchChanged("average_pre_owned", max);
-                    }}
-                  />
-                </div>
-              </Accordion>
-            </div> */}
           </div>
           <div className={styles.wrapper}>
             <div className={styles.list}>
