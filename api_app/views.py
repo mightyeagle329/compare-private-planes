@@ -4,6 +4,7 @@ from .models import Aircraft, Accident
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from django.db.models import Q
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -247,13 +248,13 @@ class AircraftSearch(View):
         baggage_capacity_CF = request.GET.get("baggage_capacity_CF")
         TO_distance_feet = request.GET.get("TO_distance_feet")
         landing_distance_feet = request.GET.get("landing_distance_feet")
-        NA_hourly_total = request.GET.get("NA_hourly_total")
+        annual_cost = request.GET.get("annual_cost")
+        estimated_hourly_charter = request.GET.get("estimated_hourly_charter")
         new_purchase = request.GET.get("new_purchase")
         average_pre_owned = request.GET.get("average_pre_owned")
-
         try:
-            results = Aircraft.objects.filter(
-                aircraft_name__icontains=aircraft_name, category__icontains=category, aircraft_manufacturer__icontains=aircraft_manufacturer, in_production__icontains=in_production, max_pax__lte=max_pax, range_NM__lte=range_NM, high_cruise_knots__lte=high_cruise_knots, max_altitude_feet__lte=max_altitude_feet, hourly_fuel_burn_GPH__lte=hourly_fuel_burn_GPH, baggage_capacity_CF__lte=baggage_capacity_CF, TO_distance_feet__lte=TO_distance_feet, landing_distance_feet__lte=landing_distance_feet, NA_hourly_total__lte=NA_hourly_total, new_purchase__lte=new_purchase, average_pre_owned__lte=average_pre_owned,)
+            results = Aircraft.objects.filter(Q
+                                              (aircraft_name__icontains=aircraft_name, category__icontains=category, aircraft_manufacturer__icontains=aircraft_manufacturer, in_production__icontains=in_production, ) & Q(max_pax__lte=max_pax) & Q(range_NM__lte=range_NM) & Q(high_cruise_knots__lte=high_cruise_knots) & Q(max_altitude_feet__lte=max_altitude_feet) & Q(hourly_fuel_burn_GPH__lte=hourly_fuel_burn_GPH) & Q(baggage_capacity_CF__lte=baggage_capacity_CF) & Q(TO_distance_feet__lte=TO_distance_feet) & Q(landing_distance_feet__lte=landing_distance_feet) & Q(annual_cost__lte=annual_cost) & Q(estimated_hourly_charter__lte=estimated_hourly_charter) & Q(new_purchase__lte=new_purchase) & Q(average_pre_owned__lte=average_pre_owned))
         except Exception:
             print("ERROR: Failed to get object from database")
             return HttpResponse("Object not found !")
