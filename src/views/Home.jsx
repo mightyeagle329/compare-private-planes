@@ -96,7 +96,7 @@ export default function Search() {
     category: "",
     in_production: "",
     aircraft_manufacturer: "",
-    max_pax: 20,
+    max_pax: 120,
     range_NM: 3000,
     high_cruise_knots: 12312,
     max_altitude_feet: 12312,
@@ -104,9 +104,9 @@ export default function Search() {
     baggage_capacity_CF: 10000,
     TO_distance_feet: 10000,
     landing_distance_feet: 10000,
-    annual_cost: 10000,
+    annual_cost: 1000000,
     estimated_hourly_charter: 1000000,
-    new_purchase: 1000000,
+    new_purchase: 10000000,
     average_pre_owned: 1000000,
   });
   const debouncedSearchTerm = useDebounce(search, 500);
