@@ -258,7 +258,11 @@ export default function Search() {
                 <div className={styles.label}>In Production</div>{" "}
                 <Dropdown
                   className={styles.dropdown}
-                  value={PRODUCTION_OPTIONS_DIC[search.in_production]}
+                  value={
+                    PRODUCTION_OPTIONS_DIC[
+                      search.in_production === true ? "Yes" : "No"
+                    ]
+                  }
                   setValue={(value) =>
                     handleSearchChanged(
                       "in_production",
