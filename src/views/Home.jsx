@@ -35,10 +35,22 @@ export default function Search() {
   const [baggageExpanded, setbaggageExpanded] = useState(false);
   const [takeOffExpanded, settakeOffExpanded] = useState(false);
   const [landingDistanceExpanded, setLandingDistanceExpanded] = useState(false);
-  const [hourlyPrice, setHourlyPrice] = useState(false);
-  const [purchasePrice, setPurchasePrice] = useState(false);
-  const [preOwned, setpreOwned] = useState(false);
+  const [hourlyPriceExpanded, setHourlyPriceExpanded] = useState(false);
+  const [annualPriceExpanded, setannualPriceExpanded] = useState(false);
+  const [purchasePriceAccordion, setPurchasePriceAccordion] = useState(false);
+  const [preOwnedExpanded, setpreOwnedExpanded] = useState(false);
   const [maxPax, setMaxPax] = useState(null);
+  const [range, setRange] = useState(null);
+  const [cruiseSpeed, setcruiseSpeed] = useState(null);
+  const [maxAltitude, setmaxAltitude] = useState(null);
+  const [fuelBurn, setfuelBurn] = useState(null);
+  const [baggageCapacity, setbaggageCapacity] = useState(null);
+  const [takeOffDistance, settakeOffDistance] = useState(null);
+  const [landingDistance, setlandingDistance] = useState(null);
+  const [annualFixedCost, setannualFixedCost] = useState(null);
+  const [hourlyprice, sethourlyprice] = useState(null);
+  const [purchaseprice, setpurchaseprice] = useState(null);
+  const [preowned, setpreowned] = useState(null);
 
   const handlePassengerAccordion = () => {
     setPassengerExpanded(!passengerExpanded);
@@ -64,23 +76,38 @@ export default function Search() {
   const handleLandingAccordion = () => {
     setLandingDistanceExpanded(!landingDistanceExpanded);
   };
+  const handleAnnualPriceAccordion = () => {
+    setannualPriceExpanded(!annualPriceExpanded);
+  };
+
   const handleHourlyPriceAccordion = () => {
-    setHourlyPrice(!hourlyPrice);
+    setHourlyPriceExpanded(!hourlyPriceExpanded);
   };
 
   const handlePurchaseAccordion = () => {
-    setPurchasePrice(!purchasePrice);
+    setPurchasePriceAccordion(!purchasePriceAccordion);
   };
 
   const handlePreOwnedAccordion = () => {
-    setpreOwned(!preOwned);
+    setpreOwnedExpanded(!preOwnedExpanded);
   };
   const [search, setSearch] = useState({
     aircraft_name: "",
     category: "",
     in_production: "",
     aircraft_manufacturer: "",
-    max_pax: null,
+    max_pax: 20,
+    range_NM: 3000,
+    high_cruise_knots: 12312,
+    max_altitude_feet: 12312,
+    hourly_fuel_burn_GPH: 1231,
+    baggage_capacity_CF: 12321,
+    TO_distance_feet: 1231,
+    landing_distance_feet: 123,
+    annual_cost: 12312,
+    estimated_hourly_charter: 1000,
+    new_purchase: 1000,
+    average_pre_owned: 10000,
   });
   const debouncedSearchTerm = useDebounce(search, 500);
 
@@ -100,6 +127,57 @@ export default function Search() {
     handleSearchChanged("max_pax", newValue);
   };
 
+  const handleRangeChanged = (event, newValue) => {
+    setRange(newValue);
+    handleSearchChanged("range_NM", newValue);
+  };
+
+  const handleCruiseChanged = (event, newValue) => {
+    setcruiseSpeed(newValue);
+    handleSearchChanged("high_cruise_knots", newValue);
+  };
+
+  const handleMaxAltitudeChanged = (event, newValue) => {
+    setmaxAltitude(newValue);
+    handleSearchChanged("max_altitude_feet", newValue);
+  };
+
+  const handleFuelBurnChanged = (event, newValue) => {
+    setfuelBurn(newValue);
+    handleSearchChanged("hourly_fuel_burn_GPH", newValue);
+  };
+
+  const handleBaggageCapacityChanged = (event, newValue) => {
+    setbaggageCapacity(newValue);
+    handleSearchChanged("baggage_capacity_CF", newValue);
+  };
+
+  const handleTakeOffChanged = (event, newValue) => {
+    settakeOffDistance(newValue);
+    handleSearchChanged("TO_distance_feet", newValue);
+  };
+
+  const handleLandingDistanceChanged = (event, newValue) => {
+    setlandingDistance(newValue);
+    handleSearchChanged("landing_distance_feet", newValue);
+  };
+  const handleAnnualFixedChanged = (event, newValue) => {
+    setannualFixedCost(newValue);
+    handleSearchChanged("annual_cost", newValue);
+  };
+  const handleHourlyPriceChange = (event, newValue) => {
+    sethourlyprice(newValue);
+    handleSearchChanged("estimated_hourly_charter", newValue);
+  };
+  const handlePurchasePriceChanged = (event, newValue) => {
+    setpurchaseprice(newValue);
+    handleSearchChanged("new_purchase", newValue);
+  };
+  const handlePreOwnedChanged = (event, newValue) => {
+    setpreowned(newValue);
+    handleSearchChanged("average_pre_owned", newValue);
+  };
+
   const handleSearchChanged = (key, value) => {
     setSearch((currentSearch) => ({ ...currentSearch, [key]: value }));
   };
@@ -112,7 +190,6 @@ export default function Search() {
     setFilterResult(res);
   };
 
-  const [rerender, setRerenderer] = useState(false);
   const openFilter = () => {
     const filter = document.querySelector(".filters_target");
     if (filter.style.display === "none") {
@@ -190,7 +267,6 @@ export default function Search() {
               </div>
             </div>
             <div>
-              {" "}
               <Accordion
                 expanded={passengerExpanded}
                 onChange={handlePassengerAccordion}
@@ -209,6 +285,290 @@ export default function Search() {
                     value={maxPax}
                     max={20}
                     onChange={handlePaxChanged}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={rangeExpanded}
+                onChange={handleRangeAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>Max Range: {range}</div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    className={styles.slider_home}
+                    aria-label="Volume"
+                    value={range}
+                    max={300}
+                    onChange={handleRangeChanged}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={cruiseExpanded}
+                onChange={handleCruiseAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>
+                    Cruise Speed (Knots): {cruiseSpeed}
+                  </div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    className={styles.slider_home}
+                    aria-label="Volume"
+                    value={cruiseSpeed}
+                    max={300}
+                    onChange={handleCruiseChanged}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={altitudeExpanded}
+                onChange={handleAltitudeAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>
+                    Max Altitude (Feet): {maxAltitude}
+                  </div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    className={styles.slider_home}
+                    aria-label="Volume"
+                    value={maxAltitude}
+                    max={300}
+                    onChange={handleMaxAltitudeChanged}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={fuelBurnExpanded}
+                onChange={handleFuelAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>
+                    Fuel Burn (Gallons/Hour): {fuelBurn}
+                  </div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    className={styles.slider_home}
+                    aria-label="Volume"
+                    value={fuelBurn}
+                    max={300}
+                    onChange={handleFuelBurnChanged}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={baggageExpanded}
+                onChange={handleBaggageAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>
+                    Baggage Capacity (cu ft): {baggageCapacity}
+                  </div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    className={styles.slider_home}
+                    aria-label="Volume"
+                    value={baggageCapacity}
+                    max={300}
+                    onChange={handleBaggageCapacityChanged}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={takeOffExpanded}
+                onChange={handleTakeOffAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>
+                    Take-Off Distance (feet): {takeOffDistance}
+                  </div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    className={styles.slider_home}
+                    aria-label="Volume"
+                    value={takeOffDistance}
+                    max={300}
+                    onChange={handleTakeOffChanged}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={landingDistanceExpanded}
+                onChange={handleLandingAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>
+                    Landing Distance (feet): {landingDistance}
+                  </div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    className={styles.slider_home}
+                    aria-label="Volume"
+                    value={landingDistance}
+                    max={300}
+                    onChange={handleLandingDistanceChanged}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={annualPriceExpanded}
+                onChange={handleAnnualPriceAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>
+                    Annual Fixed Cost ($): {annualFixedCost}
+                  </div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    className={styles.slider_home}
+                    aria-label="Volume"
+                    value={annualFixedCost}
+                    max={300}
+                    onChange={handleAnnualFixedChanged}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={hourlyPriceExpanded}
+                onChange={handleHourlyPriceAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>
+                    Hourly Price ($): {hourlyprice}
+                  </div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    className={styles.slider_home}
+                    aria-label="Volume"
+                    value={hourlyprice}
+                    max={300}
+                    onChange={handleHourlyPriceChange}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={purchasePriceAccordion}
+                onChange={handlePurchaseAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>
+                    Purchase Price ($): {purchaseprice}
+                  </div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    className={styles.slider_home}
+                    aria-label="Volume"
+                    value={purchaseprice}
+                    max={300}
+                    onChange={handlePurchasePriceChanged}
+                  />
+                </div>
+              </Accordion>
+            </div>
+
+            <div>
+              <Accordion
+                expanded={preOwnedExpanded}
+                onChange={handlePreOwnedAccordion}
+              >
+                <AccordionSummary
+                  expandIcon={<MdOutlineExpandMore />}
+                  aria-controls="panel4bh-content"
+                  id="panel4bh-header"
+                >
+                  <div className={styles.label}>
+                    Pre-Owned ($ million): {preowned}
+                  </div>
+                </AccordionSummary>
+                <div className={styles.range}>
+                  <Slider
+                    className={styles.slider_home}
+                    aria-label="Volume"
+                    value={preowned}
+                    max={300}
+                    onChange={handlePreOwnedChanged}
                   />
                 </div>
               </Accordion>
