@@ -260,7 +260,10 @@ export default function Search() {
                   className={styles.dropdown}
                   value={PRODUCTION_OPTIONS_DIC[search.in_production]}
                   setValue={(value) =>
-                    handleSearchChanged("in_production", value)
+                    handleSearchChanged(
+                      "in_production",
+                      value === "Yes" ? true : false
+                    )
                   }
                   options={PRODUCTION_OPTIONS}
                 />
