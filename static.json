@@ -1,6 +1,6 @@
 {
     "mimeTypes": {
-        "application/javascript": [
+        "text/javascript": [
             "js"
         ]
     }

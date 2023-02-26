@@ -23,9 +23,6 @@ import styles from "../styles/Search.module.scss";
 import MultiRangeSlider from "../components/common/multiRangeSlider/MultiRangeSlider";
 import { Slider } from "@mui/material";
 
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
 export default function Search() {
   const [passengerExpanded, setPassengerExpanded] = useState(false);
   const [rangeExpanded, setRangeExpanded] = useState(false);
