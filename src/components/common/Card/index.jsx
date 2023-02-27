@@ -22,7 +22,7 @@ const Card = ({ className, item }) => {
   return (
     <div className={cn(styles.card, className)} aria-hidden="true">
       <Link
-        to={`/aircrafts/${aircraftName}`}
+        to={`/${aircraftName}`}
         state={{
           id: item.aircraft_id,
         }}

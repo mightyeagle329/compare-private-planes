@@ -9,7 +9,7 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
-  { path: "/aircrafts/:aircraft_name", element: <SingleAircraftDetails /> },
+  { path: "/:aircraft_name/", element: <SingleAircraftDetails /> },
   { path: "/compare/", element: <CompareAircrafts /> },
 ]);
-root.render(<RouterProvider router={router} />);  
+root.render(<RouterProvider router={router} />);
