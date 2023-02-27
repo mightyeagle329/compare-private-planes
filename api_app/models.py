@@ -137,6 +137,7 @@ class Aircraft(models.Model):
     total_thrust_kgs = models.FloatField(default=0)
     hourly_fuel_burn_LPH = models.FloatField(default=0)
     max_altitude_feet = models.FloatField(default=0)
+    max_altitude_meters = models.FloatField(default=0)
 
     average_mission_length = models.FloatField(default=0)
 

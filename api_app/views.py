@@ -111,6 +111,7 @@ class AircraftList(View):
                 'altitude_sea_level_meters': item.altitude_sea_level_meters,
                 'range_km': item.range_km,
                 'max_altitude_feet': item.max_altitude_feet,
+                'max_altitude_meters': item.max_altitude_meters,
                 'high_speed_cruise_kmh': item.high_speed_cruise_kmh,
                 'long_range_cruise_kmh': item.long_range_cruise_kmh,
                 'ceiling_meters': item.ceiling_meters,
@@ -243,6 +244,7 @@ class AircraftSearch(View):
         range_NM = request.GET.get("range_NM")
         high_cruise_knots = request.GET.get("high_cruise_knots")
         max_altitude_feet = request.GET.get("max_altitude_feet")
+        max_altitude_meters = request.GET.get("max_altitude_meters")
         hourly_fuel_burn_GPH = request.GET.get("hourly_fuel_burn_GPH")
         baggage_capacity_CF = request.GET.get("baggage_capacity_CF")
         TO_distance_feet = request.GET.get("TO_distance_feet")
@@ -307,6 +309,7 @@ class AircraftSearch(View):
                         "cabin_volume_CF": item.cabin_volume_CF,
                         "ratio": item.ratio,
                         'max_altitude_feet': item.max_altitude_feet,
+                        'max_altitude_meters': item.max_altitude_meters,
                         "door_width_feet": item.door_width_feet,
                         "door_height_feet": item.door_height_feet,
                         "MTOW_lbs": item.MTOW_lbs,
@@ -511,6 +514,7 @@ class AircraftById(View):
             'long_range_cruise_MPH': item.long_range_cruise_MPH,
             'long_range_cruise_Mach': item.long_range_cruise_Mach,
             'max_altitude_feet': item.max_altitude_feet,
+            'max_altitude_meters': item.max_altitude_meters,
             'ceiling_feet': item.ceiling_feet,
             'minimum_pilots': item.minimum_pilots,
             'TO_distance_feet': item.TO_distance_feet,
