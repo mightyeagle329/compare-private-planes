@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import name_background from "../../../assets/name_background.png";
 
 import cn from "classnames";
 import styles from "./Header.module.scss";
@@ -97,7 +98,10 @@ const Header = () => {
           </div>
         </nav>
       </div>
-      <div className={cn(styles.aircraft_name)}>
+      <div
+        className={cn(styles.aircraft_name)}
+        style={{ backgroundImage: "url('" + name_background + "')" }}
+      >
         <h1 className={styles.name}>{headerTitle}</h1>
         <p className={styles.aircraft_year}>{aircraft_year}</p>
       </div>
