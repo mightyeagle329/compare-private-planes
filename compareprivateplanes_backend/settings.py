@@ -91,15 +91,14 @@ CORS_ORIGIN_WHITELIST = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd51ftffrdhc3v6',
-        'USER': 'syhiishydvrisd',
-        'PASSWORD': '8cdd6cfcf5dc56b19d097e319fcc60294138717e2317d97057d826033368b46b',
-        'HOST': 'ec2-34-241-90-235.eu-west-1.compute.amazonaws.com',
+        'NAME': 'dbis7pde982bht',
+        'USER': 'bukiutdphkgsnx',
+        'PASSWORD': '2575279301333053e7129a507a79ec407747e43e780baeac02df696569fabe5',
+        'HOST': 'ec2-18-203-96-229.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
 
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
