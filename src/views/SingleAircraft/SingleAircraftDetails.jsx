@@ -228,7 +228,7 @@ export default function SingleAircraftDetails() {
           country={country}
           unit={unit}
         />
-        <BasicInfo params={aircraftData} />
+        <BasicInfo params={aircraftData} currency={currency} />
         <PerformanceData params={aircraftData} unit={unit} />
         <OwnershipCosts
           params={aircraftData}
@@ -251,11 +251,11 @@ export default function SingleAircraftDetails() {
         ) : (
           <Maintenance params={aircraftData} />
         )}
-        <Interior params={aircraftData} />
+        <Interior params={aircraftData} unit={unit} />
         <Features params={aircraftData} />
-        <Powerplant params={aircraftData} />
+        <Powerplant params={aircraftData} unit={unit} />
         <Weights params={aircraftData} unit={unit} />
-        <Dimensions params={aircraftData} />
+        <Dimensions params={aircraftData} unit={unit} />
         <AccidentData
           params={accidentsData}
           nbAccidents={nbAccidents}

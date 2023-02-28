@@ -3,7 +3,7 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import numeral from "numeral";
 
-const Powerplant = ({ params }) => {
+const Powerplant = ({ params, unit }) => {
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Powerplant" />
@@ -19,12 +19,17 @@ const Powerplant = ({ params }) => {
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
-                  Thrust per Engine (lbs)
+                  Thrust per Engine{" "}
+                  {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
                 </span>
                 <span>
-                  {params.thrust_output_lbs === 0
+                  {unit === "Imperial Units"
+                    ? params.thrust_output_lbs === 0
+                      ? "-"
+                      : numeral(params.thrust_output_lbs).format("0,0")
+                    : params.thrust_output_kgs === 0
                     ? "-"
-                    : numeral(params.thrust_output_lbs).format("0,0")}
+                    : numeral(params.thrust_output_kgs).format("0,0")}
                 </span>
               </div>
             </div>
@@ -40,12 +45,17 @@ const Powerplant = ({ params }) => {
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
-                  Total Thrust Output (lbs)
+                  Total Thrust Output{" "}
+                  {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
                 </span>
                 <span>
-                  {params.total_thrust_lbs === 0
+                  {unit === "Imperial Units"
+                    ? params.total_thrust_lbs === 0
+                      ? "-"
+                      : numeral(params.total_thrust_lbs).format("0,0")
+                    : params.total_thrust_kgs === 0
                     ? "-"
-                    : numeral(params.total_thrust_lbs).format("0,0")}
+                    : numeral(params.total_thrust_kgs).format("0,0")}
                 </span>
               </div>
             </div>

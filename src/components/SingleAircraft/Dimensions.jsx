@@ -2,7 +2,7 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 
-const Dimensions = ({ params }) => {
+const Dimensions = ({ params, unit }) => {
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Dimensions" />
@@ -11,7 +11,8 @@ const Dimensions = ({ params }) => {
           <div className={cn(global.details_table)}>
             <div className={cn(global.column)}>
               <span className={cn(global.column_header)}>
-                Exterior Dimensions (Feet)
+                Exterior Dimensions{" "}
+                {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <div className={cn(global.rows_dimensions)}>
                 <div className={cn(global.row)}>
@@ -43,7 +44,8 @@ const Dimensions = ({ params }) => {
           <div className={cn(global.details_table)}>
             <div className={cn(global.column)}>
               <span className={cn(global.column_header)}>
-                Interior Dimensions (Feet)
+                Interior Dimensions{" "}
+                {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <div className={cn(global.rows_dimensions)}>
                 <div className={cn(global.row)}>
@@ -53,17 +55,31 @@ const Dimensions = ({ params }) => {
                 </div>
                 <div className={cn(global.row)}>
                   <span className={cn(global.value)}>
-                    {params.int_length_feet === 0
+                    {unit === "Imerial Units"
+                      ? params.int_length_feet === 0
+                        ? "-"
+                        : params.int_length_feet
+                      : params.int_length_meters === 0
                       ? "-"
-                      : params.int_length_feet}
+                      : params.int_length_meters}
                   </span>
                   <span className={cn(global.value)}>
-                    {params.int_height_feet === 0
+                    {unit === "Imerial Units"
+                      ? params.int_height_feet === 0
+                        ? "-"
+                        : params.int_height_feet
+                      : params.int_height_meters === 0
                       ? "-"
-                      : params.int_height_feet}
+                      : params.int_height_meters}
                   </span>
                   <span className={cn(global.value)}>
-                    {params.int_width_feet === 0 ? "-" : params.int_width_feet}
+                    {unit === "Imerial Units"
+                      ? params.int_width_feet === 0
+                        ? "-"
+                        : params.int_width_feet
+                      : params.int_width_meters === 0
+                      ? "-"
+                      : params.int_width_meters}
                   </span>
                 </div>
               </div>
@@ -75,7 +91,8 @@ const Dimensions = ({ params }) => {
           <div className={cn(global.details_table)}>
             <div className={cn(global.column)}>
               <span className={cn(global.column_header)}>
-                Door Dimensions (Feet)
+                Door Dimensions{" "}
+                {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <div className={cn(global.rows_dimensions)}>
                 <div className={cn(global.row)}>
@@ -84,14 +101,22 @@ const Dimensions = ({ params }) => {
                 </div>
                 <div className={cn(global.row)}>
                   <span className={cn(global.value)}>
-                    {params.door_height_feet === 0
+                    {unit === "Imerial Units"
+                      ? params.door_height_feet === 0
+                        ? "-"
+                        : params.door_height_feet
+                      : params.door_height_meters === 0
                       ? "-"
-                      : params.door_height_feet}
+                      : params.door_height_meters}
                   </span>
                   <span className={cn(global.value)}>
-                    {params.door_width_feet === 0
+                    {unit === "Imerial Units"
+                      ? params.door_width_feet === 0
+                        ? "-"
+                        : params.door_width_feet
+                      : params.door_width_meters === 0
                       ? "-"
-                      : params.door_width_feet}
+                      : params.door_width_meters}
                   </span>
                 </div>
               </div>

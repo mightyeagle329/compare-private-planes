@@ -39,7 +39,7 @@ const MANUFACTURER_OPTIONS = [
 
 const COUNTRY_OPTIONS = ["North America", "Europe", "South America", "Asia"];
 const CURRENCY_OPTIONS = ["USD", "EUR", "GBP"];
-const UNIT_OPTIONS = ["Imperial Units", "Metrics"];
+const UNIT_OPTIONS = ["Imperial Units", "Metric Units"];
 
 const MANUFACTURER_OPTIONS_DIC = {
   "": "Show all",

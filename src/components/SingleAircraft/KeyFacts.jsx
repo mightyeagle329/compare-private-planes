@@ -180,7 +180,9 @@ const KeyFacts = ({ params, currency, country, unit }) => {
                 ? numeral(params.range_NM).format("0,0")
                 : numeral(params.range_km).format("0,0")}{" "}
               <br></br>
-              <span className={styles.chart_label_description}>NM</span>
+              <span className={styles.chart_label_description}>
+                {unit === "Imperial Units" ? "NM" : "KM"}
+              </span>
             </span>
           </div>
           <div

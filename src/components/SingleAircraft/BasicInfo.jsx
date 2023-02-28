@@ -2,8 +2,35 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import numeral from "numeral";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const BasicInfo = ({ params }) => {
+const BasicInfo = ({ params, currency }) => {
+  const [info, setInfo] = useState([]);
+  const [from, setFrom] = useState("usd");
+  const [to, setTo] = useState("usd");
+  const [conversionRate, setConversionRate] = useState(0);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`
+      )
+      .then((res) => {
+        setInfo(res.data[from]);
+      });
+  }, [from]);
+
+  useEffect(() => {
+    currency === "USD"
+      ? setTo("usd")
+      : currency === "GBP"
+      ? setTo("gbp")
+      : setTo("eur");
+    setFrom("usd");
+    setConversionRate(info[to]);
+  }, [info, currency, to]);
+
   return (
     <section className={cn(global.section, global.page_break)}>
       <SectionHeader title="Basic Info" />
@@ -102,7 +129,17 @@ const BasicInfo = ({ params }) => {
                 <span>
                   {params.average_pre_owned === 0
                     ? "-"
-                    : numeral(params.average_pre_owned).format("0,0")}
+                    : currency === "USD"
+                    ? "$" + numeral(params.average_pre_owned).format("0,0")
+                    : currency === "EUR"
+                    ? "€" +
+                      numeral(params.average_pre_owned * conversionRate).format(
+                        "0,0"
+                      )
+                    : "£" +
+                      numeral(params.average_pre_owned * conversionRate).format(
+                        "0,0"
+                      )}
                 </span>
               </div>
             </div>

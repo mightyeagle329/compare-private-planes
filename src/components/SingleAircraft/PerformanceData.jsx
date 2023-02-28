@@ -14,29 +14,29 @@ const PerformanceData = ({ params, unit }) => {
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
-                  Range{" "}
-                  {unit === "Imperial Units"
-                    ? "(Nautical Miles)"
-                    : "(Kilometers)"}
+                  Range (Nautical Miles)
                 </span>
                 <span>
-                  {unit === "Imperial Units"
-                    ? params.range_NM === 0
-                      ? "-"
-                      : numeral(params.range_NM).format("0,0")
-                    : params.range_km === 0
+                  {params.range_NM === 0
                     ? "-"
-                    : numeral(params.range_km).format("0,0")}
+                    : numeral(params.range_NM).format("0,0")}
                 </span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
-                  Range (Miles / KM)
+                  Range {unit === "Imperial Units" ? "(Miles)" : "(KM)"}
                 </span>
                 <span>
                   {params.range_Miles === 0
                     ? "-"
                     : numeral(params.range_Miles).format("0,0")}
+                  {unit === "Imperial Units"
+                    ? params.range_Miles === 0
+                      ? "-"
+                      : numeral(params.range_Miles).format("0,0")
+                    : params.range_km === 0
+                    ? "-"
+                    : numeral(params.range_km).format("0,0")}
                 </span>
               </div>
               <div className={cn(global.row)}>
@@ -76,22 +76,39 @@ const PerformanceData = ({ params, unit }) => {
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
-                  Rate of Climb (Feet / Min)
+                  Rate of Climb{" "}
+                  {unit === "Imperial Units"
+                    ? "(Feet / Min)"
+                    : "(Meters / Min)"}
                 </span>
                 <span>
-                  {params.rate_climb === 0
+                  {unit === "Imperial Units"
+                    ? params.rate_climb === 0
+                      ? "-"
+                      : numeral(params.rate_climb).format("0,0")
+                    : params.rate_climb_meters === 0
                     ? "-"
-                    : numeral(params.rate_climb).format("0,0")}
+                    : numeral(params.rate_climb_meters).format("0,0")}
                 </span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
-                  Initial Cruise Altitude (Feet)
+                  Initial Cruise Altitude{" "}
+                  {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
                 </span>
                 <span>
-                  {numeral(params.initial_cruise_altitude).format("0,0") === 0
+                  {unit === "Imperial Units"
+                    ? numeral(params.initial_cruise_altitude).format("0,0") ===
+                      0
+                      ? "-"
+                      : numeral(params.initial_cruise_altitude).format("0,0")
+                    : numeral(params.initial_cruise_altitude_meters).format(
+                        "0,0"
+                      ) === 0
                     ? "-"
-                    : numeral(params.initial_cruise_altitude).format("0,0")}
+                    : numeral(params.initial_cruise_altitude_meters).format(
+                        "0,0"
+                      )}
                 </span>
               </div>
             </div>
@@ -104,7 +121,9 @@ const PerformanceData = ({ params, unit }) => {
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
                 <span className={cn(global.key)}>Knots</span>
-                <span className={cn(global.key)}>MPH</span>
+                <span className={cn(global.key)}>
+                  {unit === "Imperial Units" ? "MPH" : "KMH"}
+                </span>
                 <span className={cn(global.key)}>Mach</span>
               </div>
               <div className={cn(global.row)}>
@@ -114,9 +133,13 @@ const PerformanceData = ({ params, unit }) => {
                     : numeral(params.high_cruise_knots).format("0,0")}
                 </span>
                 <span className={cn(global.value)}>
-                  {params.high_cruise_MPH === 0
+                  {unit === "Imperial Units"
+                    ? params.high_cruise_MPH === 0
+                      ? "-"
+                      : numeral(params.high_cruise_MPH).format("0,0")
+                    : params.high_speed_cruise_kmh === 0
                     ? "-"
-                    : numeral(params.high_cruise_MPH).format("0,0")}
+                    : numeral(params.high_speed_cruise_kmh).format("0,0")}
                 </span>
                 <span className={cn(global.value)}>
                   {params.high_cruise_Mach === 0
@@ -133,7 +156,10 @@ const PerformanceData = ({ params, unit }) => {
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
                 <span className={cn(global.key)}>Knots</span>
-                <span className={cn(global.key)}>MPH</span>
+                <span className={cn(global.key)}>
+                  {" "}
+                  {unit === "Imperial Units" ? "MPH" : "KMH"}
+                </span>
                 <span className={cn(global.key)}>Mach</span>
               </div>
               <div className={cn(global.row)}>
@@ -141,7 +167,13 @@ const PerformanceData = ({ params, unit }) => {
                   {numeral(params.long_range_cruise_knots).format("0,0")}
                 </span>
                 <span className={cn(global.value)}>
-                  {numeral(params.long_range_cruise_MPH).format("0,0")}
+                  {unit === "Imperial Units"
+                    ? params.long_range_cruise_MPH === 0
+                      ? "-"
+                      : numeral(params.long_range_cruise_MPH).format("0,0")
+                    : params.long_range_cruise_kmh === 0
+                    ? "-"
+                    : numeral(params.long_range_cruise_kmh).format("0,0")}
                 </span>
                 <span className={cn(global.value)}>
                   {numeral(params.long_range_cruise_Mach).format("0,0")}

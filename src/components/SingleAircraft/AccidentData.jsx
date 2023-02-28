@@ -27,7 +27,6 @@ const AccidentData = ({ params, nbAccidents, aircraftName }) => {
           <thead>
             <tr className={cn(global.tr)}>
               <th className={cn(global._padding)}>Country</th>
-              <th>Aircraft</th>
               <th>Reg</th>
               <th>Date</th>
               <th>Occurrence</th>
@@ -40,7 +39,6 @@ const AccidentData = ({ params, nbAccidents, aircraftName }) => {
                 return (
                   <tr className={cn(global.tr)} key={accident.reg}>
                     <td className={cn(global._padding)}>{accident.country}</td>
-                    <td>{accident.aircraft_incident}</td>
                     <td>{accident.reg}</td>
                     <td>{accident.date}</td>
                     <td>{accident.occurrence}</td>
