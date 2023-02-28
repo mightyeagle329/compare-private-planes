@@ -4,10 +4,7 @@ import styles from "./styles/styles.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import numeral from "numeral";
 
-const PerformanceData = ({ params }) => {
-  const takeOff = "100%";
-  const landing = "45%";
-
+const PerformanceData = ({ params, unit }) => {
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Performance Data" />
@@ -17,22 +14,46 @@ const PerformanceData = ({ params }) => {
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
-                  Range (Nautical Miles)
+                  Range{" "}
+                  {unit === "Imperial Units"
+                    ? "(Nautical Miles)"
+                    : "(Kilometers)"}
                 </span>
-                <span>{numeral(params.range_NM).format("0,0")}</span>
+                <span>
+                  {unit === "Imperial Units"
+                    ? params.range_NM === 0
+                      ? "-"
+                      : numeral(params.range_NM).format("0,0")
+                    : params.range_km === 0
+                    ? "-"
+                    : numeral(params.range_km).format("0,0")}
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Range (Miles / KM)
                 </span>
-                <span>{numeral(params.range_Miles).format("0,0")}</span>
+                <span>
+                  {params.range_Miles === 0
+                    ? "-"
+                    : numeral(params.range_Miles).format("0,0")}
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
-                  Fuel Burn (Gallons per Hour)
+                  Fuel Burn{" "}
+                  {unit === "Imperial Units"
+                    ? "(Gallons per Hour)"
+                    : "(Liters per Hour)"}
                 </span>
                 <span>
-                  {numeral(params.hourly_fuel_burn_GPH).format("0,0")}
+                  {unit === "Imperial Units"
+                    ? params.hourly_fuel_burn_GPH === 0
+                      ? "-"
+                      : numeral(params.hourly_fuel_burn_GPH).format("0,0")
+                    : params.hourly_fuel_burn_LPH === 0
+                    ? "-"
+                    : numeral(params.hourly_fuel_burn_LPH).format("0,0")}
                 </span>
               </div>
             </div>
@@ -42,15 +63,26 @@ const PerformanceData = ({ params }) => {
             <div className={cn(global.rows)}>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
-                  Max Altitude (Feet)
+                  Max Altitude{" "}
+                  {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
                 </span>
-                <span>{numeral(params.max_altitude_feet).format("0,0")}</span>
+                <span>
+                  {params.max_altitude_feet === 0
+                    ? "-"
+                    : unit === "Imperial Units"
+                    ? numeral(params.max_altitude_feet).format("0,0")
+                    : numeral(params.max_altitude_meters).format("0,0")}
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Rate of Climb (Feet / Min)
                 </span>
-                <span>{numeral(params.rate_climb).format("0,0")}</span>
+                <span>
+                  {params.rate_climb === 0
+                    ? "-"
+                    : numeral(params.rate_climb).format("0,0")}
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
@@ -77,13 +109,19 @@ const PerformanceData = ({ params }) => {
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.value)}>
-                  {numeral(params.high_cruise_knots).format("0,0")}
+                  {params.high_cruise_knots === 0
+                    ? "-"
+                    : numeral(params.high_cruise_knots).format("0,0")}
                 </span>
                 <span className={cn(global.value)}>
-                  {numeral(params.high_cruise_MPH).format("0,0")}
+                  {params.high_cruise_MPH === 0
+                    ? "-"
+                    : numeral(params.high_cruise_MPH).format("0,0")}
                 </span>
                 <span className={cn(global.value)}>
-                  {numeral(params.high_cruise_Mach).format("0,0")}
+                  {params.high_cruise_Mach === 0
+                    ? "-"
+                    : numeral(params.high_cruise_Mach).format("0,0")}
                 </span>
               </div>
             </div>
@@ -123,35 +161,52 @@ const PerformanceData = ({ params }) => {
         <div className={cn(styles.additional_infos)}>
           <div className={cn(styles.info)}>
             <span className={cn(styles.subtitle)}>
-              Take-Off Distance (feet)
+              Take-Off Distance{" "}
+              {unit === "Imperial Units" ? "(feet)" : "(meters)"}
             </span>
-            <span className={cn(styles.subtitle)}>Landing Distance (feet)</span>
+            <span className={cn(styles.subtitle)}>
+              Landing Distance{" "}
+              {unit === "Imperial Units" ? "(feet)" : "(meters)"}
+            </span>
           </div>
           <div className={cn(styles.bars)}>
             <span
               className={styles.distance_bar}
               style={{
-                width: `${
-                  (parseInt(params.TO_distance_feet) /
+                width: !isNaN(
+                  parseInt(params.TO_distance_feet) /
                     (parseInt(params.TO_distance_feet) +
-                      parseInt(params.landing_distance_feet))) *
-                  1000
-                }px`,
+                      parseInt(params.landing_distance_feet))
+                )
+                  ? (parseInt(params.TO_distance_feet) /
+                      (parseInt(params.TO_distance_feet) +
+                        parseInt(params.landing_distance_feet))) *
+                    1000
+                  : "100%",
               }}
             >
-              {numeral(params.TO_distance_feet).format("0,0")}
+              {unit === "Imperial Units"
+                ? numeral(params.TO_distance_feet).format("0,0")
+                : numeral(params.TO_distance_meters).format("0,0")}
             </span>
             <span
               className={styles.landing_distance_bar}
               style={{
-                width:
-                  (parseInt(params.landing_distance_feet) /
+                width: !isNaN(
+                  parseInt(params.landing_distance_feet) /
                     (parseInt(params.TO_distance_feet) +
-                      parseInt(params.landing_distance_feet))) *
-                  1000,
+                      parseInt(params.landing_distance_feet))
+                )
+                  ? (parseInt(params.landing_distance_feet) /
+                      (parseInt(params.TO_distance_feet) +
+                        parseInt(params.landing_distance_feet))) *
+                    1000
+                  : "100%",
               }}
             >
-              {numeral(params.landing_distance_feet).format("0,0")}
+              {unit === "Imperial Units"
+                ? numeral(params.landing_distance_feet).format("0,0")
+                : numeral(params.landing_distance_meters).format("0,0")}
             </span>
           </div>
         </div>

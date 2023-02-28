@@ -28,9 +28,9 @@ ChartJS.register(
 );
 
 const HistoricalMarket = ({ params, historicalData }) => {
+  const newLegendClickHandler = () => {};
   const options = {
     responsive: true,
-    events: [],
     scales: {
       x: {
         display: true,
@@ -47,10 +47,14 @@ const HistoricalMarket = ({ params, historicalData }) => {
         },
       },
     },
+    tooltips: {
+      mode: "index",
+      position: "nearest",
+    },
     plugins: {
       legend: {
         position: "bottom",
-        // onClick: newLegendClickHandler,
+        onClick: newLegendClickHandler,
       },
     },
   };
@@ -63,7 +67,7 @@ const HistoricalMarket = ({ params, historicalData }) => {
     labels,
     datasets: [
       {
-        label: "Historical data",
+        label: "Number of Transactions",
         data: values,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",

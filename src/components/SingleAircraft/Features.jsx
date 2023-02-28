@@ -13,7 +13,9 @@ const Features = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Minimum Pilots
                 </span>
-                <span>{params.minimum_pilots}</span>
+                <span>
+                  {params.minimum_pilots === 0 ? "-" : params.minimum_pilots}
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
@@ -42,7 +44,11 @@ const Features = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Dispatch Reliability
                 </span>
-                <span>{params.typical_avionic_suite ? "Yes" : "No"}</span>
+                <span>
+                  {params.dispatch_reliability === 0
+                    ? "-"
+                    : params.dispatch_reliability + "%"}
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
@@ -54,7 +60,7 @@ const Features = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Inflight Baggage Access
                 </span>
-                <span>{params.inflight_accessible_luggage ? "Yes" : "No"}</span>
+                <span>{params.baggage_access ? "Yes" : "No"}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>

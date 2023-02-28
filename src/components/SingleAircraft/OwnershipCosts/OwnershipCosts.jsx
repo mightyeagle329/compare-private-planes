@@ -42,12 +42,14 @@ const OwnershipCosts = ({ params, currency, country }) => {
     parseInt(params.NA_annual_captain) +
       parseInt(params.NA_annual_first_office) +
       parseInt(params.NA_annual_employee_benefits),
-    params.NA_annual_crew_training,
-    params.NA_annual_hangar,
-    params.NA_annual_insurance_hull,
-    params.NA_annual_insurance_liability,
-    params.NA_annual_management,
-    params.NA_annual_misc
+    parseInt(params.NA_annual_crew_training),
+    parseInt(params.NA_annual_hangar),
+    parseInt(
+      params.NA_annual_insurance_liability + params.NA_annual_insurance_hull
+    ),
+    parseInt(params.NA_annual_management),
+    parseInt(params.NA_annual_deprecation),
+    parseInt(params.NA_annual_misc)
   );
 
   const maximumVariableValue = Math.max(
@@ -65,6 +67,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
       "Hangar",
       "Insurance",
       "Management",
+      "Deprication",
       "Miscellaneous Fixed",
     ],
     datasets: [
@@ -78,6 +81,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
           parseInt(params.NA_annual_insurance_hull) +
             parseInt(params.NA_annual_insurance_liability),
           params.NA_annual_management,
+          params.NA_annual_deprecation,
           params.NA_annual_misc,
         ],
         backgroundColor: [
@@ -86,6 +90,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
           "rgba(255, 206, 86, 0.2)",
           "rgba(75, 192, 192, 0.2)",
           "rgba(153, 102, 255, 0.2)",
+          "rgb(199, 55, 158,0.2)",
           "rgba(255, 159, 64, 0.2)",
         ],
         borderColor: [
@@ -94,6 +99,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
           "rgba(255, 206, 86, 1)",
           "rgba(75, 192, 192, 1)",
           "rgba(153, 102, 255, 1)",
+          "rgb(199, 55, 158)",
           "rgba(255, 159, 64, 1)",
         ],
         borderWidth: 1,
@@ -170,7 +176,13 @@ const OwnershipCosts = ({ params, currency, country }) => {
           <h2 className={global.pdf_hidden}>
             Estimated annual flight hours:{" "}
             <div className={styles.form + " " + global.pdf_hidden}>
-              <form className={styles.search} action="">
+              <form
+                className={styles.search}
+                action=""
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
                 <input
                   className={styles.input}
                   type="text"
@@ -192,7 +204,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   (parseInt(params.NA_annual_total) +
                     parseInt(nbHours) * params.NA_hourly_total) *
                     conversionRate
-                ).format("0,0.00")}
+                ).format("0,0")}
               </h3>
             ) : country === "Europe" ? (
               <h3 className={cn(styles.cost)}>
@@ -201,7 +213,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   (parseInt(params.EU_annual_total) +
                     parseInt(nbHours) * params.EU_hourly_total) *
                     conversionRate
-                ).format("0,0.00")}
+                ).format("0,0")}
               </h3>
             ) : country === "South America" ? (
               <h3 className={cn(styles.cost)}>
@@ -210,7 +222,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   (parseInt(params.SA_annual_total) +
                     parseInt(nbHours) * params.SA_hourly_total) *
                     conversionRate
-                ).format("0,0.00")}
+                ).format("0,0")}
               </h3>
             ) : (
               <h3 className={cn(styles.cost)}>
@@ -219,7 +231,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   (parseInt(params.AS_annual_total) +
                     parseInt(nbHours) * params.AS_hourly_total) *
                     conversionRate
-                ).format("0,0.00")}
+                ).format("0,0")}
               </h3>
             )
           ) : currency === "USD" ? (
@@ -230,7 +242,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                   (parseInt(params.NA_annual_total) +
                     parseInt(nbHours) * params.NA_hourly_total) *
                     conversionRate
-                ).format("0,0.00")}
+                ).format("0,0")}
               </h3>
             ) : country === "Europe" ? (
               <h3 className={cn(styles.cost)}>
@@ -238,7 +250,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 {numeral(
                   parseInt(params.EU_annual_total) +
                     parseInt(nbHours) * params.EU_hourly_total
-                ).format("0,0.00")}
+                ).format("0,0")}
               </h3>
             ) : country === "South America" ? (
               <h3 className={cn(styles.cost)}>
@@ -246,7 +258,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 {numeral(
                   parseInt(params.SA_annual_total) +
                     parseInt(nbHours) * params.SA_hourly_total
-                ).format("0,0.00")}
+                ).format("0,0")}
               </h3>
             ) : (
               <h3 className={cn(styles.cost)}>
@@ -254,7 +266,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 {numeral(
                   parseInt(params.AS_annual_total) +
                     parseInt(nbHours) * params.AS_hourly_total
-                ).format("0,0.00")}
+                ).format("0,0")}
               </h3>
             )
           ) : country === "North America" ? (
@@ -264,7 +276,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 (parseInt(params.NA_annual_total) +
                   parseInt(nbHours) * params.NA_hourly_total) *
                   conversionRate
-              ).format("0,0.00")}
+              ).format("0,0")}
             </h3>
           ) : country === "Europe" ? (
             <h3 className={cn(styles.cost)}>
@@ -273,7 +285,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 (parseInt(params.EU_annual_total) +
                   parseInt(nbHours) * params.EU_hourly_total) *
                   conversionRate
-              ).format("0,0.00")}
+              ).format("0,0")}
             </h3>
           ) : country === "South America" ? (
             <h3 className={cn(styles.cost)}>
@@ -282,7 +294,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 (parseInt(params.SA_annual_total) +
                   parseInt(nbHours) * params.SA_hourly_total) *
                   conversionRate
-              ).format("0,0.00")}
+              ).format("0,0")}
             </h3>
           ) : (
             <h3 className={cn(styles.cost)}>
@@ -291,7 +303,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 (parseInt(params.AS_annual_total) +
                   parseInt(nbHours) * params.AS_hourly_total) *
                   conversionRate
-              ).format("0,0.00")}
+              ).format("0,0")}
             </h3>
           )}
         </header>
@@ -301,61 +313,74 @@ const OwnershipCosts = ({ params, currency, country }) => {
               <h3>Annual Fixed Costs</h3>
               <p className={cn(styles.cost)}>
                 {country === "North America" ? (
-                  <span className={cn(styles.cost)}>
-                    {currency === "GBP"
-                      ? "£" +
-                        numeral(params.NA_annual_total * conversionRate).format(
-                          "0,0.00.00"
-                        )
-                      : currency === "EUR"
-                      ? "€" +
-                        numeral(params.NA_annual_total * conversionRate).format(
-                          "0,0.00.00"
-                        )
-                      : "$" +
-                        numeral(params.NA_annual_total).format("0,0.00.00")}
-                  </span>
+                  params.NA_annual_total === 0 ? (
+                    "-"
+                  ) : (
+                    <span className={cn(styles.cost)}>
+                      {currency === "GBP"
+                        ? "£" +
+                          numeral(
+                            params.NA_annual_total * conversionRate
+                          ).format("0,0")
+                        : currency === "EUR"
+                        ? "€" +
+                          numeral(
+                            params.NA_annual_total * conversionRate
+                          ).format("0,0")
+                        : "$" + numeral(params.NA_annual_total).format("0,0")}
+                    </span>
+                  )
                 ) : country === "Europe" ? (
-                  <span className={cn(styles.cost)}>
-                    {currency === "GBP"
-                      ? "£" +
-                        numeral(params.EU_annual_total * conversionRate).format(
-                          "0,0.00"
-                        )
-                      : currency === "EUR"
-                      ? "€" +
-                        numeral(params.EU_annual_total * conversionRate).format(
-                          "0,0.00"
-                        )
-                      : "$" + numeral(params.EU_annual_total).format("0,0.00")}
-                  </span>
+                  params.EU_annual_total === 0 ? (
+                    "-"
+                  ) : (
+                    <span className={cn(styles.cost)}>
+                      {currency === "GBP"
+                        ? "£" +
+                          numeral(
+                            params.EU_annual_total * conversionRate
+                          ).format("0,0")
+                        : currency === "EUR"
+                        ? "€" +
+                          numeral(
+                            params.EU_annual_total * conversionRate
+                          ).format("0,0")
+                        : "$" + numeral(params.EU_annual_total).format("0,0")}
+                    </span>
+                  )
                 ) : country === "South America" ? (
-                  <span className={cn(styles.cost)}>
-                    {currency === "GBP"
-                      ? "£" +
-                        numeral(params.SA_annual_total * conversionRate).format(
-                          "0,0.00"
-                        )
-                      : currency === "EUR"
-                      ? "€" +
-                        numeral(params.SA_annual_total * conversionRate).format(
-                          "0,0.00"
-                        )
-                      : "$" + numeral(params.SA_annual_total).format("0,0.00")}
-                  </span>
+                  params.SA_annual_total === 0 ? (
+                    "-"
+                  ) : (
+                    <span className={cn(styles.cost)}>
+                      {currency === "GBP"
+                        ? "£" +
+                          numeral(
+                            params.SA_annual_total * conversionRate
+                          ).format("0,0")
+                        : currency === "EUR"
+                        ? "€" +
+                          numeral(
+                            params.SA_annual_total * conversionRate
+                          ).format("0,0")
+                        : "$" + numeral(params.SA_annual_total).format("0,0")}
+                    </span>
+                  )
+                ) : params.AS_annual_total === 0 ? (
+                  "-"
                 ) : (
                   <span className={cn(styles.cost)}>
                     {currency === "GBP"
                       ? "£" +
                         numeral(params.AS_annual_total * conversionRate).format(
-                          "0,0.00"
+                          "0,0"
                         )
                       : currency === "EUR"
                       ? "€" +
                         numeral(params.AS_annual_total * conversionRate).format(
-                          "0,0.00"
+                          "0,0"
                         )
-                      : "$" + numeral(params.AS_annual_total).format("0,0.00")}
+                      : "$" + numeral(params.AS_annual_total).format("0,0")}
                   </span>
                 )}
               </p>
@@ -363,7 +388,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 data={annualData}
                 options={{
                   responsive: true,
-                  events: [],
                   plugins: {
                     legend: {
                       position: "bottom",
@@ -382,56 +406,56 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     {currency === "GBP"
                       ? "£" +
                         numeral(params.NA_hourly_total * conversionRate).format(
-                          "0,0.00"
+                          "0,0"
                         )
                       : currency === "EUR"
                       ? "€" +
                         numeral(params.NA_hourly_total * conversionRate).format(
-                          "0,0.00"
+                          "0,0"
                         )
-                      : "$" + numeral(params.NA_hourly_total).format("0,0.00")}
+                      : "$" + numeral(params.NA_hourly_total).format("0,0")}
                   </span>
                 ) : country === "Europe" ? (
                   <span className={cn(styles.cost)}>
                     {currency === "GBP"
                       ? "£" +
                         numeral(params.EU_hourly_total * conversionRate).format(
-                          "0,0.00"
+                          "0,0"
                         )
                       : currency === "EUR"
                       ? "€" +
                         numeral(params.EU_hourly_total * conversionRate).format(
-                          "0,0.00"
+                          "0,0"
                         )
-                      : "$" + numeral(params.EU_hourly_total).format("0,0.00")}
+                      : "$" + numeral(params.EU_hourly_total).format("0,0")}
                   </span>
                 ) : country === "South America" ? (
                   <span className={cn(styles.cost)}>
                     {currency === "GBP"
                       ? "£" +
                         numeral(params.SA_hourly_total * conversionRate).format(
-                          "0,0.00"
+                          "0,0"
                         )
                       : currency === "EUR"
                       ? "€" +
                         numeral(params.SA_hourly_total * conversionRate).format(
-                          "0,0.00"
+                          "0,0"
                         )
-                      : "$" + numeral(params.SA_hourly_total).format("0,0.00")}
+                      : "$" + numeral(params.SA_hourly_total).format("0,0")}
                   </span>
                 ) : (
                   <span className={cn(styles.cost)}>
                     {currency === "GBP"
                       ? "£" +
                         numeral(params.AS_hourly_total * conversionRate).format(
-                          "0,0.00"
+                          "0,0"
                         )
                       : currency === "EUR"
                       ? "€" +
                         numeral(params.AS_hourly_total * conversionRate).format(
-                          "0,0.00"
+                          "0,0"
                         )
-                      : "$" + numeral(params.AS_hourly_total).format("0,0.00")}
+                      : "$" + numeral(params.AS_hourly_total).format("0,0")}
                   </span>
                 )}
               </p>
@@ -440,7 +464,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
                 data={variableData}
                 options={{
                   responsive: true,
-                  events: [],
                   plugins: {
                     legend: {
                       position: "bottom",
@@ -558,11 +581,14 @@ const OwnershipCosts = ({ params, currency, country }) => {
                       className={cn(styles.bar__fill1)}
                       style={{
                         width:
-                          ((parseInt(params.NA_annual_captain) +
-                            parseInt(params.NA_annual_first_office) +
-                            parseInt(params.NA_annual_employee_benefits)) /
-                            maximumAnnualValue) *
-                          100,
+                          !isNaN(
+                            (parseInt(params.NA_annual_captain) +
+                              parseInt(params.NA_annual_first_office) +
+                              parseInt(params.NA_annual_employee_benefits)) /
+                              maximumAnnualValue
+                          ) *
+                            100 +
+                          "%",
                       }}
                     ></div>
                   </div>
@@ -936,6 +962,75 @@ const OwnershipCosts = ({ params, currency, country }) => {
                       style={{
                         width:
                           (params.NA_annual_management / maximumAnnualValue) *
+                            100 +
+                          "%",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+                <div className={styles.key_value_bar}>
+                  <div className={cn(styles.key_value)}>
+                    <span>Deprication Rate</span>
+                    <span>
+                      {currency === "USD"
+                        ? country === "North America"
+                          ? "$" +
+                            numeral(params.NA_annual_deprecation).format("0,0")
+                          : country === "South America"
+                          ? "$" +
+                            numeral(params.SA_annual_deprecation).format("0,0")
+                          : country === "Europe"
+                          ? "$" +
+                            numeral(params.EU_annual_deprecation).format("0,0")
+                          : "$" +
+                            numeral(params.AS_annual_deprecation).format("0,0")
+                        : currency === "GBP"
+                        ? country === "North America"
+                          ? "£" +
+                            numeral(
+                              params.NA_annual_deprecation * conversionRate
+                            ).format("0,0")
+                          : country === "South America"
+                          ? "£" +
+                            numeral(
+                              params.SA_annual_deprecation * conversionRate
+                            ).format("0,0")
+                          : country === "Europe"
+                          ? "£" +
+                            numeral(
+                              params.EU_annual_deprecation * conversionRate
+                            ).format("0,0")
+                          : "£" +
+                            numeral(
+                              params.AS_annual_deprecation * conversionRate
+                            ).format("0,0")
+                        : country === "North America"
+                        ? "€" +
+                          numeral(
+                            params.NA_annual_deprecation * conversionRate
+                          ).format("0,0")
+                        : country === "South America"
+                        ? "€" +
+                          numeral(
+                            params.SA_annual_deprecation * conversionRate
+                          ).format("0,0")
+                        : country === "Europe"
+                        ? "€" +
+                          numeral(
+                            params.EU_annual_deprecation * conversionRate
+                          ).format("0,0")
+                        : "€" +
+                          numeral(
+                            params.AS_annual_deprecation * conversionRate
+                          ).format("0,0")}
+                    </span>
+                  </div>
+                  <div className={cn(styles.bar)}>
+                    <div
+                      className={cn(styles.bar__fill8)}
+                      style={{
+                        width:
+                          (params.NA_annual_deprecation / maximumAnnualValue) *
                             100 +
                           "%",
                       }}

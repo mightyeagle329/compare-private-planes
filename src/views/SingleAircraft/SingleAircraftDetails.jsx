@@ -66,7 +66,7 @@ export default function SingleAircraftDetails() {
     // setSimilarAircrafts(filtered);
   };
 
-  const id = useLocation().state.id;
+  const id = useLocation().state.aircraftData.aircraft_id;
 
   const onCurrencyChanged = (val) => {
     setCurrency(val);
@@ -208,6 +208,18 @@ export default function SingleAircraftDetails() {
               setValue={(value) => onCurrencyChanged(value)}
               options={CURRENCY_OPTIONS}
             />
+            <input
+              type="button"
+              className={styles.header_btn}
+              value="Compare Aircraft"
+              onClick={() => setOpenModal(!openModal)}
+            />
+            <input
+              type="button"
+              className={styles.header_btn}
+              value="Export Report"
+              onClick={() => window.print()}
+            />{" "}
           </div>
         </div>
         <KeyFacts
@@ -217,7 +229,7 @@ export default function SingleAircraftDetails() {
           unit={unit}
         />
         <BasicInfo params={aircraftData} />
-        <PerformanceData params={aircraftData} />
+        <PerformanceData params={aircraftData} unit={unit} />
         <OwnershipCosts
           params={aircraftData}
           currency={currency}
@@ -242,7 +254,7 @@ export default function SingleAircraftDetails() {
         <Interior params={aircraftData} />
         <Features params={aircraftData} />
         <Powerplant params={aircraftData} />
-        <Weights params={aircraftData} />
+        <Weights params={aircraftData} unit={unit} />
         <Dimensions params={aircraftData} />
         <AccidentData
           params={accidentsData}
