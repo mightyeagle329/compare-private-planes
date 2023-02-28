@@ -12,6 +12,8 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const KeyFacts = ({ params, currency, country, unit }) => {
   const [keyFacts, setKeyFacts] = useState([]);
+  const [index, setindex] = useState(0);
+  const [loaded, setLoaded] = useState(false);
   const [info, setInfo] = useState([]);
   const [from, setFrom] = useState("usd");
   const [to, setTo] = useState("usd");
@@ -109,8 +111,8 @@ const KeyFacts = ({ params, currency, country, unit }) => {
         <main className={cn(styles.main_key_facts)}>
           <ul className={cn(styles.facts)}>
             <div>
-              {keyFacts.map((fact, index) => {
-                return <li key={index}>{fact}</li>;
+              {keyFacts.map((fact) => {
+                return <li>{fact}</li>;
               })}
             </div>
           </ul>
@@ -142,6 +144,7 @@ const KeyFacts = ({ params, currency, country, unit }) => {
               data={data_passengers}
               options={{
                 responsive: true,
+                cutout: 50,
                 cutout: 50,
                 plugins: {
                   tooltip: {
@@ -176,10 +179,7 @@ const KeyFacts = ({ params, currency, country, unit }) => {
               }}
             />
             <span className={styles.chart_label_range}>
-              {unit === "Imperial Units"
-                ? numeral(params.range_NM).format("0,0")
-                : numeral(params.range_km).format("0,0")}{" "}
-              <br></br>
+              {numeral(params.range_NM).format("0,0")} <br></br>
               <span className={styles.chart_label_description}>NM</span>
             </span>
           </div>
@@ -203,13 +203,13 @@ const KeyFacts = ({ params, currency, country, unit }) => {
               }}
             />
             <span className={styles.chart_label_cruise}>
-              {unit === "Imperial Units"
+              {unit == "Imperial Units"
                 ? numeral(params.high_cruise_knots).format("0,0")
                 : numeral(params.high_speed_cruise_kmh).format("0,0")}{" "}
               <br></br>
               <span className={styles.chart_label_description}>
                 {" "}
-                {unit === "Imperial Units" ? "Knots" : "Kmh"}
+                {unit == "Imperial Units" ? "Knots" : "Kmh"}
               </span>
             </span>
           </div>
@@ -295,13 +295,8 @@ const KeyFacts = ({ params, currency, country, unit }) => {
               }}
             />
             <span className={styles.chart_label_fuel}>
-              {unit === "Imperial Units"
-                ? numeral(params.hourly_fuel_burn_GPH).format("0,0")
-                : numeral(params.hourly_fuel_burn_LPH).format("0,0")}{" "}
-              <br></br>
-              <span className={styles.chart_label_description}>
-                {unit === "Imperial Units" ? "GPH" : "LPH"}
-              </span>
+              {numeral(params.hourly_fuel_burn_GPH).format("0,0")} <br></br>
+              <span className={styles.chart_label_description}>GPH</span>
             </span>
           </div>
         </div>

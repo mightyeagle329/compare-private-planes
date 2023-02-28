@@ -21,11 +21,7 @@ const Powerplant = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Thrust per Engine (lbs)
                 </span>
-                <span>
-                  {params.thrust_output_lbs === 0
-                    ? "-"
-                    : numeral(params.thrust_output_lbs).format("0,0")}
-                </span>
+                <span>{numeral(params.thrust_output_lbs).format("0,0")}</span>
               </div>
             </div>
           </div>
@@ -42,11 +38,7 @@ const Powerplant = ({ params }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Total Thrust Output (lbs)
                 </span>
-                <span>
-                  {params.total_thrust_lbs === 0
-                    ? "-"
-                    : numeral(params.total_thrust_lbs).format("0,0")}
-                </span>
+                <span>{numeral(params.total_thrust_lbs).format("0,0")}</span>
               </div>
             </div>
           </div>
@@ -69,13 +61,13 @@ const Powerplant = ({ params }) => {
                 <div className={cn(global.rows)}>
                   <div className={cn(global.row)}>
                     <span className={cn(global.value)}>
-                      {params.lateral_db === 0 ? "-" : params.lateral_db}
+                      {params.lateral_db}
                     </span>
                     <span className={cn(global.value)}>
-                      {params.flyover_db === 0 ? "-" : params.flyover_db}
+                      {params.flyover_db}
                     </span>
                     <span className={cn(global.value)}>
-                      {params.approach_db === 0 ? "-" : params.approach_db}
+                      {params.approach_db}
                     </span>
                   </div>
                 </div>

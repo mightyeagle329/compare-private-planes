@@ -21,17 +21,13 @@ const Dimensions = ({ params }) => {
                 </div>
                 <div className={cn(global.row)}>
                   <span className={cn(global.value)}>
-                    {params.ext_length_feet === 0
-                      ? "-"
-                      : params.ext_length_feet}
+                    {params.ext_length_feet}
                   </span>
                   <span className={cn(global.value)}>
-                    {params.exterior_height_feet === 0
-                      ? "-"
-                      : params.exterior_height_feet}
+                    {params.exterior_height_feet}
                   </span>
                   <span className={cn(global.value)}>
-                    {params.wingspan_feet === 0 ? "-" : params.wingspan_feet}
+                    {params.wingspan_feet}
                   </span>
                 </div>
               </div>
@@ -53,17 +49,13 @@ const Dimensions = ({ params }) => {
                 </div>
                 <div className={cn(global.row)}>
                   <span className={cn(global.value)}>
-                    {params.int_length_feet === 0
-                      ? "-"
-                      : params.int_length_feet}
+                    {params.int_length_feet}
                   </span>
                   <span className={cn(global.value)}>
-                    {params.int_height_feet === 0
-                      ? "-"
-                      : params.int_height_feet}
+                    {params.int_height_feet}
                   </span>
                   <span className={cn(global.value)}>
-                    {params.int_width_feet === 0 ? "-" : params.int_width_feet}
+                    {params.int_width_feet}
                   </span>
                 </div>
               </div>
@@ -84,14 +76,10 @@ const Dimensions = ({ params }) => {
                 </div>
                 <div className={cn(global.row)}>
                   <span className={cn(global.value)}>
-                    {params.door_height_feet === 0
-                      ? "-"
-                      : params.door_height_feet}
+                    {params.door_height_feet}
                   </span>
                   <span className={cn(global.value)}>
-                    {params.door_width_feet === 0
-                      ? "-"
-                      : params.door_width_feet}
+                    {params.door_width_feet}
                   </span>
                 </div>
               </div>

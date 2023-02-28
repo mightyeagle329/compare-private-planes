@@ -19,7 +19,7 @@ const RangeMap = ({ params }) => {
         <Map
           max_pax={params.max_pax}
           rangeDecrease={params.range_decrease_per_passenger}
-          aicraftRange={params.range_km}
+          aicraftRange={params.range_km * 1000}
         />
       </main>
     </section>
@@ -59,10 +59,21 @@ function Map({ rangeDecrease, aicraftRange, max_pax }) {
     zIndex: 1,
   };
 
+  const handlePaxChanged = (e) => {
+    setNbPax(e.target.value);
+    if (e.target.value !== "") {
+      setRange(
+        aicraftRange - parseFloat(e.target.value) * parseFloat(rangeDecrease)
+      );
+    }
+  };
+
   const handlePaxChange = (e, newValue) => {
     setNbPax(newValue);
-    if (newValue !== "") {
-      setRange(aicraftRange - parseFloat(newValue) * parseFloat(rangeDecrease));
+    if (e.target.value !== "") {
+      setRange(
+        aicraftRange - parseFloat(e.target.value) * parseFloat(rangeDecrease)
+      );
     }
   };
 

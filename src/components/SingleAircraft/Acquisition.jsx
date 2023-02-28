@@ -15,10 +15,12 @@ import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import Dropdown from "../common/Dropdown";
-import { FUTURE_OPTIONS } from "../../utils/constants/app-constants";
+import {
+  AIRFRAME_OPTIONS,
+  FUTURE_OPTIONS,
+} from "../../utils/constants/app-constants";
 import { useEffect, useState } from "react";
 import numeral from "numeral";
-import Axios from "axios";
 
 ChartJS.register(
   CategoryScale,
@@ -63,7 +65,10 @@ const Acquisition = ({ params, acquisition, currency }) => {
   const values = Object.values(acquisition);
   const labels = keys;
 
-  const [yearManufacture, setYearManufacture] = useState("Select year");
+  const [yearManufacture, setYearManufacture] = useState(Date.year);
+  useEffect(() => {
+    setYearManufacture(keys[0]);
+  }, [keys]);
 
   const [airframe, setAirframe] = useState(500);
   const [estimatedFutureValue, setestimatedFutureValue] = useState(
@@ -72,30 +77,9 @@ const Acquisition = ({ params, acquisition, currency }) => {
   const [futureValue, setfutureValue] = useState([]);
   const [hourAdjusted, setHourAdjusted] = useState([]);
   const [hourAdjustedSingleValue, setHourAdjustedSingleValue] = useState(0);
-  const [info, setInfo] = useState([]);
-  const [from, setFrom] = useState("usd");
-  const [to, setTo] = useState("usd");
-  const [conversionRate, setConversionRate] = useState(0);
+  const [year, setYear] = useState(keys[0]);
   const [i, seti] = useState(0);
   const [futureCounter, setFutureCounter] = useState(0);
-
-  useEffect(() => {
-    Axios.get(
-      `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`
-    ).then((res) => {
-      setInfo(res.data[from]);
-    });
-  }, [from]);
-
-  useEffect(() => {
-    currency === "USD"
-      ? setTo("usd")
-      : currency === "GBP"
-      ? setTo("gbp")
-      : setTo("eur");
-    setFrom("usd");
-    setConversionRate(info[to]);
-  }, [info, currency, to]);
 
   for (let counter = 0; counter < keys.length; counter++) {
     keys[counter] = keys[counter].replace("-", "");
@@ -149,11 +133,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
   };
 
   useEffect(() => {
-    if (hourAdjusted[i] !== undefined) {
-      setHourAdjustedSingleValue(hourAdjusted[i]);
-    } else {
-      setHourAdjustedSingleValue(0);
-    }
+    setHourAdjustedSingleValue(hourAdjusted[i]);
   }, [airframe, yearManufacture, i]);
 
   const data = {
@@ -201,19 +181,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
                 </span>
 
                 <span className={cn(global.green_value)}>
-                  {params.new_purchase == 0
-                    ? "-"
-                    : currency === "USD"
-                    ? "$" + numeral(params.new_purchase).format("0,0")
-                    : currency === "GBP"
-                    ? "£" +
-                      numeral(params.new_purchase * conversionRate).format(
-                        "0,0"
-                      )
-                    : "€" +
-                      numeral(params.new_purchase * conversionRate).format(
-                        "0,0"
-                      )}
+                  {numeral(params.new_purchase).format("0,0.0")}
                 </span>
               </div>
               <div
@@ -229,7 +197,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
                     global.key_realign_realign
                   )}
                 >
-                  Year of Manufacture
+                  Year of Manufacture:
                 </span>
                 <div className={styles.sorting}>
                   <div className={styles.dropdown + " " + global.pdf_hidden}>
@@ -251,17 +219,11 @@ const Acquisition = ({ params, acquisition, currency }) => {
                     global.key_realign_realign
                   )}
                 >
-                  Airframe Hours
+                  Airframe Hours:
                 </span>
                 <div className={styles.sorting}>
                   <div className={styles.dropdown}>
-                    <form
-                      className={styles.search}
-                      action=""
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                      }}
-                    >
+                    <form className={styles.search} action="">
                       <input
                         className={styles.input}
                         type="text"
@@ -284,7 +246,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
                     global.key_realign_realign
                   )}
                 >
-                  Estimated Future Value
+                  Future Value:
                 </span>
                 <div className={styles.sorting}>
                   <div className={styles.dropdown + " " + global.pdf_hidden}>
@@ -329,13 +291,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
                   Current Market Value
                 </span>
                 <span className={cn(global.green_value)}>
-                  {values[i] === 0
-                    ? "-"
-                    : currency === "USD"
-                    ? "$" + numeral(values[i]).format("0,0")
-                    : currency === "GBP"
-                    ? "£" + numeral(values[i] * conversionRate).format("0,0")
-                    : "€" + numeral(values[i] * conversionRate).format("0,0")}
+                  {numeral(values[i]).format("0,0.0")}
                 </span>
               </div>
               <div className={cn(global.row)}>
@@ -350,14 +306,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
                   Adjusted Value
                 </span>
                 <span className={cn(global.green_value)}>
-                  {hourAdjustedSingleValue === 0
-                    ? "-"
-                    : currency === "USD"
-                    ? "$" + Math.round(hourAdjustedSingleValue)
-                    : currency === "GBP"
-                    ? "£" + Math.round(hourAdjustedSingleValue * conversionRate)
-                    : "€" +
-                      Math.round(hourAdjustedSingleValue * conversionRate)}
+                  {Math.round(hourAdjustedSingleValue)}
                 </span>
               </div>
               <div className={cn(global.row)}>
@@ -372,19 +321,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
                   Future Value
                 </span>
                 <span className={cn(global.green_value)}>
-                  {futureValue[futureCounter] === 0
-                    ? "-"
-                    : currency === "USD"
-                    ? "$" + numeral(futureValue[futureCounter]).format("0,0")
-                    : currency === "GBP"
-                    ? "£" +
-                      numeral(
-                        futureValue[futureCounter] * conversionRate
-                      ).format("0,0")
-                    : "€" +
-                      numeral(
-                        futureValue[futureCounter] * conversionRate
-                      ).format("0,0")}
+                  {numeral(futureValue[futureCounter]).format("0,0.0")}
                 </span>
               </div>
             </div>

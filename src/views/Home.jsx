@@ -15,29 +15,15 @@ import {
   CATEGORY_OPTIONS_DIC,
   MANUFACTURER_OPTIONS_DIC,
   PRODUCTION_OPTIONS_DIC,
-  CURRENCY_OPTIONS,
-  COUNTRY_OPTIONS,
-  UNIT_OPTIONS,
 } from "../utils/constants/app-constants";
 import aircraftService from "../services/aircraft-service";
 import axios from "axios";
 import { MdOutlineExpandMore } from "react-icons/md";
 import styles from "../styles/Search.module.scss";
+import MultiRangeSlider from "../components/common/multiRangeSlider/MultiRangeSlider";
 import { Slider } from "@mui/material";
 
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
-function valuetext(value) {
-  return `${value}°C`;
-}
-
-const minDistance = 2;
-
 export default function Search() {
-  const [currency, setCurrency] = useState(CURRENCY_OPTIONS[0]);
-  const [country, setCountry] = useState(COUNTRY_OPTIONS[0]);
-  const [unit, setUnit] = useState(UNIT_OPTIONS[0]);
   const [passengerExpanded, setPassengerExpanded] = useState(false);
   const [rangeExpanded, setRangeExpanded] = useState(false);
   const [cruiseExpanded, setCruiseExpanded] = useState(false);
@@ -50,30 +36,18 @@ export default function Search() {
   const [annualPriceExpanded, setannualPriceExpanded] = useState(false);
   const [purchasePriceAccordion, setPurchasePriceAccordion] = useState(false);
   const [preOwnedExpanded, setpreOwnedExpanded] = useState(false);
-  const [maxPax, setMaxPax] = useState([null, null]);
-  const [range, setRange] = useState([null, null]);
-  const [cruiseSpeed, setcruiseSpeed] = useState([null, null]);
-  const [maxAltitude, setmaxAltitude] = useState([null, null]);
-  const [fuelBurn, setfuelBurn] = useState([null, null]);
-  const [baggageCapacity, setbaggageCapacity] = useState([null, null]);
-  const [takeOffDistance, settakeOffDistance] = useState([null, null]);
-  const [landingDistance, setlandingDistance] = useState([null, null]);
-  const [annualFixedCost, setannualFixedCost] = useState([null, null]);
-  const [hourlyprice, sethourlyprice] = useState([null, null]);
-  const [purchaseprice, setpurchaseprice] = useState([null, null]);
-  const [preowned, setpreowned] = useState([null, null]);
-
-  const onCurrencyChanged = (val) => {
-    setCurrency(val);
-  };
-
-  const onUnitChanged = (val) => {
-    setUnit(val);
-  };
-
-  const onCountryChanged = (val) => {
-    setCountry(val);
-  };
+  const [maxPax, setMaxPax] = useState(null);
+  const [range, setRange] = useState(null);
+  const [cruiseSpeed, setcruiseSpeed] = useState(null);
+  const [maxAltitude, setmaxAltitude] = useState(null);
+  const [fuelBurn, setfuelBurn] = useState(null);
+  const [baggageCapacity, setbaggageCapacity] = useState(null);
+  const [takeOffDistance, settakeOffDistance] = useState(null);
+  const [landingDistance, setlandingDistance] = useState(null);
+  const [annualFixedCost, setannualFixedCost] = useState(null);
+  const [hourlyprice, sethourlyprice] = useState(null);
+  const [purchaseprice, setpurchaseprice] = useState(null);
+  const [preowned, setpreowned] = useState(null);
 
   const handlePassengerAccordion = () => {
     setPassengerExpanded(!passengerExpanded);
@@ -114,35 +88,22 @@ export default function Search() {
   const handlePreOwnedAccordion = () => {
     setpreOwnedExpanded(!preOwnedExpanded);
   };
-
   const [search, setSearch] = useState({
     aircraft_name: "",
     category: "",
     in_production: "",
     aircraft_manufacturer: "",
     max_pax: 120,
-    max_pax_min: 0,
-    range_NM_min: 0,
     range_NM: 3000,
-    high_cruise_knots_min: 0,
     high_cruise_knots: 12312,
-    max_altitude_feet_min: 0,
     max_altitude_feet: 12312,
-    hourly_fuel_burn_GPH_min: 0,
     hourly_fuel_burn_GPH: 10000,
-    baggage_capacity_CF_min: 0,
     baggage_capacity_CF: 10000,
-    TO_distance_feet_min: 0,
     TO_distance_feet: 10000,
-    landing_distance_feet_min: 0,
     landing_distance_feet: 10000,
-    annual_cost_min: 0,
     annual_cost: 1000000,
-    estimated_hourly_charter_min: 0,
     estimated_hourly_charter: 1000000,
-    new_purchase_min: 0,
     new_purchase: 10000000,
-    average_pre_owned_min: 0,
     average_pre_owned: 1000000,
   });
   const debouncedSearchTerm = useDebounce(search, 500);
@@ -158,220 +119,60 @@ export default function Search() {
     searchAircraft();
   }, [search]);
 
-  const handleRangeChanged = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      setRange([Math.min(newValue[0], range[1] - minDistance), range[1]]);
-    } else {
-      setRange([range[0], Math.max(newValue[1], range[0] + minDistance)]);
-    }
-    handleSearchChanged("range_NM", newValue[1]);
-    handleSearchChanged("range_NM_min", newValue[0]);
+  const handlePaxChanged = (event, newValue) => {
+    setMaxPax(newValue);
+    handleSearchChanged("max_pax", newValue);
   };
 
-  const handlePaxChanged = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      setMaxPax([Math.min(newValue[0], maxPax[1] - minDistance), maxPax[1]]);
-    } else {
-      setMaxPax([maxPax[0], Math.max(newValue[1], maxPax[0] + minDistance)]);
-    }
-    handleSearchChanged("max_pax", newValue[1]);
-    handleSearchChanged("max_pax_min", newValue[0]);
+  const handleRangeChanged = (event, newValue) => {
+    setRange(newValue);
+    handleSearchChanged("range_NM", newValue);
   };
 
-  const handleCruiseChanged = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      setcruiseSpeed([
-        Math.min(newValue[0], cruiseSpeed[1] - minDistance),
-        cruiseSpeed[1],
-      ]);
-    } else {
-      setcruiseSpeed([
-        cruiseSpeed[0],
-        Math.max(newValue[1], cruiseSpeed[0] + minDistance),
-      ]);
-    }
-    handleSearchChanged("high_cruise_knots", newValue[1]);
-    handleSearchChanged("high_cruise_knots_min", newValue[0]);
+  const handleCruiseChanged = (event, newValue) => {
+    setcruiseSpeed(newValue);
+    handleSearchChanged("high_cruise_knots", newValue);
   };
 
-  const handleMaxAltitudeChanged = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      setmaxAltitude([
-        Math.min(newValue[0], maxAltitude[1] - minDistance),
-        maxAltitude[1],
-      ]);
-    } else {
-      setmaxAltitude([
-        maxAltitude[0],
-        Math.max(newValue[1], maxAltitude[0] + minDistance),
-      ]);
-    }
-    handleSearchChanged("max_altitude_feet", newValue[1]);
-    handleSearchChanged("max_altitude_feet_min", newValue[0]);
+  const handleMaxAltitudeChanged = (event, newValue) => {
+    setmaxAltitude(newValue);
+    handleSearchChanged("max_altitude_feet", newValue);
   };
 
-  const handleFuelBurnChanged = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      setfuelBurn([
-        Math.min(newValue[0], fuelBurn[1] - minDistance),
-        fuelBurn[1],
-      ]);
-    } else {
-      setfuelBurn([
-        fuelBurn[0],
-        Math.max(newValue[1], fuelBurn[0] + minDistance),
-      ]);
-    }
-    handleSearchChanged("hourly_fuel_burn_GPH", newValue[1]);
-    handleSearchChanged("hourly_fuel_burn_GPH_min", newValue[0]);
+  const handleFuelBurnChanged = (event, newValue) => {
+    setfuelBurn(newValue);
+    handleSearchChanged("hourly_fuel_burn_GPH", newValue);
   };
 
-  const handleBaggageCapacityChanged = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      setbaggageCapacity([
-        Math.min(newValue[0], baggageCapacity[1] - minDistance),
-        baggageCapacity[1],
-      ]);
-    } else {
-      setbaggageCapacity([
-        baggageCapacity[0],
-        Math.max(newValue[1], baggageCapacity[0] + minDistance),
-      ]);
-    }
-    handleSearchChanged("baggage_capacity_CF", newValue[1]);
-    handleSearchChanged("baggage_capacity_CF_min", newValue[0]);
+  const handleBaggageCapacityChanged = (event, newValue) => {
+    setbaggageCapacity(newValue);
+    handleSearchChanged("baggage_capacity_CF", newValue);
   };
 
-  const handleTakeOffChanged = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      settakeOffDistance([
-        Math.min(newValue[0], takeOffDistance[1] - minDistance),
-        takeOffDistance[1],
-      ]);
-    } else {
-      settakeOffDistance([
-        takeOffDistance[0],
-        Math.max(newValue[1], takeOffDistance[0] + minDistance),
-      ]);
-    }
-    handleSearchChanged("TO_distance_feet", newValue[1]);
-    handleSearchChanged("TO_distance_feet_min", newValue[0]);
+  const handleTakeOffChanged = (event, newValue) => {
+    settakeOffDistance(newValue);
+    handleSearchChanged("TO_distance_feet", newValue);
   };
 
-  const handleLandingDistanceChanged = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      setlandingDistance([
-        Math.min(newValue[0], landingDistance[1] - minDistance),
-        landingDistance[1],
-      ]);
-    } else {
-      setlandingDistance([
-        landingDistance[0],
-        Math.max(newValue[1], landingDistance[0] + minDistance),
-      ]);
-    }
-    handleSearchChanged("landing_distance_feet", newValue[1]);
-    handleSearchChanged("landing_distance_feet_min", newValue[0]);
+  const handleLandingDistanceChanged = (event, newValue) => {
+    setlandingDistance(newValue);
+    handleSearchChanged("landing_distance_feet", newValue);
   };
-
-  const handleAnnualFixedChanged = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      setannualFixedCost([
-        Math.min(newValue[0], annualFixedCost[1] - minDistance),
-        annualFixedCost[1],
-      ]);
-    } else {
-      setannualFixedCost([
-        annualFixedCost[0],
-        Math.max(newValue[1], annualFixedCost[0] + minDistance),
-      ]);
-    }
-    handleSearchChanged("annual_cost", newValue[1]);
-    handleSearchChanged("annual_cost_min", newValue[0]);
+  const handleAnnualFixedChanged = (event, newValue) => {
+    setannualFixedCost(newValue);
+    handleSearchChanged("annual_cost", newValue);
   };
-
-  const handleHourlyPriceChange = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      sethourlyprice([
-        Math.min(newValue[0], hourlyprice[1] - minDistance),
-        hourlyprice[1],
-      ]);
-    } else {
-      sethourlyprice([
-        hourlyprice[0],
-        Math.max(newValue[1], hourlyprice[0] + minDistance),
-      ]);
-    }
-    handleSearchChanged("estimated_hourly_charter", newValue[1]);
-    handleSearchChanged("estimated_hourly_charter_min", newValue[0]);
+  const handleHourlyPriceChange = (event, newValue) => {
+    sethourlyprice(newValue);
+    handleSearchChanged("estimated_hourly_charter", newValue);
   };
-
-  const handlePurchasePriceChanged = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      setpurchaseprice([
-        Math.min(newValue[0], purchaseprice[1] - minDistance),
-        purchaseprice[1],
-      ]);
-    } else {
-      setpurchaseprice([
-        purchaseprice[0],
-        Math.max(newValue[1], purchaseprice[0] + minDistance),
-      ]);
-    }
-    handleSearchChanged("new_purchase", newValue[1]);
-    handleSearchChanged("new_purchase_min", newValue[0]);
+  const handlePurchasePriceChanged = (event, newValue) => {
+    setpurchaseprice(newValue);
+    handleSearchChanged("new_purchase", newValue);
   };
-
-  const handlePreOwnedChanged = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (activeThumb === 0) {
-      setpreowned([
-        Math.min(newValue[0], preowned[1] - minDistance),
-        preowned[1],
-      ]);
-    } else {
-      setpreowned([
-        preowned[0],
-        Math.max(newValue[1], preowned[0] + minDistance),
-      ]);
-    }
-    handleSearchChanged("average_pre_owned", newValue[1]);
-    handleSearchChanged("average_pre_owned_min", newValue[0]);
+  const handlePreOwnedChanged = (event, newValue) => {
+    setpreowned(newValue);
+    handleSearchChanged("average_pre_owned", newValue);
   };
 
   const handleSearchChanged = (key, value) => {
@@ -456,11 +257,7 @@ export default function Search() {
                   className={styles.dropdown}
                   value={
                     PRODUCTION_OPTIONS_DIC[
-                      search.in_production === true
-                        ? "Yes"
-                        : search.in_production === false
-                        ? "No"
-                        : "Select"
+                      search.in_production === true ? "Yes" : "No"
                     ]
                   }
                   setValue={(value) =>
@@ -483,19 +280,15 @@ export default function Search() {
                   aria-controls="panel4bh-content"
                   id="panel4bh-header"
                 >
-                  <div className={styles.label}>
-                    Max Passengers: {maxPax[0]} - {maxPax[1]}
-                  </div>
+                  <div className={styles.label}>Max Passengers: {maxPax}</div>
                 </AccordionSummary>
                 <div className={styles.range}>
                   <Slider
                     className={styles.slider_home}
-                    getAriaLabel={() => "Minimum passengers"}
+                    aria-label="Volume"
                     value={maxPax}
                     max={20}
                     onChange={handlePaxChanged}
-                    valueLabelDisplay="auto"
-                    disableSwap
                   />
                 </div>
               </Accordion>
@@ -511,19 +304,15 @@ export default function Search() {
                   aria-controls="panel4bh-content"
                   id="panel4bh-header"
                 >
-                  <div className={styles.label}>
-                    Max Range: {range[0]} - {range[1]}
-                  </div>
+                  <div className={styles.label}>Max Range: {range}</div>
                 </AccordionSummary>
                 <div className={styles.range}>
                   <Slider
                     className={styles.slider_home}
-                    getAriaLabel={() => "Minimum distance"}
+                    aria-label="Volume"
                     value={range}
-                    max={3000}
+                    max={300}
                     onChange={handleRangeChanged}
-                    valueLabelDisplay="auto"
-                    disableSwap
                   />
                 </div>
               </Accordion>
@@ -540,18 +329,16 @@ export default function Search() {
                   id="panel4bh-header"
                 >
                   <div className={styles.label}>
-                    Cruise Speed (Knots): {cruiseSpeed[0]} - {cruiseSpeed[1]}
+                    Cruise Speed (Knots): {cruiseSpeed}
                   </div>
                 </AccordionSummary>
                 <div className={styles.range}>
                   <Slider
                     className={styles.slider_home}
-                    getAriaLabel={() => "Minimum cruise"}
-                    value={maxPax}
+                    aria-label="Volume"
+                    value={cruiseSpeed}
                     max={3000}
                     onChange={handleCruiseChanged}
-                    valueLabelDisplay="auto"
-                    disableSwap
                   />
                 </div>
               </Accordion>
@@ -568,18 +355,16 @@ export default function Search() {
                   id="panel4bh-header"
                 >
                   <div className={styles.label}>
-                    Max Altitude (Feet): {maxAltitude[0]} - {maxAltitude[1]}
+                    Max Altitude (Feet): {maxAltitude}
                   </div>
                 </AccordionSummary>
                 <div className={styles.range}>
                   <Slider
                     className={styles.slider_home}
-                    getAriaLabel={() => "Minimum altitude"}
+                    aria-label="Volume"
                     value={maxAltitude}
                     max={30000}
                     onChange={handleMaxAltitudeChanged}
-                    valueLabelDisplay="auto"
-                    disableSwap
                   />
                 </div>
               </Accordion>
@@ -596,18 +381,16 @@ export default function Search() {
                   id="panel4bh-header"
                 >
                   <div className={styles.label}>
-                    Fuel Burn (Gallons/Hour): {fuelBurn[0]} - {fuelBurn[1]}
+                    Fuel Burn (Gallons/Hour): {fuelBurn}
                   </div>
                 </AccordionSummary>
                 <div className={styles.range}>
                   <Slider
                     className={styles.slider_home}
-                    getAriaLabel={() => "Minimum fuel"}
+                    aria-label="Volume"
                     value={fuelBurn}
                     max={3000}
                     onChange={handleFuelBurnChanged}
-                    valueLabelDisplay="auto"
-                    disableSwap
                   />
                 </div>
               </Accordion>
@@ -624,19 +407,16 @@ export default function Search() {
                   id="panel4bh-header"
                 >
                   <div className={styles.label}>
-                    Baggage Capacity (cu ft): {baggageCapacity[0]} -{" "}
-                    {baggageCapacity[1]}
+                    Baggage Capacity (cu ft): {baggageCapacity}
                   </div>
                 </AccordionSummary>
                 <div className={styles.range}>
                   <Slider
                     className={styles.slider_home}
-                    getAriaLabel={() => "Minimum baggage"}
+                    aria-label="Volume"
                     value={baggageCapacity}
                     max={3000}
                     onChange={handleBaggageCapacityChanged}
-                    valueLabelDisplay="auto"
-                    disableSwap
                   />
                 </div>
               </Accordion>
@@ -653,19 +433,16 @@ export default function Search() {
                   id="panel4bh-header"
                 >
                   <div className={styles.label}>
-                    Take-Off Distance (feet): {takeOffDistance[0]} -{" "}
-                    {takeOffDistance[1]}
+                    Take-Off Distance (feet): {takeOffDistance}
                   </div>
                 </AccordionSummary>
                 <div className={styles.range}>
                   <Slider
                     className={styles.slider_home}
-                    getAriaLabel={() => "Minimum takeoff"}
+                    aria-label="Volume"
                     value={takeOffDistance}
                     max={3000}
                     onChange={handleTakeOffChanged}
-                    valueLabelDisplay="auto"
-                    disableSwap
                   />
                 </div>
               </Accordion>
@@ -682,19 +459,16 @@ export default function Search() {
                   id="panel4bh-header"
                 >
                   <div className={styles.label}>
-                    Landing Distance (feet): {landingDistance[0]} -{" "}
-                    {landingDistance[1]}
+                    Landing Distance (feet): {landingDistance}
                   </div>
                 </AccordionSummary>
                 <div className={styles.range}>
                   <Slider
                     className={styles.slider_home}
-                    getAriaLabel={() => "Minimum landing"}
+                    aria-label="Volume"
                     value={landingDistance}
                     max={3000}
                     onChange={handleLandingDistanceChanged}
-                    valueLabelDisplay="auto"
-                    disableSwap
                   />
                 </div>
               </Accordion>
@@ -711,19 +485,16 @@ export default function Search() {
                   id="panel4bh-header"
                 >
                   <div className={styles.label}>
-                    Annual Fixed Cost ($): {annualFixedCost[0]} -{" "}
-                    {annualFixedCost[1]}
+                    Annual Fixed Cost ($): {annualFixedCost}
                   </div>
                 </AccordionSummary>
                 <div className={styles.range}>
                   <Slider
                     className={styles.slider_home}
-                    getAriaLabel={() => "Minimum fixed cost"}
+                    aria-label="Volume"
                     value={annualFixedCost}
                     max={30000}
                     onChange={handleAnnualFixedChanged}
-                    valueLabelDisplay="auto"
-                    disableSwap
                   />
                 </div>
               </Accordion>
@@ -740,18 +511,16 @@ export default function Search() {
                   id="panel4bh-header"
                 >
                   <div className={styles.label}>
-                    Hourly Price ($): {hourlyprice[0]} - {hourlyprice[1]}
+                    Hourly Price ($): {hourlyprice}
                   </div>
                 </AccordionSummary>
                 <div className={styles.range}>
                   <Slider
                     className={styles.slider_home}
-                    getAriaLabel={() => "Minimum hourly price"}
+                    aria-label="Volume"
                     value={hourlyprice}
                     max={10000}
                     onChange={handleHourlyPriceChange}
-                    valueLabelDisplay="auto"
-                    disableSwap
                   />
                 </div>
               </Accordion>
@@ -768,19 +537,17 @@ export default function Search() {
                   id="panel4bh-header"
                 >
                   <div className={styles.label}>
-                    Purchase Price ($): {purchaseprice[0]} - {purchaseprice[1]}
+                    Purchase Price ($): {purchaseprice}
                   </div>
                 </AccordionSummary>
                 <div className={styles.range}>
                   <Slider
                     className={styles.slider_home}
-                    getAriaLabel={() => "Minimum purchase"}
+                    aria-label="Volume"
                     value={purchaseprice}
-                    max={1000000}
                     min={100000}
+                    max={1000000}
                     onChange={handlePurchasePriceChanged}
-                    valueLabelDisplay="auto"
-                    disableSwap
                   />
                 </div>
               </Accordion>
@@ -797,68 +564,38 @@ export default function Search() {
                   id="panel4bh-header"
                 >
                   <div className={styles.label}>
-                    Pre-Owned ($ million): {preowned[0]} - {preowned[1]}
+                    Pre-Owned ($ million): {preowned}
                   </div>
                 </AccordionSummary>
                 <div className={styles.range}>
                   <Slider
                     className={styles.slider_home}
-                    getAriaLabel={() => "Minimum preowned"}
+                    aria-label="Volume"
                     value={preowned}
-                    max={1000000}
-                    min={100000}
+                    max={300}
                     onChange={handlePreOwnedChanged}
-                    valueLabelDisplay="auto"
-                    disableSwap
                   />
                 </div>
               </Accordion>
             </div>
           </div>
           <div className={styles.wrapper}>
-            <div className={styles.dropdown}>
-              <Dropdown
-                className={styles.dropdown}
-                value={unit}
-                setValue={(value) => onUnitChanged(value)}
-                options={UNIT_OPTIONS}
-              />
-              <Dropdown
-                className={styles.dropdown}
-                value={country}
-                setValue={(value) => onCountryChanged(value)}
-                options={COUNTRY_OPTIONS}
-              />
-              <Dropdown
-                className={styles.dropdown}
-                value={currency}
-                setValue={(value) => onCurrencyChanged(value)}
-                options={CURRENCY_OPTIONS}
-              />
-            </div>
             <div className={styles.list}>
               {filterResult?.length ? (
                 filterResult?.map((product) => (
-                  <>
-                    <Card
-                      className={styles.card}
-                      item={product}
-                      key={product.aircraft_id}
-                      unit={unit}
-                      currency={currency}
-                      country={country}
-                    />
-                  </>
+                  <Card
+                    className={styles.card}
+                    item={product}
+                    key={product.aircraft_id}
+                  />
                 ))
               ) : aircraftsData?.length ? (
                 aircraftsData?.map((product) => (
-                  <>
-                    <Card
-                      className={styles.card}
-                      item={product}
-                      key={product.aircraft_id}
-                    />
-                  </>
+                  <Card
+                    className={styles.card}
+                    item={product}
+                    key={product.aircraft_id}
+                  />
                 ))
               ) : (
                 <p className={styles.inform}>Loading</p>

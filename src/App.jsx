@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./views/Home";
+// import SingleAircraftDetails from "./views/singleAircraft/SingleAircraftDetails";
 import Header from "./components/common/header/index";
-import Footer from "./components/common/footer";
 
 function App() {
   return (
@@ -10,9 +10,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Home />} />
       </Routes>
-      <Footer />
     </>
   );
 }
-
 export default App;

@@ -22,11 +22,7 @@ const BasicInfo = ({ params }) => {
                 >
                   Production Start
                 </span>
-                <span>
-                  {params.production_start === ""
-                    ? "-"
-                    : params.production_start}
-                </span>
+                <span>{params.production_start}</span>
               </div>
               <div className={cn(global.row)}>
                 <span
@@ -39,9 +35,7 @@ const BasicInfo = ({ params }) => {
                 >
                   Production End
                 </span>
-                <span>
-                  {params.production_end === "" ? "-" : params.production_end}
-                </span>
+                <span>{params.production_end}</span>
               </div>
               <div className={cn(global.row)}>
                 <span
@@ -72,11 +66,7 @@ const BasicInfo = ({ params }) => {
                 >
                   Number Made
                 </span>
-                <span>
-                  {params.number_made === 0
-                    ? "-"
-                    : numeral(params.number_made).format("0,0")}
-                </span>
+                <span>{numeral(params.number_made).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span
@@ -89,20 +79,16 @@ const BasicInfo = ({ params }) => {
                 >
                   Number in Service
                 </span>
-                <span>
-                  {params.number_in_service === 0
-                    ? "-"
-                    : numeral(params.number_in_service).format("0,0")}
-                </span>
+                <span>{numeral(params.number_in_service).format("0,0")}</span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
-                  Average Preowned
+                  Serial Number Range
                 </span>
                 <span>
-                  {params.average_pre_owned === 0
+                  {params.serial_numbers === 0
                     ? "-"
-                    : numeral(params.average_pre_owned).format("0,0")}
+                    : numeral(params.serial_numbers).format("0,0")}
                 </span>
               </div>
             </div>

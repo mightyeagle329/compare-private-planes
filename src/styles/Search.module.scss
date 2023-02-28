@@ -78,8 +78,18 @@
   }
 
   .sorting {
+    display: flex;
     align-items: center;
   }
+
+  .dropdown {
+    width: 256px;
+    margin-right: auto;
+  }
+
+  //   .form {
+  //     margin-bottom: 48px;
+  //   }
 
   .nav {
     display: flex;
@@ -118,16 +128,8 @@
   }
 
   .wrapper {
-    flex-grow: 1;
+    // flex-grow: 1;
     padding-left: 32px;
-
-    .dropdown {
-      display: flex;
-      flex-direction: row;
-      width: 80%;
-      justify-content: center;
-      gap: 10px;
-    }
   }
 
   .filters {
@@ -144,6 +146,8 @@
   }
 
   .range {
+
+
     align-items: center;
   }
 
@@ -209,12 +213,19 @@
 
   .list {
     display: grid;
-    gap: 1rem;
-    place-items: center;
-    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    // margin: -32px -16px 0;
   }
 
   .card {
+    flex: 0 0 calc(50% - 32px);
+    // flex: 1;
+    max-width: calc(50% - 32px);
+    min-width: 350px;
     height: 49rem;
     margin: 32px 16px 0;
     padding: 12px;
@@ -225,23 +236,6 @@
   .btns {
     margin-top: 32px;
     text-align: center;
-  }
-}
-
-@media (min-width: 600px) {
-  .dropdown {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 900px) {
-  .list {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -268,20 +262,13 @@
 
         i {
           font-size: 20px;
+
         }
       }
     }
 
     .wrapper {
       padding: 0 10px;
-      width: 100%;
-
-      .dropdown {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 10px;
-      }
     }
 
     .filters {
@@ -291,6 +278,7 @@
       background-color: white;
       width: 100%;
       padding: 10px;
+
     }
 
     .open {
@@ -299,6 +287,7 @@
 
     .list {
       margin: -32px -16px 0;
+
     }
 
     .card {
@@ -308,4 +297,6 @@
       margin: 32px 16px 0;
     }
   }
+
+
 }

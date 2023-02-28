@@ -3,7 +3,7 @@ import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import numeral from "numeral";
 
-const Weights = ({ params, unit }) => {
+const Weights = ({ params }) => {
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Weights" />
@@ -81,8 +81,7 @@ const Weights = ({ params, unit }) => {
           <div className={cn(global.details_table)}>
             <div className={cn(global.column)}>
               <span className={cn(global.column_header)}>
-                Baggage Capacity{" "}
-                {unit === "Imerial Units" ? "(cubic feet)" : "(cubic meters)"}
+                Baggage Capacity (cubic feet)
               </span>
               <div className={cn(global.rows)}>
                 <div className={cn(global.row)}>
@@ -92,31 +91,13 @@ const Weights = ({ params, unit }) => {
                 </div>
                 <div className={cn(global.row)}>
                   <span className={cn(global.value)}>
-                    {unit === "Imerial Units"
-                      ? params.baggage_capacity_CF === 0
-                        ? "-"
-                        : params.baggage_capacity_CF
-                      : params.baggage_capacity_cubicmeters === 0
-                      ? "-"
-                      : params.baggage_capacity_cubicmeters}
+                    {params.baggage_capacity_cubicmeters}
                   </span>
                   <span className={cn(global.value)}>
-                    {unit === "Imerial Units"
-                      ? params.internal_baggage_cubicfeet === 0
-                        ? "-"
-                        : params.internal_baggage_cubicfeet
-                      : params.internal_baggage_cubicmeters === 0
-                      ? "-"
-                      : params.internal_baggage_cubicmeters}
+                    {params.internal_baggage_cubicfeet}
                   </span>
                   <span className={cn(global.value)}>
-                    {unit === "Imerial Units"
-                      ? params.external_baggage_CF === 0
-                        ? "-"
-                        : params.external_baggage_CF
-                      : params.external_baggage_cubicmeters === 0
-                      ? "-"
-                      : params.external_baggage_cubicmeters}
+                    {params.external_baggage_cubicfeet}
                   </span>
                 </div>
               </div>
