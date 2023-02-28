@@ -21,7 +21,7 @@ const AccidentData = ({ params, nbAccidents, aircraftName }) => {
 
   return (
     <section className={cn(global.section)}>
-      <SectionHeader title="Accident DataBase" />
+      <SectionHeader title="Accident Database" />
       <main className={cn(styles.main_accidentData)}>
         <table className={cn(global.table)}>
           <thead>
@@ -35,18 +35,22 @@ const AccidentData = ({ params, nbAccidents, aircraftName }) => {
             </tr>
           </thead>
           <tbody>
-            {accidents.map((accident) => {
-              return (
-                <tr className={cn(global.tr)} key={accident.reg}>
-                  <td className={cn(global._padding)}>{accident.country}</td>
-                  <td>{accident.aircraft_incident}</td>
-                  <td>{accident.reg}</td>
-                  <td>{accident.date}</td>
-                  <td>{accident.occurrence}</td>
-                  <td>{accident.details}</td>
-                </tr>
-              );
-            })}
+            {accidents.length !== 0 ? (
+              accidents.map((accident) => {
+                return (
+                  <tr className={cn(global.tr)} key={accident.reg}>
+                    <td className={cn(global._padding)}>{accident.country}</td>
+                    <td>{accident.aircraft_incident}</td>
+                    <td>{accident.reg}</td>
+                    <td>{accident.date}</td>
+                    <td>{accident.occurrence}</td>
+                    <td>{accident.details}</td>
+                  </tr>
+                );
+              })
+            ) : (
+              <p>No Known Accident History</p>
+            )}
           </tbody>
         </table>
         {/* <div className={cn(global.pagination_container, global.pdf_hidden)}>

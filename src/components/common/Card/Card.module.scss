@@ -9,9 +9,10 @@
     display: grid;
     place-items: center;
 
-    & img {
+    img {
       border-radius: 16px;
       max-width: 100%;
+      width: 300px;
       min-height: 200px;
       max-height: 250px;
       margin: 0 auto;
