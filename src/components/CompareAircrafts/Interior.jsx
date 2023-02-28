@@ -5,7 +5,7 @@ import styles from "./styles/styles.module.scss";
 
 import SectionHeader from "../shared/SectionHeader";
 
-const Interior = ({ data }) => {
+const Interior = ({ data, currency, country, unit }) => {
   return (
     <>
       <section className={cn(global.section, global.page_break)}>

@@ -5,7 +5,7 @@ import styles from "./styles/styles.module.scss";
 
 import SectionHeader from "../shared/SectionHeader";
 
-const Features = ({ data }) => {
+const Features = ({ data, currency, country, unit }) => {
   return (
     <>
       <section className={cn(global.section)}>

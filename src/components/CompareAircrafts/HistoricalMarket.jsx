@@ -28,7 +28,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const HistoricalMarket = () => {
+const HistoricalMarket = ({ params, currency, country, unit }) => {
   const options = {
     responsive: true,
     plugins: {
@@ -65,7 +65,7 @@ const HistoricalMarket = () => {
   };
   return (
     <>
-      <section className={cn(global.section,global.page_break)}>
+      <section className={cn(global.section, global.page_break)}>
         <SectionHeader title="Historical Market Activity" />
         <main>
           <div className={cn(outerStyles.plot_btn_container)}>

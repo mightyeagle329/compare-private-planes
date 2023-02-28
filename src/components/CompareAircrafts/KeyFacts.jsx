@@ -3,9 +3,13 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
 import SectionHeader from "../shared/SectionHeader";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const KeyFacts = ({ data, onRemoveAircraft }) => {
   const [aircraftsData, setAircraftsData] = useState(data);
+  const [keyFacts0, setKeyFacts0] = useState([]);
+  const [keyFacts1, setKeyFacts1] = useState([]);
+  const [keyFacts2, setKeyFacts2] = useState([]);
+
   const removeAircraft = (aircraft) => {
     if (aircraftsData.length === 1)
       return alert("You must have at least one aircraft to compare");
@@ -14,13 +18,24 @@ const KeyFacts = ({ data, onRemoveAircraft }) => {
     onRemoveAircraft(data);
   };
 
+  useEffect(() => {
+    if (aircraftsData[0] !== undefined) {
+      setKeyFacts0(aircraftsData[0].key_facts.split("\n"));
+      setKeyFacts1(aircraftsData[1].key_facts.split("\n"));
+      if (aircraftsData[2] !== undefined) {
+        setKeyFacts2(aircraftsData[2].key_facts.split("\n"));
+      }
+    } else {
+    }
+  }, [aircraftsData[0].key_facts]);
+
   return (
     <>
       <section className={cn(global.section)}>
         <SectionHeader title="Key Facts" />
         <main className={cn(styles.key_facts_container)}>
           <div className={cn(styles.facts)}>
-            {aircraftsData.map((aircraft) => {
+            {aircraftsData.map((aircraft, index) => {
               return (
                 <div className={cn(styles.fact)} key={aircraft.aircraft_id}>
                   <h2>{aircraft.aircraft_name}</h2>
@@ -39,7 +54,17 @@ const KeyFacts = ({ data, onRemoveAircraft }) => {
                     <img src={aircraft.image_name} alt="" />
                   </div>
                   <ul>
-                    <li>{aircraft.key_facts} </li>
+                    {index === 0
+                      ? keyFacts0.map((fact, index) => {
+                          return <li key={index}>{fact}</li>;
+                        })
+                      : index === 1
+                      ? keyFacts1.map((fact, index) => {
+                          return <li key={index}>{fact}</li>;
+                        })
+                      : keyFacts2.map((fact, index) => {
+                          return <li key={index}>{fact}</li>;
+                        })}
                   </ul>
                 </div>
               );

@@ -3,6 +3,7 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
 import SectionHeader from "../shared/SectionHeader";
+import numeral from "numeral";
 
 const BasicInfo = ({ data }) => {
   return (
@@ -93,13 +94,19 @@ const BasicInfo = ({ data }) => {
                     {aircraft.in_production ? "Yes" : "No"}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.number_made}
+                    {aircraft.number_made === 0
+                      ? "-"
+                      : numeral(aircraft.number_made).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.number_made}
+                    {aircraft.number_in_service === 0
+                      ? "-"
+                      : numeral(aircraft.number_in_service).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.serial_numbers}
+                    {aircraft.serial_numbers === 0
+                      ? "-"
+                      : numeral(aircraft.serial_numbers).format("0,0")}
                   </span>
                 </div>
               );

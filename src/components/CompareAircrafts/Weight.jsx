@@ -4,7 +4,7 @@ import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import styles from "./styles/styles.module.scss";
 
-const Weights = ({ data }) => {
+const Weights = ({ data, currency, country, unit }) => {
   return (
     <>
       <section className={cn(global.section)}>

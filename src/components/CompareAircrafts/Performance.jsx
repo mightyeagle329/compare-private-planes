@@ -2,10 +2,10 @@ import React from "react";
 import cn from "classnames";
 import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
-
+import numeral from "numeral";
 import SectionHeader from "../shared/SectionHeader";
 
-const Performance = ({ data }) => {
+const Performance = ({ data, currency, country, unit }) => {
   return (
     <>
       <section className={cn(global.section, global.page_break)}>
@@ -35,7 +35,7 @@ const Performance = ({ data }) => {
                   styles.table_key
                 )}
               >
-                Range (Miles)
+                Range {unit === "Imperial Units" ? "(Miles)" : "(KM)"}
               </span>
               <span
                 className={cn(
@@ -43,7 +43,7 @@ const Performance = ({ data }) => {
                   styles.table_key
                 )}
               >
-                Fuel Burn (GPH)
+                Fuel Burn {unit === "Imperial Units" ? "(GPH)" : "(LPH)"}
               </span>
               <span
                 className={cn(
@@ -51,7 +51,7 @@ const Performance = ({ data }) => {
                   styles.table_key
                 )}
               >
-                Max Altitude (Feet)
+                Max Altitude {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <span
                 className={cn(
@@ -59,7 +59,8 @@ const Performance = ({ data }) => {
                   styles.table_key
                 )}
               >
-                Rate of Climb (Feet/Min)
+                Rate of Climb{" "}
+                {unit === "Imperial Units" ? "(Feet / Min)" : "(Meters / Min)"}
               </span>
               <span
                 className={cn(
@@ -67,7 +68,8 @@ const Performance = ({ data }) => {
                   styles.table_key
                 )}
               >
-                Initial Cruise Altitude (Feet)
+                Initial Cruise Altitude{" "}
+                {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <span
                 className={cn(
@@ -75,7 +77,8 @@ const Performance = ({ data }) => {
                   styles.table_key
                 )}
               >
-                Take-Off Distance (Feet)
+                Take-Off Distance{" "}
+                {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <span
                 className={cn(
@@ -83,7 +86,8 @@ const Performance = ({ data }) => {
                   styles.table_key
                 )}
               >
-                Landing Distance (Feet)
+                Landing Distance{" "}
+                {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
             </div>
             {data.map((aircraft) => {
@@ -101,28 +105,74 @@ const Performance = ({ data }) => {
                     {aircraft.aircraft_name}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.range_NM}
+                    {aircraft.range_NM === 0
+                      ? "-"
+                      : numeral(aircraft.range_NM).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.range_Miles}
+                    {unit === "Imperial Units"
+                      ? aircraft.range_Miles === 0
+                        ? "-"
+                        : numeral(aircraft.range_Miles).format("0,0")
+                      : aircraft.range_km === 0
+                      ? "-"
+                      : numeral(aircraft.range_km).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.hourly_fuel_burn_GPH}
+                    {unit === "Imperial Units"
+                      ? aircraft.hourly_fuel_burn_GPH === 0
+                        ? "-"
+                        : numeral(aircraft.hourly_fuel_burn_GPH).format("0,0")
+                      : aircraft.hourly_fuel_burn_LPH === 0
+                      ? "-"
+                      : numeral(aircraft.hourly_fuel_burn_LPH).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.max_altitude_feet}
+                    {aircraft.max_altitude_feet === 0
+                      ? "-"
+                      : unit === "Imperial Units"
+                      ? numeral(aircraft.max_altitude_feet).format("0,0")
+                      : numeral(aircraft.max_altitude_meters).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.rate_climb}
+                    {unit === "Imperial Units"
+                      ? aircraft.rate_climb === 0
+                        ? "-"
+                        : numeral(aircraft.rate_climb).format("0,0")
+                      : aircraft.rate_climb_meters === 0
+                      ? "-"
+                      : numeral(aircraft.rate_climb_meters).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.initial_cruise_altitude}
+                    {unit === "Imperial Units"
+                      ? aircraft.initial_cruise_altitude === 0
+                        ? "-"
+                        : numeral(aircraft.initial_cruise_altitude).format(
+                            "0,0"
+                          )
+                      : aircraft.initial_cruise_altitude_meters === 0
+                      ? "-"
+                      : numeral(aircraft.initial_cruise_altitude_meters).format(
+                          "0,0"
+                        )}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.TO_distance_feet}
+                    {unit === "Imperial Units"
+                      ? aircraft.TO_distance_feet === 0
+                        ? "-"
+                        : numeral(aircraft.TO_distance_feet).format("0,0")
+                      : aircraft.TO_distance_meters === 0
+                      ? "-"
+                      : numeral(aircraft.TO_distance_meters).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.landing_distance_feet}
+                    {unit === "Imperial Units"
+                      ? aircraft.landing_distance_feet === 0
+                        ? "-"
+                        : numeral(aircraft.landing_distance_feet).format("0,0")
+                      : aircraft.landing_distance_meters === 0
+                      ? "-"
+                      : numeral(aircraft.landing_distance_meters).format("0,0")}
                   </span>
                 </div>
               );

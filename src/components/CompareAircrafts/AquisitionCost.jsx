@@ -26,7 +26,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const AquisitionCost = ({ data }) => {
+const AquisitionCost = ({ data, currency, country, unit }) => {
   const options = {
     responsive: true,
     plugins: {

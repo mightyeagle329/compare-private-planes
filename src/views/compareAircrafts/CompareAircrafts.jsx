@@ -19,19 +19,40 @@ import Powerplant from "../../components/CompareAircrafts/Powerplant";
 import Range from "../../components/CompareAircrafts/Range";
 import Weights from "../../components/CompareAircrafts/Weight";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import styles from "./styles.module.scss";
+import Dropdown from "../../components/common/Dropdown";
+import {
+  COUNTRY_OPTIONS,
+  CURRENCY_OPTIONS,
+  UNIT_OPTIONS,
+} from "../../utils/constants/app-constants";
 
 const CompareAircrafts = () => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
-  // location.state.selectedAircrfts is an array of selected aircraft IDs,
-  // which you can use to fetch the data for the selected aircrafts
-  // and pass them as props
+
+  const [unit, setUnit] = useState(UNIT_OPTIONS[0]);
+  const [currency, setCurrency] = useState(CURRENCY_OPTIONS[0]);
+  const [country, setCountry] = useState(COUNTRY_OPTIONS[0]);
+  const [openModal, setOpenModal] = useState(false);
   const location = useLocation();
   const aircrafts = location.state;
   const [aircraftsData, setAircraftsData] = useState(aircrafts);
+
+  const onCurrencyChanged = (val) => {
+    setCurrency(val);
+  };
+
+  const onUnitChanged = (val) => {
+    setUnit(val);
+  };
+
+  const onCountryChanged = (val) => {
+    setCountry(val);
+  };
+
   const onRemoveAircraft = (data) => {
     setAircraftsData(data);
   };
@@ -80,25 +101,110 @@ const CompareAircrafts = () => {
           </footer> */}
         </div>
       </div>
+
       <main className={cn(global.wrapper)}>
+        <div className={styles.sorting}>
+          <div className={styles.dropdown}>
+            <Dropdown
+              className={styles.dropdown}
+              value={unit}
+              setValue={(value) => onUnitChanged(value)}
+              options={UNIT_OPTIONS}
+            />
+            <Dropdown
+              className={styles.dropdown}
+              value={country}
+              setValue={(value) => onCountryChanged(value)}
+              options={COUNTRY_OPTIONS}
+            />
+            <Dropdown
+              className={styles.dropdown}
+              value={currency}
+              setValue={(value) => onCurrencyChanged(value)}
+              options={CURRENCY_OPTIONS}
+            />
+            <input
+              type="button"
+              className={styles.header_btn}
+              value="Export Report"
+              onClick={() => window.print()}
+            />{" "}
+          </div>
+        </div>
         <KeyFacts data={aircraftsData} onRemoveAircraft={onRemoveAircraft} />
         <BascInfo data={aircraftsData} />
-        <Performance data={aircraftsData} />
-        <OwnershipCost data={aircraftsData} />
-        <AquisitionCost data={aircraftsData} />
-        <HistoricalMarket data={aircraftsData} />
-        <Range data={aircraftsData} />
-        <Maintenance data={aircraftsData} />
-        <Interior data={aircraftsData} />
-        <Features data={aircraftsData} />
-        <Powerplant data={aircraftsData} />
-        <Weights data={aircraftsData} />
-        <Dimensions data={aircraftsData} />
+        <Performance
+          data={aircraftsData}
+          currency={currency}
+          country={country}
+          unit={unit}
+        />
+        <OwnershipCost
+          data={aircraftsData}
+          currency={currency}
+          country={country}
+          unit={unit}
+        />
+        <AquisitionCost
+          data={aircraftsData}
+          currency={currency}
+          country={country}
+          unit={unit}
+        />
+        <HistoricalMarket
+          params={aircraftsData}
+          currency={currency}
+          country={country}
+          unit={unit}
+        />
+        <Range
+          data={aircraftsData}
+          currency={currency}
+          country={country}
+          unit={unit}
+        />
+        <Maintenance
+          data={aircraftsData}
+          currency={currency}
+          country={country}
+          unit={unit}
+        />
+        <Interior
+          data={aircraftsData}
+          currency={currency}
+          country={country}
+          unit={unit}
+        />
+        <Features
+          data={aircraftsData}
+          currency={currency}
+          country={country}
+          unit={unit}
+        />
+        <Powerplant
+          data={aircraftsData}
+          currency={currency}
+          country={country}
+          unit={unit}
+        />
+        <Weights
+          data={aircraftsData}
+          currency={currency}
+          country={country}
+          unit={unit}
+        />
+        <Dimensions
+          data={aircraftsData}
+          currency={currency}
+          country={country}
+          unit={unit}
+        />
         <div className={cn(global.footer)}>
           <div>
             <div className={cn(global.btns_container)}>
-              <button className={cn(global.action_btn, global.pdf_hidden)}
-              onClick={() => window.print()}
+              <button
+                className={cn(global.action_btn, global.pdf_hidden)}
+                onClick={() => window.print()}
               >
                 Export Report as PDF
               </button>

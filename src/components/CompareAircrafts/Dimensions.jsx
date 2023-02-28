@@ -4,7 +4,7 @@ import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import styles from "./styles/styles.module.scss";
 
-const Dimensions = ({ data }) => {
+const Dimensions = ({ data, currency, country, unit }) => {
   return (
     <>
       <section className={cn(global.section, global.page_break)}>

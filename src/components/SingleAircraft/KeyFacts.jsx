@@ -43,6 +43,7 @@ const KeyFacts = ({ params, currency, country, unit }) => {
     } else {
     }
   }, [params.key_facts]);
+
   const data_passengers = {
     datasets: [
       {

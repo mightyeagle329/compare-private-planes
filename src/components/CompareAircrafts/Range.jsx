@@ -3,7 +3,7 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 
-const Range = () => {
+const Range = (data, currency, country, unit) => {
   return (
     <>
       <section className={cn(global.section)}>

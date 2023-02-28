@@ -27,9 +27,6 @@ const PerformanceData = ({ params, unit }) => {
                   Range {unit === "Imperial Units" ? "(Miles)" : "(KM)"}
                 </span>
                 <span>
-                  {params.range_Miles === 0
-                    ? "-"
-                    : numeral(params.range_Miles).format("0,0")}
                   {unit === "Imperial Units"
                     ? params.range_Miles === 0
                       ? "-"
@@ -98,13 +95,10 @@ const PerformanceData = ({ params, unit }) => {
                 </span>
                 <span>
                   {unit === "Imperial Units"
-                    ? numeral(params.initial_cruise_altitude).format("0,0") ===
-                      0
+                    ? params.initial_cruise_altitude === 0
                       ? "-"
                       : numeral(params.initial_cruise_altitude).format("0,0")
-                    : numeral(params.initial_cruise_altitude_meters).format(
-                        "0,0"
-                      ) === 0
+                    : params.initial_cruise_altitude_meters === 0
                     ? "-"
                     : numeral(params.initial_cruise_altitude_meters).format(
                         "0,0"
