@@ -107,18 +107,21 @@ const CompareAircrafts = () => {
           <div className={styles.dropdown}>
             <Dropdown
               className={styles.dropdown}
+              headerDropdown={true}
               value={unit}
               setValue={(value) => onUnitChanged(value)}
               options={UNIT_OPTIONS}
             />
             <Dropdown
               className={styles.dropdown}
+              headerDropdown={true}
               value={country}
               setValue={(value) => onCountryChanged(value)}
               options={COUNTRY_OPTIONS}
             />
             <Dropdown
               className={styles.dropdown}
+              headerDropdown={true}
               value={currency}
               setValue={(value) => onCurrencyChanged(value)}
               options={CURRENCY_OPTIONS}

@@ -819,11 +819,13 @@ export default function Search() {
             <div className={styles.dropdown}>
               <Dropdown
                 className={styles.dropdown}
+                headerDropdown={true}
                 value={unit}
                 setValue={(value) => onUnitChanged(value)}
                 options={UNIT_OPTIONS}
               />
               <Dropdown
+                headerDropdown={true}
                 className={styles.dropdown}
                 value={country}
                 setValue={(value) => onCountryChanged(value)}
@@ -831,6 +833,7 @@ export default function Search() {
               />
               <Dropdown
                 className={styles.dropdown}
+                headerDropdown={true}
                 value={currency}
                 setValue={(value) => onCurrencyChanged(value)}
                 options={CURRENCY_OPTIONS}

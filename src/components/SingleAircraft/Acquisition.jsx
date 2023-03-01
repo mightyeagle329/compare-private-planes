@@ -105,7 +105,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
     futureValue[k] =
       values[k] *
       Math.pow(
-        100 - parseFloat(params.depreication_rate) / 100,
+        (100 - parseFloat(params.depreication_rate)) / 100,
         parseFloat(estimatedFutureValue)
       );
     futureValue[k].toFixed(2);
@@ -353,11 +353,16 @@ const Acquisition = ({ params, acquisition, currency }) => {
                   {hourAdjustedSingleValue === 0
                     ? "-"
                     : currency === "USD"
-                    ? "$" + Math.round(hourAdjustedSingleValue)
+                    ? "$" + numeral(hourAdjustedSingleValue).format("0,0.00")
                     : currency === "GBP"
-                    ? "£" + Math.round(hourAdjustedSingleValue * conversionRate)
+                    ? "£" +
+                      numeral(hourAdjustedSingleValue * conversionRate).format(
+                        "0,0.00"
+                      )
                     : "€" +
-                      Math.round(hourAdjustedSingleValue * conversionRate)}
+                      numeral(hourAdjustedSingleValue * conversionRate).format(
+                        "0,0.00"
+                      )}
                 </span>
               </div>
               <div className={cn(global.row)}>
