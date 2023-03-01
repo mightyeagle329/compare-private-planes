@@ -4,6 +4,7 @@ import SectionHeader from "../shared/SectionHeader";
 import { GoogleMap, Circle, LoadScript, Marker } from "@react-google-maps/api";
 import { useState } from "react";
 import Slider from "@mui/material/Slider";
+import TextField from "@mui/material/TextField";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -86,24 +87,25 @@ function Map({ rangeDecrease, aicraftRange, max_pax }) {
           }) => (
             <div className={styles.range_configs}>
               <div className={styles.map_inputs}>
+                <label htmlFor="paxNumber" className={styles.pax_slider}>
+                  Pax number
+                  <Slider
+                    valueLabelDisplay="auto"
+                    aria-label="Volume"
+                    value={nbPax}
+                    max={max_pax}
+                    onChange={handlePaxChange}
+                  />
+                </label>
                 <label htmlFor="startLocation">
-                  Start location
-                  <input
+                  <TextField
                     {...getInputProps({
                       placeholder: "Start location",
                       className: "location-search-input",
                     })}
                     id="startLocation"
-                    className={styles.map_input}
-                  />
-                </label>
-                <label htmlFor="paxNumber">
-                  Pax number: {nbPax}
-                  <Slider
-                    aria-label="Volume"
-                    value={nbPax}
-                    max={max_pax}
-                    onChange={handlePaxChange}
+                    label="Start Location"
+                    variant="standard"
                   />
                 </label>
               </div>

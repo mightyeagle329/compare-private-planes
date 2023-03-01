@@ -599,26 +599,17 @@
       flex-direction: column;
       align-items: center;
 
+      .pax_slider {
+        width: 170px;
+        align-items: start !important;
+        text-align: left !important;
+      }
+
       label {
         display: grid;
         place-items: center;
         max-width: 200px;
         margin: 0 auto;
-      }
-
-      .map_input {
-        margin-top: 10px;
-        max-width: 120px;
-        height: 30px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-shadow: 0px 0px 2px 0px rgba(99, 99, 99, 0.75);
-        padding: 0 5px;
-        outline: none;
-
-        &:focus {
-          border: 1px solid rgb(139, 139, 139);
-        }
       }
 
     }
