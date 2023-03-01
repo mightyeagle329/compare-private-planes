@@ -79,28 +79,56 @@ const Weights = ({ params, unit }) => {
                 <span className={cn(global.key, global.key_realign)}>
                   Max Ramp Weight {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
                 </span>
-                <span>{numeral(params.max_ramp_weight_lbs).format("0,0")}</span>
+                <span>
+                  {unit === "Imperial Units"
+                    ? params.max_ramp_weight_lbs === 0
+                      ? "-"
+                      : numeral(params.max_ramp_weight_lbs).format("0,0")
+                    : params.max_ramp_weight_kgs === 0
+                    ? "-"
+                    : numeral(params.max_ramp_weight_kgs).format("0,0")}
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Available Fuel {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
                 </span>
-                <span>{numeral(params.available_fuel_lbs).format("0,0")}</span>
+                <span>
+                  {unit === "Imperial Units"
+                    ? params.available_fuel_lbs === 0
+                      ? "-"
+                      : numeral(params.available_fuel_lbs).format("0,0")
+                    : params.available_fuel_kgs === 0
+                    ? "-"
+                    : numeral(params.available_fuel_kgs).format("0,0")}
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Useful Payload {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
                 </span>
-                <span>{numeral(params.useful_load_lbs).format("0,0")}</span>
+                <span>
+                  {unit === "Imperial Units"
+                    ? params.useful_load_lbs === 0
+                      ? "-"
+                      : numeral(params.useful_load_lbs).format("0,0")
+                    : params.useful_payloads_kgs === 0
+                    ? "-"
+                    : numeral(params.useful_payloads_kgs).format("0,0")}
+                </span>
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.key, global.key_realign)}>
                   Baggage Weight {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
                 </span>
                 <span>
-                  {params.baggage_weight_lbs !== 0
-                    ? numeral(params.baggage_weight_lbs).format("0,0")
-                    : "-"}
+                  {unit === "Imperial Units"
+                    ? params.baggage_weight_lbs === 0
+                      ? "-"
+                      : numeral(params.baggage_weight_lbs).format("0,0")
+                    : params.baggage_weight_kgs === 0
+                    ? "-"
+                    : numeral(params.baggage_weight_kgs).format("0,0")}
                 </span>
               </div>
             </div>
@@ -133,12 +161,12 @@ const Weights = ({ params, unit }) => {
                   </span>
                   <span className={cn(global.value)}>
                     {unit === "Imperial Units"
-                      ? params.internal_baggage_cubicfeet === 0
+                      ? params.internal_baggage_CF === 0
                         ? "-"
-                        : params.internal_baggage_cubicfeet
+                        : params.internal_baggage_CF
                       : params.internal_baggage_cubicmeters === 0
                       ? "-"
-                      : params.internal_baggage_cubicmeters}
+                      : params.internal_baggage_cubicmeters}{" "}
                   </span>
                   <span className={cn(global.value)}>
                     {unit === "Imperial Units"

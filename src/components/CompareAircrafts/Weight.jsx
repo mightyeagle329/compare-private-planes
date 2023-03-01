@@ -131,37 +131,113 @@ const Weights = ({ data, currency, country, unit }) => {
                     {aircraft.aircraft_name}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.MTOW_kgs}
+                    {unit === "Imperial Units"
+                      ? aircraft.MTOW_lbs === 0
+                        ? "-"
+                        : numeral(aircraft.MTOW_lbs).format("0,0")
+                      : aircraft.MTOW_kgs === 0
+                      ? "-"
+                      : numeral(aircraft.MTOW_kgs).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.max_landing_weight_lbs}
+                    {unit === "Imperial Units"
+                      ? aircraft.max_landing_weight_lbs === 0
+                        ? "-"
+                        : numeral(aircraft.max_landing_weight_lbs).format("0,0")
+                      : aircraft.max_landing_weight_kgs === 0
+                      ? "-"
+                      : numeral(aircraft.max_landing_weight_kgs).format(
+                          "0,0"
+                        )}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.max_ramp_weight_lbs}
+                    {unit === "Imperial Units"
+                      ? aircraft.max_ramp_weight_lbs === 0
+                        ? "-"
+                        : numeral(aircraft.max_ramp_weight_lbs).format("0,0")
+                      : aircraft.max_ramp_weight_kgs === 0
+                      ? "-"
+                      : numeral(aircraft.max_ramp_weight_kgs).format(
+                          "0,0"
+                        )}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.available_fuel_lbs}
+                    {unit === "Imperial Units"
+                      ? aircraft.available_fuel_lbs === 0
+                        ? "-"
+                        : numeral(aircraft.available_fuel_lbs).format("0,0")
+                      : aircraft.available_fuel_kgs === 0
+                      ? "-"
+                      : numeral(aircraft.available_fuel_kgs).format("0,0")}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.max_payload_lbs}
+                    {unit === "Imperial Units"
+                      ? aircraft.max_payload_lbs === 0
+                        ? "-"
+                        : numeral(aircraft.max_payload_lbs).format("0,0")
+                      : aircraft.max_payload_kgs === 0
+                      ? "-"
+                      : numeral(aircraft.max_payload_kgs).format("0,0")}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.useful_load_lbs}
+                    {unit === "Imperial Units"
+                      ? aircraft.useful_load_lbs === 0
+                        ? "-"
+                        : numeral(aircraft.useful_load_lbs).format("0,0")
+                      : aircraft.useful_payloads_kgs === 0
+                      ? "-"
+                      : numeral(aircraft.useful_payloads_kgs).format(
+                          "0,0"
+                        )}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.basic_operating_weight_lbs}
+                    {unit === "Imperial Units"
+                      ? aircraft.basic_operating_weight_lbs === 0
+                        ? "-"
+                        : numeral(aircraft.basic_operating_weight_lbs).format(
+                            "0,0"
+                          )
+                      : aircraft.basic_operating_weight_kgs === 0
+                      ? "-"
+                      : numeral(aircraft.basic_operating_weight_kgs).format(
+                          "0,0"
+                        )}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.baggage_weight_lbs}
+                    {unit === "Imperial Units"
+                      ? aircraft.baggage_weight_lbs === 0
+                        ? "-"
+                        : numeral(aircraft.baggage_weight_lbs).format("0,0")
+                      : aircraft.baggage_weight_kgs === 0
+                      ? "-"
+                      : numeral(aircraft.baggage_weight_kgs).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.baggage_capacity_cubicmeters}
+                    {unit === "Imperial Units"
+                      ? aircraft.baggage_capacity_CF === 0
+                        ? "-"
+                        : aircraft.baggage_capacity_CF
+                      : aircraft.baggage_capacity_cubicmeters === 0
+                      ? "-"
+                      : aircraft.baggage_capacity_cubicmeters}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.internal_baggage_cubicfeet}
+                    {unit === "Imperial Units"
+                      ? aircraft.internal_baggage_CF === 0
+                        ? "-"
+                        : aircraft.internal_baggage_CF
+                      : aircraft.internal_baggage_cubicmeters === 0
+                      ? "-"
+                      : aircraft.internal_baggage_cubicmeters}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.external_baggage_cubicfeet}
+                    {unit === "Imperial Units"
+                      ? aircraft.external_baggage_CF === 0
+                        ? "-"
+                        : aircraft.external_baggage_CF
+                      : aircraft.external_baggage_cubicmeters === 0
+                      ? "-"
+                      : aircraft.external_baggage_cubicmeters}
                   </span>
                 </div>
               );

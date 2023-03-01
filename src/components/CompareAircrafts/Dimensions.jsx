@@ -26,7 +26,8 @@ const Dimensions = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Exterior Length (feet)
+                Exterior Length{" "}
+                {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <span
                 className={cn(
@@ -34,7 +35,8 @@ const Dimensions = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Exterior Height (feet)
+                Exterior Height{" "}
+                {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <span
                 className={cn(
@@ -42,7 +44,7 @@ const Dimensions = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Wingspan (feet)
+                Wingspan {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <span
                 className={cn(
@@ -50,7 +52,8 @@ const Dimensions = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Interior Length (feet)
+                Interior Length{" "}
+                {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <span
                 className={cn(
@@ -58,7 +61,8 @@ const Dimensions = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Interior Height (feet)
+                Interior Height{" "}
+                {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <span
                 className={cn(
@@ -66,7 +70,8 @@ const Dimensions = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Interior Width (feet)
+                Interior Width{" "}
+                {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <span
                 className={cn(
@@ -74,7 +79,7 @@ const Dimensions = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Door Height (feet)
+                Door Height {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
               <span
                 className={cn(
@@ -82,7 +87,7 @@ const Dimensions = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Door Width (feet)
+                Door Width {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
             </div>
             {data.map((aircraft) => {
@@ -100,28 +105,70 @@ const Dimensions = ({ data, currency, country, unit }) => {
                     {aircraft.aircraft_name}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.ext_length_feet}
+                    {aircraft.ext_length_feet === 0
+                      ? "-"
+                      : unit === "Imperial Units"
+                      ? aircraft.ext_length_feet
+                      : aircraft.ext_length_meters}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.exterior_height_feet}
+                    {aircraft.exterior_height_feet === 0
+                      ? "-"
+                      : unit === "Imperial Units"
+                      ? aircraft.exterior_height_feet
+                      : aircraft.ext_height_meters}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.wingspan_feet}
+                    {aircraft.wingspan_feet === 0
+                      ? "-"
+                      : unit === "Imperial Units"
+                      ? aircraft.wingspan_feet
+                      : aircraft.wingspan_meters}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.int_length_feet}
+                    {unit === "Imperial Units"
+                      ? aircraft.int_length_feet === 0
+                        ? "-"
+                        : aircraft.int_length_feet
+                      : aircraft.int_length_meters === 0
+                      ? "-"
+                      : aircraft.int_length_meters}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.int_height_feet}
+                    {unit === "Imperial Units"
+                      ? aircraft.int_height_feet === 0
+                        ? "-"
+                        : aircraft.int_height_feet
+                      : aircraft.int_height_meters === 0
+                      ? "-"
+                      : aircraft.int_height_meters}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.int_width_feet}
+                    {unit === "Imperial Units"
+                      ? aircraft.int_width_feet === 0
+                        ? "-"
+                        : aircraft.int_width_feet
+                      : aircraft.int_width_meters === 0
+                      ? "-"
+                      : aircraft.int_width_meters}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.door_height_feet}
+                    {unit === "Imperial Units"
+                      ? aircraft.door_height_feet === 0
+                        ? "-"
+                        : aircraft.door_height_feet
+                      : aircraft.door_height_meters === 0
+                      ? "-"
+                      : aircraft.door_height_meters}{" "}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.door_width_feet}
+                    {unit === "Imperial Units"
+                      ? aircraft.door_width_feet === 0
+                        ? "-"
+                        : aircraft.door_width_feet
+                      : aircraft.door_width_meters === 0
+                      ? "-"
+                      : aircraft.door_width_meters}{" "}
                   </span>
                 </div>
               );

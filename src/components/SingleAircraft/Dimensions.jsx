@@ -24,15 +24,23 @@ const Dimensions = ({ params, unit }) => {
                   <span className={cn(global.value)}>
                     {params.ext_length_feet === 0
                       ? "-"
-                      : params.ext_length_feet}
+                      : unit === "Imperial Units"
+                      ? params.ext_length_feet
+                      : params.ext_length_meters}
                   </span>
                   <span className={cn(global.value)}>
                     {params.exterior_height_feet === 0
                       ? "-"
-                      : params.exterior_height_feet}
+                      : unit === "Imperial Units"
+                      ? params.exterior_height_feet
+                      : params.ext_height_meters}
                   </span>
                   <span className={cn(global.value)}>
-                    {params.wingspan_feet === 0 ? "-" : params.wingspan_feet}
+                    {params.wingspan_feet === 0
+                      ? "-"
+                      : unit === "Imperial Units"
+                      ? params.wingspan_feet
+                      : params.wingspan_meters}
                   </span>
                 </div>
               </div>
