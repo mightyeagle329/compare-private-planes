@@ -2,7 +2,7 @@ import React from "react";
 import cn from "classnames";
 import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
-
+import numeral from "numeral";
 import SectionHeader from "../shared/SectionHeader";
 
 const Features = ({ data, currency, country, unit }) => {
@@ -101,7 +101,9 @@ const Features = ({ data, currency, country, unit }) => {
                     {aircraft.aircraft_name}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.minimum_pilots}
+                    {aircraft.minimum_pilots === 0
+                      ? "-"
+                      : aircraft.minimum_pilots}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
                     {aircraft.typical_avionic_suite}

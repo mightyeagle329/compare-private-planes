@@ -89,6 +89,77 @@ const Performance = ({ data, currency, country, unit }) => {
                 Landing Distance{" "}
                 {unit === "Imperial Units" ? "(Feet)" : "(Meters)"}
               </span>
+              <span
+                className={cn(
+                  styles.compare_table_column_cell,
+                  styles.table_key
+                )}
+              ></span>
+              <span
+                className={cn(
+                  styles.compare_table_column_cell,
+                  styles.table_key
+                )}
+              >
+                High Speed Cruise:
+              </span>
+              <span
+                className={cn(
+                  styles.compare_table_column_cell,
+                  styles.table_key
+                )}
+              >
+                Knots
+              </span>
+              <span
+                className={cn(
+                  styles.compare_table_column_cell,
+                  styles.table_key
+                )}
+              >
+                {unit === "Imperial Units" ? "MPH" : "KMH"}
+              </span>
+              <span
+                className={cn(
+                  styles.compare_table_column_cell,
+                  styles.table_key
+                )}
+              >
+                Mach
+              </span>
+
+              <span
+                className={cn(
+                  styles.compare_table_column_cell,
+                  styles.table_key
+                )}
+              >
+                Long Speed Cruise:
+              </span>
+              <span
+                className={cn(
+                  styles.compare_table_column_cell,
+                  styles.table_key
+                )}
+              >
+                Knots
+              </span>
+              <span
+                className={cn(
+                  styles.compare_table_column_cell,
+                  styles.table_key
+                )}
+              >
+                {unit === "Imperial Units" ? "MPH" : "KMH"}
+              </span>
+              <span
+                className={cn(
+                  styles.compare_table_column_cell,
+                  styles.table_key
+                )}
+              >
+                Mach
+              </span>
             </div>
             {data.map((aircraft) => {
               return (
@@ -173,6 +244,50 @@ const Performance = ({ data, currency, country, unit }) => {
                       : aircraft.landing_distance_meters === 0
                       ? "-"
                       : numeral(aircraft.landing_distance_meters).format("0,0")}
+                  </span>
+                  <span className={cn(styles.compare_table_column_cell)}></span>
+                  <span className={cn(styles.compare_table_column_cell)}></span>
+                  <span className={cn(styles.compare_table_column_cell)}></span>
+                  <span className={cn(styles.compare_table_column_cell)}>
+                    {aircraft.high_cruise_knots === 0
+                      ? "-"
+                      : numeral(aircraft.high_cruise_knots).format("0,0")}
+                  </span>
+                  <span className={cn(styles.compare_table_column_cell)}>
+                    {unit === "Imperial Units"
+                      ? aircraft.high_cruise_MPH === 0
+                        ? "-"
+                        : numeral(aircraft.high_cruise_MPH).format("0,0")
+                      : aircraft.high_speed_cruise_kmh === 0
+                      ? "-"
+                      : numeral(aircraft.high_speed_cruise_kmh).format("0,0")}
+                  </span>
+                  <span className={cn(styles.compare_table_column_cell)}>
+                    {aircraft.high_cruise_Mach === 0
+                      ? "-"
+                      : numeral(aircraft.high_cruise_Mach).format("0,0")}
+                  </span>
+                  <span className={cn(styles.compare_table_column_cell)}></span>
+                  <span className={cn(styles.compare_table_column_cell)}></span>
+                  <span className={cn(styles.compare_table_column_cell)}></span>
+                  <span className={cn(styles.compare_table_column_cell)}>
+                    {aircraft.long_range_cruise_knots === 0
+                      ? "-"
+                      : numeral(aircraft.long_range_cruise_knots).format("0,0")}
+                  </span>
+                  <span className={cn(styles.compare_table_column_cell)}>
+                    {unit === "Imperial Units"
+                      ? aircraft.long_range_cruise_MPH === 0
+                        ? "-"
+                        : numeral(aircraft.long_range_cruise_MPH).format("0,0")
+                      : aircraft.long_range_cruise_kmh === 0
+                      ? "-"
+                      : numeral(aircraft.long_range_cruise_kmh).format("0,0")}
+                  </span>
+                  <span className={cn(styles.compare_table_column_cell)}>
+                    {aircraft.long_range_cruise_Mach === 0
+                      ? "-"
+                      : numeral(aircraft.long_range_cruise_Mach).format("0,0")}
                   </span>
                 </div>
               );

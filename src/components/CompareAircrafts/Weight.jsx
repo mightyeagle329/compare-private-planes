@@ -3,6 +3,7 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import styles from "./styles/styles.module.scss";
+import numeral from "numeral";
 
 const Weights = ({ data, currency, country, unit }) => {
   return (
@@ -26,7 +27,8 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Max Take-Off Weight (lbs)
+                Max Take-Off Weight{" "}
+                {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
               </span>
               <span
                 className={cn(
@@ -34,7 +36,8 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Max Landing Weight (lbs)
+                Max Landing Weight{" "}
+                {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
               </span>
               <span
                 className={cn(
@@ -42,7 +45,7 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Max Ramp Weight (lbs)
+                Max Ramp Weight {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
               </span>
               <span
                 className={cn(
@@ -50,7 +53,7 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Available Fuel (lbs)
+                Available Fuel {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
               </span>
               <span
                 className={cn(
@@ -58,7 +61,7 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Max Payload (lbs)
+                Max Payload {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
               </span>
               <span
                 className={cn(
@@ -66,7 +69,7 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Useful Payload (lbs)
+                Useful Payload {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
               </span>
               <span
                 className={cn(
@@ -74,7 +77,8 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Basic Operating Weight (lbs)
+                Basic Operating Weight{" "}
+                {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
               </span>
               <span
                 className={cn(
@@ -82,7 +86,7 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Baggage Weight (lbs)
+                Baggage Weight {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
               </span>
               <span
                 className={cn(
@@ -90,7 +94,8 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Total Baggage (cubic feet)
+                Total Baggage{" "}
+                {unit === "Imperial Units" ? "(cubic feet)" : "(cubic meters)"}
               </span>
               <span
                 className={cn(
@@ -98,7 +103,8 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Internal Baggage (cubic feet)
+                Internal Baggage{" "}
+                {unit === "Imperial Units" ? "(cubic feet)" : "(cubic meters)"}
               </span>
               <span
                 className={cn(
@@ -106,7 +112,8 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                External Baggage (cubic feet)
+                External Baggage{" "}
+                {unit === "Imperial Units" ? "(cubic feet)" : "(cubic meters)"}
               </span>
             </div>
             {data.map((aircraft) => {

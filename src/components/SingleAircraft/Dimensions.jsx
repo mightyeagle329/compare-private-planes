@@ -55,7 +55,7 @@ const Dimensions = ({ params, unit }) => {
                 </div>
                 <div className={cn(global.row)}>
                   <span className={cn(global.value)}>
-                    {unit === "Imerial Units"
+                    {unit === "Imperial Units"
                       ? params.int_length_feet === 0
                         ? "-"
                         : params.int_length_feet
@@ -64,7 +64,7 @@ const Dimensions = ({ params, unit }) => {
                       : params.int_length_meters}
                   </span>
                   <span className={cn(global.value)}>
-                    {unit === "Imerial Units"
+                    {unit === "Imperial Units"
                       ? params.int_height_feet === 0
                         ? "-"
                         : params.int_height_feet
@@ -73,7 +73,7 @@ const Dimensions = ({ params, unit }) => {
                       : params.int_height_meters}
                   </span>
                   <span className={cn(global.value)}>
-                    {unit === "Imerial Units"
+                    {unit === "Imperial Units"
                       ? params.int_width_feet === 0
                         ? "-"
                         : params.int_width_feet
@@ -101,7 +101,7 @@ const Dimensions = ({ params, unit }) => {
                 </div>
                 <div className={cn(global.row)}>
                   <span className={cn(global.value)}>
-                    {unit === "Imerial Units"
+                    {unit === "Imperial Units"
                       ? params.door_height_feet === 0
                         ? "-"
                         : params.door_height_feet
@@ -110,7 +110,7 @@ const Dimensions = ({ params, unit }) => {
                       : params.door_height_meters}
                   </span>
                   <span className={cn(global.value)}>
-                    {unit === "Imerial Units"
+                    {unit === "Imperial Units"
                       ? params.door_width_feet === 0
                         ? "-"
                         : params.door_width_feet

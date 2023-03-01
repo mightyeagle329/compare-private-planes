@@ -147,13 +147,14 @@ const OwnershipCosts = ({ params, currency, country }) => {
     setNbHours(e.target.value);
     setAnnualBudget(
       currency !== "USD"
-        ? (country === "North America"
+        ? ((country === "North America"
             ? parseFloat(params.NA_annual_total)
             : country === "Europe"
             ? parseFloat(params.EU_annual_total)
             : country === "South America"
             ? parseFloat(params.SA_annual_total)
-            : parseFloat(params.AS_annual_total) + parseFloat(e.target.value)) *
+            : parseFloat(params.AS_annual_total)) +
+            parseFloat(e.target.value)) *
             conversionRate
         : (country === "North America"
             ? parseFloat(params.NA_annual_total)
@@ -161,13 +162,13 @@ const OwnershipCosts = ({ params, currency, country }) => {
             ? parseFloat(params.EU_annual_total)
             : country === "South America"
             ? parseFloat(params.SA_annual_total)
-            : parseFloat(params.AS_annual_total) + parseFloat(e.target.value)) +
-            parseFloat(e.target.value)
+            : parseFloat(params.AS_annual_total)) + parseFloat(e.target.value)
     );
     if (e.target.value === "") {
       setAnnualBudget(params.NA_annual_total);
     }
   };
+
   return (
     <section className={cn(global.section) + " " + global.page_break}>
       <SectionHeader title="Ownership Costs" />

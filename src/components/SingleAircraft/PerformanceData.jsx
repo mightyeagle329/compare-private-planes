@@ -158,7 +158,9 @@ const PerformanceData = ({ params, unit }) => {
               </div>
               <div className={cn(global.row)}>
                 <span className={cn(global.value)}>
-                  {numeral(params.long_range_cruise_knots).format("0,0")}
+                  {params.long_range_cruise_knots === 0
+                    ? "-"
+                    : numeral(params.long_range_cruise_knots).format("0,0")}
                 </span>
                 <span className={cn(global.value)}>
                   {unit === "Imperial Units"
@@ -170,7 +172,9 @@ const PerformanceData = ({ params, unit }) => {
                     : numeral(params.long_range_cruise_kmh).format("0,0")}
                 </span>
                 <span className={cn(global.value)}>
-                  {numeral(params.long_range_cruise_Mach).format("0,0")}
+                  {params.long_range_cruise_Mach === 0
+                    ? "-"
+                    : numeral(params.long_range_cruise_Mach).format("0,0")}
                 </span>
               </div>
             </div>

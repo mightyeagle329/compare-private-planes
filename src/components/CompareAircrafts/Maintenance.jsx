@@ -69,16 +69,16 @@ const MainTenance = ({ data, currency, country, unit }) => {
                     {aircraft.aircraft_name}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.a_check} hours
+                    {aircraft.a_check === "0" ? "-" : aircraft.a_check}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.b_check} hours
+                    {aircraft.b_check === "0" ? "-" : aircraft.b_check}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.c_check} hours
+                    {aircraft.c_check === "0" ? "-" : aircraft.c_check}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.d_check} hours
+                    {aircraft.d_check === "0" ? "-" : aircraft.d_check}
                   </span>
                 </div>
               );

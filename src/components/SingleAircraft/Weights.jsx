@@ -113,7 +113,7 @@ const Weights = ({ params, unit }) => {
             <div className={cn(global.column)}>
               <span className={cn(global.column_header)}>
                 Baggage Capacity{" "}
-                {unit === "Imerial Units" ? "(cubic feet)" : "(cubic meters)"}
+                {unit === "Imperial Units" ? "(cubic feet)" : "(cubic meters)"}
               </span>
               <div className={cn(global.rows)}>
                 <div className={cn(global.row)}>
@@ -123,7 +123,7 @@ const Weights = ({ params, unit }) => {
                 </div>
                 <div className={cn(global.row)}>
                   <span className={cn(global.value)}>
-                    {unit === "Imerial Units"
+                    {unit === "Imperial Units"
                       ? params.baggage_capacity_CF === 0
                         ? "-"
                         : params.baggage_capacity_CF
@@ -132,7 +132,7 @@ const Weights = ({ params, unit }) => {
                       : params.baggage_capacity_cubicmeters}
                   </span>
                   <span className={cn(global.value)}>
-                    {unit === "Imerial Units"
+                    {unit === "Imperial Units"
                       ? params.internal_baggage_cubicfeet === 0
                         ? "-"
                         : params.internal_baggage_cubicfeet
@@ -141,7 +141,7 @@ const Weights = ({ params, unit }) => {
                       : params.internal_baggage_cubicmeters}
                   </span>
                   <span className={cn(global.value)}>
-                    {unit === "Imerial Units"
+                    {unit === "Imperial Units"
                       ? params.external_baggage_CF === 0
                         ? "-"
                         : params.external_baggage_CF

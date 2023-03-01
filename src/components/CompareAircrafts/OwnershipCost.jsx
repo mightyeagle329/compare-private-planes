@@ -1,17 +1,141 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import cn from "classnames";
 import global from "../styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
-
+import Axios from "axios";
+import numeral from "numeral";
 import SectionHeader from "../shared/SectionHeader";
 
 const OwnershipCost = ({ data, currency, country, unit }) => {
+  const [info, setInfo] = useState([]);
+  const [from, setFrom] = useState("usd");
+  const [to, setTo] = useState("usd");
+  const [nbHours, setNbHours] = useState(0);
+  const [conversionRate, setConversionRate] = useState(0);
+  const [annualBudget0, setAnnualBudget0] = useState(0);
+  const [annualBudget1, setAnnualBudget1] = useState(0);
+  const [annualBudget2, setAnnualBudget2] = useState(0);
+
+  useEffect(() => {
+    Axios.get(
+      `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`
+    ).then((res) => {
+      setInfo(res.data[from]);
+    });
+  }, [from]);
+
+  useEffect(() => {
+    currency === "USD"
+      ? setTo("usd")
+      : currency === "GBP"
+      ? setTo("gbp")
+      : setTo("eur");
+    setFrom("usd");
+    setConversionRate(info[to]);
+  }, [info, currency, to]);
+
+  const onHoursChanged = (e) => {
+    setNbHours(e.target.value);
+    setAnnualBudget0(
+      currency !== "USD"
+        ? ((country === "North America"
+            ? parseFloat(data[0].NA_annual_total)
+            : country === "Europe"
+            ? parseFloat(data[0].EU_annual_total)
+            : country === "South America"
+            ? parseFloat(data[0].SA_annual_total)
+            : parseFloat(data[0].AS_annual_total)) +
+            parseFloat(e.target.value)) *
+            conversionRate
+        : (country === "North America"
+            ? parseFloat(data[0].NA_annual_total)
+            : country === "Europe"
+            ? parseFloat(data[0].EU_annual_total)
+            : country === "South America"
+            ? parseFloat(data[0].SA_annual_total)
+            : parseFloat(data[0].AS_annual_total)) + parseFloat(e.target.value)
+    );
+    if (e.target.value === "") {
+      setAnnualBudget0(data[0].NA_annual_total);
+    }
+
+    setAnnualBudget1(
+      currency !== "USD"
+        ? ((country === "North America"
+            ? parseFloat(data[1].NA_annual_total)
+            : country === "Europe"
+            ? parseFloat(data[1].EU_annual_total)
+            : country === "South America"
+            ? parseFloat(data[1].SA_annual_total)
+            : parseFloat(data[1].AS_annual_total)) +
+            parseFloat(e.target.value)) *
+            conversionRate
+        : (country === "North America"
+            ? parseFloat(data[1].NA_annual_total)
+            : country === "Europe"
+            ? parseFloat(data[1].EU_annual_total)
+            : country === "South America"
+            ? parseFloat(data[1].SA_annual_total)
+            : parseFloat(data[1].AS_annual_total)) + parseFloat(e.target.value)
+    );
+    if (e.target.value === "") {
+      setAnnualBudget1(data[1].NA_annual_total);
+    }
+
+    if (data[1] !== undefined) {
+      setAnnualBudget2(
+        currency !== "USD"
+          ? ((country === "North America"
+              ? parseFloat(data[2].NA_annual_total)
+              : country === "Europe"
+              ? parseFloat(data[2].EU_annual_total)
+              : country === "South America"
+              ? parseFloat(data[2].SA_annual_total)
+              : parseFloat(data[2].AS_annual_total)) +
+              parseFloat(e.target.value)) *
+              conversionRate
+          : (country === "North America"
+              ? parseFloat(data[2].NA_annual_total)
+              : country === "Europe"
+              ? parseFloat(data[2].EU_annual_total)
+              : country === "South America"
+              ? parseFloat(data[2].SA_annual_total)
+              : parseFloat(data[2].AS_annual_total)) +
+              parseFloat(e.target.value)
+      );
+      if (e.target.value === "") {
+        setAnnualBudget2(data[2].NA_annual_total);
+      }
+    }
+  };
+
   return (
     <>
       <section className={cn(global.section)}>
         <SectionHeader title="Ownership Costs" />
         <main className={cn(styles.ownership_container)}>
-          <h3>Your estimated annual flight hours: 200</h3>
+          <center>
+            <p>Your estimated annual flight hours: </p>
+            <div className={styles.form + " " + global.pdf_hidden}>
+              <form
+                className={styles.search}
+                action=""
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                <input
+                  className={styles.input}
+                  type="text"
+                  value={nbHours}
+                  onChange={(e) => onHoursChanged(e)}
+                  name="nbHours"
+                  placeholder="Number of hours"
+                  required
+                />
+              </form>
+            </div>
+          </center>
           <div className={cn(styles.compare_table)}>
             <div className={cn(styles.compare_table_column)}>
               <span
@@ -47,7 +171,7 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                 Variable Cost per Hour{" "}
               </span>
             </div>
-            {data.map((aircraft) => {
+            {data.map((aircraft, index) => {
               return (
                 <div
                   className={cn(styles.compare_table_column)}
@@ -63,13 +187,116 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                   </span>
 
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.annual_budget}
+                    {currency === "USD" ? "$" : currency === "GBP" ? "£" : "€"}
+                    {index === 0
+                      ? annualBudget0 === 0
+                        ? "-"
+                        : numeral(annualBudget0).format("0,0")
+                      : index === 1
+                      ? annualBudget1 === 0
+                        ? "-"
+                        : numeral(annualBudget1).format("0,0")
+                      : annualBudget2 === 0
+                      ? "-"
+                      : numeral(annualBudget2).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.annual_fixed_cost}
+                    {currency === "USD"
+                      ? country === "North America"
+                        ? "$" + numeral(aircraft.NA_annual_total).format("0,0")
+                        : country === "South America"
+                        ? "$" + numeral(aircraft.SA_annual_total).format("0,0")
+                        : country === "Europe"
+                        ? "$" + numeral(aircraft.EU_annual_total).format("0,0")
+                        : "$" + numeral(aircraft.AS_annual_total).format("0,0")
+                      : currency === "GBP"
+                      ? country === "North America"
+                        ? "£" +
+                          numeral(
+                            aircraft.NA_annual_total * conversionRate
+                          ).format("0,0")
+                        : country === "South America"
+                        ? "£" +
+                          numeral(
+                            aircraft.SA_annual_total * conversionRate
+                          ).format("0,0")
+                        : country === "Europe"
+                        ? "£" +
+                          numeral(
+                            aircraft.EU_annual_total * conversionRate
+                          ).format("0,0")
+                        : "£" +
+                          numeral(
+                            aircraft.AS_annual_total * conversionRate
+                          ).format("0,0")
+                      : country === "North America"
+                      ? "€" +
+                        numeral(
+                          aircraft.NA_annual_total * conversionRate
+                        ).format("0,0")
+                      : country === "South America"
+                      ? "€" +
+                        numeral(
+                          aircraft.SA_annual_total * conversionRate
+                        ).format("0,0")
+                      : country === "Europe"
+                      ? "€" +
+                        numeral(
+                          aircraft.EU_annual_total * conversionRate
+                        ).format("0,0")
+                      : "€" +
+                        numeral(
+                          aircraft.AS_annual_total * conversionRate
+                        ).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.variable_costs_hourly}
+                    {currency === "USD"
+                      ? country === "North America"
+                        ? "$" + numeral(aircraft.NA_hourly_total).format("0,0")
+                        : country === "South America"
+                        ? "$" + numeral(aircraft.SA_hourly_total).format("0,0")
+                        : country === "Europe"
+                        ? "$" + numeral(aircraft.EU_hourly_total).format("0,0")
+                        : "$" + numeral(aircraft.AS_hourly_total).format("0,0")
+                      : currency === "GBP"
+                      ? country === "North America"
+                        ? "£" +
+                          numeral(
+                            aircraft.NA_hourly_total * conversionRate
+                          ).format("0,0")
+                        : country === "South America"
+                        ? "£" +
+                          numeral(
+                            aircraft.SA_hourly_total * conversionRate
+                          ).format("0,0")
+                        : country === "Europe"
+                        ? "£" +
+                          numeral(
+                            aircraft.EU_hourly_total * conversionRate
+                          ).format("0,0")
+                        : "£" +
+                          numeral(
+                            aircraft.AS_hourly_total * conversionRate
+                          ).format("0,0")
+                      : country === "North America"
+                      ? "€" +
+                        numeral(
+                          aircraft.NA_hourly_total * conversionRate
+                        ).format("0,0")
+                      : country === "South America"
+                      ? "€" +
+                        numeral(
+                          aircraft.SA_hourly_total * conversionRate
+                        ).format("0,0")
+                      : country === "Europe"
+                      ? "€" +
+                        numeral(
+                          aircraft.EU_hourly_total * conversionRate
+                        ).format("0,0")
+                      : "€" +
+                        numeral(
+                          aircraft.AS_hourly_total * conversionRate
+                        ).format("0,0")}
                   </span>
                 </div>
               );
