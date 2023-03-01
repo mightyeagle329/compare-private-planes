@@ -240,7 +240,7 @@ export default function SingleAircraftDetails() {
           acquisition={keys}
           currency={currency}
         />
-        <HistoricalMarket params={aircraftData} historicalData={history} />
+        <HistoricalMarket historicalData={history} />
         <FleetFlightHours params={aircraftData} />
         <RangeMap params={aircraftData} />
         {aircraftData.a_check === 0 &&

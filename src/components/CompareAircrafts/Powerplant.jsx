@@ -43,8 +43,7 @@ const Powerplant = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Thrust per Engine Thrust per Engine{" "}
-                {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
+                Thrust per Engine {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
               </span>
               <span
                 className={cn(
@@ -52,7 +51,7 @@ const Powerplant = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Total Thrust Output Thrust per Engine{" "}
+                Total Thrust Output{" "}
                 {unit === "Imperial Units" ? "(lbs)" : "(KG)"}
               </span>
               <span

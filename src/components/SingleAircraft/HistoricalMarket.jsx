@@ -27,7 +27,7 @@ ChartJS.register(
   Legend
 );
 
-const HistoricalMarket = ({ params, historicalData }) => {
+const HistoricalMarket = ({ historicalData }) => {
   const newLegendClickHandler = () => {};
   const options = {
     responsive: true,

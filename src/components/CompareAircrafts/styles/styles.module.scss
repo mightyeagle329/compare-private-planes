@@ -137,6 +137,26 @@
     }
 }
 
+.chart_dates {
+    width: 50%;
+    margin-bottom: 15px;
+    text-align: center;
+    margin-left: 25%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px
+}
+
+.single_select {
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 30%;
+}
+
+
 // Ownership Costs 
 .ownership_container {
     .additional_info {
@@ -164,6 +184,33 @@
 
 
 
+.sorting {
+
+    right: 0;
+    padding-top: 20px;
+
+    input {
+        max-width: 120px;
+        height: 30px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0px 0px 2px 0px rgba(99, 99, 99, 0.75);
+        padding: 0 5px;
+        outline: none;
+
+        &:focus {
+            border: 1px solid rgb(139, 139, 139);
+        }
+    }
+
+    .dropdown {
+        .dropdown {
+            .head {
+                display: none;
+            }
+        }
+    }
+}
 
 .aquisition_container {
     .future_value {

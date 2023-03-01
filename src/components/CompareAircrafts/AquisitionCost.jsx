@@ -14,7 +14,11 @@ import {
 } from "chart.js";
 import { faker } from "@faker-js/faker";
 import { Line } from "react-chartjs-2";
-
+import Dropdown from "../common/Dropdown";
+import { FUTURE_OPTIONS } from "../../utils/constants/app-constants";
+import { useEffect, useState } from "react";
+import numeral from "numeral";
+import Axios from "axios";
 import SectionHeader from "../shared/SectionHeader";
 
 ChartJS.register(
@@ -27,6 +31,33 @@ ChartJS.register(
   Legend
 );
 const AquisitionCost = ({ data, currency, country, unit }) => {
+  const [futureCounter, setFutureCounter] = useState(0);
+  const [estimatedFutureValue, setestimatedFutureValue] = useState(
+    FUTURE_OPTIONS[0]
+  );
+  const [info, setInfo] = useState([]);
+  const [from, setFrom] = useState("usd");
+  const [to, setTo] = useState("usd");
+  const [conversionRate, setConversionRate] = useState(0);
+
+  useEffect(() => {
+    Axios.get(
+      `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`
+    ).then((res) => {
+      setInfo(res.data[from]);
+    });
+  }, [from]);
+
+  useEffect(() => {
+    currency === "USD"
+      ? setTo("usd")
+      : currency === "GBP"
+      ? setTo("gbp")
+      : setTo("eur");
+    setFrom("usd");
+    setConversionRate(info[to]);
+  }, [info, currency, to]);
+
   const options = {
     responsive: true,
     plugins: {
@@ -61,6 +92,16 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
       },
     ],
   };
+
+  const onestimatedFutureValueChanged = (val) => {
+    setestimatedFutureValue(val);
+    for (var c = 0; c < FUTURE_OPTIONS.length; c++) {
+      if (FUTURE_OPTIONS[c] === val) {
+        setFutureCounter(c);
+      }
+    }
+  };
+
   return (
     <>
       <section className={cn(global.section)}>
@@ -69,7 +110,18 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
           <div className={cn(styles.future_value)}>
             <h2>
               Estimated Future Value{" "}
-              <button className={cn(styles.btn)}>2 years</button>
+              <div className={styles.sorting}>
+                <div className={styles.dropdown + " " + global.pdf_hidden}>
+                  <center>
+                    <Dropdown
+                      className={styles.dropdown}
+                      value={estimatedFutureValue}
+                      setValue={(value) => onestimatedFutureValueChanged(value)}
+                      options={FUTURE_OPTIONS}
+                    />
+                  </center>
+                </div>
+              </div>
             </h2>
           </div>
           <div className={cn(styles.compare_table)}>
@@ -142,13 +194,25 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
                     2019
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.new_purchase}
+                    {aircraft.new_purchase == 0
+                      ? "-"
+                      : currency === "USD"
+                      ? "$" + numeral(aircraft.new_purchase).format("0,0")
+                      : currency === "GBP"
+                      ? "£" +
+                        numeral(aircraft.new_purchase * conversionRate).format(
+                          "0,0"
+                        )
+                      : "€" +
+                        numeral(aircraft.new_purchase * conversionRate).format(
+                          "0,0"
+                        )}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
                     {aircraft.current_value}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {aircraft.deprecation_rate}
+                    -{aircraft.depreication_rate}%
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
                     {aircraft.future_value}
