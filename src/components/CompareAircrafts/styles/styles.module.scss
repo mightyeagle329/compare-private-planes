@@ -1,4 +1,33 @@
 // global styles for compare aircraft page*
+.range_configs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+
+    .map_inputs {
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        align-items: center;
+
+        .pax_slider {
+            width: 170px;
+            align-items: start !important;
+            text-align: left !important;
+        }
+
+        label {
+            display: grid;
+            place-items: center;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+    }
+}
+
 
 .compare_table {
     display: flex;
