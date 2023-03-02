@@ -30,8 +30,8 @@ const Range = ({ params }) => {
       <main className={styles.main_range_map}>
         <Map
           max_pax={maxPax}
-          rangeDecrease={rangesDec}
-          aicraftRange={rangesAircrafts}
+          rangesDecrease={rangesDec}
+          aicraftsRange={rangesAircrafts}
         />
       </main>
     </section>
