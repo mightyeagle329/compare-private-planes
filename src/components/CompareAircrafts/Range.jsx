@@ -2,7 +2,7 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import { GoogleMap, Circle, LoadScript, Marker } from "@react-google-maps/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
 
@@ -24,7 +24,6 @@ const Range = ({ params }) => {
 
   return (
     <section className={cn(global.section)}>
-      {rangesDec.length}
       <SectionHeader title="Range Map" />
       <main className={styles.main_range_map}>
         <Map
@@ -46,8 +45,7 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
   const [range0, setRange0] = useState(aicraftsRange[0]);
   const [range1, setRange1] = useState(aicraftsRange[1]);
   // const [range2, setRange2] = useState(aicraftsRange[2]);
-  const [rangeDecrease0, setrangeDecrease0] = useState(rangesDecrease[0]);
-  const [rangeDecrease1, setrangeDecrease1] = useState(rangesDecrease[1]);
+
   // const [rangeDecrease2, setrangeDecrease2] = useState(rangesDecrease[2]);
 
   function handleChange(address) {
@@ -92,8 +90,12 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
   const handlePaxChange = (e, newValue) => {
     setNbPax(newValue);
     if (newValue !== "") {
-      setRange1(range0 - parseFloat(newValue) * parseFloat(rangeDecrease0));
-      setRange1(range1 - parseFloat(newValue) * parseFloat(rangeDecrease1));
+      setRange0(
+        aicraftsRange[0] - parseFloat(newValue) * parseFloat(rangesDecrease[0])
+      );
+      setRange1(
+        aicraftsRange[1] - parseFloat(newValue) * parseFloat(rangesDecrease[1])
+      );
     }
   };
 
