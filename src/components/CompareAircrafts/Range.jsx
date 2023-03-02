@@ -15,11 +15,16 @@ import styles from "./styles/styles.module.scss";
 const Range = ({ params }) => {
   var rangesDec = [];
   var rangesAircrafts = [];
-  const [maxPax, setMaxPax] = useState(params[0].max_pax);
+  const [maxPax, setMaxPax] = useState(
+    Math.max(params[0].max_pax, params[1].max_pax)
+  );
 
-  for (var i = 0; i < 2; i++) {
+  for (var i = 0; i < params.length; i++) {
     rangesDec.push(params[i].range_decrease_per_passenger);
     rangesAircrafts.push(params[i].range_km);
+    if (i == 2) {
+      setMaxPax(params[0].max_pax, params[1].max_pax, params[2].max_pax);
+    }
   }
 
   return (
@@ -44,9 +49,12 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
   const [nbPax, setNbPax] = useState(0);
   const [range0, setRange0] = useState(aicraftsRange[0]);
   const [range1, setRange1] = useState(aicraftsRange[1]);
-  // const [range2, setRange2] = useState(aicraftsRange[2]);
-
-  // const [rangeDecrease2, setrangeDecrease2] = useState(rangesDecrease[2]);
+  const [range2, setRange2] = useState(
+    aicraftsRange[2] !== undefined ? aicraftsRange[2] : 0
+  );
+  const [rangeDecrease2, setrangeDecrease2] = useState(
+    rangesDecrease[2] !== undefined ? rangesDecrease[2] : 0
+  );
 
   function handleChange(address) {
     setAddress(address);
@@ -74,10 +82,24 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
   };
 
   var options1 = {
-    strokeColor: "#FF0000",
+    strokeColor: "#0000FF",
     strokeOpacity: 0.8,
     strokeWeight: 2,
-    fillColor: "#FF0000",
+    fillColor: "#0000FF",
+    fillOpacity: 0.35,
+    clickable: false,
+    draggable: false,
+    editable: false,
+    visible: true,
+    radius: range1 * 1000,
+    zIndex: 1,
+  };
+
+  var options2 = {
+    strokeColor: "#FFFF00",
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: "#FFFF00",
     fillOpacity: 0.35,
     clickable: false,
     draggable: false,
@@ -96,6 +118,12 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
       setRange1(
         aicraftsRange[1] - parseFloat(newValue) * parseFloat(rangesDecrease[1])
       );
+      if (aicraftsRange[2] !== undefined) {
+        setRange2(
+          aicraftsRange[2] -
+            parseFloat(newValue) * parseFloat(rangesDecrease[2])
+        );
+      }
     }
   };
 
@@ -179,6 +207,7 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
         >
           <Circle center={latLng} options={options0} />
           <Circle center={latLng} options={options1} />
+          <Circle center={latLng} options={options2} />
           <Marker position={latLng} />
           <p>chadi</p>
         </GoogleMap>

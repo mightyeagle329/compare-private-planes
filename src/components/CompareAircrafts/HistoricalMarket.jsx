@@ -98,19 +98,19 @@ const HistoricalMarket = ({ params }) => {
       params[2] !== undefined
         ? [
             {
-              label: "Aircraft 1",
+              label: params[0].aircraft_name,
               data: values0,
               borderColor: "rgb(255, 99, 132)",
               backgroundColor: "rgba(255, 99, 132, 0.5)",
             },
             {
-              label: "Aircraft 2",
+              label: params[1].aircraft_name,
               data: values1,
               borderColor: "rgb(53, 162, 235)",
               backgroundColor: "rgba(53, 162, 235, 0.5)",
             },
             {
-              label: "Aircraft 3",
+              label: params[2].aircraft_name,
               data: values2,
               borderColor: "rgb(153, 82, 155)",
               backgroundColor: "rgba(153, 82, 155, 0.5)",
@@ -118,13 +118,13 @@ const HistoricalMarket = ({ params }) => {
           ]
         : [
             {
-              label: "Aircraft 1",
+              label: params[0].aircraft_name,
               data: values0,
               borderColor: "rgb(255, 99, 132)",
               backgroundColor: "rgba(255, 99, 132, 0.5)",
             },
             {
-              label: "Aircraft 2",
+              label: params[1].aircraft_name,
               data: values1,
               borderColor: "rgb(53, 162, 235)",
               backgroundColor: "rgba(53, 162, 235, 0.5)",
