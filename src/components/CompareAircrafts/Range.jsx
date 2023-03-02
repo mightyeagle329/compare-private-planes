@@ -16,7 +16,7 @@ const Range = ({ params }) => {
   var rangesDec = [];
   var rangesAircrafts = [];
 
-  for (let i = 0; i < params.length; i++) {
+  for (let i = 0; i < 2; i++) {
     rangesDec.push(params[i].range_decrease_per_passenger);
     rangesAircrafts.push(params[i].range_km);
   }
