@@ -212,6 +212,11 @@
     gap: 1rem;
     place-items: center;
     margin: 0 auto;
+
+    .spinner {
+      padding-top: 15rem;
+      padding-left: 30rem;
+    }
   }
 
   .card {
@@ -236,12 +241,16 @@
 
   .list {
     grid-template-columns: repeat(2, 1fr);
+
+
   }
 }
 
 @media (min-width: 900px) {
   .list {
     grid-template-columns: repeat(3, 1fr);
+
+
   }
 }
 
@@ -299,6 +308,11 @@
 
     .list {
       margin: -32px -16px 0;
+
+      .spinner {
+        padding-top: 5rem;
+        padding-left: 5rem;
+      }
     }
 
     .card {

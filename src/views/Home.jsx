@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, CSSProperties } from "react";
 import cn from "classnames";
 import { HiOutlineSearch } from "react-icons/hi";
+import BounceLoader from "react-spinners/BounceLoader";
 
 import useDebounce from "../utils/hooks/useDebounce";
 import { searchService } from "../utils/hooks/utils";
@@ -547,7 +548,7 @@ export default function Search() {
                   <Slider
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum cruise"}
-                    value={maxPax}
+                    value={cruiseSpeed}
                     max={3000}
                     onChange={handleCruiseChanged}
                     valueLabelDisplay="auto"
@@ -853,18 +854,10 @@ export default function Search() {
                     />
                   </>
                 ))
-              ) : aircraftsData?.length ? (
-                aircraftsData?.map((product) => (
-                  <>
-                    <Card
-                      className={styles.card}
-                      item={product}
-                      key={product.aircraft_id}
-                    />
-                  </>
-                ))
               ) : (
-                <p className={styles.inform}>Loading</p>
+                <div className={styles.spinner}>
+                  <BounceLoader color={"#81B8E1"} loading={true} size={50} />
+                </div>
               )}
             </div>
           </div>

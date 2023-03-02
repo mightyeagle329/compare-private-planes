@@ -30,6 +30,7 @@
     "react-places-autocomplete": "^7.3.0",
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "sass": "^1.57.1",
     "simple-react-donut-chart": "^0.0.8",
     "web-vitals": "^2.1.4"

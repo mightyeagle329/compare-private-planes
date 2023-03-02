@@ -69,18 +69,150 @@ const OwnershipCosts = ({ params, currency, country }) => {
     ],
     datasets: [
       {
-        data: [
-          parseInt(params.NA_annual_captain) +
-            parseInt(params.NA_annual_first_office) +
-            parseInt(params.NA_annual_employee_benefits),
-          params.NA_annual_crew_training,
-          params.NA_annual_hangar,
-          parseInt(params.NA_annual_insurance_hull) +
-            parseInt(params.NA_annual_insurance_liability),
-          params.NA_annual_management,
-          params.NA_annual_deprecation,
-          params.NA_annual_misc,
-        ],
+        data:
+          currency === "USD"
+            ? country === "North America"
+              ? [
+                  Math.round(
+                    params.NA_annual_captain +
+                      params.NA_annual_first_office +
+                      params.NA_annual_employee_benefits
+                  ),
+                  Math.round(params.NA_annual_crew_training),
+                  Math.round(params.NA_annual_hangar),
+                  Math.round(
+                    params.NA_annual_insurance_hull +
+                      params.NA_annual_insurance_liability
+                  ),
+                  Math.round(params.NA_annual_management),
+                  Math.round(params.NA_annual_deprecation),
+                  Math.round(params.NA_annual_misc),
+                ]
+              : country === "South America"
+              ? [
+                  Math.round(
+                    params.SA_annual_captain +
+                      params.SA_annual_first_office +
+                      params.SA_annual_employee_benefits
+                  ),
+                  Math.round(params.SA_annual_crew_training),
+                  Math.round(params.SA_annual_hangar),
+                  Math.round(
+                    params.SA_annual_insurance_hull +
+                      params.SA_annual_insurance_liability
+                  ),
+                  Math.round(params.SA_annual_management),
+                  Math.round(params.SA_annual_deprecation),
+                  Math.round(params.SA_annual_misc),
+                ]
+              : country === "Europe"
+              ? [
+                  Math.round(
+                    params.EU_annual_captain +
+                      params.EU_annual_first_office +
+                      params.EU_annual_employee_benefits
+                  ),
+                  Math.round(params.EU_annual_crew_training),
+                  Math.round(params.EU_annual_hangar),
+                  Math.round(
+                    params.EU_annual_insurance_hull +
+                      params.EU_annual_insurance_liability
+                  ),
+                  Math.round(params.EU_annual_management),
+                  Math.round(params.EU_annual_deprecation),
+                  Math.round(params.EU_annual_misc),
+                ]
+              : [
+                  Math.round(
+                    params.AS_annual_captain +
+                      params.AS_annual_first_office +
+                      params.AS_annual_employee_benefits
+                  ),
+                  Math.round(params.AS_annual_crew_training),
+                  Math.round(params.AS_annual_hangar),
+                  Math.round(
+                    params.AS_annual_insurance_hull +
+                      params.AS_annual_insurance_liability
+                  ),
+                  Math.round(params.AS_annual_management),
+                  Math.round(params.AS_annual_deprecation),
+                  Math.round(params.AS_annual_misc),
+                ]
+            : country === "North America"
+            ? [
+                Math.round(
+                  conversionRate *
+                    (params.NA_annual_captain +
+                      params.NA_annual_first_office +
+                      params.NA_annual_employee_benefits)
+                ),
+                Math.round(params.NA_annual_crew_training * conversionRate),
+                Math.round(params.NA_annual_hangar * conversionRate),
+                Math.round(
+                  (params.NA_annual_insurance_hull +
+                    params.NA_annual_insurance_liability) *
+                    conversionRate
+                ),
+                Math.round(params.NA_annual_management * conversionRate),
+                Math.round(params.NA_annual_deprecation * conversionRate),
+                Math.round(params.NA_annual_misc * conversionRate),
+              ]
+            : country === "South America"
+            ? [
+                Math.round(
+                  conversionRate *
+                    (params.SA_annual_captain +
+                      params.SA_annual_first_office +
+                      params.SA_annual_employee_benefits)
+                ),
+                Math.round(params.SA_annual_crew_training * conversionRate),
+                Math.round(params.SA_annual_hangar * conversionRate),
+                Math.round(
+                  conversionRate *
+                    (params.SA_annual_insurance_hull +
+                      params.SA_annual_insurance_liability)
+                ),
+                Math.round(params.SA_annual_management * conversionRate),
+                Math.round(params.SA_annual_deprecation * conversionRate),
+                Math.round(params.SA_annual_misc * conversionRate),
+              ]
+            : country === "Europe"
+            ? [
+                Math.round(
+                  conversionRate *
+                    (params.EU_annual_captain +
+                      params.EU_annual_first_office +
+                      params.EU_annual_employee_benefits)
+                ),
+                Math.round(params.EU_annual_crew_training * conversionRate),
+                Math.round(params.EU_annual_hangar * conversionRate),
+                Math.round(
+                  conversionRate *
+                    (params.EU_annual_insurance_hull +
+                      params.EU_annual_insurance_liability)
+                ),
+                Math.round(params.EU_annual_management * conversionRate),
+                Math.round(params.EU_annual_deprecation * conversionRate),
+                Math.round(params.EU_annual_misc * conversionRate),
+              ]
+            : [
+                Math.round(
+                  conversionRate *
+                    (params.AS_annual_captain +
+                      params.AS_annual_first_office +
+                      params.AS_annual_employee_benefits)
+                ),
+                Math.round(params.AS_annual_crew_training * conversionRate),
+                Math.round(params.AS_annual_hangar * conversionRate),
+                Math.round(
+                  conversionRate *
+                    (params.AS_annual_insurance_hull +
+                      params.AS_annual_insurance_liability)
+                ),
+                Math.round(params.AS_annual_management * conversionRate),
+                Math.round(params.AS_annual_deprecation * conversionRate),
+                Math.round(params.AS_annual_misc * conversionRate),
+              ],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -114,13 +246,71 @@ const OwnershipCosts = ({ params, currency, country }) => {
     ],
     datasets: [
       {
-        data: [
-          params.NA_hourly_fuel,
-          params.NA_hourly_maintenance,
-          params.NA_hourly_engine_overhaul,
-          params.NA_hourly_ground_fees,
-          params.NA_hourly_misc,
-        ],
+        data:
+          currency === "USD"
+            ? country === "North America"
+              ? [
+                  params.NA_hourly_fuel,
+                  params.NA_hourly_maintenance,
+                  params.NA_hourly_engine_overhaul,
+                  params.NA_hourly_ground_fees,
+                  params.NA_hourly_misc,
+                ]
+              : country === "South America"
+              ? [
+                  params.SA_hourly_fuel,
+                  params.SA_hourly_maintenance,
+                  params.SA_hourly_engine_overhaul,
+                  params.SA_hourly_ground_fees,
+                  params.SA_hourly_misc,
+                ]
+              : country === "Europe"
+              ? [
+                  params.EU_hourly_fuel,
+                  params.EU_hourly_maintenance,
+                  params.EU_hourly_engine_overhaul,
+                  params.EU_hourly_ground_fees,
+                  params.EU_hourly_misc,
+                ]
+              : [
+                  params.AS_hourly_fuel,
+                  params.AS_hourly_maintenance,
+                  params.AS_hourly_engine_overhaul,
+                  params.AS_hourly_ground_fees,
+                  params.AS_hourly_misc,
+                ]
+            : country === "North America"
+            ? [
+                params.NA_hourly_fuel * conversionRate,
+                params.NA_hourly_maintenance * conversionRate,
+                params.NA_hourly_engine_overhaul * conversionRate,
+                params.NA_hourly_ground_fees * conversionRate,
+                params.NA_hourly_misc * conversionRate,
+              ]
+            : country === "South America"
+            ? [
+                params.SA_hourly_fuel * conversionRate,
+                params.SA_hourly_maintenance * conversionRate,
+                params.SA_hourly_engine_overhaul * conversionRate,
+                params.SA_hourly_ground_fees * conversionRate,
+                params.SA_hourly_misc * conversionRate,
+              ]
+            : country === "Europe"
+            ? [
+                params.EU_hourly_fuel * conversionRate,
+                params.EU_hourly_maintenance * conversionRate,
+                params.EU_hourly_engine_overhaul * conversionRate,
+                params.EU_hourly_ground_fees * conversionRate,
+                params.EU_hourly_misc * conversionRate,
+              ]
+            : [
+                params.AS_hourly_fuel * conversionRate,
+                params.AS_hourly_maintenance * conversionRate,
+                params.AS_hourly_engine_overhaul * conversionRate,
+                params.AS_hourly_ground_fees * conversionRate,
+                params.AS_hourly_misc * conversionRate,
+              ],
+
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",

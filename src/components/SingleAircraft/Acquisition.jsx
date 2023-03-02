@@ -124,7 +124,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
 
   for (let kounter = 0; kounter < keys.length; kounter++) {
     let real = (2022 - keys[kounter]) * 400;
-    hourAdjusted[kounter] = values[i];
+    hourAdjusted[kounter] = values[kounter];
     if (parseFloat(airframe) - real > 0) {
       for (let i = 0; i < parseFloat(airframe) - real; i++) {
         hourAdjusted[kounter] *= 0.99999;
@@ -427,13 +427,25 @@ const Acquisition = ({ params, acquisition, currency }) => {
                 <tr key={index}>
                   <td className={cn(global.td)}>{label}</td>
                   <td className={cn(global.td)}>
-                    {numeral(data.datasets[0].data[index]).format("0,0")}
+                    {numeral(
+                      currency === "USD"
+                        ? data.datasets[0].data[index]
+                        : data.datasets[0].data[index] * conversionRate
+                    ).format("0,0")}
                   </td>
                   <td className={cn(global.td)}>
-                    {numeral(data.datasets[1].data[index]).format("0,0")}
+                    {numeral(
+                      currency === "USD"
+                        ? data.datasets[1].data[index]
+                        : data.datasets[1].data[index] * conversionRate
+                    ).format("0,0")}
                   </td>
                   <td className={cn(global.td)}>
-                    {numeral(data.datasets[2].data[index]).format("0,0")}
+                    {currency === "USD"
+                      ? numeral(data.datasets[2].data[index]).format("0,0")
+                      : numeral(
+                          data.datasets[2].data[index] * conversionRate
+                        ).format("0,0")}
                   </td>
                 </tr>
               ))}
