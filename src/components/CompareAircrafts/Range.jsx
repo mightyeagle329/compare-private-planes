@@ -15,18 +15,21 @@ import styles from "./styles/styles.module.scss";
 const Range = ({ params }) => {
   var rangesDec = [];
   var rangesAircrafts = [];
+  const [maxPax, setMaxPax] = useState(params[0].max_pax);
 
-  for (let i = 0; i < 2; i++) {
-    rangesDec.push(params[i].range_decrease_per_passenger);
-    rangesAircrafts.push(params[i].range_km);
-  }
+  useEffect(() => {
+    for (var i = 0; i < 2; i++) {
+      rangesDec.push(params[i].range_decrease_per_passenger);
+      rangesAircrafts.push(params[i].range_km);
+    }
+  }, []);
 
   return (
     <section className={cn(global.section)}>
       <SectionHeader title="Range Map" />
       <main className={styles.main_range_map}>
         <Map
-          max_pax={params[0].max_pax}
+          max_pax={maxPax}
           rangeDecrease={rangesDec}
           aicraftRange={rangesAircrafts}
         />
