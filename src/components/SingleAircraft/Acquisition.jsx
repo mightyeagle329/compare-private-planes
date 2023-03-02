@@ -103,7 +103,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
 
   for (var k = 0; k < values.length; k++) {
     futureValue[k] =
-      values[k] *
+      values[i] *
       Math.pow(
         (100 - parseFloat(params.depreication_rate)) / 100,
         parseFloat(estimatedFutureValue)
@@ -113,7 +113,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
 
   for (let kounter = 0; kounter < keys.length; kounter++) {
     let real = (2022 - keys[kounter]) * 400;
-    hourAdjusted[kounter] = 1;
+    hourAdjusted[kounter] = values[i];
     if (parseFloat(airframe) - real > 0) {
       for (let i = 0; i < parseFloat(airframe) - real; i++) {
         hourAdjusted[kounter] *= 0.99999;
@@ -353,15 +353,15 @@ const Acquisition = ({ params, acquisition, currency }) => {
                   {hourAdjustedSingleValue === 0
                     ? "-"
                     : currency === "USD"
-                    ? "$" + numeral(hourAdjustedSingleValue).format("0,0.00")
+                    ? "$" + numeral(hourAdjustedSingleValue).format("0,0")
                     : currency === "GBP"
                     ? "£" +
                       numeral(hourAdjustedSingleValue * conversionRate).format(
-                        "0,0.00"
+                        "0,0"
                       )
                     : "€" +
                       numeral(hourAdjustedSingleValue * conversionRate).format(
-                        "0,0.00"
+                        "0,0"
                       )}
                 </span>
               </div>
