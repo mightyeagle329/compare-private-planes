@@ -157,25 +157,135 @@
 }
 
 
+
+
 // Ownership Costs 
 .ownership_container {
-    .additional_info {
-        .crew_salary {
-            display: flex;
-            padding: 0 30px;
-            gap: 20px;
 
-            .aircraft_names>*,
-            .bars>* {
+    .additional_info {
+
+        .key_value_bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .key_value {
                 flex: 1;
-                margin-bottom: 10px;
-                padding: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 10px;
+                white-space: nowrap;
             }
 
             .bar {
-                background-color: rebeccapurple;
-                border-radius: 100px;
+                flex: 2;
+                background-color: rgb(230, 228, 229);
+                height: 15px;
+                transition: width 1s ease-in-out;
+                text-align: end;
                 color: beige;
+                padding-right: 10px;
+                position: relative;
+                border-radius: 15px;
+
+                .bar__fill1 {
+                    background-color: rgba(255, 99, 132, 1);
+                    height: 15px;
+                    transition: width 1s ease-in-out;
+                    text-align: end;
+                    color: beige;
+                    // width: 30%;
+                    padding-right: 10px;
+                    position: relative;
+                    border-radius: 15px;
+                }
+
+                .bar__fill2 {
+                    background-color: rgba(54, 162, 235, 1);
+                    height: 15px;
+                    transition: width 1s ease-in-out;
+                    text-align: end;
+                    color: beige;
+                    // width: 30%;
+                    padding-right: 10px;
+                    position: relative;
+                    border-radius: 15px;
+                }
+
+                .bar__fill3 {
+                    background-color: rgba(255, 206, 86, 1);
+                    height: 15px;
+                    transition: width 1s ease-in-out;
+                    text-align: end;
+                    color: beige;
+                    // width: 30%;
+                    padding-right: 10px;
+                    position: relative;
+                    border-radius: 15px;
+                }
+
+                .bar__fill4 {
+                    background-color: rgba(75, 192, 192, 1);
+                    height: 15px;
+                    transition: width 1s ease-in-out;
+                    text-align: end;
+                    color: beige;
+                    // width: 30%;
+                    padding-right: 10px;
+                    position: relative;
+                    border-radius: 15px;
+                }
+
+                .bar__fill5 {
+                    background-color: rgba(75, 192, 192, 1);
+                    height: 15px;
+                    transition: width 1s ease-in-out;
+                    text-align: end;
+                    color: beige;
+                    // width: 30%;
+                    padding-right: 10px;
+                    position: relative;
+                    border-radius: 15px;
+                }
+
+                .bar__fill6 {
+                    background-color: rgba(153, 102, 255, 1);
+                    height: 15px;
+                    transition: width 1s ease-in-out;
+                    text-align: end;
+                    color: beige;
+                    // width: 30%;
+                    padding-right: 10px;
+                    position: relative;
+                    border-radius: 15px;
+                }
+
+                .bar__fill8 {
+                    background-color: rgb(199, 55, 158);
+                    height: 15px;
+                    transition: width 1s ease-in-out;
+                    text-align: end;
+                    color: beige;
+                    // width: 30%;
+                    padding-right: 10px;
+                    position: relative;
+                    border-radius: 15px;
+                }
+
+                .bar__fill7 {
+                    background-color: rgba(255, 159, 64, 1);
+                    height: 15px;
+                    transition: width 1s ease-in-out;
+                    text-align: end;
+                    color: beige;
+                    // width: 30%;
+                    padding-right: 10px;
+                    position: relative;
+                    border-radius: 15px;
+                }
+
             }
         }
     }

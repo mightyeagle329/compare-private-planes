@@ -70,6 +70,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
     FUTURE_OPTIONS[0]
   );
   const [futureValue, setfutureValue] = useState([]);
+  const [futureValueConstant, setfutureValueConstant] = useState([]);
   const [hourAdjusted, setHourAdjusted] = useState([]);
   const [hourAdjustedSingleValue, setHourAdjustedSingleValue] = useState(0);
   const [info, setInfo] = useState([]);
@@ -103,13 +104,23 @@ const Acquisition = ({ params, acquisition, currency }) => {
 
   for (var k = 0; k < values.length; k++) {
     futureValue[k] =
-      values[i] *
+      values[k] *
       Math.pow(
         (100 - parseFloat(params.depreication_rate)) / 100,
         parseFloat(estimatedFutureValue)
       );
     futureValue[k].toFixed(2);
   }
+
+  useEffect(() => {
+    setfutureValueConstant(
+      values[i] *
+        Math.pow(
+          (100 - parseFloat(params.depreication_rate)) / 100,
+          parseFloat(estimatedFutureValue)
+        )
+    );
+  }, [i, yearManufacture, estimatedFutureValue]);
 
   for (let kounter = 0; kounter < keys.length; kounter++) {
     let real = (2022 - keys[kounter]) * 400;
@@ -123,6 +134,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
         hourAdjusted[kounter] *= 1.00001;
       }
     }
+    hourAdjusted[kounter] = Math.round(hourAdjusted[kounter]);
   }
 
   const onYearChanged = (val) => {
@@ -161,7 +173,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
 
     datasets: [
       {
-        label: "Current Values",
+        label: "Current Value",
         data: values,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
@@ -173,7 +185,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
       {
-        label: "Future Values",
+        label: "Future Value",
         data: futureValue,
         borderColor: "rgb(153, 82, 155)",
         backgroundColor: "rgba(153, 82, 155, 0.5)",
@@ -377,19 +389,19 @@ const Acquisition = ({ params, acquisition, currency }) => {
                   Future Value
                 </span>
                 <span className={cn(global.green_value)}>
-                  {futureValue[futureCounter] === 0
+                  {futureValueConstant === 0
                     ? "-"
                     : currency === "USD"
-                    ? "$" + numeral(futureValue[futureCounter]).format("0,0")
+                    ? "$" + numeral(futureValueConstant).format("0,0")
                     : currency === "GBP"
                     ? "£" +
-                      numeral(
-                        futureValue[futureCounter] * conversionRate
-                      ).format("0,0")
+                      numeral(futureValueConstant * conversionRate).format(
+                        "0,0"
+                      )
                     : "€" +
-                      numeral(
-                        futureValue[futureCounter] * conversionRate
-                      ).format("0,0")}
+                      numeral(futureValueConstant * conversionRate).format(
+                        "0,0"
+                      )}
                 </span>
               </div>
             </div>

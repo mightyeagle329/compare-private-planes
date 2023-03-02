@@ -1,9 +1,6 @@
 import cn from "classnames";
-
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-
 import { Pie } from "react-chartjs-2";
-
 import global from "../../styles/global.module.scss";
 import styles from "../styles/styles.module.scss";
 import SectionHeader from "../../shared/SectionHeader";

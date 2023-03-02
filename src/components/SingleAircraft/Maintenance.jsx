@@ -13,19 +13,19 @@ const Maintenance = ({ params }) => {
           <div className={cn(styles.container, styles.left)}>
             <div className={cn(styles.content)}>
               <h2>A Check</h2>
-              <p>{numeral(params.a_check).format("0,0")}</p>
+              <p> {params.a_check === "0" ? "-" : params.a_check}</p>
             </div>
           </div>
           <div className={cn(styles.container, styles.right)}>
             <div className={cn(styles.content)}>
               <h2>B Check</h2>
-              <p>{numeral(params.b_check).format("0,0")}</p>
+              <p> {params.b_check === "0" ? "-" : params.b_check}</p>
             </div>
           </div>
           <div className={cn(styles.container, styles.left)}>
             <div className={cn(styles.content)}>
               <h2>C Check</h2>
-              <p>{numeral(params.c_check).format("0,0")}</p>
+              <p> {params.c_check === "0" ? "-" : params.c_check}</p>
             </div>
           </div>
         </div>

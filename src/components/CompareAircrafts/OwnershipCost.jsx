@@ -15,6 +15,19 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
   const [annualBudget0, setAnnualBudget0] = useState(0);
   const [annualBudget1, setAnnualBudget1] = useState(0);
   const [annualBudget2, setAnnualBudget2] = useState(0);
+  const maximumAnnualValue = Math.max(
+    parseInt(data[0].NA_annual_captain) +
+      parseInt(data[0].NA_annual_first_office) +
+      parseInt(data[0].NA_annual_employee_benefits),
+    parseInt(data[0].NA_annual_crew_training),
+    parseInt(data[0].NA_annual_hangar),
+    parseInt(
+      data[0].NA_annual_insurance_liability + data[0].NA_annual_insurance_hull
+    ),
+    parseInt(data[0].NA_annual_management),
+    parseInt(data[0].NA_annual_deprecation),
+    parseInt(data[0].NA_annual_misc)
+  );
 
   useEffect(() => {
     Axios.get(
@@ -305,7 +318,413 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
           <div className={cn(styles.additional_info)}>
             <h3>Annual Fixed Costs Breakdown</h3>
             <div>
-              <h4>Crew Salary</h4>
+              <h5>Crew Salary</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.aircraft_name)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.aircraft_name}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={cn(styles.bars)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.bar)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.NA_annual_captain +
+                          aircraft.NA_annual_first_office}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Crew Training</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.aircraft_name)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.aircraft_name}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={cn(styles.bars)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.bar)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.NA_annual_captain +
+                          aircraft.NA_annual_first_office}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Hangar</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.aircraft_name)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.aircraft_name}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={cn(styles.bars)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.bar)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.NA_annual_captain +
+                          aircraft.NA_annual_first_office}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Insurance Hull</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.aircraft_name)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.aircraft_name}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={cn(styles.bars)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.bar)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.NA_annual_captain +
+                          aircraft.NA_annual_first_office}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Insurance Liability</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.aircraft_name)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.aircraft_name}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={cn(styles.bars)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.bar)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.NA_annual_captain +
+                          aircraft.NA_annual_first_office}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Management</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.aircraft_name)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.aircraft_name}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={cn(styles.bars)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.bar)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.NA_annual_captain +
+                          aircraft.NA_annual_first_office}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Deprication Rate</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.aircraft_name)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.aircraft_name}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={cn(styles.bars)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.bar)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.NA_annual_captain +
+                          aircraft.NA_annual_first_office}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Misc Fixed</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.aircraft_name)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.aircraft_name}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={cn(styles.bars)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.bar)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.NA_annual_captain +
+                          aircraft.NA_annual_first_office}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+            <h3>Variable Costs Breakdown</h3>
+            <div>
+              <h5>Fuel Cost</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.aircraft_name)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.aircraft_name}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={cn(styles.bars)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.bar)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.NA_annual_captain +
+                          aircraft.NA_annual_first_office}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Maintenance</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.NA_annual_crew_training
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.SA_annual_crew_training
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.EU_annual_crew_training
+                                  ).format("0,0")
+                                : "$" +
+                                  numeral(
+                                    aircraft.AS_annual_crew_training
+                                  ).format("0,0")
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.NA_annual_crew_training *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.SA_annual_crew_training *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.EU_annual_crew_training *
+                                      conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    aircraft.AS_annual_crew_training *
+                                      conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.NA_annual_crew_training *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.SA_annual_crew_training *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  aircraft.EU_annual_crew_training *
+                                    conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  aircraft.AS_annual_crew_training *
+                                    conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={cn(styles.bar__fill2)}
+                            style={{
+                              width:
+                                (aircraft.NA_annual_crew_training /
+                                  maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Engine Overhaul</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.aircraft_name)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.aircraft_name}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={cn(styles.bars)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.bar)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.NA_annual_captain +
+                          aircraft.NA_annual_first_office}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Ground Fees</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.aircraft_name)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.aircraft_name}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className={cn(styles.bars)}>
+                  {data.map((aircraft) => {
+                    return (
+                      <div
+                        className={cn(styles.bar)}
+                        key={aircraft.aircraft_id}
+                      >
+                        {aircraft.NA_annual_captain +
+                          aircraft.NA_annual_first_office}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Misc Variable</h5>
               <div className={cn(styles.crew_salary)}>
                 <div className={cn(styles.aircraft_names)}>
                   {data.map((aircraft) => {
