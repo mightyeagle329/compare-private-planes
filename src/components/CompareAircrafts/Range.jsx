@@ -17,15 +17,14 @@ const Range = ({ params }) => {
   var rangesAircrafts = [];
   const [maxPax, setMaxPax] = useState(params[0].max_pax);
 
-  useEffect(() => {
-    for (var i = 0; i < 2; i++) {
-      rangesDec.push(params[i].range_decrease_per_passenger);
-      rangesAircrafts.push(params[i].range_km);
-    }
-  }, []);
+  for (var i = 0; i < 2; i++) {
+    rangesDec.push(params[i].range_decrease_per_passenger);
+    rangesAircrafts.push(params[i].range_km);
+  }
 
   return (
     <section className={cn(global.section)}>
+      {rangesDec.length}
       <SectionHeader title="Range Map" />
       <main className={styles.main_range_map}>
         <Map
