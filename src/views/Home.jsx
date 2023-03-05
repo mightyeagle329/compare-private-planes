@@ -124,7 +124,7 @@ export default function Search() {
     max_pax: 120,
     max_pax_min: 0,
     range_NM_min: 0,
-    range_NM: 3000,
+    range_NM: 8000,
     high_cruise_knots_min: 0,
     high_cruise_knots: 12312,
     max_altitude_feet_min: 0,
