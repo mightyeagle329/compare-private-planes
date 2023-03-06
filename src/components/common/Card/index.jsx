@@ -149,8 +149,7 @@ const Card = ({ className, item, unit, currency, country }) => {
                 : "N/A"}
             </p>
             <p className={styles.count}>
-              <HiOutlineCurrencyDollar name="search" size="16" /> Hourly
-              Charter:{" "}
+              <HiOutlineCurrencyDollar name="search" size="16" /> Hourly Cost:{" "}
               {currency === "USD" ? "$" : currency === "GBP" ? "£" : "€"}
               {country === "North America"
                 ? item?.NA_hourly_total > 0
