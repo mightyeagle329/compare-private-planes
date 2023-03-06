@@ -32,7 +32,7 @@ export default RangeMap;
 function Map({ rangeDecrease, aicraftRange, max_pax }) {
   const [latLng, setLatLong] = useState({ lat: 37.772, lng: -80 });
   const [address, setAddress] = useState("");
-  const [nbPax, setNbPax] = useState(0);
+  const [nbPax, setNbPax] = useState(1);
   const [range, setRange] = useState(aicraftRange);
 
   function handleChange(address) {

@@ -200,63 +200,101 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                   </span>
 
                   <span className={cn(styles.compare_table_column_cell)}>
-                    {currency === "USD" ? "$" : currency === "GBP" ? "£" : "€"}
                     {index === 0
                       ? annualBudget0 === 0
                         ? "-"
-                        : numeral(annualBudget0).format("0,0")
+                        : (currency === "USD"
+                            ? "$"
+                            : currency === "GBP"
+                            ? "£"
+                            : "€") + numeral(annualBudget0).format("0,0")
                       : index === 1
                       ? annualBudget1 === 0
                         ? "-"
-                        : numeral(annualBudget1).format("0,0")
+                        : (currency === "USD"
+                            ? "$"
+                            : currency === "GBP"
+                            ? "£"
+                            : "€") + numeral(annualBudget1).format("0,0")
                       : annualBudget2 === 0
                       ? "-"
-                      : numeral(annualBudget2).format("0,0")}
+                      : (currency === "USD"
+                          ? "$"
+                          : currency === "GBP"
+                          ? "£"
+                          : "€") + numeral(annualBudget2).format("0,0")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}>
                     {currency === "USD"
                       ? country === "North America"
-                        ? "$" + numeral(aircraft.NA_annual_total).format("0,0")
+                        ? aircraft.NA_annual_total === 0
+                          ? "-"
+                          : "$" +
+                            numeral(aircraft.NA_annual_total).format("0,0")
                         : country === "South America"
-                        ? "$" + numeral(aircraft.SA_annual_total).format("0,0")
+                        ? aircraft.SA_annual_total === 0
+                          ? "-"
+                          : "$" +
+                            numeral(aircraft.SA_annual_total).format("0,0")
                         : country === "Europe"
-                        ? "$" + numeral(aircraft.EU_annual_total).format("0,0")
+                        ? aircraft.EU_annual_total === 0
+                          ? "-"
+                          : "$" +
+                            numeral(aircraft.EU_annual_total).format("0,0")
+                        : aircraft.AS_annual_total === 0
+                        ? "-"
                         : "$" + numeral(aircraft.AS_annual_total).format("0,0")
                       : currency === "GBP"
                       ? country === "North America"
-                        ? "£" +
-                          numeral(
-                            aircraft.NA_annual_total * conversionRate
-                          ).format("0,0")
+                        ? aircraft.NA_annual_total === 0
+                          ? "-"
+                          : "£" +
+                            numeral(
+                              aircraft.NA_annual_total * conversionRate
+                            ).format("0,0")
                         : country === "South America"
-                        ? "£" +
-                          numeral(
-                            aircraft.SA_annual_total * conversionRate
-                          ).format("0,0")
+                        ? aircraft.SA_annual_total === 0
+                          ? "-"
+                          : "£" +
+                            numeral(
+                              aircraft.SA_annual_total * conversionRate
+                            ).format("0,0")
                         : country === "Europe"
-                        ? "£" +
-                          numeral(
-                            aircraft.EU_annual_total * conversionRate
-                          ).format("0,0")
+                        ? aircraft.EU_annual_total === 0
+                          ? "-"
+                          : "£" +
+                            numeral(
+                              aircraft.EU_annual_total * conversionRate
+                            ).format("0,0")
+                        : aircraft.AS_annual_total === 0
+                        ? "-"
                         : "£" +
                           numeral(
                             aircraft.AS_annual_total * conversionRate
                           ).format("0,0")
                       : country === "North America"
-                      ? "€" +
-                        numeral(
-                          aircraft.NA_annual_total * conversionRate
-                        ).format("0,0")
+                      ? aircraft.NA_annual_total === 0
+                        ? "-"
+                        : "€" +
+                          numeral(
+                            aircraft.NA_annual_total * conversionRate
+                          ).format("0,0")
                       : country === "South America"
-                      ? "€" +
-                        numeral(
-                          aircraft.SA_annual_total * conversionRate
-                        ).format("0,0")
+                      ? aircraft.SA_annual_total === 0
+                        ? "-"
+                        : "€" +
+                          numeral(
+                            aircraft.SA_annual_total * conversionRate
+                          ).format("0,0")
                       : country === "Europe"
-                      ? "€" +
-                        numeral(
-                          aircraft.EU_annual_total * conversionRate
-                        ).format("0,0")
+                      ? aircraft.EU_annual_total === 0
+                        ? "-"
+                        : "€" +
+                          numeral(
+                            aircraft.EU_annual_total * conversionRate
+                          ).format("0,0")
+                      : aircraft.AS_annual_total === 0
+                      ? "-"
                       : "€" +
                         numeral(
                           aircraft.AS_annual_total * conversionRate
@@ -265,47 +303,74 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                   <span className={cn(styles.compare_table_column_cell)}>
                     {currency === "USD"
                       ? country === "North America"
-                        ? "$" + numeral(aircraft.NA_hourly_total).format("0,0")
+                        ? aircraft.NA_hourly_total === 0
+                          ? "-"
+                          : "$" +
+                            numeral(aircraft.NA_hourly_total).format("0,0")
                         : country === "South America"
-                        ? "$" + numeral(aircraft.SA_hourly_total).format("0,0")
+                        ? aircraft.SA_hourly_total === 0
+                          ? "-"
+                          : "$" +
+                            numeral(aircraft.SA_hourly_total).format("0,0")
                         : country === "Europe"
-                        ? "$" + numeral(aircraft.EU_hourly_total).format("0,0")
+                        ? aircraft.EU_hourly_total === 0
+                          ? "-"
+                          : "$" +
+                            numeral(aircraft.EU_hourly_total).format("0,0")
+                        : aircraft.AS_hourly_total === 0
+                        ? "-"
                         : "$" + numeral(aircraft.AS_hourly_total).format("0,0")
                       : currency === "GBP"
                       ? country === "North America"
-                        ? "£" +
-                          numeral(
-                            aircraft.NA_hourly_total * conversionRate
-                          ).format("0,0")
+                        ? aircraft.NA_hourly_total === 0
+                          ? "-"
+                          : "£" +
+                            numeral(
+                              aircraft.NA_hourly_total * conversionRate
+                            ).format("0,0")
                         : country === "South America"
-                        ? "£" +
-                          numeral(
-                            aircraft.SA_hourly_total * conversionRate
-                          ).format("0,0")
+                        ? aircraft.SA_hourly_total === 0
+                          ? "-"
+                          : "£" +
+                            numeral(
+                              aircraft.SA_hourly_total * conversionRate
+                            ).format("0,0")
                         : country === "Europe"
-                        ? "£" +
-                          numeral(
-                            aircraft.EU_hourly_total * conversionRate
-                          ).format("0,0")
+                        ? aircraft.EU_hourly_total === 0
+                          ? "-"
+                          : "£" +
+                            numeral(
+                              aircraft.EU_hourly_total * conversionRate
+                            ).format("0,0")
+                        : aircraft.AS_hourly_total === 0
+                        ? "-"
                         : "£" +
                           numeral(
                             aircraft.AS_hourly_total * conversionRate
                           ).format("0,0")
                       : country === "North America"
-                      ? "€" +
-                        numeral(
-                          aircraft.NA_hourly_total * conversionRate
-                        ).format("0,0")
+                      ? aircraft.NA_hourly_total === 0
+                        ? "-"
+                        : "€" +
+                          numeral(
+                            aircraft.NA_hourly_total * conversionRate
+                          ).format("0,0")
                       : country === "South America"
-                      ? "€" +
-                        numeral(
-                          aircraft.SA_hourly_total * conversionRate
-                        ).format("0,0")
+                      ? aircraft.SA_hourly_total === 0
+                        ? "-"
+                        : "€" +
+                          numeral(
+                            aircraft.SA_hourly_total * conversionRate
+                          ).format("0,0")
                       : country === "Europe"
-                      ? "€" +
-                        numeral(
-                          aircraft.EU_hourly_total * conversionRate
-                        ).format("0,0")
+                      ? aircraft.EU_hourly_total === 0
+                        ? "-"
+                        : "€" +
+                          numeral(
+                            aircraft.EU_hourly_total * conversionRate
+                          ).format("0,0")
+                      : aircraft.AS_hourly_total === 0
+                      ? "-"
                       : "€" +
                         numeral(
                           aircraft.AS_hourly_total * conversionRate

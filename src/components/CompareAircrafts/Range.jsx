@@ -2,7 +2,7 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import { GoogleMap, Circle, LoadScript, Marker } from "@react-google-maps/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
 
@@ -19,13 +19,15 @@ const Range = ({ params }) => {
     Math.max(params[0].max_pax, params[1].max_pax)
   );
 
-  for (var i = 0; i < params.length; i++) {
-    rangesDec.push(params[i].range_decrease_per_passenger);
-    rangesAircrafts.push(params[i].range_km);
-    if (i == 2) {
-      setMaxPax(params[0].max_pax, params[1].max_pax, params[2].max_pax);
+  useEffect(() => {
+    for (var i = 0; i < params.length; i++) {
+      rangesDec.push(params[i].range_decrease_per_passenger);
+      rangesAircrafts.push(params[i].range_km);
+      if (i == 2) {
+        setMaxPax(params[0].max_pax, params[1].max_pax, params[2].max_pax);
+      }
     }
-  }
+  }, []);
 
   return (
     <section className={cn(global.section)}>
