@@ -138,7 +138,7 @@ export default function Search() {
     landing_distance_feet_min: 0,
     landing_distance_feet: 10000,
     annual_cost_min: 0,
-    annual_cost: 1000000,
+    annual_cost: 9000000,
     estimated_hourly_charter_min: 0,
     estimated_hourly_charter: 1000000,
     new_purchase_min: 0,
