@@ -244,7 +244,7 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
   return (
     <>
       <section className={cn(global.section)}>
-        <SectionHeader title="Aquisition Costs" />
+        <SectionHeader title="Acquisition Costs" />
         <main className={cn(styles.aquisition_container)}>
           <div className={cn(styles.future_value)}>
             <h2>

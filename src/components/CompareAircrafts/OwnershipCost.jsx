@@ -386,26 +386,123 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
               <h5>Crew Salary</h5>
               <div className={cn(styles.crew_salary)}>
                 <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
+                  {data.map((aircraft, index) => {
                     return (
-                      <div
-                        className={cn(styles.aircraft_name)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.aircraft_name}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={cn(styles.bars)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.bar)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.NA_annual_captain +
-                          aircraft.NA_annual_first_office}
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.NA_annual_employee_benefits +
+                                      aircraft.NA_annual_captain +
+                                      aircraft.NA_annual_first_office
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.SA_annual_employee_benefits +
+                                      aircraft.SA_annual_captain +
+                                      aircraft.SA_annual_first_office
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.EU_annual_employee_benefits +
+                                      aircraft.EU_annual_captain +
+                                      aircraft.EU_annual_first_office
+                                  ).format("0,0")
+                                : "$" +
+                                  numeral(
+                                    aircraft.AS_annual_employee_benefits +
+                                      aircraft.AS_annual_captain +
+                                      aircraft.AS_annual_first_office
+                                  ).format("0,0")
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    (aircraft.NA_annual_employee_benefits +
+                                      aircraft.NA_annual_captain +
+                                      aircraft.NA_annual_first_office) *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    (aircraft.SA_annual_employee_benefits +
+                                      aircraft.SA_annual_captain +
+                                      aircraft.SA_annual_first_office) *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    (aircraft.EU_annual_employee_benefits +
+                                      aircraft.EU_annual_captain +
+                                      aircraft.EU_annual_first_office) *
+                                      conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    (aircraft.AS_annual_employee_benefits +
+                                      aircraft.AS_annual_captain +
+                                      aircraft.AS_annual_first_office) *
+                                      conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  (aircraft.NA_annual_employee_benefits +
+                                    aircraft.NA_annual_captain +
+                                    aircraft.NA_annual_first_office) *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  (aircraft.SA_annual_employee_benefits +
+                                    aircraft.SA_annual_captain +
+                                    aircraft.SA_annual_first_office) *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  (aircraft.EU_annual_employee_benefits +
+                                    aircraft.EU_annual_captain +
+                                    aircraft.EU_annual_first_office) *
+                                    conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  (aircraft.AS_annual_employee_benefits +
+                                    aircraft.AS_annual_captain +
+                                    aircraft.AS_annual_first_office) *
+                                    conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
+                            style={{
+                              width:
+                                (aircraft.NA_annual_crew_training /
+                                  maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
                       </div>
                     );
                   })}
@@ -414,234 +511,7 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
               <h5>Crew Training</h5>
               <div className={cn(styles.crew_salary)}>
                 <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.aircraft_name)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.aircraft_name}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={cn(styles.bars)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.bar)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.NA_annual_captain +
-                          aircraft.NA_annual_first_office}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <h5>Hangar</h5>
-              <div className={cn(styles.crew_salary)}>
-                <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.aircraft_name)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.aircraft_name}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={cn(styles.bars)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.bar)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.NA_annual_captain +
-                          aircraft.NA_annual_first_office}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <h5>Insurance Hull</h5>
-              <div className={cn(styles.crew_salary)}>
-                <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.aircraft_name)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.aircraft_name}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={cn(styles.bars)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.bar)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.NA_annual_captain +
-                          aircraft.NA_annual_first_office}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <h5>Insurance Liability</h5>
-              <div className={cn(styles.crew_salary)}>
-                <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.aircraft_name)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.aircraft_name}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={cn(styles.bars)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.bar)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.NA_annual_captain +
-                          aircraft.NA_annual_first_office}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <h5>Management</h5>
-              <div className={cn(styles.crew_salary)}>
-                <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.aircraft_name)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.aircraft_name}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={cn(styles.bars)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.bar)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.NA_annual_captain +
-                          aircraft.NA_annual_first_office}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <h5>Deprication Rate</h5>
-              <div className={cn(styles.crew_salary)}>
-                <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.aircraft_name)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.aircraft_name}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={cn(styles.bars)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.bar)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.NA_annual_captain +
-                          aircraft.NA_annual_first_office}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <h5>Misc Fixed</h5>
-              <div className={cn(styles.crew_salary)}>
-                <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.aircraft_name)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.aircraft_name}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={cn(styles.bars)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.bar)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.NA_annual_captain +
-                          aircraft.NA_annual_first_office}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-            <h3>Variable Costs Breakdown</h3>
-            <div>
-              <h5>Fuel Cost</h5>
-              <div className={cn(styles.crew_salary)}>
-                <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.aircraft_name)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.aircraft_name}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={cn(styles.bars)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.bar)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.NA_annual_captain +
-                          aircraft.NA_annual_first_office}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <h5>Maintenance</h5>
-              <div className={cn(styles.crew_salary)}>
-                <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
+                  {data.map((aircraft, index) => {
                     return (
                       <div className={styles.key_value_bar}>
                         <div className={cn(styles.key_value)}>
@@ -718,7 +588,13 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                         </div>
                         <div className={cn(styles.bar)}>
                           <div
-                            className={cn(styles.bar__fill2)}
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
                             style={{
                               width:
                                 (aircraft.NA_annual_crew_training /
@@ -733,29 +609,867 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                   })}
                 </div>
               </div>
-              <h5>Engine Overhaul</h5>
+              <h5>Hangar</h5>
               <div className={cn(styles.crew_salary)}>
                 <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
+                  {data.map((aircraft, index) => {
                     return (
-                      <div
-                        className={cn(styles.aircraft_name)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.aircraft_name}
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(aircraft.NA_annual_hangar).format(
+                                    "0,0"
+                                  )
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(aircraft.SA_annual_hangar).format(
+                                    "0,0"
+                                  )
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(aircraft.EU_annual_hangar).format(
+                                    "0,0"
+                                  )
+                                : "$" +
+                                  numeral(aircraft.AS_annual_hangar).format(
+                                    "0,0"
+                                  )
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.NA_annual_hangar * conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.SA_annual_hangar * conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.EU_annual_hangar * conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    aircraft.AS_annual_hangar * conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.NA_annual_hangar * conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.SA_annual_hangar * conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  aircraft.EU_annual_hangar * conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  aircraft.AS_annual_hangar * conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
+                            style={{
+                              width:
+                                (aircraft.NA_annual_hangar /
+                                  maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
                       </div>
                     );
                   })}
                 </div>
-                <div className={cn(styles.bars)}>
-                  {data.map((aircraft) => {
+              </div>
+              <h5>Insurance Hull</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft, index) => {
                     return (
-                      <div
-                        className={cn(styles.bar)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.NA_annual_captain +
-                          aircraft.NA_annual_first_office}
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.NA_annual_insurance_hull
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.SA_annual_insurance_hull
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.EU_annual_insurance_hull
+                                  ).format("0,0")
+                                : "$" +
+                                  numeral(
+                                    aircraft.AS_annual_insurance_hull
+                                  ).format("0,0")
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.NA_annual_insurance_hull *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.SA_annual_insurance_hull *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.EU_annual_insurance_hull *
+                                      conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    aircraft.AS_annual_insurance_hull *
+                                      conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.NA_annual_insurance_hull *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.SA_annual_insurance_hull *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  aircraft.EU_annual_insurance_hull *
+                                    conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  aircraft.AS_annual_insurance_hull *
+                                    conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
+                            style={{
+                              width:
+                                (aircraft.NA_annual_insurance_hull /
+                                  maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Insurance Liability</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft, index) => {
+                    return (
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.NA_annual_insurance_liability
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.SA_annual_insurance_liability
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.EU_annual_insurance_liability
+                                  ).format("0,0")
+                                : "$" +
+                                  numeral(
+                                    aircraft.AS_annual_insurance_liability
+                                  ).format("0,0")
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.NA_annual_insurance_liability *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.SA_annual_insurance_liability *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.EU_annual_insurance_liability *
+                                      conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    aircraft.AS_annual_insurance_liability *
+                                      conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.NA_annual_insurance_liability *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.SA_annual_insurance_liability *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  aircraft.EU_annual_insurance_liability *
+                                    conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  aircraft.AS_annual_insurance_liability *
+                                    conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
+                            style={{
+                              width:
+                                (aircraft.NA_annual_insurance_liability /
+                                  maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Management</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft, index) => {
+                    return (
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(aircraft.NA_annual_management).format(
+                                    "0,0"
+                                  )
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(aircraft.SA_annual_management).format(
+                                    "0,0"
+                                  )
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(aircraft.EU_annual_management).format(
+                                    "0,0"
+                                  )
+                                : "$" +
+                                  numeral(aircraft.AS_annual_management).format(
+                                    "0,0"
+                                  )
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.NA_annual_management *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.SA_annual_management *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.EU_annual_management *
+                                      conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    aircraft.AS_annual_management *
+                                      conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.NA_annual_management * conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.SA_annual_management * conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  aircraft.EU_annual_management * conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  aircraft.AS_annual_management * conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
+                            style={{
+                              width:
+                                (aircraft.NA_annual_management /
+                                  maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Deprication Rate</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft, index) => {
+                    return (
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.NA_annual_deprecation
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.SA_annual_deprecation
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.EU_annual_deprecation
+                                  ).format("0,0")
+                                : "$" +
+                                  numeral(
+                                    aircraft.AS_annual_deprecation
+                                  ).format("0,0")
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.NA_annual_deprecation *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.SA_annual_deprecation *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.EU_annual_deprecation *
+                                      conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    aircraft.AS_annual_deprecation *
+                                      conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.NA_annual_deprecation *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.SA_annual_deprecation *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  aircraft.EU_annual_deprecation *
+                                    conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  aircraft.AS_annual_deprecation *
+                                    conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
+                            style={{
+                              width:
+                                (aircraft.NA_annual_deprecation /
+                                  maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Misc Fixed</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft, index) => {
+                    return (
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(aircraft.NA_annual_misc).format("0,0")
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(aircraft.SA_annual_misc).format("0,0")
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(aircraft.EU_annual_misc).format("0,0")
+                                : "$" +
+                                  numeral(aircraft.AS_annual_misc).format("0,0")
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.NA_annual_misc * conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.SA_annual_misc * conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.EU_annual_misc * conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    aircraft.AS_annual_misc * conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.NA_annual_misc * conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.SA_annual_misc * conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  aircraft.EU_annual_misc * conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  aircraft.AS_annual_misc * conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
+                            style={{
+                              width:
+                                (aircraft.NA_annual_misc / maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+            <h3>Variable Costs Breakdown</h3>
+            <div>
+              <h5>Fuel Cost</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft, index) => {
+                    return (
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(aircraft.NA_hourly_fuel).format("0,0")
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(aircraft.SA_hourly_fuel).format("0,0")
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(aircraft.EU_hourly_fuel).format("0,0")
+                                : "$" +
+                                  numeral(aircraft.AS_hourly_fuel).format("0,0")
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.NA_hourly_fuel * conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.SA_hourly_fuel * conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.EU_hourly_fuel * conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    aircraft.AS_hourly_fuel * conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.NA_hourly_fuel * conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.SA_hourly_fuel * conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  aircraft.EU_hourly_fuel * conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  aircraft.AS_hourly_fuel * conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
+                            style={{
+                              width:
+                                (aircraft.NA_hourly_fuel / maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Maintenance</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft, index) => {
+                    return (
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.NA_hourly_maintenance
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.SA_hourly_maintenance
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.EU_hourly_maintenance
+                                  ).format("0,0")
+                                : "$" +
+                                  numeral(
+                                    aircraft.AS_hourly_maintenance
+                                  ).format("0,0")
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.NA_hourly_maintenance *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.SA_hourly_maintenance *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.EU_hourly_maintenance *
+                                      conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    aircraft.AS_hourly_maintenance *
+                                      conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.NA_hourly_maintenance *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.SA_hourly_maintenance *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  aircraft.EU_hourly_maintenance *
+                                    conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  aircraft.AS_hourly_maintenance *
+                                    conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
+                            style={{
+                              width:
+                                (aircraft.NA_hourly_maintenance /
+                                  maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <h5>Engine Overhaul</h5>
+              <div className={cn(styles.crew_salary)}>
+                <div className={cn(styles.aircraft_names)}>
+                  {data.map((aircraft, index) => {
+                    return (
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.NA_hourly_engine_overhaul
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.SA_hourly_engine_overhaul
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.EU_hourly_engine_overhaul
+                                  ).format("0,0")
+                                : "$" +
+                                  numeral(
+                                    aircraft.AS_hourly_engine_overhaul
+                                  ).format("0,0")
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.NA_hourly_engine_overhaul *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.SA_hourly_engine_overhaul *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.EU_hourly_engine_overhaul *
+                                      conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    aircraft.AS_hourly_engine_overhaul *
+                                      conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.NA_hourly_engine_overhaul *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.SA_hourly_engine_overhaul *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  aircraft.EU_hourly_engine_overhaul *
+                                    conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  aircraft.AS_hourly_engine_overhaul *
+                                    conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
+                            style={{
+                              width:
+                                (aircraft.NA_hourly_engine_overhaul /
+                                  maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
                       </div>
                     );
                   })}
@@ -764,26 +1478,99 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
               <h5>Ground Fees</h5>
               <div className={cn(styles.crew_salary)}>
                 <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
+                  {data.map((aircraft, index) => {
                     return (
-                      <div
-                        className={cn(styles.aircraft_name)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.aircraft_name}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={cn(styles.bars)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.bar)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.NA_annual_captain +
-                          aircraft.NA_annual_first_office}
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.NA_hourly_ground_fees
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.SA_hourly_ground_fees
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(
+                                    aircraft.EU_hourly_ground_fees
+                                  ).format("0,0")
+                                : "$" +
+                                  numeral(
+                                    aircraft.AS_hourly_ground_fees
+                                  ).format("0,0")
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.NA_hourly_ground_fees *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.SA_hourly_ground_fees *
+                                      conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.EU_hourly_ground_fees *
+                                      conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    aircraft.AS_hourly_ground_fees *
+                                      conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.NA_hourly_ground_fees *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.SA_hourly_ground_fees *
+                                    conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  aircraft.EU_hourly_ground_fees *
+                                    conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  aircraft.AS_hourly_ground_fees *
+                                    conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
+                            style={{
+                              width:
+                                (aircraft.NA_hourly_ground_fees /
+                                  maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
                       </div>
                     );
                   })}
@@ -792,26 +1579,82 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
               <h5>Misc Variable</h5>
               <div className={cn(styles.crew_salary)}>
                 <div className={cn(styles.aircraft_names)}>
-                  {data.map((aircraft) => {
+                  {data.map((aircraft, index) => {
                     return (
-                      <div
-                        className={cn(styles.aircraft_name)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.aircraft_name}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className={cn(styles.bars)}>
-                  {data.map((aircraft) => {
-                    return (
-                      <div
-                        className={cn(styles.bar)}
-                        key={aircraft.aircraft_id}
-                      >
-                        {aircraft.NA_annual_captain +
-                          aircraft.NA_annual_first_office}
+                      <div className={styles.key_value_bar}>
+                        <div className={cn(styles.key_value)}>
+                          <span>{aircraft.aircraft_name} </span>
+                          <span>
+                            {currency === "USD"
+                              ? country === "North America"
+                                ? "$" +
+                                  numeral(aircraft.NA_hourly_misc).format("0,0")
+                                : country === "South America"
+                                ? "$" +
+                                  numeral(aircraft.SA_hourly_misc).format("0,0")
+                                : country === "Europe"
+                                ? "$" +
+                                  numeral(aircraft.EU_hourly_misc).format("0,0")
+                                : "$" +
+                                  numeral(aircraft.AS_hourly_misc).format("0,0")
+                              : currency === "GBP"
+                              ? country === "North America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.NA_hourly_misc * conversionRate
+                                  ).format("0,0")
+                                : country === "South America"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.SA_hourly_misc * conversionRate
+                                  ).format("0,0")
+                                : country === "Europe"
+                                ? "£" +
+                                  numeral(
+                                    aircraft.EU_hourly_misc * conversionRate
+                                  ).format("0,0")
+                                : "£" +
+                                  numeral(
+                                    aircraft.AS_hourly_misc * conversionRate
+                                  ).format("0,0")
+                              : country === "North America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.NA_hourly_misc * conversionRate
+                                ).format("0,0")
+                              : country === "South America"
+                              ? "€" +
+                                numeral(
+                                  aircraft.SA_hourly_misc * conversionRate
+                                ).format("0,0")
+                              : country === "Europe"
+                              ? "€" +
+                                numeral(
+                                  aircraft.EU_hourly_misc * conversionRate
+                                ).format("0,0")
+                              : "€" +
+                                numeral(
+                                  aircraft.AS_hourly_misc * conversionRate
+                                ).format("0,0")}
+                          </span>
+                        </div>
+                        <div className={cn(styles.bar)}>
+                          <div
+                            className={
+                              index === 0
+                                ? cn(styles.bar__fill1)
+                                : index === 1
+                                ? cn(styles.bar__fill2)
+                                : cn(styles.bar__fill3)
+                            }
+                            style={{
+                              width:
+                                (aircraft.NA_hourly_misc / maximumAnnualValue) *
+                                  100 +
+                                "%",
+                            }}
+                          ></div>
+                        </div>
                       </div>
                     );
                   })}

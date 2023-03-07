@@ -195,7 +195,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
 
   return (
     <section className={cn(global.section)}>
-      <SectionHeader title="Aquisition Costs" />
+      <SectionHeader title="Acquisition Costs" />
       <main className={cn(styles.main_aquisiton)}>
         <div className={cn(global.details_table)}>
           <div className={cn(global.column)}>
