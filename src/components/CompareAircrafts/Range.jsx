@@ -15,6 +15,11 @@ import styles from "./styles/styles.module.scss";
 const Range = ({ params }) => {
   var rangesDec = [];
   var rangesAircrafts = [];
+  var aircraftNames = [
+    params[0].aircraft_name,
+    params[1].aircraft_name,
+    params[2] !== undefined ? params[2].aircraft_name : null,
+  ];
   const [maxPax, setMaxPax] = useState(
     Math.max(params[0].max_pax, params[1].max_pax)
   );
@@ -38,6 +43,22 @@ const Range = ({ params }) => {
           rangesDecrease={rangesDec}
           aicraftsRange={rangesAircrafts}
         />
+        {
+          <div className={styles.squares}>
+            <div className={styles.square0}></div>
+            {params[0].aircraft_name}
+            <div className={styles.square1}></div>
+            {params[1].aircraft_name}
+            {params[2] !== undefined ? (
+              <>
+                <div className={styles.square2}></div>
+                {params[2].aircraft_name}
+              </>
+            ) : (
+              <div></div>
+            )}
+          </div>
+        }
       </main>
     </section>
   );
