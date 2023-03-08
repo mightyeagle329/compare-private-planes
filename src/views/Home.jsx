@@ -142,9 +142,9 @@ export default function Search() {
     estimated_hourly_charter_min: 0,
     estimated_hourly_charter: 1000000,
     new_purchase_min: 0,
-    new_purchase: 10000000,
+    new_purchase: 100000000,
     average_pre_owned_min: 0,
-    average_pre_owned: 1000000,
+    average_pre_owned: 100000000,
   });
   const debouncedSearchTerm = useDebounce(search, 500);
 

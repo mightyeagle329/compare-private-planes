@@ -496,10 +496,45 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_annual_crew_training /
-                                  maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_annual_crew_training /
+                                        (data[0].NA_annual_crew_training +
+                                          data[1].NA_annual_crew_training +
+                                          data[2].NA_annual_crew_training)
+                                      : country === "South America"
+                                      ? aircraft.SA_annual_crew_training /
+                                        (data[0].SA_annual_crew_training +
+                                          data[1].SA_annual_crew_training +
+                                          data[2].SA_annual_crew_training)
+                                      : country === "Europe"
+                                      ? aircraft.EU_annual_crew_training /
+                                        (data[0].EU_annual_crew_training +
+                                          data[1].EU_annual_crew_training +
+                                          data[2].EU_annual_crew_training)
+                                      : aircraft.AS_annual_crew_training /
+                                        (data[0].AS_annual_crew_training +
+                                          data[1].AS_annual_crew_training +
+                                          data[2].AS_annual_crew_training)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_crew_training /
+                                        (data[0].NA_hourly_crew_training +
+                                          data[1].NA_hourly_crew_training)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_crew_training /
+                                        (data[0].SA_hourly_crew_training +
+                                          data[1].SA_hourly_crew_training)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_crew_training /
+                                        (data[0].EU_hourly_crew_training +
+                                          data[1].EU_hourly_crew_training)
+                                      : aircraft.AS_hourly_crew_training /
+                                        (data[0].AS_hourly_crew_training +
+                                          data[1].AS_hourly_crew_training)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
@@ -597,10 +632,45 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_annual_crew_training /
-                                  maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_annual_crew_training /
+                                        (data[0].NA_annual_crew_training +
+                                          data[1].NA_annual_crew_training +
+                                          data[2].NA_annual_crew_training)
+                                      : country === "South America"
+                                      ? aircraft.SA_annual_crew_training /
+                                        (data[0].SA_annual_crew_training +
+                                          data[1].SA_annual_crew_training +
+                                          data[2].SA_annual_crew_training)
+                                      : country === "Europe"
+                                      ? aircraft.EU_annual_crew_training /
+                                        (data[0].EU_annual_crew_training +
+                                          data[1].EU_annual_crew_training +
+                                          data[2].EU_annual_crew_training)
+                                      : aircraft.AS_annual_crew_training /
+                                        (data[0].AS_annual_crew_training +
+                                          data[1].AS_annual_crew_training +
+                                          data[2].AS_annual_crew_training)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_crew_training /
+                                        (data[0].NA_hourly_crew_training +
+                                          data[1].NA_hourly_crew_training)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_crew_training /
+                                        (data[0].SA_hourly_crew_training +
+                                          data[1].SA_hourly_crew_training)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_crew_training /
+                                        (data[0].EU_hourly_crew_training +
+                                          data[1].EU_hourly_crew_training)
+                                      : aircraft.AS_hourly_crew_training /
+                                        (data[0].AS_hourly_crew_training +
+                                          data[1].AS_hourly_crew_training)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
@@ -690,10 +760,45 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_annual_hangar /
-                                  maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_annual_hangar /
+                                        (data[0].NA_annual_hangar +
+                                          data[1].NA_annual_hangar +
+                                          data[2].NA_annual_hangar)
+                                      : country === "South America"
+                                      ? aircraft.SA_annual_hangar /
+                                        (data[0].SA_annual_hangar +
+                                          data[1].SA_annual_hangar +
+                                          data[2].SA_annual_hangar)
+                                      : country === "Europe"
+                                      ? aircraft.EU_annual_hangar /
+                                        (data[0].EU_annual_hangar +
+                                          data[1].EU_annual_hangar +
+                                          data[2].EU_annual_hangar)
+                                      : aircraft.AS_annual_hangar /
+                                        (data[0].AS_annual_hangar +
+                                          data[1].AS_annual_hangar +
+                                          data[2].AS_annual_hangar)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_hangar /
+                                        (data[0].NA_hourly_hangar +
+                                          data[1].NA_hourly_hangar)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_hangar /
+                                        (data[0].SA_hourly_hangar +
+                                          data[1].SA_hourly_hangar)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_hangar /
+                                        (data[0].EU_hourly_hangar +
+                                          data[1].EU_hourly_hangar)
+                                      : aircraft.AS_hourly_hangar /
+                                        (data[0].AS_hourly_hangar +
+                                          data[1].AS_hourly_hangar)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
@@ -791,10 +896,45 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_annual_insurance_hull /
-                                  maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_annual_insurance_hull /
+                                        (data[0].NA_annual_insurance_hull +
+                                          data[1].NA_annual_insurance_hull +
+                                          data[2].NA_annual_insurance_hull)
+                                      : country === "South America"
+                                      ? aircraft.SA_annual_insurance_hull /
+                                        (data[0].SA_annual_insurance_hull +
+                                          data[1].SA_annual_insurance_hull +
+                                          data[2].SA_annual_insurance_hull)
+                                      : country === "Europe"
+                                      ? aircraft.EU_annual_insurance_hull /
+                                        (data[0].EU_annual_insurance_hull +
+                                          data[1].EU_annual_insurance_hull +
+                                          data[2].EU_annual_insurance_hull)
+                                      : aircraft.AS_annual_insurance_hull /
+                                        (data[0].AS_annual_insurance_hull +
+                                          data[1].AS_annual_insurance_hull +
+                                          data[2].AS_annual_insurance_hull)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_insurance_hull /
+                                        (data[0].NA_hourly_insurance_hull +
+                                          data[1].NA_hourly_insurance_hull)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_insurance_hull /
+                                        (data[0].SA_hourly_insurance_hull +
+                                          data[1].SA_hourly_insurance_hull)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_insurance_hull /
+                                        (data[0].EU_hourly_insurance_hull +
+                                          data[1].EU_hourly_insurance_hull)
+                                      : aircraft.AS_hourly_insurance_hull /
+                                        (data[0].AS_hourly_insurance_hull +
+                                          data[1].AS_hourly_insurance_hull)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
@@ -892,10 +1032,51 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_annual_insurance_liability /
-                                  maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_annual_insurance_liability /
+                                        (data[0].NA_annual_insurance_liability +
+                                          data[1]
+                                            .NA_annual_insurance_liability +
+                                          data[2].NA_annual_insurance_liability)
+                                      : country === "South America"
+                                      ? aircraft.SA_annual_insurance_liability /
+                                        (data[0].SA_annual_insurance_liability +
+                                          data[1]
+                                            .SA_annual_insurance_liability +
+                                          data[2].SA_annual_insurance_liability)
+                                      : country === "Europe"
+                                      ? aircraft.EU_annual_insurance_liability /
+                                        (data[0].EU_annual_insurance_liability +
+                                          data[1]
+                                            .EU_annual_insurance_liability +
+                                          data[2].EU_annual_insurance_liability)
+                                      : aircraft.AS_annual_insurance_liability /
+                                        (data[0].AS_annual_insurance_liability +
+                                          data[1]
+                                            .AS_annual_insurance_liability +
+                                          data[2]
+                                            .AS_annual_insurance_liability)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_insurance_liability /
+                                        (data[0].NA_hourly_insurance_liability +
+                                          data[1].NA_hourly_insurance_liability)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_insurance_liability /
+                                        (data[0].SA_hourly_insurance_liability +
+                                          data[1].SA_hourly_insurance_liability)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_insurance_liability /
+                                        (data[0].EU_hourly_insurance_liability +
+                                          data[1].EU_hourly_insurance_liability)
+                                      : aircraft.AS_hourly_insurance_liability /
+                                        (data[0].AS_hourly_insurance_liability +
+                                          data[1]
+                                            .AS_hourly_insurance_liability)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
@@ -989,10 +1170,45 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_annual_management /
-                                  maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_annual_management /
+                                        (data[0].NA_annual_management +
+                                          data[1].NA_annual_management +
+                                          data[2].NA_annual_management)
+                                      : country === "South America"
+                                      ? aircraft.SA_annual_management /
+                                        (data[0].SA_annual_management +
+                                          data[1].SA_annual_management +
+                                          data[2].SA_annual_management)
+                                      : country === "Europe"
+                                      ? aircraft.EU_annual_management /
+                                        (data[0].EU_annual_management +
+                                          data[1].EU_annual_management +
+                                          data[2].EU_annual_management)
+                                      : aircraft.AS_annual_management /
+                                        (data[0].AS_annual_management +
+                                          data[1].AS_annual_management +
+                                          data[2].AS_annual_management)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_management /
+                                        (data[0].NA_hourly_management +
+                                          data[1].NA_hourly_management)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_management /
+                                        (data[0].SA_hourly_management +
+                                          data[1].SA_hourly_management)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_management /
+                                        (data[0].EU_hourly_management +
+                                          data[1].EU_hourly_management)
+                                      : aircraft.AS_hourly_management /
+                                        (data[0].AS_hourly_management +
+                                          data[1].AS_hourly_management)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
@@ -1090,10 +1306,45 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_annual_deprecation /
-                                  maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_annual_deprecation /
+                                        (data[0].NA_annual_deprecation +
+                                          data[1].NA_annual_deprecation +
+                                          data[2].NA_annual_deprecation)
+                                      : country === "South America"
+                                      ? aircraft.SA_annual_deprecation /
+                                        (data[0].SA_annual_deprecation +
+                                          data[1].SA_annual_deprecation +
+                                          data[2].SA_annual_deprecation)
+                                      : country === "Europe"
+                                      ? aircraft.EU_annual_deprecation /
+                                        (data[0].EU_annual_deprecation +
+                                          data[1].EU_annual_deprecation +
+                                          data[2].EU_annual_deprecation)
+                                      : aircraft.AS_annual_deprecation /
+                                        (data[0].AS_annual_deprecation +
+                                          data[1].AS_annual_deprecation +
+                                          data[2].AS_annual_deprecation)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_deprecation /
+                                        (data[0].NA_hourly_deprecation +
+                                          data[1].NA_hourly_deprecation)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_deprecation /
+                                        (data[0].SA_hourly_deprecation +
+                                          data[1].SA_hourly_deprecation)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_deprecation /
+                                        (data[0].EU_hourly_deprecation +
+                                          data[1].EU_hourly_deprecation)
+                                      : aircraft.AS_hourly_deprecation /
+                                        (data[0].AS_hourly_deprecation +
+                                          data[1].AS_hourly_deprecation)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
@@ -1175,9 +1426,45 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_annual_misc / maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_annual_misc /
+                                        (data[0].NA_annual_misc +
+                                          data[1].NA_annual_misc +
+                                          data[2].NA_annual_misc)
+                                      : country === "South America"
+                                      ? aircraft.SA_annual_misc /
+                                        (data[0].SA_annual_misc +
+                                          data[1].SA_annual_misc +
+                                          data[2].SA_annual_misc)
+                                      : country === "Europe"
+                                      ? aircraft.EU_annual_misc /
+                                        (data[0].EU_annual_misc +
+                                          data[1].EU_annual_misc +
+                                          data[2].EU_annual_misc)
+                                      : aircraft.AS_annual_misc /
+                                        (data[0].AS_annual_misc +
+                                          data[1].AS_annual_misc +
+                                          data[2].AS_annual_misc)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_misc /
+                                        (data[0].NA_hourly_misc +
+                                          data[1].NA_hourly_misc)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_misc /
+                                        (data[0].SA_hourly_misc +
+                                          data[1].SA_hourly_misc)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_misc /
+                                        (data[0].EU_hourly_misc +
+                                          data[1].EU_hourly_misc)
+                                      : aircraft.AS_hourly_misc /
+                                        (data[0].AS_hourly_misc +
+                                          data[1].AS_hourly_misc)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
@@ -1262,9 +1549,45 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_hourly_fuel / maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_hourly_fuel /
+                                        (data[0].NA_hourly_fuel +
+                                          data[1].NA_hourly_fuel +
+                                          data[2].NA_hourly_fuel)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_fuel /
+                                        (data[0].SA_hourly_fuel +
+                                          data[1].SA_hourly_fuel +
+                                          data[2].SA_hourly_fuel)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_fuel /
+                                        (data[0].EU_hourly_fuel +
+                                          data[1].EU_hourly_fuel +
+                                          data[2].EU_hourly_fuel)
+                                      : aircraft.AS_hourly_fuel /
+                                        (data[0].AS_hourly_fuel +
+                                          data[1].AS_hourly_fuel +
+                                          data[2].AS_hourly_fuel)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_fuel /
+                                        (data[0].NA_hourly_fuel +
+                                          data[1].NA_hourly_fuel)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_fuel /
+                                        (data[0].SA_hourly_fuel +
+                                          data[1].SA_hourly_fuel)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_fuel /
+                                        (data[0].EU_hourly_fuel +
+                                          data[1].EU_hourly_fuel)
+                                      : aircraft.AS_hourly_fuel /
+                                        (data[0].AS_hourly_fuel +
+                                          data[1].AS_hourly_fuel)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
@@ -1362,10 +1685,45 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_hourly_maintenance /
-                                  maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_hourly_maintenance /
+                                        (data[0].NA_hourly_maintenance +
+                                          data[1].NA_hourly_maintenance +
+                                          data[2].NA_hourly_maintenance)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_maintenance /
+                                        (data[0].SA_hourly_maintenance +
+                                          data[1].SA_hourly_maintenance +
+                                          data[2].SA_hourly_maintenance)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_maintenance /
+                                        (data[0].EU_hourly_maintenance +
+                                          data[1].EU_hourly_maintenance +
+                                          data[2].EU_hourly_maintenance)
+                                      : aircraft.AS_hourly_maintenance /
+                                        (data[0].AS_hourly_maintenance +
+                                          data[1].AS_hourly_maintenance +
+                                          data[2].AS_hourly_maintenance)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_maintenance /
+                                        (data[0].NA_hourly_maintenance +
+                                          data[1].NA_hourly_maintenance)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_maintenance /
+                                        (data[0].SA_hourly_maintenance +
+                                          data[1].SA_hourly_maintenance)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_maintenance /
+                                        (data[0].EU_hourly_maintenance +
+                                          data[1].EU_hourly_maintenance)
+                                      : aircraft.AS_hourly_maintenance /
+                                        (data[0].AS_hourly_maintenance +
+                                          data[1].AS_hourly_maintenance)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
@@ -1463,10 +1821,45 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_hourly_engine_overhaul /
-                                  maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_hourly_engine_overhaul /
+                                        (data[0].NA_hourly_engine_overhaul +
+                                          data[1].NA_hourly_engine_overhaul +
+                                          data[2].NA_hourly_engine_overhaul)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_engine_overhaul /
+                                        (data[0].SA_hourly_engine_overhaul +
+                                          data[1].SA_hourly_engine_overhaul +
+                                          data[2].SA_hourly_engine_overhaul)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_engine_overhaul /
+                                        (data[0].EU_hourly_engine_overhaul +
+                                          data[1].EU_hourly_engine_overhaul +
+                                          data[2].EU_hourly_engine_overhaul)
+                                      : aircraft.AS_hourly_engine_overhaul /
+                                        (data[0].AS_hourly_engine_overhaul +
+                                          data[1].AS_hourly_engine_overhaul +
+                                          data[2].AS_hourly_engine_overhaul)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_engine_overhaul /
+                                        (data[0].NA_hourly_engine_overhaul +
+                                          data[1].NA_hourly_engine_overhaul)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_engine_overhaul /
+                                        (data[0].SA_hourly_engine_overhaul +
+                                          data[1].SA_hourly_engine_overhaul)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_engine_overhaul /
+                                        (data[0].EU_hourly_engine_overhaul +
+                                          data[1].EU_hourly_engine_overhaul)
+                                      : aircraft.AS_hourly_engine_overhaul /
+                                        (data[0].AS_hourly_engine_overhaul +
+                                          data[1].AS_hourly_engine_overhaul)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
@@ -1564,10 +1957,45 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_hourly_ground_fees /
-                                  maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_hourly_ground_fees /
+                                        (data[0].NA_hourly_ground_fees +
+                                          data[1].NA_hourly_ground_fees +
+                                          data[2].NA_hourly_ground_fees)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_ground_fees /
+                                        (data[0].SA_hourly_ground_fees +
+                                          data[1].SA_hourly_ground_fees +
+                                          data[2].SA_hourly_ground_fees)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_ground_fees /
+                                        (data[0].EU_hourly_ground_fees +
+                                          data[1].EU_hourly_ground_fees +
+                                          data[2].EU_hourly_ground_fees)
+                                      : aircraft.AS_hourly_ground_fees /
+                                        (data[0].AS_hourly_ground_fees +
+                                          data[1].AS_hourly_ground_fees +
+                                          data[2].AS_hourly_ground_fees)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_ground_fees /
+                                        (data[0].NA_hourly_ground_fees +
+                                          data[1].NA_hourly_ground_fees)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_ground_fees /
+                                        (data[0].SA_hourly_ground_fees +
+                                          data[1].SA_hourly_ground_fees)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_ground_fees /
+                                        (data[0].EU_hourly_ground_fees +
+                                          data[1].EU_hourly_ground_fees)
+                                      : aircraft.AS_hourly_ground_fees /
+                                        (data[0].AS_hourly_ground_fees +
+                                          data[1].AS_hourly_ground_fees)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
@@ -1649,9 +2077,45 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                             }
                             style={{
                               width:
-                                (aircraft.NA_hourly_misc / maximumAnnualValue) *
-                                  100 +
-                                "%",
+                                data[2] !== undefined
+                                  ? (country === "North America"
+                                      ? aircraft.NA_hourly_misc /
+                                        (data[0].NA_hourly_misc +
+                                          data[1].NA_hourly_misc +
+                                          data[2].NA_hourly_misc)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_misc /
+                                        (data[0].SA_hourly_misc +
+                                          data[1].SA_hourly_misc +
+                                          data[2].SA_hourly_misc)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_misc /
+                                        (data[0].EU_hourly_misc +
+                                          data[1].EU_hourly_misc +
+                                          data[2].EU_hourly_misc)
+                                      : aircraft.AS_hourly_misc /
+                                        (data[0].AS_hourly_misc +
+                                          data[1].AS_hourly_misc +
+                                          data[2].AS_hourly_misc)) *
+                                      100 +
+                                    "%"
+                                  : (country === "North America"
+                                      ? aircraft.NA_hourly_misc /
+                                        (data[0].NA_hourly_misc +
+                                          data[1].NA_hourly_misc)
+                                      : country === "South America"
+                                      ? aircraft.SA_hourly_misc /
+                                        (data[0].SA_hourly_misc +
+                                          data[1].SA_hourly_misc)
+                                      : country === "Europe"
+                                      ? aircraft.EU_hourly_misc /
+                                        (data[0].EU_hourly_misc +
+                                          data[1].EU_hourly_misc)
+                                      : aircraft.AS_hourly_misc /
+                                        (data[0].AS_hourly_misc +
+                                          data[1].AS_hourly_misc)) *
+                                      100 +
+                                    "%",
                             }}
                           ></div>
                         </div>
