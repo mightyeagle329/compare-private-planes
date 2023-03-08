@@ -47,15 +47,19 @@ const Range = ({ params }) => {
           <div className={styles.squares}>
             <div className={styles.square0}></div>
             {params[0].aircraft_name}
-            <div className={styles.square1}></div>
-            {params[1].aircraft_name}
+
             {params[2] !== undefined ? (
               <>
+                <div className={styles.square1}></div>
+                {params[1].aircraft_name}
                 <div className={styles.square2}></div>
                 {params[2].aircraft_name}
               </>
             ) : (
-              <div></div>
+              <>
+                <div className={styles.square2}></div>
+                {params[1].aircraft_name}{" "}
+              </>
             )}
           </div>
         }
