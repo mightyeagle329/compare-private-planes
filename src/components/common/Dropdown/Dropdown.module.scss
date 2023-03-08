@@ -23,6 +23,7 @@
     .head {
         position: relative;
         height: 38px;
+        width: 8rem;
         display: flex;
         align-items: center;
         padding: 0 48px 0 16px;
@@ -38,7 +39,8 @@
             box-shadow: inset 0 0 0 2px var(--neutrals4);
         }
     }
-    .header_dropdown{
+
+    .header_dropdown {
         position: relative;
         height: 38px;
         width: 12rem;

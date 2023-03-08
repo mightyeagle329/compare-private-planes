@@ -63,7 +63,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
   const values = Object.values(acquisition);
   const labels = keys;
 
-  const [yearManufacture, setYearManufacture] = useState("Select year");
+  const [yearManufacture, setYearManufacture] = useState("Select");
 
   const [airframe, setAirframe] = useState(500);
   const [estimatedFutureValue, setestimatedFutureValue] = useState(

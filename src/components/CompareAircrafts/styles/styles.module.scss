@@ -1,3 +1,21 @@
+.form {
+    .search {
+        input {
+            max-width: 120px;
+            height: 30px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0px 0px 2px 0px rgba(99, 99, 99, 0.75);
+            padding: 0 5px;
+            outline: none;
+
+            &:focus {
+                border: 1px solid rgb(139, 139, 139);
+            }
+        }
+    }
+}
+
 // global styles for compare aircraft page*
 .range_configs {
     display: flex;

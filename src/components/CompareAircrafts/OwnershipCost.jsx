@@ -51,22 +51,29 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
     setNbHours(e.target.value);
     setAnnualBudget0(
       currency !== "USD"
-        ? ((country === "North America"
-            ? parseFloat(data[0].NA_annual_total)
+        ? (country === "North America"
+            ? data[0].NA_annual_total +
+              parseFloat(e.target.value) * data[0].NA_hourly_total
             : country === "Europe"
-            ? parseFloat(data[0].EU_annual_total)
+            ? data[0].EU_annual_total +
+              parseFloat(e.target.value) * data[0].EU_hourly_total
             : country === "South America"
-            ? parseFloat(data[0].SA_annual_total)
-            : parseFloat(data[0].AS_annual_total)) +
-            parseFloat(e.target.value)) *
+            ? data[0].SA_annual_total +
+              parseFloat(e.target.value) * data[0].SA_hourly_total
+            : data[0].AS_annual_total +
+              parseFloat(e.target.value) * data[0].AS_hourly_total) *
             conversionRate
-        : (country === "North America"
-            ? parseFloat(data[0].NA_annual_total)
-            : country === "Europe"
-            ? parseFloat(data[0].EU_annual_total)
-            : country === "South America"
-            ? parseFloat(data[0].SA_annual_total)
-            : parseFloat(data[0].AS_annual_total)) + parseFloat(e.target.value)
+        : country === "North America"
+        ? data[0].NA_annual_total +
+          parseFloat(e.target.value) * data[0].NA_hourly_total
+        : country === "Europe"
+        ? data[0].EU_annual_total +
+          parseFloat(e.target.value) * data[0].EU_hourly_total
+        : country === "South America"
+        ? data[0].SA_annual_total +
+          parseFloat(e.target.value) * data[0].SA_hourly_total
+        : data[0].AS_annual_total +
+          parseFloat(e.target.value) * data[0].AS_hourly_total
     );
     if (e.target.value === "") {
       setAnnualBudget0(data[0].NA_annual_total);
@@ -74,47 +81,60 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
 
     setAnnualBudget1(
       currency !== "USD"
-        ? ((country === "North America"
-            ? parseFloat(data[1].NA_annual_total)
+        ? (country === "North America"
+            ? data[1].NA_annual_total +
+              parseFloat(e.target.value) * data[1].NA_hourly_total
             : country === "Europe"
-            ? parseFloat(data[1].EU_annual_total)
+            ? data[1].EU_annual_total +
+              parseFloat(e.target.value) * data[1].EU_hourly_total
             : country === "South America"
-            ? parseFloat(data[1].SA_annual_total)
-            : parseFloat(data[1].AS_annual_total)) +
-            parseFloat(e.target.value)) *
+            ? data[1].SA_annual_total +
+              parseFloat(e.target.value) * data[1].SA_hourly_total
+            : data[1].AS_annual_total +
+              parseFloat(e.target.value) * data[1].AS_hourly_total) *
             conversionRate
-        : (country === "North America"
-            ? parseFloat(data[1].NA_annual_total)
-            : country === "Europe"
-            ? parseFloat(data[1].EU_annual_total)
-            : country === "South America"
-            ? parseFloat(data[1].SA_annual_total)
-            : parseFloat(data[1].AS_annual_total)) + parseFloat(e.target.value)
+        : country === "North America"
+        ? data[1].NA_annual_total +
+          parseFloat(e.target.value) * data[1].NA_hourly_total
+        : country === "Europe"
+        ? data[1].EU_annual_total +
+          parseFloat(e.target.value) * data[1].EU_hourly_total
+        : country === "South America"
+        ? data[1].SA_annual_total +
+          parseFloat(e.target.value) * data[1].SA_hourly_total
+        : data[1].AS_annual_total +
+          parseFloat(e.target.value) * data[1].AS_hourly_total
     );
     if (e.target.value === "") {
       setAnnualBudget1(data[1].NA_annual_total);
     }
 
-    if (data[1] !== undefined) {
+    if (data[2] !== undefined) {
       setAnnualBudget2(
         currency !== "USD"
-          ? ((country === "North America"
-              ? parseFloat(data[2].NA_annual_total)
+          ? (country === "North America"
+              ? data[2].NA_annual_total +
+                parseFloat(e.target.value) * data[2].NA_hourly_total
               : country === "Europe"
-              ? parseFloat(data[2].EU_annual_total)
+              ? data[2].EU_annual_total +
+                parseFloat(e.target.value) * data[2].EU_hourly_total
               : country === "South America"
-              ? parseFloat(data[2].SA_annual_total)
-              : parseFloat(data[2].AS_annual_total)) +
-              parseFloat(e.target.value)) *
+              ? data[2].SA_annual_total +
+                parseFloat(e.target.value) * data[2].SA_hourly_total
+              : data[2].AS_annual_total +
+                parseFloat(e.target.value) * data[2].AS_hourly_total) *
               conversionRate
-          : (country === "North America"
-              ? parseFloat(data[2].NA_annual_total)
-              : country === "Europe"
-              ? parseFloat(data[2].EU_annual_total)
-              : country === "South America"
-              ? parseFloat(data[2].SA_annual_total)
-              : parseFloat(data[2].AS_annual_total)) +
-              parseFloat(e.target.value)
+          : country === "North America"
+          ? data[2].NA_annual_total +
+            parseFloat(e.target.value) * data[2].NA_hourly_total
+          : country === "Europe"
+          ? data[2].EU_annual_total +
+            parseFloat(e.target.value) * data[2].EU_hourly_total
+          : country === "South America"
+          ? data[2].SA_annual_total +
+            parseFloat(e.target.value) * data[2].SA_hourly_total
+          : data[2].AS_annual_total +
+            parseFloat(e.target.value) * data[2].AS_hourly_total
       );
       if (e.target.value === "") {
         setAnnualBudget2(data[2].NA_annual_total);
