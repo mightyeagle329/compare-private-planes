@@ -79,6 +79,9 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
   const [range2, setRange2] = useState(
     aicraftsRange[2] !== undefined ? aicraftsRange[2] : 0
   );
+  const [rangeDecrease2, setrangeDecrease2] = useState(
+    rangesDecrease[2] !== undefined ? rangesDecrease[2] : 0
+  );
 
   function handleChange(address) {
     setAddress(address);
