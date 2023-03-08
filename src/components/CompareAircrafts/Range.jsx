@@ -15,11 +15,6 @@ import styles from "./styles/styles.module.scss";
 const Range = ({ params }) => {
   var rangesDec = [];
   var rangesAircrafts = [];
-  var aircraftNames = [
-    params[0].aircraft_name,
-    params[1].aircraft_name,
-    params[2] !== undefined ? params[2].aircraft_name : null,
-  ];
   const [maxPax, setMaxPax] = useState(
     Math.max(params[0].max_pax, params[1].max_pax)
   );
@@ -29,7 +24,9 @@ const Range = ({ params }) => {
       rangesDec.push(params[i].range_decrease_per_passenger);
       rangesAircrafts.push(params[i].range_km);
       if (i == 2) {
-        setMaxPax(params[0].max_pax, params[1].max_pax, params[2].max_pax);
+        setMaxPax(
+          Math.max(params[0].max_pax, params[1].max_pax, params[2].max_pax)
+        );
       }
     }
   }, []);
