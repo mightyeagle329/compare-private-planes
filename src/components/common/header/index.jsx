@@ -28,46 +28,52 @@ const Header = () => {
   return (
     <header className={cn(styles.header)}>
       <div className={cn(styles.nav_wrapper)}>
-        <div className={cn(styles.top_header)}>
-          <div className={cn(styles.left)}>
-            <div className={cn(styles.lang)}>
-              <i className="fa-solid fa-globe"></i>
-            </div>
-            <div className={cn(styles.logo)}>
+        <nav className={cn(styles.nav)}>
+          <ul>
+            <li className={cn(styles.logo)}>
               <img
                 src="https://compareprivateplanes.com/images/site/cropped-logo-blue-1536x997.png"
                 alt="logo"
               />
-            </div>
-          </div>
-          <div className={cn(styles.right)}>
-            <Link to="/login">Join Now</Link>
-            <Link to="/logout">Sign in </Link>
-          </div>
-        </div>
-        <nav className={cn(styles.nav)}>
-          <ul>
+            </li>
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>Search Aircraft</li>
             <li>
-              <Link to="/aircraft-comparisons">Aircraft Comparisons</Link>
+              {" "}
+              <Link to="/">Search Aircraft</Link>
             </li>
             <li>
-              <Link to="/basics">The Basics</Link>
-            </li>
-            <li>Engines</li>
-            <li>Ways To Fly</li>
-            <li>Free Tools</li>
-            <li>
-              <Link to="/premium">Premium</Link>
-            </li>
-            <li>
-              <Link to="/premium">About</Link>
+              <a
+                href="https://compareprivateplanes.com/premium"
+                target="_blank"
+              >
+                Dashboard
+              </a>
             </li>
             <li>
-              <Link to="/premium">Contact</Link>
+              <a
+                href="https://compareprivateplanes.com/register/your-membership"
+                target="_blank"
+              >
+                My Account
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://compareprivateplanes.com/premium/support"
+                target="_blank"
+              >
+                Support
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://compareprivateplanes.com/wp-login.php?action=logout&redirect_to=https%3A%2F%2Fcompareprivateplanes.com&_wpnonce=892bc803fb"
+                target="_blank"
+              >
+                Log Out
+              </a>
             </li>
           </ul>
         </nav>

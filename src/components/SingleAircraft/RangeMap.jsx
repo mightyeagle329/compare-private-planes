@@ -155,6 +155,7 @@ function Map({ rangeDecrease, aicraftRange, max_pax }) {
         >
           <Circle center={latLng} options={options} />
           <Marker position={latLng} />
+          <p>chadi</p>
         </GoogleMap>
       </LoadScript>
     </div>

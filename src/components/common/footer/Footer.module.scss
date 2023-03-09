@@ -1,3 +1,22 @@
 .footer {
-  height: 100px;
+  background-color: #1B344B;
+  margin-top: 5rem;
+
+  .footerDiv {
+    align-items: center;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .footerContent {
+      color: white;
+      font-size: 15px;
+    }
+
+    .footerLinks {
+      color: white;
+      font-size: 13px;
+    }
+  }
+
 }

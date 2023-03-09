@@ -268,6 +268,7 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
               <div>{circleName}</div>
             </InfoWindow>
           )}
+          <p>chadi</p>
         </GoogleMap>
       </LoadScript>
     </div>
