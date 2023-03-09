@@ -197,7 +197,7 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
                     valueLabelDisplay="auto"
                     aria-label="Volume"
                     value={nbPax}
-                    max={30}
+                    max={25}
                     onChange={handlePaxChange}
                   />
                 </label>

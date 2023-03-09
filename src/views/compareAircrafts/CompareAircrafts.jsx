@@ -19,7 +19,7 @@ import Performance from "../../components/CompareAircrafts/Performance";
 import Powerplant from "../../components/CompareAircrafts/Powerplant";
 import Range from "../../components/CompareAircrafts/Range";
 import Weights from "../../components/CompareAircrafts/Weight";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import Dropdown from "../../components/common/Dropdown";
@@ -163,7 +163,7 @@ const CompareAircrafts = () => {
               setValue={(value) => onCurrencyChanged(value)}
               options={CURRENCY_OPTIONS}
             />
-            {aircraftsData.length == 2 ? (
+            {aircraftsData.length === 2 ? (
               <input
                 type="button"
                 className={styles.header_btn}
