@@ -29,7 +29,7 @@ const Range = ({ params }) => {
         );
       }
     }
-  }, [params[2]]);
+  }, [params[0], params[1], params[2]]);
 
   return (
     <section className={cn(global.section)}>

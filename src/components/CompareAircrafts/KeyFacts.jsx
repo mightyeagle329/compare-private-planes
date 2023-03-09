@@ -27,7 +27,7 @@ const KeyFacts = ({ data, onRemoveAircraft }) => {
       }
     } else {
     }
-  }, [aircraftsData[0].key_facts]);
+  }, [data[2]]);
 
   return (
     <>

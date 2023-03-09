@@ -153,7 +153,6 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
     responsive: true,
     scales: {
       x: {
-        display: true,
         title: {
           display: true,
           text: "Year",
@@ -189,12 +188,13 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
     }
   };
 
-  const labels =
-    data[2] !== undefined
-      ? keys0
-          .concat(keys1.filter((item) => keys0.indexOf(item) < 0))
-          .concat(keys2.filter((item) => keys0.indexOf(item) < 0))
-      : keys0.concat(keys1.filter((item) => keys0.indexOf(item) < 0));
+  // const labels =
+  //   data[2] !== undefined
+  //     ? keys0
+  //         .concat(keys1.filter((item) => keys0.indexOf(item) < 0))
+  //         .concat(keys2.filter((item) => keys0.indexOf(item) < 0))
+  //     : keys0.concat(keys1.filter((item) => keys0.indexOf(item) < 0));
+  const labels = keys0 + keys1;
 
   const lineData = {
     labels,
