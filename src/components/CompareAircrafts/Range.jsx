@@ -8,7 +8,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
 
@@ -75,6 +75,9 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
   const [latLng, setLatLong] = useState({ lat: 37.772, lng: -80 });
   const [address, setAddress] = useState("");
   const [nbPax, setNbPax] = useState();
+  const [NbSlide, setNbSlide] = useState(
+    Math.max(max_pax[0], max_pax[1], max_pax[2])
+  );
   const [range0, setRange0] = useState(aicraftsRange[0]);
   const [range1, setRange1] = useState(aicraftsRange[1]);
   const [range2, setRange2] = useState(
@@ -197,7 +200,7 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
                     valueLabelDisplay="auto"
                     aria-label="Volume"
                     value={nbPax}
-                    max={25}
+                    max={NbSlide}
                     onChange={handlePaxChange}
                   />
                 </label>
