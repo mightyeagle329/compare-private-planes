@@ -29,7 +29,7 @@ const Range = ({ params }) => {
         );
       }
     }
-  }, []);
+  }, [params[2]]);
 
   return (
     <section className={cn(global.section)}>
@@ -153,6 +153,14 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
 
   return (
     <div>
+      {max_pax}
+      <br></br>
+      {range0}
+      <br></br>
+      {range1}
+      <br></br>
+      {range2}
+      <br></br>
       <LoadScript
         id="script-loader"
         googleMapsApiKey="AIzaSyB7zRbK_udn4vYNr4neiaPd71SuyldNIg4"
