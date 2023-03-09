@@ -56,7 +56,7 @@ const Range = ({ params }) => {
               </>
             ) : (
               <>
-                <div className={styles.square2}></div>
+                <div className={styles.square1}></div>
                 {params[1].aircraft_name}{" "}
               </>
             )}
