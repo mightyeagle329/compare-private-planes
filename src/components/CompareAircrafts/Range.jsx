@@ -74,7 +74,7 @@ export default Range;
 function Map({ rangesDecrease, aicraftsRange, max_pax }) {
   const [latLng, setLatLong] = useState({ lat: 37.772, lng: -80 });
   const [address, setAddress] = useState("");
-  const [nbPax, setNbPax] = useState(0);
+  const [nbPax, setNbPax] = useState();
   const [range0, setRange0] = useState(aicraftsRange[0]);
   const [range1, setRange1] = useState(aicraftsRange[1]);
   const [range2, setRange2] = useState(
@@ -197,7 +197,7 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
                     valueLabelDisplay="auto"
                     aria-label="Volume"
                     value={nbPax}
-                    max={Math.max(max_pax)}
+                    max={30}
                     onChange={handlePaxChange}
                   />
                 </label>
