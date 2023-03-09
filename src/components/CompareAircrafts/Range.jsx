@@ -1,7 +1,13 @@
 import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
-import { GoogleMap, Circle, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  Circle,
+  LoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
@@ -147,16 +153,15 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
     }
   };
 
+  const circleName = "Your Circle Name";
+  const [infoOpen, setInfoOpen] = useState(false);
+
+  const handleCircleClick = () => {
+    setInfoOpen(!infoOpen);
+  };
+
   return (
     <div>
-      {max_pax}
-      <br></br>
-      {range0}
-      <br></br>
-      {range1}
-      <br></br>
-      {range2}
-      <br></br>
       <LoadScript
         id="script-loader"
         googleMapsApiKey="AIzaSyB7zRbK_udn4vYNr4neiaPd71SuyldNIg4"
@@ -233,10 +238,22 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
           mapContainerClassName="map-container"
           mapContainerStyle={{ height: 400 + "px" }}
         >
-          <Circle center={latLng} options={options0} />
+          <Circle
+            center={latLng}
+            options={options0}
+            onClick={handleCircleClick}
+          />
           <Circle center={latLng} options={options1} />
           <Circle center={latLng} options={options2} />
           <Marker position={latLng} />
+          {infoOpen && (
+            <InfoWindow
+              position={latLng}
+              onCloseClick={() => setInfoOpen(false)}
+            >
+              <div>{circleName}</div>
+            </InfoWindow>
+          )}
           <p>chadi</p>
         </GoogleMap>
       </LoadScript>
