@@ -28,6 +28,17 @@
     }
   }
 
+  .logo {
+    display: flex;
+    justify-content: flex-end;
+
+    img {
+      display: block;
+      max-width: 15%;
+      height: auto;
+    }
+  }
+
   .top_header {
     display: flex;
     align-items: center;
