@@ -16,14 +16,12 @@ const Range = ({ params }) => {
   var rangesDec = [
     params[0].range_decrease_per_passenger,
     params[1].range_decrease_per_passenger,
-    params[2].range_decrease_per_passenger !== undefined
-      ? params[2].range_decrease_per_passenger
-      : 0,
+    params[2] !== undefined ? params[2].range_decrease_per_passenger : 0,
   ];
   var rangesAircrafts = [
     params[0].range_km,
     params[1].range_km,
-    params[2].range_km !== undefined ? params[2].range_km : 0,
+    params[2] !== undefined ? params[2].range_km : 0,
   ];
   const [maxPax, setMaxPax] = useState(
     Math.max(params[0].max_pax, params[1].max_pax)
