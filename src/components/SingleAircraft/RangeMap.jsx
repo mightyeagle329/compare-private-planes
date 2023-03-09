@@ -2,7 +2,7 @@ import cn from "classnames";
 import global from "../styles/global.module.scss";
 import SectionHeader from "../shared/SectionHeader";
 import { GoogleMap, Circle, LoadScript, Marker } from "@react-google-maps/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
 
@@ -38,6 +38,10 @@ function Map({ rangeDecrease, aicraftRange, max_pax }) {
   const [address, setAddress] = useState("");
   const [nbPax, setNbPax] = useState(1);
   const [range, setRange] = useState(aicraftRange);
+
+  useEffect(() => {
+    setRange(setRange);
+  }, []);
 
   function handleChange(address) {
     setAddress(address);
