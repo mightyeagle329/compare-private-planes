@@ -13,23 +13,21 @@ import PlacesAutocomplete, {
 import styles from "./styles/styles.module.scss";
 
 const Range = ({ params }) => {
-  var rangesDec = [];
-  var rangesAircrafts = [];
+  var rangesDec = [
+    params[0].range_decrease_per_passenger,
+    params[1].range_decrease_per_passenger,
+    params[2].range_decrease_per_passenger !== undefined
+      ? params[2].range_decrease_per_passenger
+      : 0,
+  ];
+  var rangesAircrafts = [
+    params[0].range_km,
+    params[1].range_km,
+    params[2].range_km !== undefined ? params[2].range_km : 0,
+  ];
   const [maxPax, setMaxPax] = useState(
     Math.max(params[0].max_pax, params[1].max_pax)
   );
-
-  useEffect(() => {
-    for (var i = 0; i < params.length; i++) {
-      rangesDec.push(params[i].range_decrease_per_passenger);
-      rangesAircrafts.push(params[i].range_km);
-      if (i == 2) {
-        setMaxPax(
-          Math.max(params[0].max_pax, params[1].max_pax, params[2].max_pax)
-        );
-      }
-    }
-  }, [params[0], params[1], params[2]]);
 
   return (
     <section className={cn(global.section)}>
@@ -142,7 +140,7 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
       setRange1(
         aicraftsRange[1] - parseFloat(newValue) * parseFloat(rangesDecrease[1])
       );
-      if (aicraftsRange[2] !== undefined) {
+      if (aicraftsRange[2] !== 0) {
         setRange2(
           aicraftsRange[2] -
             parseFloat(newValue) * parseFloat(rangesDecrease[2])
