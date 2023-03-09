@@ -16,6 +16,11 @@
     }
 }
 
+.green_value {
+    color: green;
+    font-weight: 700;
+}
+
 // global styles for compare aircraft page*
 .range_configs {
     display: flex;
@@ -219,6 +224,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            padding-bottom: 10px;
 
             .key_value {
                 flex: 1;
@@ -343,7 +349,6 @@
 
 
 
-
 .sorting {
 
     right: 0;
@@ -365,9 +370,7 @@
 
     .dropdown {
         .dropdown {
-            .head {
-                display: none;
-            }
+            width: 10rem;
         }
     }
 }

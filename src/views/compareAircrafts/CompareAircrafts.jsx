@@ -3,6 +3,7 @@ import pdf from "../../components/styles/pdf.module.scss";
 import cn from "classnames";
 
 import logo from "../../assets/logo.png";
+import scopedStyles from "./styles.module.scss";
 
 import Header from "../../components/common/header";
 import AquisitionCost from "../../components/CompareAircrafts/AquisitionCost";
@@ -18,7 +19,7 @@ import Performance from "../../components/CompareAircrafts/Performance";
 import Powerplant from "../../components/CompareAircrafts/Powerplant";
 import Range from "../../components/CompareAircrafts/Range";
 import Weights from "../../components/CompareAircrafts/Weight";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import Dropdown from "../../components/common/Dropdown";
@@ -27,6 +28,8 @@ import {
   CURRENCY_OPTIONS,
   UNIT_OPTIONS,
 } from "../../utils/constants/app-constants";
+import Modal from "../../components/common/modal/Modal";
+import aircraftService from "../../services/aircraft-service";
 
 const CompareAircrafts = () => {
   useEffect(() => {
@@ -40,10 +43,19 @@ const CompareAircrafts = () => {
   const location = useLocation();
   const aircrafts = location.state;
   const [aircraftsData, setAircraftsData] = useState(aircrafts);
-
+  const [allaircraftsData, setAllAircraftsData] = useState([]);
+  const filteredAircrafts = allaircraftsData.filter(
+    (aircraft) =>
+      aircraft.aircraft_id !== aircraftsData[0].aircraft_id &&
+      aircraft.aircraft_id !== aircraftsData[1].aircraft_id
+  );
   const onCurrencyChanged = (val) => {
     setCurrency(val);
   };
+
+  useEffect(() => {
+    aircraftService.getAircrafts().then((data) => setAllAircraftsData(data));
+  }, []);
 
   const onUnitChanged = (val) => {
     setUnit(val);
@@ -55,6 +67,31 @@ const CompareAircrafts = () => {
 
   const onRemoveAircraft = (data) => {
     setAircraftsData(data);
+  };
+  let selectedAircafts = aircraftsData;
+
+  const onSelect = (e, aircraft) => {
+    if (selectedAircafts.includes(aircraft)) {
+      e.target.checked = false;
+      selectedAircafts.pop(aircraft);
+      return;
+    }
+    if (selectedAircafts.length >= 3) {
+      alert("Max 3");
+      e.target.checked = false;
+      return;
+    }
+
+    selectedAircafts.push(aircraft);
+  };
+
+  const onCompare = () => {
+    if (selectedAircafts.length > 3) {
+      alert("You can add only one aircraft");
+      return;
+    }
+    setAircraftsData(selectedAircafts);
+    setOpenModal(!openModal);
   };
   return (
     <>
@@ -126,6 +163,16 @@ const CompareAircrafts = () => {
               setValue={(value) => onCurrencyChanged(value)}
               options={CURRENCY_OPTIONS}
             />
+            {aircraftsData.length == 2 ? (
+              <input
+                type="button"
+                className={styles.header_btn}
+                value="Add aircraft to compare"
+                onClick={() => setOpenModal(!openModal)}
+              />
+            ) : (
+              <div></div>
+            )}
             <input
               type="button"
               className={styles.header_btn}
@@ -204,6 +251,41 @@ const CompareAircrafts = () => {
             </div>
           </div>
         </div>
+        <Modal title={`Add another aircraft to compare`} toggler={openModal}>
+          <div className={cn(global.pdf_hidden)}>
+            <div className={cn(scopedStyles.options)}>
+              {filteredAircrafts.map((aircraft) => {
+                return (
+                  <label
+                    className={cn(scopedStyles.option)}
+                    key={aircraft.aircraft_id}
+                  >
+                    <span>{aircraft.aircraft_name}</span>
+                    <input
+                      type="checkbox"
+                      value={aircraft.aircraft_id}
+                      name="aircraft"
+                      // pass aircraft_id as param to onSelect
+                      onClick={(e) => onSelect(e, aircraft)}
+                    />
+                    <i
+                      className={
+                        "fa-solid fa-check " + cn(scopedStyles.checkmark)
+                      }
+                    ></i>
+                    <img src={aircraft.image_name} alt="" />
+                  </label>
+                );
+              })}
+            </div>
+            <button
+              onClick={() => onCompare()}
+              className={scopedStyles.compare_btn}
+            >
+              Add Aircraft
+            </button>
+          </div>
+        </Modal>
       </main>
     </>
   );

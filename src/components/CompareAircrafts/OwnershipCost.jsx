@@ -169,6 +169,8 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
               </form>
             </div>
           </center>
+          <br></br>
+          <br></br>
           <div className={cn(styles.compare_table)}>
             <div className={cn(styles.compare_table_column)}>
               <span
@@ -401,6 +403,7 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
             })}
           </div>
           <div className={cn(styles.additional_info)}>
+            <br></br>
             <h3>Annual Fixed Costs Breakdown</h3>
             <div>
               <h5>Crew Salary</h5>
@@ -1494,6 +1497,8 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                 </div>
               </div>
             </div>
+            <br></br>
+            <br></br>
             <h3>Variable Costs Breakdown</h3>
             <div>
               <h5>Fuel Cost</h5>

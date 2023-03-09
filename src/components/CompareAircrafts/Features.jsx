@@ -35,7 +35,7 @@ const Features = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Dispatch Reliability
+                Avionics Suite
               </span>
               <span
                 className={cn(

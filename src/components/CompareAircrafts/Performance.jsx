@@ -127,7 +127,7 @@ const Performance = ({ data, currency, country, unit }) => {
               >
                 Mach
               </span>
-
+              <br></br>
               <span
                 className={cn(
                   styles.compare_table_column_cell,

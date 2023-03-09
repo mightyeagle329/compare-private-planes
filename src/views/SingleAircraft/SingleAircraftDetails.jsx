@@ -26,7 +26,7 @@ import Modal from "../../components/common/modal/Modal";
 
 import aircraftService from "../../services/aircraft-service";
 
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { searchService } from "../../utils/hooks/utils";
 import styles from "./styles.module.scss";

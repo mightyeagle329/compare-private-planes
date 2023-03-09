@@ -9,7 +9,7 @@ const Header = () => {
   let headerTitle = "Search Page";
   let aircraft_year = "";
   if (location.pathname === "/compare") {
-    headerTitle = "Compare Aircrafts";
+    headerTitle = "Compare Aircraft";
     aircraft_year = "";
   } else if (location.state !== null) {
     headerTitle = location.state.aircraftData.aircraft_name;

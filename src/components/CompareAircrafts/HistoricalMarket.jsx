@@ -14,7 +14,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { faker } from "@faker-js/faker";
 import { Line } from "react-chartjs-2";
 
 import SectionHeader from "../shared/SectionHeader";

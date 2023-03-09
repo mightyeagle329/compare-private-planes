@@ -12,7 +12,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { faker } from "@faker-js/faker";
 import { Line } from "react-chartjs-2";
 import Dropdown from "../common/Dropdown";
 import { FUTURE_OPTIONS } from "../../utils/constants/app-constants";
@@ -273,14 +272,18 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
               >
                 invisible
               </span>
+              <br></br>
+              <br></br>
+
               <span
                 className={cn(
                   styles.compare_table_column_cell,
                   styles.table_key
                 )}
               >
-                Select YOM
+                Select Year
               </span>
+              <br></br>
               <span
                 className={cn(
                   styles.compare_table_column_cell,
@@ -289,6 +292,7 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
               >
                 New Purchase Price
               </span>
+              <br></br>
               <span
                 className={cn(
                   styles.compare_table_column_cell,
@@ -297,6 +301,7 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
               >
                 Current Value
               </span>
+              <br></br>
               <span
                 className={cn(
                   styles.compare_table_column_cell,
@@ -305,6 +310,7 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
               >
                 Depreciation Rate
               </span>
+              <br></br>
               <span
                 className={cn(
                   styles.compare_table_column_cell,
@@ -313,6 +319,7 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
               >
                 Future Values
               </span>
+              <br></br>
             </div>
             {data.map((aircraft, index) => {
               return (
@@ -350,7 +357,13 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
                       </center>
                     </div>
                   </span>
-                  <span className={cn(styles.compare_table_column_cell)}>
+                  <br></br>
+                  <span
+                    className={cn(
+                      styles.compare_table_column_cell,
+                      styles.green_value
+                    )}
+                  >
                     {aircraft.new_purchase == 0
                       ? "-"
                       : currency === "USD"
@@ -365,7 +378,13 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
                           "0,0"
                         )}
                   </span>
-                  <span className={cn(styles.compare_table_column_cell)}>
+                  <br></br>
+                  <span
+                    className={cn(
+                      styles.compare_table_column_cell,
+                      styles.green_value
+                    )}
+                  >
                     {index === 0
                       ? values0[i0] === 0
                         ? "-"
@@ -396,10 +415,22 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
                       : "€" +
                         numeral(values2[i2] * conversionRate).format("0,0")}
                   </span>
-                  <span className={cn(styles.compare_table_column_cell)}>
+                  <br></br>
+                  <span
+                    className={cn(
+                      styles.compare_table_column_cell,
+                      styles.green_value
+                    )}
+                  >
                     -{aircraft.depreication_rate}%
                   </span>
-                  <span className={cn(styles.compare_table_column_cell)}>
+                  <br></br>
+                  <span
+                    className={cn(
+                      styles.compare_table_column_cell,
+                      styles.green_value
+                    )}
+                  >
                     {index === 0
                       ? futureValueConstant0 === 0
                         ? "-"
