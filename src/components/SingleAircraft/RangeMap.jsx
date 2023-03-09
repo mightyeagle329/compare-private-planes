@@ -37,10 +37,10 @@ function Map({ rangeDecrease, aicraftRange, max_pax }) {
   const [latLng, setLatLong] = useState({ lat: 37.772, lng: -80 });
   const [address, setAddress] = useState("");
   const [nbPax, setNbPax] = useState(1);
-  const [range, setRange] = useState(aicraftRange);
+  const [range, setRange] = useState(0);
 
   useEffect(() => {
-    setRange(setRange);
+    setRange(aicraftRange);
   }, []);
 
   function handleChange(address) {
@@ -64,7 +64,7 @@ function Map({ rangeDecrease, aicraftRange, max_pax }) {
     draggable: false,
     editable: false,
     visible: true,
-    radius: range * 1000,
+    radius: range === undefined ? aicraftRange * 1000 : range * 1000,
     zIndex: 1,
   };
 
