@@ -34,6 +34,7 @@ const Header = () => {
               <img
                 src="https://compareprivateplanes.com/images/site/cropped-logo-blue-1536x997.png"
                 alt="logo"
+                className={cn(styles.logo_img)}
               />
             </li>
             <li>
