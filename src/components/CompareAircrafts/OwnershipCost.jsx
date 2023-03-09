@@ -221,7 +221,12 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                     {aircraft.aircraft_name}
                   </span>
 
-                  <span className={cn(styles.compare_table_column_cell)}>
+                  <span
+                    className={cn(
+                      styles.compare_table_column_cell,
+                      styles.green_value
+                    )}
+                  >
                     {index === 0
                       ? annualBudget0 === 0
                         ? "-"
