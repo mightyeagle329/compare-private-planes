@@ -29,9 +29,11 @@ const Range = ({ params }) => {
     params[1].range_km,
     params[2] !== undefined ? params[2].range_km : 0,
   ];
-  const [maxPax, setMaxPax] = useState(
-    Math.max(params[0].max_pax, params[1].max_pax)
-  );
+  const [maxPax, setMaxPax] = useState([
+    params[0].max_pax,
+    params[1].max_pax,
+    params[2] !== undefined ? params[2].max_pax : 0,
+  ]);
 
   return (
     <section className={cn(global.section)}>
@@ -138,17 +140,26 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
   const handlePaxChange = (e, newValue) => {
     setNbPax(newValue);
     if (newValue !== "") {
-      setRange0(
-        aicraftsRange[0] - parseFloat(newValue) * parseFloat(rangesDecrease[0])
-      );
-      setRange1(
-        aicraftsRange[1] - parseFloat(newValue) * parseFloat(rangesDecrease[1])
-      );
-      if (aicraftsRange[2] !== 0) {
-        setRange2(
-          aicraftsRange[2] -
-            parseFloat(newValue) * parseFloat(rangesDecrease[2])
+      if (newValue < max_pax[0]) {
+        setRange0(
+          aicraftsRange[0] -
+            parseFloat(newValue) * parseFloat(rangesDecrease[0])
         );
+      }
+      if (newValue < max_pax[1]) {
+        setRange1(
+          aicraftsRange[1] -
+            parseFloat(newValue) * parseFloat(rangesDecrease[1])
+        );
+      }
+
+      if (aicraftsRange[2] !== 0) {
+        if (newValue < max_pax[2]) {
+          setRange2(
+            aicraftsRange[2] -
+              parseFloat(newValue) * parseFloat(rangesDecrease[2])
+          );
+        }
       }
     }
   };
@@ -186,7 +197,7 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
                     valueLabelDisplay="auto"
                     aria-label="Volume"
                     value={nbPax}
-                    max={max_pax}
+                    max={Math.max(max_pax)}
                     onChange={handlePaxChange}
                   />
                 </label>
