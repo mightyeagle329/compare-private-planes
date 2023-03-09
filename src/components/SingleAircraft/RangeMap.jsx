@@ -13,9 +13,9 @@ import PlacesAutocomplete, {
 import styles from "./styles/styles.module.scss";
 
 const RangeMap = ({ params }) => {
-  const [rangeDec, setRangeDec] = useState(params.range_decrease_per_passenger);
-  const [rangesAircraft, setrangesAircraft] = useState(params.range_km);
-  const [maxPax, setmaxPax] = useState(params.max_pax);
+  const rangeDec = params.range_decrease_per_passenger;
+  const rangesAircraft = params.range_km;
+  const maxPax = params.max_pax;
 
   return (
     <section className={cn(global.section)}>
