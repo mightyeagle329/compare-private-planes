@@ -31,14 +31,18 @@ const Header = () => {
         <nav className={cn(styles.nav)}>
           <ul>
             <li className={cn(styles.logo)}>
-              <img
-                src="https://compareprivateplanes.com/images/site/cropped-logo-blue-1536x997.png"
-                alt="logo"
-                className={cn(styles.logo_img)}
-              />
+              <a href="https://compareprivateplanes.com" target="_blank">
+                <img
+                  src="https://compareprivateplanes.com/images/site/cropped-logo-blue-1536x997.png"
+                  alt="logo"
+                  className={cn(styles.logo_img)}
+                />
+              </a>
             </li>
             <li>
-              <Link to="/">Home</Link>
+              <a href="https://compareprivateplanes.com" target="_blank">
+                Home
+              </a>
             </li>
             <li>
               {" "}
@@ -91,7 +95,7 @@ const Header = () => {
               <Link to="/aircraft-comparisons">Aircraft Comparisons</Link>
             </p>
             <p>
-              <Link to="/basics">The Basics</Link>
+              <Link to="/basics">Dashboard</Link>
             </p>
             <p>Engines</p>
             <p>Ways To Fly</p>
