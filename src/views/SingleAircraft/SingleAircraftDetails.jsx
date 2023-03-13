@@ -36,6 +36,7 @@ import {
   UNIT_OPTIONS,
 } from "../../utils/constants/app-constants";
 import Dropdown from "../../components/common/Dropdown";
+import Footer from "../../components/common/footer";
 
 export default function SingleAircraftDetails() {
   const [aircraftData, setAircraftData] = useState([]);
@@ -323,6 +324,7 @@ export default function SingleAircraftDetails() {
           </div>
         </Modal>
       </main>
+      <Footer />
     </>
   );
 }

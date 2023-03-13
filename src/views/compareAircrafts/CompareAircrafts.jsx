@@ -30,6 +30,7 @@ import {
 } from "../../utils/constants/app-constants";
 import Modal from "../../components/common/modal/Modal";
 import aircraftService from "../../services/aircraft-service";
+import Footer from "../../components/common/footer";
 
 const CompareAircrafts = () => {
   useEffect(() => {
@@ -287,6 +288,7 @@ const CompareAircrafts = () => {
           </div>
         </Modal>
       </main>
+      <Footer />
     </>
   );
 };
