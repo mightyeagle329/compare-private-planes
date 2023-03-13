@@ -10,46 +10,54 @@
     align-items: center;
     margin-top: 30px;
     gap: 30px;
-    
+
     .first_page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+
+      .logo_container {
         display: flex;
-        flex-direction: column;
         justify-content: center;
-        align-items: center;
-        gap: 30px;
-        .logo_container {
-          display: flex;
-          justify-content: center;
-          img {
-            max-width: 40%;
-          }
+
+        img {
+          max-width: 20%;
         }
-        .sample_aircrafts {
+      }
+
+      .sample_aircrafts {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+
+        .sample_aircraft {
           display: flex;
+          flex-direction: column;
+          justify-content: center;
           align-items: center;
-          gap: 40px;
-          .sample_aircraft {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            .image_container {
-              position: relative;
-              img {
-                object-fit: cover;
-                width: 220px;
-                height: auto;
-                border-radius: 15px;
-              }
+          gap: 10px;
+
+          .image_container {
+            position: relative;
+
+            img {
+              object-fit: cover;
+              width: 220px;
+              height: auto;
+              border-radius: 15px;
             }
-            .aircraft_name {
-              font-size: 1.2em;
-              font-weight: 600;
-            }
+          }
+
+          .aircraft_name {
+            font-size: 1.2em;
+            font-weight: 600;
           }
         }
       }
+    }
+
     .second_page {
       position: relative;
       page-break-after: always;
@@ -58,7 +66,8 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      p{
+
+      p {
         text-align: center;
         font-size: 1.6rem;
       }

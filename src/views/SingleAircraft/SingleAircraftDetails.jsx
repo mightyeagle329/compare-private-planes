@@ -168,6 +168,12 @@ export default function SingleAircraftDetails() {
               </div>
             </div>
           </div>
+          <footer>
+            <center>
+              <p>&#169; Magic Lagoon Limited</p>
+              <p>{new Date().getFullYear()}</p>
+            </center>
+          </footer>
         </div>
         <div className={cn(pdf.second_page)}>
           <p>
@@ -181,11 +187,6 @@ export default function SingleAircraftDetails() {
             report are: Region: North America Currency: USD Units: Imperial
             Estimated Annual Flight Hours: 200
           </p>
-
-          {/* <footer>
-            <p>&#169; Magic Lagoon Limited</p>
-            <p>{new Date().getFullYear()}</p>
-          </footer> */}
         </div>
       </div>
       <main className={cn(global.wrapper)}>
