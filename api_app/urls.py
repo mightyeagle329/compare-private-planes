@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AircraftList, AircraftSearch, AircraftById, AccidentsList, upload_csv
+from .views import AircraftList, AircraftSearch, AircraftById, AccidentsList, upload_csv, upload_accidents
 
 urlpatterns = [
     path("search", AircraftSearch.as_view()),
@@ -7,4 +7,5 @@ urlpatterns = [
     path("accident-items/", AccidentsList.as_view()),
     path('aircrafts/<int:id>/', AircraftById.as_view()),
     path('upload-csv/', upload_csv, name="upload-csv"),
+    path('upload-accidents/', upload_accidents, name="upload-accidents"),
 ]

@@ -958,3 +958,30 @@ def upload_csv(request):
         )
     context = {}
     return render(request, 'admin/upload-csv.html', context)
+
+
+def upload_accidents(request):
+    accidents = Accident.objects.all()
+    prompt = {
+        'order': 'Order of the CSV should be field1, field2, field3 ...',
+        'products': accidents
+    }
+    if request.method == 'GET':
+        return render(request, 'admin/upload-accidents.html', prompt)
+    csv_file = request.FILES['file']
+    if not csv_file.endswith('.csv'):
+        messages.error(request, 'THIS IS NOT A CSV FILE')
+    data_set = csv_file.read().decode('utf-8')
+    io_string = io.StringIO(data_set)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter=',', quotechar='|'):
+        accident, created = Accident.objects.update_or_create(
+            country=column[0],
+            aircraft_incident=column[1],
+            reg=column[2],
+            date=column[3],
+            occurrence=column[3],
+            details=column[5],
+        )
+    context = {}
+    return render(request, 'admin/upload-accidents.html', context)
