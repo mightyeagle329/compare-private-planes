@@ -6,7 +6,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.db.models import Q
 from django.shortcuts import render
-from django.contrib import messages
 import csv
 import io
 
@@ -745,8 +744,6 @@ def upload_csv(request):
     if request.method == 'GET':
         return render(request, 'admin/upload-csv.html', prompt)
     csv_file = request.FILES['file']
-    if not csv_file.endswith('.csv'):
-        messages.error(request, 'THIS IS NOT A CSV FILE')
     data_set = csv_file.read().decode('utf-8')
     io_string = io.StringIO(data_set)
     next(io_string)
@@ -969,8 +966,6 @@ def upload_accidents(request):
     if request.method == 'GET':
         return render(request, 'admin/upload-accidents.html', prompt)
     csv_file = request.FILES['file']
-    if not csv_file.endswith('.csv'):
-        messages.error(request, 'THIS IS NOT A CSV FILE')
     data_set = csv_file.read().decode('utf-8')
     io_string = io.StringIO(data_set)
     next(io_string)
