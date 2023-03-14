@@ -142,7 +142,7 @@ export default function SingleAircraftDetails() {
   const navigate = useNavigate();
 
   const onCompare = () => {
-    if (selectedAircafts.length < 2) {
+    if (selectedAircafts.length < 1) {
       alert("Select at least 1 aircraft");
       return;
     }

@@ -8,7 +8,7 @@ import numeral from "numeral";
 const Powerplant = ({ data, currency, country, unit }) => {
   return (
     <>
-      <section className={cn(global.section, global.page_break)}>
+      <section className={cn(global.section)}>
         <SectionHeader title="Powerplant" />
         <main>
           <div className={cn(styles.compare_table)}>

@@ -117,6 +117,11 @@
     }
 }
 
+@media print {
+    .compare_table{
+        overflow: hidden;
+    }
+}
 .btn {
     border-radius: 15px;
     outline: none;
@@ -345,6 +350,14 @@
             }
         }
     }
+}
+
+// pdf view for ownership costs
+@media print {
+    .bar {
+        background-color: rgb(230, 228, 229) s;
+        print-color-adjust: exact;
+      }
 }
 
 

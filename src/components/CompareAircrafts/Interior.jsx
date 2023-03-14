@@ -8,7 +8,7 @@ import SectionHeader from "../shared/SectionHeader";
 const Interior = ({ data, currency, country, unit }) => {
   return (
     <>
-      <section className={cn(global.section, global.page_break)}>
+      <section className={cn(global.section)}>
         <SectionHeader title="Interior" />
         <main>
           <div className={cn(styles.compare_table)}>

@@ -118,11 +118,11 @@ const HistoricalMarket = ({ historicalData }) => {
   }, [from]);
 
   return (
-    <section className={cn(global.section)}>
+    <section className={cn(global.section, global.page_break)}>
       <SectionHeader title="Historical Market Activity" />
       <main>
         <div className={cn(styles.chart_dates)}>
-          <div className={cn(styles.single_select)}>
+          <div className={cn(styles.single_select, global.pdf_hidden)}>
             From
             <Select
               labelId="demo-simple-select-label"
@@ -137,8 +137,12 @@ const HistoricalMarket = ({ historicalData }) => {
                 </MenuItem>
               ))}
             </Select>
+
           </div>
-          <div className={cn(styles.single_select)}>
+            <span  className={global.pdf_only}>
+                From {from}
+            </span>
+          <div className={cn(styles.single_select, global.pdf_hidden)}>
             To
             <Select
               labelId="demo-simple-select-label"
@@ -154,6 +158,9 @@ const HistoricalMarket = ({ historicalData }) => {
               ))}
             </Select>
           </div>
+            <span  className={global.pdf_only}>
+                To {to}
+            </span>
         </div>
         <div className={cn(styles.line_chart)}>
           <Line data={data} options={options} />

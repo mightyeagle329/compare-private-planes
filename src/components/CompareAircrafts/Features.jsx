@@ -8,7 +8,7 @@ import SectionHeader from "../shared/SectionHeader";
 const Features = ({ data, currency, country, unit }) => {
   return (
     <>
-      <section className={cn(global.section)}>
+      <section className={cn(global.section, global.page_break)}>
         <SectionHeader title="Features" />
         <main>
           <div className={cn(styles.compare_table)}>

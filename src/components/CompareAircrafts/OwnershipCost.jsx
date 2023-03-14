@@ -144,7 +144,7 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
 
   return (
     <>
-      <section className={cn(global.section)}>
+      <section className={cn(global.section, global.page_break)}>
         <SectionHeader title="Ownership Costs" />
         <main className={cn(styles.ownership_container)}>
           <center>

@@ -71,7 +71,7 @@ const FleetFlightHours = ({ params }) => {
     }
   };
   return (
-    <section className={cn(global.section)}>
+    <section className={cn(global.section,global.page_break)}>
       <SectionHeader title="Fleet Flight Hour" />
       <main>
         <div className={cn(global.details_table)}>

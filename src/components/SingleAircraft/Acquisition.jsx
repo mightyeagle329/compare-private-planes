@@ -253,6 +253,9 @@ const Acquisition = ({ params, acquisition, currency }) => {
                     />
                   </div>
                 </div>
+                <span className={global.pdf_only}>
+                  {yearManufacture === "Select" ? "-" : yearManufacture}
+                </span>
               </div>
               <div className={cn(global.row) + " " + global.pdf_hidden}>
                 <span
@@ -265,7 +268,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
                 >
                   Airframe Hours
                 </span>
-                <div className={styles.sorting}>
+                <div className={styles.sorting + " " + global.pdf_hidden}>
                   <div className={styles.dropdown}>
                     <form
                       className={styles.search}
@@ -286,8 +289,9 @@ const Acquisition = ({ params, acquisition, currency }) => {
                     </form>
                   </div>
                 </div>
+                <span className={global.pdf_only}>{airframe}</span>
               </div>
-              <div className={cn(global.row, global.pdf_hidden)}>
+              <div className={cn(global.row)}>
                 <span
                   className={cn(
                     global.key,
@@ -298,7 +302,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
                 >
                   Estimated Future Value
                 </span>
-                <div className={styles.sorting}>
+                <div className={styles.sorting + " " + global.pdf_hidden}>
                   <div className={styles.dropdown + " " + global.pdf_hidden}>
                     <Dropdown
                       className={styles.dropdown}
@@ -308,6 +312,7 @@ const Acquisition = ({ params, acquisition, currency }) => {
                     />
                   </div>
                 </div>
+                <span className={global.pdf_only}>{estimatedFutureValue}</span>
               </div>
             </div>
           </div>

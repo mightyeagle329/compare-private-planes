@@ -18,7 +18,7 @@ const RangeMap = ({ params }) => {
   const maxPax = params.max_pax;
 
   return (
-    <section className={cn(global.section)}>
+    <section className={cn(global.section, global.page_break)}>
       <SectionHeader title="Range Map" />
       <main className={styles.main_range_map}>
         <Map
@@ -94,7 +94,7 @@ function Map({ rangeDecrease, aicraftRange, max_pax }) {
             loading,
           }) => (
             <div className={styles.range_configs}>
-              <div className={styles.map_inputs}>
+              <div className={cn(styles.map_inputs, global.pdf_hidden)}>
                 <label htmlFor="paxNumber" className={styles.pax_slider}>
                   Pax number
                   <Slider
@@ -105,6 +105,7 @@ function Map({ rangeDecrease, aicraftRange, max_pax }) {
                     onChange={handlePaxChange}
                   />
                 </label>
+                
                 <label htmlFor="startLocation">
                   <TextField
                     {...getInputProps({

@@ -5,7 +5,7 @@ import numeral from "numeral";
 
 const Interior = ({ params, unit }) => {
   return (
-    <section className={cn(global.section)}>
+    <section className={cn(global.section, global.page_break)}>
       <SectionHeader title="Interior" />
       <main>
         <div className={cn(global.details_table)}>

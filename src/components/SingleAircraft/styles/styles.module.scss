@@ -23,7 +23,7 @@
   .img_container {
     flex: 1;
     margin-left: 2rem;
-    padding-bottom: .5rem;
+    padding-bottom: 0.5rem;
 
     img {
       max-width: 70%;
@@ -70,8 +70,6 @@
   }
 }
 
-
-
 .doughnut_charts_wrapper {
   display: flex;
   justify-content: center;
@@ -95,14 +93,14 @@
       transform: translate(-50%, -50%);
       font-size: 1.4rem;
       font-weight: 600;
-      color: #56AD70;
+      color: #56ad70;
       z-index: 10;
       text-align: center;
 
       .chart_label_description {
         font-weight: 200;
         font-size: 15px;
-        color: #8E8E8E;
+        color: #8e8e8e;
         text-align: center;
       }
     }
@@ -114,7 +112,7 @@
       transform: translate(-50%, -50%);
       font-size: 1.4rem;
       font-weight: 600;
-      color: #DBE050;
+      color: #dbe050;
       text-align: center;
       z-index: 10;
 
@@ -122,7 +120,7 @@
         font-weight: 200;
         font-size: 15px;
         text-align: center;
-        color: #8E8E8E;
+        color: #8e8e8e;
         text-align: center;
       }
     }
@@ -135,13 +133,13 @@
       font-size: 1.4rem;
       text-align: center;
       font-weight: 600;
-      color: #DA3978;
+      color: #da3978;
       z-index: 10;
 
       .chart_label_description {
         font-weight: 200;
         font-size: 15px;
-        color: #8E8E8E;
+        color: #8e8e8e;
         text-align: center;
       }
     }
@@ -154,13 +152,13 @@
       text-align: center;
       font-size: 1.4rem;
       font-weight: 600;
-      color: #90EB4B;
+      color: #90eb4b;
       z-index: 10;
 
       .chart_label_description {
         font-weight: 200;
         font-size: 15px;
-        color: #8E8E8E;
+        color: #8e8e8e;
         text-align: center;
       }
     }
@@ -173,13 +171,13 @@
       transform: translate(-50%, -50%);
       font-size: 1.4rem;
       font-weight: 600;
-      color: #D857F4;
+      color: #d857f4;
       z-index: 10;
 
       .chart_label_description {
         font-weight: 200;
         font-size: 15px;
-        color: #8E8E8E;
+        color: #8e8e8e;
         text-align: center;
       }
     }
@@ -237,7 +235,7 @@
     gap: 10px;
 
     .distance_bar {
-      background-color: #7AA4DA;
+      background-color: #7aa4da;
       height: 25px;
       transition: width 1s ease-in-out;
       text-align: end;
@@ -261,7 +259,7 @@
     }
 
     .landing_distance_bar {
-      background-color: #92C176;
+      background-color: #92c176;
       height: 25px;
       padding-top: 3px;
       transition: width 1s ease-in-out;
@@ -328,6 +326,15 @@
     }
   }
 }
+
+// pdf view for performance 
+@media print {
+  .distance_bar, .landing_distance_bar{
+    background-color: transparent;
+    print-color-adjust: exact;
+  }
+}
+
 
 // Ownership costs
 
@@ -486,7 +493,6 @@
                 position: relative;
                 border-radius: 15px;
               }
-
             }
           }
         }
@@ -496,10 +502,17 @@
           display: flex;
           flex-direction: column;
           gap: 18px;
-
         }
       }
     }
+  }
+}
+
+// pdf view for ownership cost
+@media print {
+  .bar {
+    background-color: rgb(230, 228, 229) s;
+    print-color-adjust: exact;
   }
 }
 
@@ -544,8 +557,6 @@
   }
 }
 
-
-
 .chart_dates {
   width: 50%;
   margin-bottom: 15px;
@@ -553,7 +564,7 @@
   margin-left: 25%;
   display: flex;
   flex-wrap: wrap;
-  gap: 50px
+  gap: 50px;
 }
 
 .single_select {
@@ -566,14 +577,12 @@
 }
 
 .os_header {
-
   h1,
   h2,
   h3 {
     text-align: center;
   }
 }
-
 
 // Range Map
 
@@ -603,11 +612,9 @@
         max-width: 200px;
         margin: 0 auto;
       }
-
     }
   }
 }
-
 
 @media screen and (max-width: 940px) {
   .pie_charts {
@@ -702,7 +709,7 @@
 // fleet flight hours
 
 .aircraft_table {
-  >* {
+  > * {
     border-bottom: 1px solid #c4c4c4;
   }
 
@@ -719,7 +726,7 @@
     max-width: 90%;
     margin: 0 auto;
 
-    >* {
+    > * {
       flex: 1;
     }
   }
@@ -733,7 +740,7 @@
       justify-content: center;
       align-items: center;
 
-      >* {
+      > * {
         flex: 1;
       }
 
@@ -874,7 +881,6 @@
 
 /* Media queries - Responsive timeline on screens less than 600px wide */
 @media screen and (max-width: 600px) {
-
   /* Place the timelime to the left */
   .timeline::after {
     left: 31px;
