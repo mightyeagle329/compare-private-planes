@@ -39,7 +39,7 @@ const FleetFlightHours = ({ params }) => {
 
   const options = {
     responsive: true,
-    events:[],
+    events: [],
     plugins: {
       legend: {
         position: "bottom",
@@ -71,79 +71,16 @@ const FleetFlightHours = ({ params }) => {
     }
   };
   return (
-    <section className={cn(global.section,global.page_break)}>
-      <SectionHeader title="Fleet Flight Hour" />
+    <section className={cn(global.section, global.page_break)}>
+      {/* <SectionHeader title="Fleet Flight Hour" /> */}
       <main>
-        <div className={cn(global.details_table)}>
-          <div className={cn(global.column)}>
-            <div className={cn(global.rows)}>
-              <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>
-                  Average Hours per Aircraft per Year:
-                </span>
-                <span>200</span>
-              </div>
-            </div>
-          </div>
-          <span className={cn(global.seperator)}></span>
-          <div className={cn(global.column)}>
-            <div className={cn(global.rows)}>
-              <div className={cn(global.row)}>
-                <span className={cn(global.key, global.key_realign)}>
-                  Total Fleet Hours This Year:
-                </span>
-                <span>200</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* -------------------- */}
-
-        <div className={cn(global.line_chart)}>
-          <Line data={data} options={options} />
-        </div>
-        {/* ------------------- */}
-        <div className={cn(styles.aircraft_table, global.pdf_hidden)}>
-          <div className={cn(global.flexify, styles.aircraft_table_head)}>
-            {colsHeads.map((label, index) => {
-              return (
-                <span className={cn(global._padding)} key={index}>
-                  {label}
-                </span>
-              );
-            })}
-          </div>
-          <div className={cn(global.flexify, styles.aircraft_table_body)}>
-            {rowDataPlaceholder.map((elm, index) => {
-              return (
-                <div className={cn(styles.aircraft_table_row)} key={index}>
-                  <div
-                    className={cn(
-                      global.flexify,
-                      styles.aircraft_table_row_elm
-                    )}
-                  >
-                    <span className={cn(global._padding)}>{elm}</span>
-                    <span className={cn(global._padding)}>{elm}</span>
-                    <span className={cn(global._padding)}>{elm}</span>
-                    <span className={cn(global._padding)}>{elm}</span>
-                    <span className={cn(global._padding)}>{elm}</span>
-                    <span className={cn(global._padding)}>{elm}</span>
-                    <button
-                      onClick={(e) => onToggle(e, index)}
-                      className={cn(styles.toggle_btn)}
-                    >
-                      View
-                    </button>
-                  </div>
-                  <div className={cn(styles.hours_graph) + " chart" + index}>
-                    <Line data={data} options={options} />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+          <iframe
+            src="https://compareprivateplanes.com/tools/fleet-flight-hours/index"
+            title="Fleet flight per hour"
+            frameborder="0"
+            className={cn(styles.ffh_frame)}
+            scrolling="no"
+          ></iframe>
       </main>
     </section>
   );

@@ -31,7 +31,7 @@ const KeyFacts = ({ data, onRemoveAircraft }) => {
 
   return (
     <>
-      <section className={cn(global.section)}>
+      <section className={cn(global.section, global.page_break)}>
         <SectionHeader title="Key Facts" />
         <main className={cn(styles.key_facts_container)}>
           <div className={cn(styles.facts)}>

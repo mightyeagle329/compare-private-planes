@@ -708,59 +708,9 @@
 
 // fleet flight hours
 
-.aircraft_table {
-  > * {
-    border-bottom: 1px solid #c4c4c4;
-  }
-
-  .aircraft_table_body {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .aircraft_table_head {
-    font-size: smaller;
-    white-space: nowrap;
-    min-width: 90%;
-    max-width: 90%;
-    margin: 0 auto;
-
-    > * {
-      flex: 1;
-    }
-  }
-
-  .aircraft_table_row {
-    border-bottom: 1px solid #c4c4c4;
-    min-width: 90%;
-    max-width: 90%;
-
-    .aircraft_table_row_elm {
-      justify-content: center;
-      align-items: center;
-
-      > * {
-        flex: 1;
-      }
-
-      .toggle_btn {
-        outline: none;
-        border: none;
-        background-color: #d9d9d9;
-        border-radius: 100px;
-        padding: 5px;
-        cursor: pointer;
-        font-weight: 600;
-      }
-    }
-
-    .hours_graph {
-      position: relative;
-      display: none;
-      justify-content: center;
-    }
-  }
+.ffh_frame{
+  width: 100%;
+  min-height: 80vh;
 }
 
 @media screen and (max-width: 768px) {
