@@ -970,9 +970,11 @@ def upload_accidents(request):
     io_string = io.StringIO(data_set)
     next(io_string)
     for column in csv.reader(io_string, delimiter=',', quotechar='|'):
+        incident, _ = Aircraft.objects.get_or_create(
+            aircraft_name=column[1])
         accident, created = Accident.objects.update_or_create(
             country=column[0],
-            aircraft_incident=column[1],
+            aircraft_incident=incident,
             reg=column[2],
             date=column[3],
             occurrence=column[3],
