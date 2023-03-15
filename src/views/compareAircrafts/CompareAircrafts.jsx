@@ -184,8 +184,8 @@ const CompareAircrafts = () => {
           country={country}
           unit={unit}
         />
-        <HistoricalMarket params={aircraftsData} />
-        <Range params={aircraftsData} /> 
+        {/* <HistoricalMarket params={aircraftsData} /> */}
+        <Range params={aircraftsData} />
         <Maintenance
           data={aircraftsData}
           currency={currency}

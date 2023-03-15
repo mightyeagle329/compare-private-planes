@@ -50,12 +50,12 @@ const HistoricalMarket = ({ params }) => {
 
     aircraftService
       .getAircraftById(params[1].aircraft_id)
-      .then((data) => setHistory1(JSON.parse(data[1].historical_data)));
+      .then((data) => setHistory1(JSON.parse(data[0].historical_data)));
 
     if (params[2] !== undefined) {
       aircraftService
         .getAircraftById(params[2].aircraft_id)
-        .then((data) => setHistory2(JSON.parse(data[2].historical_data)));
+        .then((data) => setHistory2(JSON.parse(data[0].historical_data)));
     }
   }, [params]);
 
@@ -86,7 +86,6 @@ const HistoricalMarket = ({ params }) => {
     plugins: {
       legend: {
         position: "bottom",
-        onClick: newLegendClickHandler,
       },
     },
   };
