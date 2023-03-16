@@ -1,6 +1,6 @@
 from django.views import View
 from django.http import JsonResponse
-from .models import Aircraft, Accident
+from .models import Aircraft, Accident, User
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
@@ -986,3 +986,26 @@ def upload_accidents(request):
         )
     context = {}
     return render(request, 'admin/upload-accidents.html', context)
+
+
+@csrf_exempt
+def process_webhook(request):
+    if request.method == 'POST':
+        # Process the user data sent by the webhook
+        user_data = request.POST.get('user_data')
+        name = user_data.get('name')
+        email = user_data.get('email')
+        # Assuming you have a custom field 'favorite_color' in your user model
+        # subscription = user_data.get('subscription')
+
+        # Create a new User object using the user data
+        user = User(name=name, email=email)
+
+        # Save the user object to the database
+        user.save()
+
+        # Return a response indicating that the webhook was processed successfully
+        return JsonResponse({'status': 'success'})
+    else:
+        # Return a 404 error if the view is accessed with a non-POST request
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
