@@ -12,8 +12,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { faker } from "@faker-js/faker";
-import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -26,61 +24,17 @@ ChartJS.register(
 );
 
 const FleetFlightHours = ({ params }) => {
-  const colsHeads = [
-    "Registration Number",
-    "Serial Number",
-    "Owner Name",
-    "Country",
-    "Average Monthly Hours",
-    "2021 Total Hours",
-    "Hours Graph",
-  ];
-  const rowDataPlaceholder = ["---", "---"];
-
-  const options = {
-    responsive: true,
-    events: [],
-    plugins: {
-      legend: {
-        position: "bottom",
-      },
-    },
-  };
-
-  const labels = ["May", "Jun", "Jul", "Aug", "Sep", "Oct"];
-
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: "Current Values",
-        data: labels.map(() => faker.datatype.number({ min: 11.0, max: 20.0 })),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
-    ],
-  };
-  const onToggle = (e, index) => {
-    const elm = document.getElementsByClassName("chart" + index)[0];
-    if (elm.style.display === "none") {
-      e.target.innerText = "Hide";
-      elm.style.display = "flex";
-    } else {
-      elm.style.display = "none";
-      e.target.innerText = "View";
-    }
-  };
   return (
     <section className={cn(global.section, global.page_break)}>
       <SectionHeader title="Fleet Flight Hour" />
       <main>
-          <iframe
-            src="https://compareprivateplanes.com/tools/fleet-flight-hours/index"
-            title="Fleet flight per hour"
-            frameborder="0"
-            className={cn(styles.ffh_frame)}
-            scrolling="no"
-          ></iframe>
+        <iframe
+          src={params.fleet_flight_link}
+          title="Fleet flight per hour"
+          frameborder="0"
+          className={cn(styles.ffh_frame)}
+          scrolling="no"
+        ></iframe>
       </main>
     </section>
   );

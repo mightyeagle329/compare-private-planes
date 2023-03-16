@@ -225,6 +225,7 @@ class Aircraft(models.Model):
 
     acquisition_values = models.TextField(default="")
     historical_data = models.TextField(default="")
+    fleet_flight_link = models.CharField(max_length=200, default="")
 
     def __str__(self):
         return self.aircraft_name

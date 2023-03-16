@@ -23,6 +23,7 @@ class AircraftList(View):
                 'aircraft_manufacturer': item.aircraft_manufacturer,
                 'key_facts': item.key_facts,
                 'model': item.model,
+                'fleet_flight_link': item.fleet_flight_link,
                 'category': item.category,
                 'max_pax': item.max_pax,
                 'typical_pax': item.typical_pax,
@@ -285,6 +286,7 @@ class AircraftSearch(View):
                         "key_facts": item.key_facts,
                         "model": item.model,
                         "category": item.category,
+                        "fleet_flight_link": item.fleet_flight_link,
                         'aircraft_manufacturer': item.aircraft_manufacturer,
                         "a_check": item.a_check,
                         "b_check": item.b_check,
@@ -502,6 +504,7 @@ class AircraftById(View):
         aircraft_data.append({
             'aircraft_id': item.id,
             'aircraft_name': item.aircraft_name,
+            'fleet_flight_link': item.fleet_flight_link,
             "a_check": item.a_check,
             "b_check": item.b_check,
             "c_check": item.c_check,
@@ -952,6 +955,7 @@ def upload_csv(request):
             AS_fuel_costs=float(column[200]),
             acquisition_values=column[201],
             historical_data=column[202],
+            fleet_flight_link=column[203],
         )
     context = {}
     return render(request, 'admin/upload-csv.html', context)
