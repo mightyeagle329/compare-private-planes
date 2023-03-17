@@ -1,6 +1,6 @@
 from django.views import View
 from django.http import JsonResponse
-from .models import Aircraft, Accident, UserModel
+from .models import Aircraft, Accident, UsersModel
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
@@ -1002,7 +1002,7 @@ class UsersList(View):
 
         }
 
-        user_item = UserModel.objects.create(**user_data)
+        user_item = UsersModel.objects.create(**user_data)
         data = {
             "message": f"New user added with id: {user_item.id}"
         }

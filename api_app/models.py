@@ -246,7 +246,7 @@ class Accident(models.Model):
         return str(self.aircraft_incident)
 
 
-class UserModel(models.Model):
+class UsersModel(models.Model):
     name = models.CharField(
         max_length=200, default="", null=True, blank=True)
     email = models.CharField(max_length=200, null=True, blank=True)
