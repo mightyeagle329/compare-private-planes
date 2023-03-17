@@ -997,6 +997,7 @@ def process_webhook(request):
         user_data = str(json.loads(request.body.decode("utf-8")))
 
         print(user_data)
+        print(str(request.headers))
         # name = user_data['user_data']['name']
         # email = user_data['user_data']['email']
         # print(name)
@@ -1012,7 +1013,7 @@ def process_webhook(request):
         # user.save()
 
         # Return a response indicating that the webhook was processed successfully
-        return JsonResponse({'status': user_data})
+        return JsonResponse({'token': str(request.headers)})
     else:
         # Return a 404 error if the view is accessed with a non-POST request
         return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
