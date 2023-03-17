@@ -1015,7 +1015,7 @@ def process_webhook(request):
         user.save()
 
         # Return a response indicating that the webhook was processed successfully
-        return JsonResponse({'token': str(request.headers)})
+        return JsonResponse({'status': user_data})
     else:
         # Return a 404 error if the view is accessed with a non-POST request
         return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
