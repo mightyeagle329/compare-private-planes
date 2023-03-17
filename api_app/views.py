@@ -993,9 +993,38 @@ def upload_accidents(request):
 @csrf_exempt
 def process_webhook(request):
     if request.method == 'POST':
+        # Process the user data sent by the webhook
+        user_data = json.loads(request.body.decode("utf-8"))
+
+        print(user_data)
+        name = user_data['user_data']['name']
+        email = user_data['user_data']['email']
+        print(name)
+        print(email)
+        # Assuming you have a custom field 'favorite_color' in your user model
+        # subscription = user_data.get('subscription')
+
+        # Create a new User object using the user data
+        user = User.objects.create_user(
+            username=name, email=email, password='new password')
+
+        # Save the user object to the database
+        # user.save()
+
+        # Return a response indicating that the webhook was processed successfully
+        return JsonResponse({'status': 'success'})
+    else:
+        # Return a 404 error if the view is accessed with a non-POST request
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+
+@csrf_exempt
+def process_webhook1(request):
+    if request.method == 'POST':
 
         # Process the user data sent by the webhook
         user_data = json.loads(request.body.decode("utf-8"))
+        print(user_data)
         name = user_data.get('name')
         email = user_data.get('email')
         # Assuming you have a custom field 'favorite_color' in your user model
