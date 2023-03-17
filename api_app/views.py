@@ -1,6 +1,6 @@
 from django.views import View
 from django.http import JsonResponse
-from .models import Aircraft, Accident, UsersModel
+from .models import Aircraft, Accident
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.shortcuts import render
 import csv
 import io
+from django.contrib.auth.models import User
 import json
 
 
@@ -989,21 +990,26 @@ def upload_accidents(request):
     return render(request, 'admin/upload-accidents.html', context)
 
 
-@method_decorator(csrf_exempt, name='dispatch')
-class UsersList(View):
-    def post(self, request):
+@csrf_exempt
+def process_webhook(request):
+    if request.method == 'POST':
 
-        data = json.loads(request.body.decode("utf-8"))
-        name = data.get('name')
-        email = data.get('email')
-        user_data = {
-            'name': name,
-            'email': email,
+        # Process the user data sent by the webhook
+        user_data = json.loads(request.body.decode("utf-8"))
+        name = user_data.get('name')
+        email = user_data.get('email')
+        # Assuming you have a custom field 'favorite_color' in your user model
+        # subscription = user_data.get('subscription')
 
-        }
+        # Create a new User object using the user data
+        user = User.objects.create_user(
+            username=name, email=email, password='new password')
 
-        user_item = UsersModel.objects.create(**user_data)
-        data = {
-            "message": f"New user added with id: {user_item.id}"
-        }
-        return JsonResponse(data, status=201)
+        # Save the user object to the database
+        user.save()
+
+        # Return a response indicating that the webhook was processed successfully
+        return JsonResponse({'status': 'success'})
+    else:
+        # Return a 404 error if the view is accessed with a non-POST request
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})

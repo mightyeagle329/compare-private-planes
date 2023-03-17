@@ -244,12 +244,3 @@ class Accident(models.Model):
 
     def __str__(self):
         return str(self.aircraft_incident)
-
-
-class UsersModel(models.Model):
-    name = models.CharField(
-        max_length=200, default="", null=True, blank=True)
-    email = models.CharField(max_length=200, null=True, blank=True)
-
-    def __str__(self):
-        return str(self.aircraft_incident)
