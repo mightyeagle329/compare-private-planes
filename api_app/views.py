@@ -1,6 +1,6 @@
 from django.views import View
 from django.http import JsonResponse
-from .models import Aircraft, Accident, User
+from .models import Aircraft, Accident, UserModel
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
@@ -999,7 +999,7 @@ def process_webhook(request):
         # subscription = user_data.get('subscription')
 
         # Create a new User object using the user data
-        user = User(name=name, email=email)
+        user = UserModel(name=name, email=email)
 
         # Save the user object to the database
         user.save()
