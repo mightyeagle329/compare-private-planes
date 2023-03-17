@@ -997,22 +997,19 @@ def process_webhook(request):
         user_data = str(json.loads(request.body.decode("utf-8")))
 
         print(user_data)
-        print(str(request.headers))
         # name = user_data['user_data']['name']
         # email = user_data['user_data']['email']
-        name = user_data['name']
-        email = user_data['email']
         # print(name)
         # print(email)
         # Assuming you have a custom field 'favorite_color' in your user model
         # subscription = user_data.get('subscription')
 
         # Create a new User object using the user data
-        user = User.objects.create_user(
-            username=name, email=email, password='new password')
+        # user = User.objects.create_user(
+        #     username=name, email=email, password='new password')
 
         # Save the user object to the database
-        user.save()
+        # user.save()
 
         # Return a response indicating that the webhook was processed successfully
         return JsonResponse({'status': user_data})
