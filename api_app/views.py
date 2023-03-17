@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.shortcuts import render
 import csv
 import io
+import json
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -988,24 +989,21 @@ def upload_accidents(request):
     return render(request, 'admin/upload-accidents.html', context)
 
 
-@csrf_exempt
-def process_webhook(request):
-    if request.method == 'POST':
-        # Process the user data sent by the webhook
-        user_data = request.POST.get('user_data')
-        name = user_data.get('name')
-        email = user_data.get('email')
-        # Assuming you have a custom field 'favorite_color' in your user model
-        # subscription = user_data.get('subscription')
+@method_decorator(csrf_exempt, name='dispatch')
+class UsersList(View):
+    def post(self, request):
 
-        # Create a new User object using the user data
-        user = UserModel(name=name, email=email)
+        data = json.loads(request.body.decode("utf-8"))
+        name = data.get('name')
+        email = data.get('email')
+        user_data = {
+            'name': name,
+            'email': email,
 
-        # Save the user object to the database
-        user.save()
+        }
 
-        # Return a response indicating that the webhook was processed successfully
-        return JsonResponse({'status': 'success'})
-    else:
-        # Return a 404 error if the view is accessed with a non-POST request
-        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+        user_item = UserModel.objects.create(**user_data)
+        data = {
+            "message": f"New user added with id: {user_item.id}"
+        }
+        return JsonResponse(data, status=201)
