@@ -9,6 +9,4 @@ urlpatterns = [
     path("add-user/", process_webhook, name="add-user"),
     path('upload-csv/', upload_csv, name="upload-csv"),
     path('upload-accidents/', upload_accidents, name="upload-accidents"),
-    path("/", process_webhook, name="process-user"),
-
 ]
