@@ -80,7 +80,23 @@ export default function SingleAircraftDetails() {
   const onCountryChanged = (val) => {
     setCountry(val);
   };
-
+  const location = useLocation();
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    console.log(token);
+    if (location.state !== null) {
+      if (
+        location.state.prevRoute === "/subscription/check" &&
+        token === "enabled"
+      ) {
+        console.log(location.state.prevRoute);
+        return;
+      }
+    }
+    if (token === null) {
+      navigate("not-found");
+    }
+  }, []);
   useEffect(() => {
     aircraftService
       .getAircraftById(id)

@@ -8,7 +8,11 @@ const Header = () => {
   const location = useLocation();
   let headerTitle = "Search Page";
   let aircraft_year = "";
-  if (location.pathname === "/compare") {
+  if(location.pathname === "/"){
+    headerTitle = "Search Page";
+    aircraft_year = "";
+  }
+  else if (location.pathname === "/compare") {
     headerTitle = "Compare Aircraft";
     aircraft_year = "";
   } else if (location.state !== null) {
