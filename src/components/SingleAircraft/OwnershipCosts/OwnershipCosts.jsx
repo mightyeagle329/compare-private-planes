@@ -242,7 +242,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
       "Maintenance",
       "Engine Overhaul",
       "Ground Fees",
-      "Miscellaneous Variabme",
+      "Miscellaneous Variable",
     ],
     datasets: [
       {

@@ -134,7 +134,7 @@ const Performance = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Long Speed Cruise:
+                Long Range Cruise:
               </span>
               <span
                 className={cn(

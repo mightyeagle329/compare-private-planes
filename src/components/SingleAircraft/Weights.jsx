@@ -141,7 +141,7 @@ const Weights = ({ params, unit }) => {
             <div className={cn(global.column)}>
               <span className={cn(global.column_header)}>
                 Baggage Capacity{" "}
-                {unit === "Imperial Units" ? "(cubic feet)" : "(cubic meters)"}
+                {unit === "Imperial Units" ? "(Cubic Feet)" : "(Cubic Meters)"}
               </span>
               <div className={cn(global.rows)}>
                 <div className={cn(global.row)}>

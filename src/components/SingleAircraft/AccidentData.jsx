@@ -59,7 +59,7 @@ const AccidentData = ({ params, nbAccidents, aircraftName }) => {
           <span>Next</span>
         </div> */}
         <p className={cn(styles.total_aircraft, global.pdf_hidden)}>
-          Total Accidents: {nbSingleAccidents}
+          Total Accidents: {accidents.length}
         </p>
         <p className={cn(global.pdf_only, global.pdf_accidentData_text)}>
           For a full list of assumptions and how data is collected, please visit

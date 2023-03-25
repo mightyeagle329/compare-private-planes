@@ -31,7 +31,7 @@ const FleetFlightHours = ({ params }) => {
         <iframe
           src={params.fleet_flight_link}
           title="Fleet flight per hour"
-          frameborder="0"
+          frameBorder="0"
           className={cn(styles.ffh_frame)}
           scrolling="no"
         ></iframe>

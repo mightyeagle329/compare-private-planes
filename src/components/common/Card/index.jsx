@@ -65,7 +65,7 @@ const Card = ({ className, item, unit, currency, country }) => {
               {item?.max_pax > 0 ? `${item?.max_pax} ` : "N/A"}
             </p>
             <p className={styles.count}>
-              <HiOutlineMap name="search" size="16" /> Range:
+              <HiOutlineMap name="search" size="16" /> Range:{" "}
               {unit === "Imperial Units"
                 ? item?.range_NM > 0
                   ? `${numeral(item?.range_NM).format("0,0")} NM`

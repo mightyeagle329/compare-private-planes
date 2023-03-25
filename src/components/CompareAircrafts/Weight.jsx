@@ -94,7 +94,7 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Total Baggage {unit === "Imperial Units" ? "(CF)" : "(CM)"}
+                Total Baggage {unit === "Imperial Units" ? "(Cubic Feet)" : "(Cubic Meters)"}
               </span>
               <span
                 className={cn(
@@ -102,7 +102,7 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                Internal Baggage {unit === "Imperial Units" ? "(CF)" : "(CM)"}
+                Internal Baggage {unit === "Imperial Units" ? "(Cubic Feet)" : "(Cubic Meters)"}
               </span>
               <span
                 className={cn(
@@ -110,7 +110,7 @@ const Weights = ({ data, currency, country, unit }) => {
                   styles.table_key
                 )}
               >
-                External Baggage {unit === "Imperial Units" ? "(CF)" : "(CM)"}
+                External Baggage {unit === "Imperial Units" ? "(Cubic Feet)" : "(Cubic Meters)"}
               </span>
             </div>
             {data.map((aircraft) => {

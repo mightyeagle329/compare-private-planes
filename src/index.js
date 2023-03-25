@@ -13,7 +13,7 @@ const router = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/:aircraft_name/", element: <SingleAircraftDetails /> },
   { path: "/compare/", element: <CompareAircrafts /> },
-  { path: "/subscription/check", element: <Subscription /> },
-  { path: "not-found", element: <NotFound /> },
+  { path: "/check", element: <Subscription /> },
+  { path: "/not-found", element: <NotFound /> },
 ]);
 root.render(<RouterProvider router={router} />);

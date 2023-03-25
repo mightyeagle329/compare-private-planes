@@ -250,7 +250,7 @@ function Map({ rangesDecrease, aicraftsRange, max_pax }) {
             mapTypeControl: false,
           }}
           mapContainerClassName="map-container"
-          mapContainerStyle={{ height: 400 + "px" }}
+          mapContainerStyle={{ height: 700 + "px" }}
         >
           <Circle
             center={latLng}

@@ -54,6 +54,7 @@ export default function SingleAircraftDetails() {
   const [history, setHistory] = useState([]);
 
   const searchAircraft = async (cat) => {
+    console.log(cat);
     const res = await searchService(
       `/api/search?aircraft_name=&category=${cat}&in_production=&model=`
     );
@@ -66,8 +67,15 @@ export default function SingleAircraftDetails() {
     );
     // setSimilarAircrafts(filtered);
   };
-
-  const id = useLocation().state.aircraftData.aircraft_id;
+  var id = -1
+  const loc = useLocation();
+  if(loc.state === null){
+    const baseURL = window.location.origin;
+    window.location.href = baseURL + "/not-found";
+  }else{
+    
+  }
+  id = loc.state.aircraftData.aircraft_id;
 
   const onCurrencyChanged = (val) => {
     setCurrency(val);
@@ -98,6 +106,7 @@ export default function SingleAircraftDetails() {
     }
   }, []);
   useEffect(() => {
+    window.scrollTo(0, 0);
     aircraftService
       .getAircraftById(id)
       .then((data) => searchAircraft(data[0].category));

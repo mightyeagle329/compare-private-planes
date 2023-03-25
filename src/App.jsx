@@ -12,14 +12,14 @@ function App() {
     console.log(token);
     if (location.state !== null) {
       if (
-        location.state.prevRoute === "subscription/check" &&
+        location.state.prevRoute === "check" &&
         token === "enabled"
       ) {
         console.log(location.state.prevRoute);
         return;
       }
     }
-    if (token === null) {
+    if (token === null) {  
       navigate("not-found");
     }
   }, []);
