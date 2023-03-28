@@ -26,7 +26,7 @@ const Similar = ({ params }) => {
             </Link>
           ))
         ) : (
-          <p>No similar aircrafts</p>
+          <p>No Similar Aircraft</p>
         )}
       </main>
     </section>

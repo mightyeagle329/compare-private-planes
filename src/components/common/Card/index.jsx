@@ -140,11 +140,35 @@ const Card = ({ className, item, unit, currency, country }) => {
             <p className={styles.count}>
               <HiOutlineCurrencyDollar name="search" size="16" /> Annual Fixed
               Costs: {currency === "USD" ? "$" : currency === "GBP" ? "£" : "€"}
-              {item?.annual_cost > 0
+              {country === "North America"
+                ? item?.NA_annual_total > 0
+                  ? `${numeral(
+                      currency === "USD"
+                        ? item?.NA_annual_total
+                        : item?.NA_annual_total * conversionRate
+                    ).format("0,0")} `
+                  : "N/A"
+                : country === "South America"
+                ? item?.SA_annual_total > 0
+                  ? `${numeral(
+                      currency === "USD"
+                        ? item?.SA_annual_total
+                        : item?.SA_annual_total * conversionRate
+                    ).format("0,0")} `
+                  : "N/A"
+                : country === "Europe"
+                ? item?.EU_annual_total > 0
+                  ? `${numeral(
+                      currency === "USD"
+                        ? item?.EU_annual_total
+                        : item?.EU_annual_total * conversionRate
+                    ).format("0,0")} `
+                  : "N/A"
+                : item?.AS_annual_total > 0
                 ? `${numeral(
                     currency === "USD"
-                      ? item?.annual_cost
-                      : item?.annual_cost * conversionRate
+                      ? item?.AS_annual_total
+                      : item?.AS_annual_total * conversionRate
                   ).format("0,0")} `
                 : "N/A"}
             </p>

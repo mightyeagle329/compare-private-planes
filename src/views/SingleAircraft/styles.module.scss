@@ -15,6 +15,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
     span {
       display: none;
       position: absolute;
@@ -23,15 +24,18 @@
       transform: translate(-50%, -50%);
       color: rgb(255, 255, 255);
       font-weight: bolder;
+      font-size: 1.2rem;
     }
     &:hover {
+      background-color: rgba(0, 0, 0, 0.5);
       span {
         display: block;
         z-index: 150;
       }
       img {
-        filter: brightness(50%);
+        filter: brightness(30%);
       }
+
     }
     input[type="checkbox"] {
       position: absolute;
