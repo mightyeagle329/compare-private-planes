@@ -273,7 +273,7 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
               </div>
             </h2>
           </div>
-          <div className={cn(styles.compare_table)}>
+          <div className={cn(styles.compare_table, styles.no_scroll)}>
             <div className={cn(styles.compare_table_column)}>
               <span
                 className={cn(

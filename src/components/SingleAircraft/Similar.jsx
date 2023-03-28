@@ -2,6 +2,7 @@ import cn from "classnames";
 import global from "..//styles/global.module.scss";
 import styles from "./styles/styles.module.scss";
 import SectionHeader from "../shared/SectionHeader";
+import { Link } from "react-router-dom";
 
 const Similar = ({ params }) => {
   return (
@@ -9,13 +10,20 @@ const Similar = ({ params }) => {
       <SectionHeader title="Similar Aircraft" />
       <main className={cn(styles.similar)}>
         {params?.length ? (
-          params?.map((product) => (
-            <div key={product.aircraft_id} className={cn(styles.suggestion)}>
-              <div className={cn(styles.image_container)}>
-                <img src={`${product?.image_name}`} alt="" />
+          params?.map((aircraft) => (
+            <Link
+              to={`/${aircraft.aircraft_name.replace(/\s/g, "-")}`}
+              state={{
+                aircraftData: aircraft,
+              }}
+            >
+              <div key={aircraft.aircraft_id} className={cn(styles.suggestion)}>
+                <div className={cn(styles.image_container)}>
+                  <img src={`${aircraft?.image_name}`} alt="" />
+                </div>
+                <h5>{aircraft.aircraft_name}</h5>
               </div>
-              <h5>{product.aircraft_name}</h5>
-            </div>
+            </Link>
           ))
         ) : (
           <p>No similar aircrafts</p>

@@ -63,6 +63,18 @@ export default function Search() {
   const [hourlyprice, sethourlyprice] = useState([null, null]);
   const [purchaseprice, setpurchaseprice] = useState([null, null]);
   const [preowned, setpreowned] = useState([null, null]);
+  const [max_pax, setmax_pax] = useState(0);
+  const [high_cruise_knots, sethigh_cruise_knots] = useState(0);
+  const [max_altitude_feet, setmax_altitude_feet] = useState(0);
+  const [rangeNM, setMaxRangeNM] = useState(0);
+  const [hourly_fuel_burn_GPH, sethourly_fuel_burn_GPH] = useState(0);
+  const [baggage_capacity_CF, setbaggage_capacity_CF] = useState(0);
+  const [TO_distance_feet, setTO_distance_feet] = useState(0);
+  const [landing_distance_feet, setlanding_distance_feet] = useState(0);
+  const [annual_cost, setannual_cost] = useState(0);
+  const [estimated_hourly_charter, setestimated_hourly_charter] = useState(0);
+  const [new_purchase, setnew_purchase] = useState(0);
+  const [average_pre_owned, setaverage_pre_owned] = useState(0);
 
   const onCurrencyChanged = (val) => {
     setCurrency(val);
@@ -150,6 +162,76 @@ export default function Search() {
 
   const [aircraftsData, setAircraftsData] = useState([]);
   const [filterResult, setFilterResult] = useState([]);
+
+  useEffect(() => {
+    aircraftService.getAircrafts().then((data) => {
+      const range_NM = data.reduce((max, aircraft) => {
+        return aircraft.range_NM > max ? aircraft.range_NM : max;
+      }, 0);
+      const max_pax = data.reduce((max, aircraft) => {
+        return aircraft.max_pax > max ? aircraft.max_pax : max;
+      }, 0);
+      const high_cruise_knots = data.reduce((max, aircraft) => {
+        return aircraft.high_cruise_knots > max
+          ? aircraft.high_cruise_knots
+          : max;
+      }, 0);
+      const max_altitude_feet = data.reduce((max, aircraft) => {
+        return aircraft.max_altitude_feet > max
+          ? aircraft.max_altitude_feet
+          : max;
+      }, 0);
+      const hourly_fuel_burn_GPH = data.reduce((max, aircraft) => {
+        return aircraft.hourly_fuel_burn_GPH > max
+          ? aircraft.hourly_fuel_burn_GPH
+          : max;
+      }, 0);
+      const baggage_capacity_CF = data.reduce((max, aircraft) => {
+        return aircraft.baggage_capacity_CF > max
+          ? aircraft.baggage_capacity_CF
+          : max;
+      }, 0);
+      const TO_distance_feet = data.reduce((max, aircraft) => {
+        return aircraft.TO_distance_feet > max
+          ? aircraft.TO_distance_feet
+          : max;
+      }, 0);
+      const landing_distance_feet = data.reduce((max, aircraft) => {
+        return aircraft.landing_distance_feet > max
+          ? aircraft.landing_distance_feet
+          : max;
+      }, 0);
+      const annual_cost = data.reduce((max, aircraft) => {
+        return aircraft.annual_cost > max ? aircraft.annual_cost : max;
+      }, 0);
+      const estimated_hourly_charter = data.reduce((max, aircraft) => {
+        return aircraft.estimated_hourly_charter > max
+          ? aircraft.estimated_hourly_charter
+          : max;
+      }, 0);
+      const new_purchase = data.reduce((max, aircraft) => {
+        return aircraft.new_purchase > max ? aircraft.new_purchase : max;
+      }, 0);
+
+      const average_pre_owned = data.reduce((max, aircraft) => {
+        return aircraft.average_pre_owned > max
+          ? aircraft.average_pre_owned
+          : max;
+      }, 0);
+      setMaxRangeNM(range_NM);
+      setmax_pax(max_pax);
+      sethigh_cruise_knots(high_cruise_knots);
+      setmax_altitude_feet(max_altitude_feet);
+      sethourly_fuel_burn_GPH(hourly_fuel_burn_GPH);
+      setbaggage_capacity_CF(baggage_capacity_CF);
+      setTO_distance_feet(TO_distance_feet);
+      setlanding_distance_feet(landing_distance_feet);
+      setannual_cost(annual_cost);
+      setestimated_hourly_charter(estimated_hourly_charter);
+      setnew_purchase(new_purchase);
+      setaverage_pre_owned(average_pre_owned);
+    });
+  }, []);
 
   useEffect(() => {
     aircraftService.getAircrafts().then((data) => setAircraftsData(data));
@@ -493,7 +575,7 @@ export default function Search() {
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum passengers"}
                     value={maxPax}
-                    max={20}
+                    max={max_pax}
                     onChange={handlePaxChanged}
                     valueLabelDisplay="auto"
                     disableSwap
@@ -521,7 +603,7 @@ export default function Search() {
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum distance"}
                     value={range}
-                    max={3000}
+                    max={rangeNM}
                     onChange={handleRangeChanged}
                     valueLabelDisplay="auto"
                     disableSwap
@@ -549,7 +631,7 @@ export default function Search() {
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum cruise"}
                     value={cruiseSpeed}
-                    max={3000}
+                    max={high_cruise_knots}
                     onChange={handleCruiseChanged}
                     valueLabelDisplay="auto"
                     disableSwap
@@ -577,7 +659,7 @@ export default function Search() {
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum altitude"}
                     value={maxAltitude}
-                    max={30000}
+                    max={max_altitude_feet}
                     onChange={handleMaxAltitudeChanged}
                     valueLabelDisplay="auto"
                     disableSwap
@@ -604,7 +686,7 @@ export default function Search() {
                   <Slider
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum fuel"}
-                    value={fuelBurn}
+                    value={hourly_fuel_burn_GPH}
                     max={3000}
                     onChange={handleFuelBurnChanged}
                     valueLabelDisplay="auto"
@@ -634,7 +716,7 @@ export default function Search() {
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum baggage"}
                     value={baggageCapacity}
-                    max={3000}
+                    max={baggage_capacity_CF}
                     onChange={handleBaggageCapacityChanged}
                     valueLabelDisplay="auto"
                     disableSwap
@@ -663,7 +745,7 @@ export default function Search() {
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum takeoff"}
                     value={takeOffDistance}
-                    max={3000}
+                    max={TO_distance_feet}
                     onChange={handleTakeOffChanged}
                     valueLabelDisplay="auto"
                     disableSwap
@@ -692,7 +774,7 @@ export default function Search() {
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum landing"}
                     value={landingDistance}
-                    max={3000}
+                    max={landing_distance_feet}
                     onChange={handleLandingDistanceChanged}
                     valueLabelDisplay="auto"
                     disableSwap
@@ -721,7 +803,7 @@ export default function Search() {
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum fixed cost"}
                     value={annualFixedCost}
-                    max={30000}
+                    max={annual_cost}
                     onChange={handleAnnualFixedChanged}
                     valueLabelDisplay="auto"
                     disableSwap
@@ -749,7 +831,7 @@ export default function Search() {
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum hourly price"}
                     value={hourlyprice}
-                    max={10000}
+                    max={estimated_hourly_charter}
                     onChange={handleHourlyPriceChange}
                     valueLabelDisplay="auto"
                     disableSwap
@@ -777,7 +859,7 @@ export default function Search() {
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum purchase"}
                     value={purchaseprice}
-                    max={1000000}
+                    max={new_purchase}
                     min={100000}
                     onChange={handlePurchasePriceChanged}
                     valueLabelDisplay="auto"
@@ -806,7 +888,7 @@ export default function Search() {
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum preowned"}
                     value={preowned}
-                    max={1000000}
+                    max={average_pre_owned}
                     min={100000}
                     onChange={handlePreOwnedChanged}
                     valueLabelDisplay="auto"

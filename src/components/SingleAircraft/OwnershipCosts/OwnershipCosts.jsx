@@ -45,7 +45,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
       params.NA_annual_insurance_liability + params.NA_annual_insurance_hull
     ),
     parseInt(params.NA_annual_management),
-    parseInt(params.NA_annual_deprecation),
     parseInt(params.NA_annual_misc)
   );
 
@@ -64,7 +63,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
       "Hangar",
       "Insurance",
       "Management",
-      "Deprication",
       "Miscellaneous Fixed",
     ],
     datasets: [
@@ -85,7 +83,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
                       params.NA_annual_insurance_liability
                   ),
                   Math.round(params.NA_annual_management),
-                  Math.round(params.NA_annual_deprecation),
                   Math.round(params.NA_annual_misc),
                 ]
               : country === "South America"
@@ -102,7 +99,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
                       params.SA_annual_insurance_liability
                   ),
                   Math.round(params.SA_annual_management),
-                  Math.round(params.SA_annual_deprecation),
                   Math.round(params.SA_annual_misc),
                 ]
               : country === "Europe"
@@ -119,7 +115,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
                       params.EU_annual_insurance_liability
                   ),
                   Math.round(params.EU_annual_management),
-                  Math.round(params.EU_annual_deprecation),
                   Math.round(params.EU_annual_misc),
                 ]
               : [
@@ -135,7 +130,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
                       params.AS_annual_insurance_liability
                   ),
                   Math.round(params.AS_annual_management),
-                  Math.round(params.AS_annual_deprecation),
                   Math.round(params.AS_annual_misc),
                 ]
             : country === "North America"
@@ -154,7 +148,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     conversionRate
                 ),
                 Math.round(params.NA_annual_management * conversionRate),
-                Math.round(params.NA_annual_deprecation * conversionRate),
                 Math.round(params.NA_annual_misc * conversionRate),
               ]
             : country === "South America"
@@ -173,7 +166,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
                       params.SA_annual_insurance_liability)
                 ),
                 Math.round(params.SA_annual_management * conversionRate),
-                Math.round(params.SA_annual_deprecation * conversionRate),
                 Math.round(params.SA_annual_misc * conversionRate),
               ]
             : country === "Europe"
@@ -192,7 +184,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
                       params.EU_annual_insurance_liability)
                 ),
                 Math.round(params.EU_annual_management * conversionRate),
-                Math.round(params.EU_annual_deprecation * conversionRate),
                 Math.round(params.EU_annual_misc * conversionRate),
               ]
             : [
@@ -210,7 +201,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
                       params.AS_annual_insurance_liability)
                 ),
                 Math.round(params.AS_annual_management * conversionRate),
-                Math.round(params.AS_annual_deprecation * conversionRate),
                 Math.round(params.AS_annual_misc * conversionRate),
               ],
         backgroundColor: [
@@ -219,7 +209,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
           "rgba(255, 206, 86, 0.2)",
           "rgba(75, 192, 192, 0.2)",
           "rgba(153, 102, 255, 0.2)",
-          "rgb(199, 55, 158,0.2)",
           "rgba(255, 159, 64, 0.2)",
         ],
         borderColor: [
@@ -228,7 +217,6 @@ const OwnershipCosts = ({ params, currency, country }) => {
           "rgba(255, 206, 86, 1)",
           "rgba(75, 192, 192, 1)",
           "rgba(153, 102, 255, 1)",
-          "rgb(199, 55, 158)",
           "rgba(255, 159, 64, 1)",
         ],
         borderWidth: 1,
@@ -1156,7 +1144,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                     ></div>
                   </div>
                 </div>
-                <div className={styles.key_value_bar}>
+                {/* <div className={styles.key_value_bar}>
                   <div className={cn(styles.key_value)}>
                     <span>Deprication Rate</span>
                     <span>
@@ -1224,7 +1212,7 @@ const OwnershipCosts = ({ params, currency, country }) => {
                       }}
                     ></div>
                   </div>
-                </div>
+                </div> */}
                 <div className={styles.key_value_bar}>
                   <div className={cn(styles.key_value)}>
                     <span>Misc Fixed</span>

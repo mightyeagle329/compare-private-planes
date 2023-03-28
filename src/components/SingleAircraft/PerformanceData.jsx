@@ -138,7 +138,7 @@ const PerformanceData = ({ params, unit }) => {
                 <span className={cn(global.value)}>
                   {params.high_cruise_Mach === 0
                     ? "-"
-                    : numeral(params.high_cruise_Mach).format("0,0")}
+                    : numeral(params.high_cruise_Mach).format("0,0.00")}
                 </span>
               </div>
             </div>
@@ -174,7 +174,7 @@ const PerformanceData = ({ params, unit }) => {
                 <span className={cn(global.value)}>
                   {params.long_range_cruise_Mach === 0
                     ? "-"
-                    : numeral(params.long_range_cruise_Mach).format("0,0")}
+                    : numeral(params.long_range_cruise_Mach).format("0,0.00")}
                 </span>
               </div>
             </div>

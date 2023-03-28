@@ -1245,7 +1245,7 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                   })}
                 </div>
               </div>
-              <h5>Deprication Rate</h5>
+              {/* <h5>Deprication Rate</h5>
               <div className={cn(styles.crew_salary)}>
                 <div className={cn(styles.aircraft_names)}>
                   {data.map((aircraft, index) => {
@@ -1380,7 +1380,7 @@ const OwnershipCost = ({ data, currency, country, unit }) => {
                     );
                   })}
                 </div>
-              </div>
+              </div> */}
               <h5>Misc Fixed</h5>
               <div className={cn(styles.crew_salary)}>
                 <div className={cn(styles.aircraft_names)}>

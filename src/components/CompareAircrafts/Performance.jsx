@@ -265,7 +265,7 @@ const Performance = ({ data, currency, country, unit }) => {
                   <span className={cn(styles.compare_table_column_cell)}>
                     {aircraft.high_cruise_Mach === 0
                       ? "-"
-                      : numeral(aircraft.high_cruise_Mach).format("0,0")}
+                      : numeral(aircraft.high_cruise_Mach).format("0,0.00")}
                   </span>
                   <span className={cn(styles.compare_table_column_cell)}></span>
                   <span className={cn(styles.compare_table_column_cell)}></span>
@@ -287,7 +287,9 @@ const Performance = ({ data, currency, country, unit }) => {
                   <span className={cn(styles.compare_table_column_cell)}>
                     {aircraft.long_range_cruise_Mach === 0
                       ? "-"
-                      : numeral(aircraft.long_range_cruise_Mach).format("0,0")}
+                      : numeral(aircraft.long_range_cruise_Mach).format(
+                          "0,0.00"
+                        )}
                   </span>
                 </div>
               );
