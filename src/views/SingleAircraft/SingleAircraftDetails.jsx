@@ -2,11 +2,9 @@ import global from "../../components/styles/global.module.scss";
 import pdf from "../../components/styles/pdf.module.scss";
 import logo from "../../assets/logo.png";
 import { HiOutlineSearch } from "react-icons/hi";
-import searchStyles from "../../styles/Search.module.scss";
 
 import scopedStyles from "./styles.module.scss";
 import cn from "classnames";
-
 import Header from "../../components/common/header";
 import KeyFacts from "../../components/SingleAircraft/KeyFacts";
 import BasicInfo from "../../components/SingleAircraft/BasicInfo";
@@ -54,36 +52,6 @@ export default function SingleAircraftDetails() {
   const [keys, setKeys] = useState([]);
   const [history, setHistory] = useState([]);
   const [filteredAircrafts, setFilteredAircrafts] = useState([]);
-  const [search, setSearch] = useState({
-    aircraft_name: "",
-    category: "",
-    in_production: "",
-    aircraft_manufacturer: "",
-    max_pax: 120,
-    max_pax_min: 0,
-    range_NM_min: 0,
-    range_NM: 8000,
-    high_cruise_knots_min: 0,
-    high_cruise_knots: 12312,
-    max_altitude_feet_min: 0,
-    max_altitude_feet: 60000,
-    hourly_fuel_burn_GPH_min: 0,
-    hourly_fuel_burn_GPH: 50000,
-    baggage_capacity_CF_min: 0,
-    baggage_capacity_CF: 10000,
-    TO_distance_feet_min: 0,
-    TO_distance_feet: 10000,
-    landing_distance_feet_min: 0,
-    landing_distance_feet: 10000,
-    annual_cost_min: 0,
-    annual_cost: 9000000,
-    estimated_hourly_charter_min: 0,
-    estimated_hourly_charter: 1000000,
-    new_purchase_min: 0,
-    new_purchase: 100000000,
-    average_pre_owned_min: 0,
-    average_pre_owned: 100000000,
-  });
 
   const searchAircraft = async (cat, range, new_purchase) => {
     console.log(cat);
@@ -182,7 +150,7 @@ export default function SingleAircraftDetails() {
   }, [aircraftsData, aircraftData]);
 
   let selectedAircafts = [];
-  selectedAircafts.push(aircraftData);  
+  selectedAircafts.push(aircraftData);
   const onSelect = (e, aircraft) => {
     if (selectedAircafts.includes(aircraft)) {
       e.target.checked = false;
@@ -206,14 +174,10 @@ export default function SingleAircraftDetails() {
     }
     navigate("/compare", { state: selectedAircafts });
   };
-  const handleSearchChanged = (key, value) => {
-    setSearch((currentSearch) => ({ ...currentSearch, [key]: value }));
-  };
-  const compareSearchAircraft = async () => {
-    const searchParams = new URLSearchParams(search);
-    console.log(searchParams.toString());
-    const res = await searchService(`/api/search?${searchParams.toString()}`);
-    console.log(res);
+  const handleSearchChanged = async (value) => {
+    const res = await searchService(
+      `aircraft_name=${value}&category=&in_production=&aircraft_manufacturer=&max_pax=120&max_pax_min=0&range_NM_min=0&range_NM=8000&high_cruise_knots_min=0&high_cruise_knots=12312&max_altitude_feet_min=0&max_altitude_feet=60000&hourly_fuel_burn_GPH_min=0&hourly_fuel_burn_GPH=50000&baggage_capacity_CF_min=0&baggage_capacity_CF=10000&TO_distance_feet_min=0&TO_distance_feet=10000&landing_distance_feet_min=0&landing_distance_feet=10000&annual_cost_min=0&annual_cost=9000000&estimated_hourly_charter_min=0&estimated_hourly_charter=1000000&new_purchase_min=0&new_purchase=100000000&average_pre_owned_min=0&average_pre_owned=100000000`
+    );
     setFilteredAircrafts(res);
   };
 
@@ -358,13 +322,8 @@ export default function SingleAircraftDetails() {
                   type="text"
                   className={styles.input}
                   placeholder="Search for aircrafts"
-                  onChange={(e) =>
-                    handleSearchChanged("aircraft_name", e.target.value)
-                  }
+                  onChange={(e) => handleSearchChanged(e.target.value)}
                 />
-                <button className={styles.result}>
-                  <HiOutlineSearch name="search" size="16" />
-                </button>
               </form>
             </div>
             <div className={cn(scopedStyles.options)}>

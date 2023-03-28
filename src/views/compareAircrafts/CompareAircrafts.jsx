@@ -21,6 +21,8 @@ import Range from "../../components/CompareAircrafts/Range";
 import Weights from "../../components/CompareAircrafts/Weight";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { searchService } from "../../utils/hooks/utils";
+
 import styles from "./styles.module.scss";
 import Dropdown from "../../components/common/Dropdown";
 import {
@@ -45,14 +47,20 @@ const CompareAircrafts = () => {
   const aircrafts = location.state;
   const [aircraftsData, setAircraftsData] = useState(aircrafts);
   const [allaircraftsData, setAllAircraftsData] = useState([]);
-  const filteredAircrafts = allaircraftsData.filter(
-    (aircraft) =>
-      aircraft.aircraft_id !== aircraftsData[0].aircraft_id &&
-      aircraft.aircraft_id !== aircraftsData[1].aircraft_id
-  );
+  const [filteredAircrafts, setFilteredAircrafts] = useState([]);
+
   const onCurrencyChanged = (val) => {
     setCurrency(val);
   };
+
+  useEffect(() => {
+    const tmp = allaircraftsData.filter(
+      (aircraft) =>
+        aircraft.aircraft_id !== aircraftsData[0].aircraft_id &&
+        aircraft.aircraft_id !== aircraftsData[1].aircraft_id
+    );
+    setFilteredAircrafts(tmp);
+  }, []);
 
   useEffect(() => {
     aircraftService.getAircrafts().then((data) => setAllAircraftsData(data));
@@ -94,6 +102,14 @@ const CompareAircrafts = () => {
     setAircraftsData(selectedAircafts);
     setOpenModal(!openModal);
   };
+
+  const handleSearchChanged = async (value) => {
+    const res = await searchService(
+      `aircraft_name=${value}&category=&in_production=&aircraft_manufacturer=&max_pax=120&max_pax_min=0&range_NM_min=0&range_NM=8000&high_cruise_knots_min=0&high_cruise_knots=12312&max_altitude_feet_min=0&max_altitude_feet=60000&hourly_fuel_burn_GPH_min=0&hourly_fuel_burn_GPH=50000&baggage_capacity_CF_min=0&baggage_capacity_CF=10000&TO_distance_feet_min=0&TO_distance_feet=10000&landing_distance_feet_min=0&landing_distance_feet=10000&annual_cost_min=0&annual_cost=9000000&estimated_hourly_charter_min=0&estimated_hourly_charter=1000000&new_purchase_min=0&new_purchase=100000000&average_pre_owned_min=0&average_pre_owned=100000000`
+    );
+    setFilteredAircrafts(res);
+  };
+
   return (
     <>
       <Header />
@@ -236,6 +252,16 @@ const CompareAircrafts = () => {
         </div>
         <Modal title={`Add another aircraft to compare`} toggler={openModal}>
           <div className={cn(global.pdf_hidden)}>
+            <div className={styles.form}>
+              <form className={styles.search} action="">
+                <input
+                  type="text"
+                  className={styles.input}
+                  placeholder="Search for aircrafts"
+                  onChange={(e) => handleSearchChanged(e.target.value)}
+                />
+              </form>
+            </div>
             <div className={cn(scopedStyles.options)}>
               {filteredAircrafts.map((aircraft) => {
                 return (
