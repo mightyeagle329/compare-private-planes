@@ -258,7 +258,7 @@ const CompareAircrafts = () => {
                   type="text"
                   className={styles.input}
                   placeholder="Search for aircrafts"
-                  onChange={(e) => handleSearchChanged(e.target.value)}
+                  onChange={(value) => handleSearchChanged(value)}
                 />
               </form>
             </div>
