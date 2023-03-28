@@ -176,7 +176,7 @@ export default function SingleAircraftDetails() {
   };
   const handleSearchChanged = async (value) => {
     const res = await searchService(
-      `aircraft_name=${value}&category=&in_production=&aircraft_manufacturer=&max_pax=120&max_pax_min=0&range_NM_min=0&range_NM=8000&high_cruise_knots_min=0&high_cruise_knots=12312&max_altitude_feet_min=0&max_altitude_feet=60000&hourly_fuel_burn_GPH_min=0&hourly_fuel_burn_GPH=50000&baggage_capacity_CF_min=0&baggage_capacity_CF=10000&TO_distance_feet_min=0&TO_distance_feet=10000&landing_distance_feet_min=0&landing_distance_feet=10000&annual_cost_min=0&annual_cost=9000000&estimated_hourly_charter_min=0&estimated_hourly_charter=1000000&new_purchase_min=0&new_purchase=100000000&average_pre_owned_min=0&average_pre_owned=100000000`
+      `/api/search?aircraft_name=${value}&category=&in_production=&aircraft_manufacturer=&max_pax=120&max_pax_min=0&range_NM_min=0&range_NM=8000&high_cruise_knots_min=0&high_cruise_knots=12312&max_altitude_feet_min=0&max_altitude_feet=60000&hourly_fuel_burn_GPH_min=0&hourly_fuel_burn_GPH=50000&baggage_capacity_CF_min=0&baggage_capacity_CF=10000&TO_distance_feet_min=0&TO_distance_feet=10000&landing_distance_feet_min=0&landing_distance_feet=10000&annual_cost_min=0&annual_cost=9000000&estimated_hourly_charter_min=0&estimated_hourly_charter=1000000&new_purchase_min=0&new_purchase=100000000&average_pre_owned_min=0&average_pre_owned=100000000`
     );
     setFilteredAircrafts(res);
   };
@@ -322,34 +322,38 @@ export default function SingleAircraftDetails() {
                   type="text"
                   className={styles.input}
                   placeholder="Search for aircrafts"
-                  onChange={(value) => handleSearchChanged(value)}
+                  onChange={(e) => handleSearchChanged(e.target.value)}
                 />
               </form>
             </div>
             <div className={cn(scopedStyles.options)}>
-              {filteredAircrafts.map((aircraft) => {
-                return (
-                  <label
-                    className={cn(scopedStyles.option)}
-                    key={aircraft.aircraft_id}
-                  >
-                    <span>{aircraft.aircraft_name}</span>
-                    <input
-                      type="checkbox"
-                      value={aircraft.aircraft_id}
-                      name="aircraft"
-                      // pass aircraft_id as param to onSelect
-                      onClick={(e) => onSelect(e, aircraft)}
-                    />
-                    <i
-                      className={
-                        "fa-solid fa-check " + cn(scopedStyles.checkmark)
-                      }
-                    ></i>
-                    <img src={aircraft.image_name} alt="" />
-                  </label>
-                );
-              })}
+              {filteredAircrafts?.length ? (
+                filteredAircrafts.map((aircraft) => {
+                  return (
+                    <label
+                      className={cn(scopedStyles.option)}
+                      key={aircraft.aircraft_id}
+                    >
+                      <span>{aircraft.aircraft_name}</span>
+                      <input
+                        type="checkbox"
+                        value={aircraft.aircraft_id}
+                        name="aircraft"
+                        // pass aircraft_id as param to onSelect
+                        onClick={(e) => onSelect(e, aircraft)}
+                      />
+                      <i
+                        className={
+                          "fa-solid fa-check " + cn(scopedStyles.checkmark)
+                        }
+                      ></i>
+                      <img src={aircraft.image_name} alt="" />
+                    </label>
+                  );
+                })
+              ) : (
+                <p>loading</p>
+              )}
             </div>
             <button
               onClick={() => onCompare()}
