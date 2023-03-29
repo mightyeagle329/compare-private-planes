@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <base href="/" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Compare Private Planes" />
@@ -58,7 +58,7 @@ a:active {
   </style>
   </head>
 
-  <body  onunload="deleteAllCookies()">
+  <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
@@ -72,17 +72,4 @@ a:active {
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
-  <script>
-    function deleteAllCookies() {
-      var cookies = document.cookie.split(";");
-
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        var eqPos = cookie.indexOf("=");
-        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      }
-    }
-  </script>
-
 </html>

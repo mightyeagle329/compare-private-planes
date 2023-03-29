@@ -6,6 +6,7 @@
   gap: 10px;
   height: 500px;
   overflow-y: auto;
+  margin-top: 40px;
 
   .option {
     position: relative;
@@ -15,6 +16,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
 
     span {
       display: none;
@@ -24,17 +26,21 @@
       transform: translate(-50%, -50%);
       color: rgb(255, 255, 255);
       font-weight: bolder;
+      font-size: 1.2rem;
     }
 
     &:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+
       span {
         display: block;
         z-index: 150;
       }
 
       img {
-        filter: brightness(50%);
+        filter: brightness(30%);
       }
+
     }
 
     input[type="checkbox"] {
@@ -122,10 +128,12 @@
 
 
 }
+
 .form {
   .search {
     position: relative;
     width: min-content;
+
     input {
       max-width: fit-content;
       height: 35px;
@@ -135,10 +143,12 @@
       padding: 10px 10px;
       outline: none;
       transition: all 0.4s;
+
       &:focus {
         border: 1px solid rgb(139, 139, 139);
       }
     }
+
     .result {
       position: absolute;
       top: 30%;
@@ -152,6 +162,7 @@
       background: transparent;
       transition: all 0.4s;
       z-index: 1000;
+
       svg {
         fill: var(--neutrals8);
       }
@@ -183,7 +194,7 @@
 
     .dropdown {
       flex-direction: column;
-      align-items: stretch;  
+      align-items: stretch;
       gap: 0;
     }
   }
