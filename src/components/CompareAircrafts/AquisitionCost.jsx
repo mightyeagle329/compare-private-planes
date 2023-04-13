@@ -350,7 +350,7 @@ const AquisitionCost = ({ data, currency, country, unit }) => {
                     <div className={styles.dropdown + " " + global.pdf_hidden}>
                       <center>
                         <Dropdown
-                          className={styles.dropdown + compare.year.dropdown}
+                          className={styles.dropdown}
                           value={
                             index === 0
                               ? yearManufacture0
