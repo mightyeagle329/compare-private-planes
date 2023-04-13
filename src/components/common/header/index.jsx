@@ -6,10 +6,10 @@ import styles from "./Header.module.scss";
 
 const Header = () => {
   const location = useLocation();
-  let headerTitle = "Search Page";
+  let headerTitle = "Search Aircraft";
   let aircraft_year = "";
   if (location.pathname === "/") {
-    headerTitle = "Search Page";
+    headerTitle = "Search Aircraft";
     aircraft_year = "";
   } else if (location.pathname === "/compare") {
     headerTitle = "Compare Aircraft";
@@ -50,21 +50,15 @@ const Header = () => {
               <Link to="/">Search Aircraft</Link>
             </li>
             <li>
+              {" "}
+              <Link to="/compare">Compare Aircraft</Link>
+            </li>
+            <li>
               <a href="https://compareprivateplanes.com/premium">Dashboard</a>
             </li>
             <li>
               <a href="https://compareprivateplanes.com/register/your-membership">
                 My Account
-              </a>
-            </li>
-            <li>
-              <a href="https://compareprivateplanes.com/premium/support">
-                Support
-              </a>
-            </li>
-            <li>
-              <a href="https://compareprivateplanes.com/wp-login.php?action=logout&redirect_to=https%3A%2F%2Fcompareprivateplanes.com&_wpnonce=892bc803fb">
-                Log Out
               </a>
             </li>
           </ul>
