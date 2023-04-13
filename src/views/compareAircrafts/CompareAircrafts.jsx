@@ -168,7 +168,7 @@ const CompareAircrafts = () => {
               <input
                 type="button"
                 className={styles.header_btn}
-                value="Add aircraft to compare"
+                value="Add Aircraft to Compare"
                 onClick={() => setOpenModal(!openModal)}
               />
             ) : (
