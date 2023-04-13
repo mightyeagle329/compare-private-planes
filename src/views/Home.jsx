@@ -556,6 +556,32 @@ export default function Search() {
                 />
               </div>
             </div>
+
+            <div className={styles.sorting}>
+              <div className={styles.dropdown}>
+                <div className={styles.label}>Flat Floor</div>{" "}
+                <Dropdown
+                  className={styles.dropdown}
+                  value={
+                    PRODUCTION_OPTIONS_DIC[
+                      search.flat_floor === true
+                        ? "Yes"
+                        : search.flat_floor === false
+                        ? "No"
+                        : "Select"
+                    ]
+                  }
+                  setValue={(value) =>
+                    handleSearchChanged(
+                      "flat_floor",
+                      value === "Yes" ? true : false
+                    )
+                  }
+                  options={PRODUCTION_OPTIONS}
+                />
+              </div>
+            </div>
+
             <div>
               <Accordion
                 expanded={passengerExpanded}
