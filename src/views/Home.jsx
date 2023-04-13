@@ -679,7 +679,8 @@ export default function Search() {
                   id="panel4bh-header"
                 >
                   <div className={styles.label}>
-                    Fuel Burn (Gallons/Hour): {fuelBurn[0]} - {fuelBurn[1]}
+                    Fuel Burn (Gallons/Hour): {fuelBurn[0]} -{" "}
+                    {fuelBurn[1]}
                   </div>
                 </AccordionSummary>
                 <div className={styles.range}>
