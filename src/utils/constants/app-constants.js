@@ -66,13 +66,6 @@ const PRODUCTION_OPTIONS_DIC = {
   No: "No",
 };
 
-const FLAT_FLOOR_OPTIONS = ["", "Yes", "No"];
-const FLAT_FLOOR_OPTIONS_DIC = {
-  "": "Show all",
-  Yes: "Yes",
-  No: "No",
-};
-
 export {
   CATEGORY_OPTIONS,
   MANUFACTURER_OPTIONS,
