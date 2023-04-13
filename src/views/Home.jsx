@@ -687,8 +687,8 @@ export default function Search() {
                   <Slider
                     className={styles.slider_home}
                     getAriaLabel={() => "Minimum fuel"}
-                    value={hourly_fuel_burn_GPH}
-                    max={3000}
+                    value={fuelBurn}
+                    max={hourly_fuel_burn_GPH}
                     onChange={handleFuelBurnChanged}
                     valueLabelDisplay="auto"
                     disableSwap
