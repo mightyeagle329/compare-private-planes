@@ -50,10 +50,6 @@ const Header = () => {
               <Link to="/">Search Aircraft</Link>
             </li>
             <li>
-              {" "}
-              <Link to="/compare">Compare Aircraft</Link>
-            </li>
-            <li>
               <a href="https://compareprivateplanes.com/premium">Dashboard</a>
             </li>
             <li>

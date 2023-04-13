@@ -306,7 +306,7 @@ export default function SingleAircraftDetails() {
                 className={cn(global.action_btn)}
                 onClick={() => setOpenModal(!openModal)}
               >
-                Add Aircraft to compare
+                Add Aircraft to Compare
               </button>
             </div>
           </div>
