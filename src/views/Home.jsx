@@ -563,7 +563,7 @@ export default function Search() {
                 <Dropdown
                   className={styles.dropdown}
                   value={
-                    PRODUCTION_OPTIONS_DIC[
+                    FLAT_FLOOR_OPTIONS_DIC[
                       search.flat_floor === true
                         ? "Yes"
                         : search.flat_floor === false
@@ -577,7 +577,7 @@ export default function Search() {
                       value === "Yes" ? true : false
                     )
                   }
-                  options={PRODUCTION_OPTIONS}
+                  options={FLAT_FLOOR_OPTIONS}
                 />
               </div>
             </div>
